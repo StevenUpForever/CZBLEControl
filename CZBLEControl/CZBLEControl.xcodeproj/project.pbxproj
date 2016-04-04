@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ABFAE2DB8EC0C95B9C2A4F78 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B993CE7C738FDFE053CC181 /* libPods.a */; };
+		AF7284A71CB1EF3D00B8D610 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A61CB1EF3D00B8D610 /* MainTableViewController.swift */; };
+		AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */; };
+		AF7284AC1CB1F19600B8D610 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */; };
+		AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */; };
+		AF7284B01CB1FAE000B8D610 /* RSSIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AF1CB1FAE000B8D610 /* RSSIView.swift */; };
+		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
 		AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */; };
-		AFDA74731CB1EE5800F09BD8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDA74721CB1EE5800F09BD8 /* ViewController.swift */; };
 		AFDA74761CB1EE5800F09BD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFDA74741CB1EE5800F09BD8 /* Main.storyboard */; };
 		AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AFDA74771CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld */; };
 		AFDA747B1CB1EE5800F09BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFDA747A1CB1EE5800F09BD8 /* Assets.xcassets */; };
@@ -28,9 +34,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06D893E0F5AF0B906038144F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7B993CE7C738FDFE053CC181 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF7284A61CB1EF3D00B8D610 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewController.swift; sourceTree = "<group>"; };
+		AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
+		AF7284AF1CB1FAE000B8D610 /* RSSIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSIView.swift; sourceTree = "<group>"; };
+		AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewCell.swift; sourceTree = "<group>"; };
 		AFDA746D1CB1EE5800F09BD8 /* CZBLEControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZBLEControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AFDA74721CB1EE5800F09BD8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AFDA74751CB1EE5800F09BD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AFDA74781CB1EE5800F09BD8 /* CZBLEControl.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CZBLEControl.xcdatamodel; sourceTree = "<group>"; };
 		AFDA747A1CB1EE5800F09BD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,6 +53,7 @@
 		AFDA74881CB1EE5900F09BD8 /* CZBLEControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZBLEControlTests.swift; sourceTree = "<group>"; };
 		AFDA748A1CB1EE5900F09BD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFDA74931CB1EE6600F09BD8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		EF416EE927B22566EE362841 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7284AC1CB1F19600B8D610 /* CoreBluetooth.framework in Frameworks */,
+				ABFAE2DB8EC0C95B9C2A4F78 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +76,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF7284AA1CB1F17B00B8D610 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */,
+				AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */,
+				AF7284AF1CB1FAE000B8D610 /* RSSIView.swift */,
+			);
+			name = BLE;
+			sourceTree = "<group>";
+		};
 		AFDA74641CB1EE5800F09BD8 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +93,8 @@
 				AFDA746F1CB1EE5800F09BD8 /* CZBLEControl */,
 				AFDA74871CB1EE5800F09BD8 /* CZBLEControlTests */,
 				AFDA746E1CB1EE5800F09BD8 /* Products */,
+				E2E0A7537779B96024B8F9A6 /* Pods */,
+				C70898AF65AABA5604E6720E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,7 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */,
-				AFDA74721CB1EE5800F09BD8 /* ViewController.swift */,
+				AF7284A61CB1EF3D00B8D610 /* MainTableViewController.swift */,
+				AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */,
+				AF7284AA1CB1F17B00B8D610 /* BLE */,
 				AFDA74741CB1EE5800F09BD8 /* Main.storyboard */,
 				AFDA747A1CB1EE5800F09BD8 /* Assets.xcassets */,
 				AFDA747C1CB1EE5800F09BD8 /* LaunchScreen.storyboard */,
@@ -102,6 +132,24 @@
 			path = CZBLEControlTests;
 			sourceTree = "<group>";
 		};
+		C70898AF65AABA5604E6720E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */,
+				7B993CE7C738FDFE053CC181 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E2E0A7537779B96024B8F9A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF416EE927B22566EE362841 /* Pods.debug.xcconfig */,
+				06D893E0F5AF0B906038144F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,9 +157,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFDA748D1CB1EE5900F09BD8 /* Build configuration list for PBXNativeTarget "CZBLEControl" */;
 			buildPhases = (
+				ADC1D388D18288543A164E45 /* Check Pods Manifest.lock */,
 				AFDA74691CB1EE5800F09BD8 /* Sources */,
 				AFDA746A1CB1EE5800F09BD8 /* Frameworks */,
 				AFDA746B1CB1EE5800F09BD8 /* Resources */,
+				1AC8CB5F5BC7C33DD27268A6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,13 +249,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1AC8CB5F5BC7C33DD27268A6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ADC1D388D18288543A164E45 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AFDA74691CB1EE5800F09BD8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */,
+				AF7284B01CB1FAE000B8D610 /* RSSIView.swift in Sources */,
 				AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */,
-				AFDA74731CB1EE5800F09BD8 /* ViewController.swift in Sources */,
+				AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */,
+				AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */,
+				AF7284A71CB1EF3D00B8D610 /* MainTableViewController.swift in Sources */,
 				AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,6 +420,7 @@
 		};
 		AFDA748E1CB1EE5900F09BD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF416EE927B22566EE362841 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
@@ -344,6 +432,7 @@
 		};
 		AFDA748F1CB1EE5900F09BD8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06D893E0F5AF0B906038144F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
@@ -396,6 +485,7 @@
 				AFDA748F1CB1EE5900F09BD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AFDA74901CB1EE5900F09BD8 /* Build configuration list for PBXNativeTarget "CZBLEControlTests" */ = {
 			isa = XCConfigurationList;
@@ -404,6 +494,7 @@
 				AFDA74921CB1EE5900F09BD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

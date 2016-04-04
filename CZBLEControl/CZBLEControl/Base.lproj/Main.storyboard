@@ -1,25 +1,172 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="m0q-gY-3WN">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Main Table View Controller-->
+        <scene sceneID="HWP-k8-2Rz">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <tableViewController id="flv-Zi-yH4" customClass="MainTableViewController" customModule="CZBLEControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="hIt-9o-4hV">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection headerTitle="Bluetooth Low Energy" id="dmD-j5-lo2">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="5GM-9N-l8s" style="IBUITableViewCellStyleDefault" id="x3F-7l-uLB">
+                                        <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x3F-7l-uLB" id="7Sq-yf-AuX">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Search nearby BLE devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5GM-9N-l8s">
+                                                    <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="OSP-Jr-g2x" kind="show" identifier="gotoBLE" id="8Do-bi-AOI"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Ethernet Cable" id="d1U-mL-AKK">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ID5-br-Jvl" style="IBUITableViewCellStyleDefault" id="7dP-9r-mGH">
+                                        <rect key="frame" x="0.0" y="207.5" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7dP-9r-mGH" id="5Xr-Wl-puE">
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Connect with Ethernet Cable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ID5-br-Jvl">
+                                                    <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="flv-Zi-yH4" id="AV9-vZ-vWU"/>
+                            <outlet property="delegate" destination="flv-Zi-yH4" id="tf2-3K-QHc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="uhC-mo-UL7"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2qE-9i-YUt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1003" y="372"/>
+        </scene>
+        <!--Search BLE Devices-->
+        <scene sceneID="bD1-xT-QBc">
+            <objects>
+                <tableViewController id="OSP-Jr-g2x" customClass="BLETableViewController" customModule="CZBLEControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="28" sectionFooterHeight="28" id="ffG-9J-hja">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BLECell" rowHeight="73" id="dk7-C8-C2s">
+                                <rect key="frame" x="0.0" y="92" width="600" height="73"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dk7-C8-C2s" id="LQo-cB-Nen">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="72.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ek-5f-7A7">
+                                            <rect key="frame" x="8" y="8" width="44" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usK-Nw-UW2">
+                                            <rect key="frame" x="8" y="38" width="458" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MSS-l8-3u2">
+                                            <rect key="frame" x="572" y="27" width="20" height="20"/>
+                                            <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </activityIndicatorView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbX-ww-fV0">
+                                            <rect key="frame" x="514" y="12" width="50" height="50"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="pbX-ww-fV0" secondAttribute="height" multiplier="1:1" id="pRm-AM-Y0Z"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSSI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKE-Se-fun">
+                                            <rect key="frame" x="474" y="27" width="32" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="usK-Nw-UW2" firstAttribute="leading" secondItem="LQo-cB-Nen" secondAttribute="leadingMargin" id="A8k-c3-2jV"/>
+                                        <constraint firstItem="MSS-l8-3u2" firstAttribute="trailing" secondItem="LQo-cB-Nen" secondAttribute="trailingMargin" id="APt-1J-TfA"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="usK-Nw-UW2" secondAttribute="bottom" constant="8.5" id="Dmx-Sf-Qql"/>
+                                        <constraint firstItem="usK-Nw-UW2" firstAttribute="width" secondItem="LQo-cB-Nen" secondAttribute="width" multiplier="229:300" id="F3p-ht-c5u"/>
+                                        <constraint firstItem="MSS-l8-3u2" firstAttribute="centerY" secondItem="LQo-cB-Nen" secondAttribute="centerY" id="IOP-6L-gbQ"/>
+                                        <constraint firstItem="pbX-ww-fV0" firstAttribute="height" secondItem="LQo-cB-Nen" secondAttribute="height" multiplier="50:72.5" id="Q0e-gq-yQn"/>
+                                        <constraint firstItem="pbX-ww-fV0" firstAttribute="centerY" secondItem="LQo-cB-Nen" secondAttribute="centerY" id="QsW-Lw-vXP"/>
+                                        <constraint firstItem="lKE-Se-fun" firstAttribute="leading" secondItem="usK-Nw-UW2" secondAttribute="trailing" constant="8" id="a98-Ag-Dtu"/>
+                                        <constraint firstItem="4ek-5f-7A7" firstAttribute="leading" secondItem="LQo-cB-Nen" secondAttribute="leadingMargin" id="bON-gL-t3I"/>
+                                        <constraint firstItem="usK-Nw-UW2" firstAttribute="top" secondItem="4ek-5f-7A7" secondAttribute="bottom" constant="8" id="ggt-js-BrQ"/>
+                                        <constraint firstItem="lKE-Se-fun" firstAttribute="centerY" secondItem="LQo-cB-Nen" secondAttribute="centerY" id="iI2-Yn-bkr"/>
+                                        <constraint firstItem="4ek-5f-7A7" firstAttribute="top" secondItem="LQo-cB-Nen" secondAttribute="topMargin" id="nHB-Ib-Wxz"/>
+                                        <constraint firstItem="pbX-ww-fV0" firstAttribute="leading" secondItem="lKE-Se-fun" secondAttribute="trailing" constant="8" id="ndo-CG-ce2"/>
+                                        <constraint firstItem="MSS-l8-3u2" firstAttribute="leading" secondItem="pbX-ww-fV0" secondAttribute="trailing" constant="8" id="usr-wf-Iv9"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="OSP-Jr-g2x" id="otg-KT-o1p"/>
+                            <outlet property="delegate" destination="OSP-Jr-g2x" id="xEN-4E-5A4"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Search BLE Devices" id="N9I-Qn-vNv"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q6B-HM-lBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1715" y="73"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qGq-6A-IBU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m0q-gY-3WN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xhc-rM-zMc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="flv-Zi-yH4" kind="relationship" relationship="rootViewController" id="6c7-99-G9j"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9BP-ym-dk4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="315" y="372"/>
         </scene>
     </scenes>
 </document>
