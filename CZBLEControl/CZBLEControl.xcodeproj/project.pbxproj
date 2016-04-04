@@ -10,10 +10,10 @@
 		ABFAE2DB8EC0C95B9C2A4F78 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B993CE7C738FDFE053CC181 /* libPods.a */; };
 		AF7284A71CB1EF3D00B8D610 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A61CB1EF3D00B8D610 /* MainTableViewController.swift */; };
 		AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */; };
-		AF7284AC1CB1F19600B8D610 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */; };
 		AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */; };
-		AF7284B01CB1FAE000B8D610 /* RSSIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AF1CB1FAE000B8D610 /* RSSIView.swift */; };
 		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
+		AFD10C481CB214E300CD5E86 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */; };
+		AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */; };
 		AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */; };
 		AFDA74761CB1EE5800F09BD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFDA74741CB1EE5800F09BD8 /* Main.storyboard */; };
 		AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AFDA74771CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld */; };
@@ -40,8 +40,8 @@
 		AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewController.swift; sourceTree = "<group>"; };
 		AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
-		AF7284AF1CB1FAE000B8D610 /* RSSIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSIView.swift; sourceTree = "<group>"; };
 		AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewCell.swift; sourceTree = "<group>"; };
+		AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
 		AFDA746D1CB1EE5800F09BD8 /* CZBLEControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZBLEControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFDA74751CB1EE5800F09BD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -61,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF7284AC1CB1F19600B8D610 /* CoreBluetooth.framework in Frameworks */,
+				AFD10C481CB214E300CD5E86 /* CoreBluetooth.framework in Frameworks */,
 				ABFAE2DB8EC0C95B9C2A4F78 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,7 +81,7 @@
 			children = (
 				AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */,
 				AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */,
-				AF7284AF1CB1FAE000B8D610 /* RSSIView.swift */,
+				AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */,
 			);
 			name = BLE;
 			sourceTree = "<group>";
@@ -202,6 +202,7 @@
 				TargetAttributes = {
 					AFDA746C1CB1EE5800F09BD8 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 78A73LK6Q3;
 					};
 					AFDA74831CB1EE5800F09BD8 = {
 						CreatedOnToolsVersion = 7.3;
@@ -288,11 +289,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */,
-				AF7284B01CB1FAE000B8D610 /* RSSIView.swift in Sources */,
 				AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */,
 				AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */,
 				AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */,
 				AF7284A71CB1EF3D00B8D610 /* MainTableViewController.swift in Sources */,
+				AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */,
 				AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,10 +424,13 @@
 			baseConfigurationReference = EF416EE927B22566EE362841 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengzhiJia.CZBLEControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -435,10 +439,13 @@
 			baseConfigurationReference = 06D893E0F5AF0B906038144F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengzhiJia.CZBLEControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -3,9 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Main Table View Controller-->
@@ -83,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BLECell" rowHeight="73" id="dk7-C8-C2s">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BLECell" rowHeight="73" id="dk7-C8-C2s" customClass="BLETableViewCell" customModule="CZBLEControl" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dk7-C8-C2s" id="LQo-cB-Nen">
@@ -96,25 +94,29 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usK-Nw-UW2">
-                                            <rect key="frame" x="8" y="38" width="458" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MSS-l8-3u2">
                                             <rect key="frame" x="572" y="27" width="20" height="20"/>
                                             <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbX-ww-fV0">
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbX-ww-fV0">
                                             <rect key="frame" x="514" y="12" width="50" height="50"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="pbX-ww-fV0" secondAttribute="height" multiplier="1:1" id="pRm-AM-Y0Z"/>
+                                                <constraint firstAttribute="height" constant="50" id="3u2-bm-zVY"/>
+                                                <constraint firstAttribute="width" constant="50" id="FVF-Do-kEy"/>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSSI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKE-Se-fun">
                                             <rect key="frame" x="474" y="27" width="32" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="32" id="Sqf-K4-wLZ"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usK-Nw-UW2">
+                                            <rect key="frame" x="8" y="38" width="441" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -124,19 +126,23 @@
                                         <constraint firstItem="usK-Nw-UW2" firstAttribute="leading" secondItem="LQo-cB-Nen" secondAttribute="leadingMargin" id="A8k-c3-2jV"/>
                                         <constraint firstItem="MSS-l8-3u2" firstAttribute="trailing" secondItem="LQo-cB-Nen" secondAttribute="trailingMargin" id="APt-1J-TfA"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="usK-Nw-UW2" secondAttribute="bottom" constant="8.5" id="Dmx-Sf-Qql"/>
-                                        <constraint firstItem="usK-Nw-UW2" firstAttribute="width" secondItem="LQo-cB-Nen" secondAttribute="width" multiplier="229:300" id="F3p-ht-c5u"/>
                                         <constraint firstItem="MSS-l8-3u2" firstAttribute="centerY" secondItem="LQo-cB-Nen" secondAttribute="centerY" id="IOP-6L-gbQ"/>
-                                        <constraint firstItem="pbX-ww-fV0" firstAttribute="height" secondItem="LQo-cB-Nen" secondAttribute="height" multiplier="50:72.5" id="Q0e-gq-yQn"/>
-                                        <constraint firstItem="pbX-ww-fV0" firstAttribute="centerY" secondItem="LQo-cB-Nen" secondAttribute="centerY" id="QsW-Lw-vXP"/>
-                                        <constraint firstItem="lKE-Se-fun" firstAttribute="leading" secondItem="usK-Nw-UW2" secondAttribute="trailing" constant="8" id="a98-Ag-Dtu"/>
+                                        <constraint firstItem="MSS-l8-3u2" firstAttribute="leading" secondItem="pbX-ww-fV0" secondAttribute="trailing" constant="8" id="O8e-VI-All"/>
+                                        <constraint firstItem="pbX-ww-fV0" firstAttribute="centerY" secondItem="LQo-cB-Nen" secondAttribute="centerY" id="Q75-nF-2lW"/>
+                                        <constraint firstItem="pbX-ww-fV0" firstAttribute="leading" secondItem="lKE-Se-fun" secondAttribute="trailing" constant="8" id="XSP-l6-TDm"/>
+                                        <constraint firstItem="lKE-Se-fun" firstAttribute="leading" secondItem="usK-Nw-UW2" secondAttribute="trailing" constant="25" id="a98-Ag-Dtu"/>
                                         <constraint firstItem="4ek-5f-7A7" firstAttribute="leading" secondItem="LQo-cB-Nen" secondAttribute="leadingMargin" id="bON-gL-t3I"/>
                                         <constraint firstItem="usK-Nw-UW2" firstAttribute="top" secondItem="4ek-5f-7A7" secondAttribute="bottom" constant="8" id="ggt-js-BrQ"/>
                                         <constraint firstItem="lKE-Se-fun" firstAttribute="centerY" secondItem="LQo-cB-Nen" secondAttribute="centerY" id="iI2-Yn-bkr"/>
                                         <constraint firstItem="4ek-5f-7A7" firstAttribute="top" secondItem="LQo-cB-Nen" secondAttribute="topMargin" id="nHB-Ib-Wxz"/>
-                                        <constraint firstItem="pbX-ww-fV0" firstAttribute="leading" secondItem="lKE-Se-fun" secondAttribute="trailing" constant="8" id="ndo-CG-ce2"/>
-                                        <constraint firstItem="MSS-l8-3u2" firstAttribute="leading" secondItem="pbX-ww-fV0" secondAttribute="trailing" constant="8" id="usr-wf-Iv9"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="RSSIView" destination="pbX-ww-fV0" id="WOB-KN-ayQ"/>
+                                    <outlet property="UUIDLabel" destination="usK-Nw-UW2" id="K28-vo-V26"/>
+                                    <outlet property="indicator" destination="MSS-l8-3u2" id="1wS-vQ-VcM"/>
+                                    <outlet property="nameLabel" destination="4ek-5f-7A7" id="0Ib-PQ-EXw"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

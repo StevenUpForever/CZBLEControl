@@ -13,11 +13,15 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
     
     private let centralManager = CBCentralManager()
     private let peripheralArray = NSMutableArray()
+    private var peripheral: CBPeripheral?
     
     //MARK = viewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        centralManager.delegate = self;
+        centralManager.delegate = self
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.view.addSubview(refresh)
     }
     
     //MARK - CBCentralManager delegate
@@ -35,95 +39,78 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
     }
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-        if self.peripheralArray.containsObject(peripheral) == false {
-            self.peripheralArray.addObject(peripheral)
+            self.peripheralArray.addObject(PeripheralInfo(peripheral: peripheral, RSSI: RSSI))
             self.tableView.reloadData()
-        }
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-//        DeviceConnectTableViewCell *cell = [self.tableView cellForRowAtIndexPath:self.tableView.indexPathForSelectedRow];
-//        cell.stateView.image = [UIImage imageNamed:@"tick55"];
-//        [cell.indicator stopAnimating];
-//        NSLog(@"%@", peripheral.services);
-//        //713D0007-503E-4C75-BA94-3148F18D941E
-//        CBMutableCharacteristic *character = [[CBMutableCharacteristic alloc]initWithType:[CBUUID UUIDWithString:@"00002a05-0000-1000-8000-00805f9b34fb"] properties:CBCharacteristicPropertyWrite value:nil permissions:CBAttributePermissionsWriteable | CBAttributePermissionsReadable];
-//        [peripheral writeValue:[@"0" dataUsingEncoding:NSUTF8StringEncoding] forCharacteristic:character type:CBCharacteristicWriteWithResponse];
-        //[self performSegueWithIdentifier:@"gotoControl" sender:self];
-        //[peripheral discoverServices:@[[CBUUID UUIDWithString:@"713D0000-503E-4C75-BA94-3148F18D941E"]]];
-        
+        let cell = self.tableView.cellForRowAtIndexPath(self.tableView.indexPathForSelectedRow!) as? BLETableViewCell
+        if cell?.indicator.isAnimating() == true {
+            cell?.indicator.stopAnimating()
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        let cell = self.tableView.cellForRowAtIndexPath(self.tableView.indexPathForSelectedRow!) as? BLETableViewCell
+        if cell?.indicator.isAnimating() == true {
+            cell?.indicator.stopAnimating()
+        }
+        CustomAlertController.showErrorAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.peripheralArray.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("BLECell", forIndexPath: indexPath) as! BLETableViewCell
+        cell.loadData(self.peripheralArray.objectAtIndex(indexPath.row) as? PeripheralInfo)
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
+         cell.indicator.startAnimating()
+        if let connectPeripheral = cell.peripheralInfo?.peripheral {
+             self.centralManager.connectPeripheral(connectPeripheral, options: nil)
+        } else {
+            print("Error")
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell
+        if cell?.indicator.isAnimating() == true {
+            cell?.indicator.stopAnimating()
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 73.0
     }
-    */
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //MARK - other methods
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-    */
+    
+    func tableViewRefresh(refreshControl: UIRefreshControl) {
+        self.tableView.reloadData()
+        if self.centralManager.isScanning == false {
+            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+        }
+        refreshControl.endRefreshing()
+    }
 
 }
