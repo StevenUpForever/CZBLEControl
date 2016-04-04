@@ -21,7 +21,7 @@ class BLETableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.RSSIView.addSubview(RSSISubView)
-        self.RSSIView.layer.borderWidth = 2.0
+        self.RSSIView.layer.borderWidth = 1.0
         self.RSSIView.layer.borderColor = UIColor.darkGrayColor().CGColor
         // Initialization code
     }
@@ -50,16 +50,16 @@ class BLETableViewCell: UITableViewCell {
         let height = self.RSSIView.frame.size.height
         if num == nil || (num >= 0 && num <= 25) {
             RSSISubView.frame = CGRectMake(0, height*3/4, width, height/4)
-            RSSISubView.backgroundColor = UIColor.redColor()
+            RSSISubView.backgroundColor = UIColor.customRed()
         } else if num > 25 && num <= 50 {
             RSSISubView.frame = CGRectMake(0, height/2, width, height/2)
-            RSSISubView.backgroundColor = UIColor.yellowColor()
+            RSSISubView.backgroundColor = UIColor.customOrange()
         } else if num > 50 && num <= 75 {
             RSSISubView.frame = CGRectMake(0, height/4, width, height*3/4)
-            RSSISubView.backgroundColor = UIColor.blueColor()
+            RSSISubView.backgroundColor = UIColor.customBlue()
         } else if num > 75 {
             RSSISubView.frame = RSSIView.frame
-            RSSISubView.backgroundColor = UIColor.greenColor()
+            RSSISubView.backgroundColor = UIColor.customGreen()
         }
     }
 

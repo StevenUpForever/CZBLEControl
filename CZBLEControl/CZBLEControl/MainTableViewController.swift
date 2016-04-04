@@ -12,17 +12,18 @@ class MainTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "navigationTitleView"))
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.navigationBar.hidden = true
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(true)
-        self.navigationController?.navigationBar.hidden = false
-    }
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(true)
+//        self.navigationController?.navigationBar.hidden = true
+//    }
+//    
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(true)
+//        self.navigationController?.navigationBar.hidden = false
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -17,7 +17,7 @@
                         <sections>
                             <tableViewSection headerTitle="Bluetooth Low Energy" id="dmD-j5-lo2">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="5GM-9N-l8s" style="IBUITableViewCellStyleDefault" id="x3F-7l-uLB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="5GM-9N-l8s" style="IBUITableViewCellStyleDefault" id="x3F-7l-uLB">
                                         <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x3F-7l-uLB" id="7Sq-yf-AuX">
@@ -41,7 +41,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Ethernet Cable" id="d1U-mL-AKK">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ID5-br-Jvl" style="IBUITableViewCellStyleDefault" id="7dP-9r-mGH">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ID5-br-Jvl" style="IBUITableViewCellStyleDefault" id="7dP-9r-mGH">
                                         <rect key="frame" x="0.0" y="207.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7dP-9r-mGH" id="5Xr-Wl-puE">
@@ -66,7 +66,9 @@
                             <outlet property="delegate" destination="flv-Zi-yH4" id="tf2-3K-QHc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="uhC-mo-UL7"/>
+                    <navigationItem key="navigationItem" id="uhC-mo-UL7">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="jdi-7q-5et"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2qE-9i-YUt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -150,20 +152,58 @@
                             <outlet property="delegate" destination="OSP-Jr-g2x" id="xEN-4E-5A4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Search BLE Devices" id="N9I-Qn-vNv"/>
+                    <navigationItem key="navigationItem" title="Search BLE Devices" id="N9I-Qn-vNv">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="gN4-lF-28w"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Spa-wo-Pf1" kind="show" identifier="peripheralControl" id="Sc5-kp-p1d"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q6B-HM-lBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1715" y="73"/>
+        </scene>
+        <!--Peripheral Control-->
+        <scene sceneID="98m-rL-eFH">
+            <objects>
+                <viewController id="Spa-wo-Pf1" customClass="PeripheralControlViewController" customModule="CZBLEControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NzV-uL-zgu"/>
+                        <viewControllerLayoutGuide type="bottom" id="R5p-2Z-hJu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GZy-NR-yOx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zon-Pp-T5e">
+                                <rect key="frame" x="38" y="109" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.30980392156862746" green="0.76470588235294112" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Peripheral Control" id="n90-mf-vHP">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="ThV-d5-1g5"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vnU-mX-0D1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2409" y="73"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qGq-6A-IBU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m0q-gY-3WN" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xhc-rM-zMc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="backButton" backIndicatorTransitionMaskImage="backButton" id="Xhc-rM-zMc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.30980392156862746" green="0.76470588235294112" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -175,4 +215,7 @@
             <point key="canvasLocation" x="315" y="372"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="backButton" width="22" height="22"/>
+    </resources>
 </document>

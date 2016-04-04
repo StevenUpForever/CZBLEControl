@@ -22,6 +22,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.view.addSubview(refresh)
+        
     }
     
     //MARK - CBCentralManager delegate
@@ -44,17 +45,11 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-        let cell = self.tableView.cellForRowAtIndexPath(self.tableView.indexPathForSelectedRow!) as? BLETableViewCell
-        if cell?.indicator.isAnimating() == true {
-            cell?.indicator.stopAnimating()
-        }
+        self.performSegueWithIdentifier("peripheralControl", sender: self)
     }
     
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        let cell = self.tableView.cellForRowAtIndexPath(self.tableView.indexPathForSelectedRow!) as? BLETableViewCell
-        if cell?.indicator.isAnimating() == true {
-            cell?.indicator.stopAnimating()
-        }
+        
         CustomAlertController.showErrorAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
     }
 
@@ -111,6 +106,12 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
             centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
         }
         refreshControl.endRefreshing()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "peripheralControl" {
+            _ = segue.destinationViewController as? PeripheralControlViewController
+        }
     }
 
 }
