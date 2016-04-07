@@ -9,20 +9,26 @@
 import UIKit
 import CoreBluetooth
 
-class BLETableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
+class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     
     private let centralManager = CBCentralManager()
     private let peripheralArray = NSMutableArray()
-    private var peripheral: CBPeripheral?
+    private var peripheralObj: CBPeripheral?
     
     //MARK = viewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         centralManager.delegate = self
+        
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.view.addSubview(refresh)
         
+    }
+    
+    //Transfer delegate to this viewController when back to this page
+    override func viewWillAppear(animated: Bool) {
+        centralManager.delegate = self
     }
     
     //MARK - CBCentralManager delegate
@@ -43,19 +49,20 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
         var index = 0
         while index < peripheralArray.count {
             if peripheralArray[index].peripheral == peripheral {
-                peripheralArray.replaceObjectAtIndex(index, withObject: PeripheralInfo(peripheral: peripheral, RSSI: RSSI))
+                peripheralArray.replaceObjectAtIndex(index, withObject: PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
                 tableView.reloadData()
                 break
             }
             index += 1
         }
         if index == peripheralArray.count {
-            self.peripheralArray.addObject(PeripheralInfo(peripheral: peripheral, RSSI: RSSI))
+            self.peripheralArray.addObject(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
             self.tableView.reloadData()
         }
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+        peripheralObj = peripheral
         self.performSegueWithIdentifier("peripheralControl", sender: self)
     }
     
@@ -63,7 +70,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
         
         CustomAlertController.showErrorAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -112,6 +119,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
     }
     
     func tableViewRefresh(refreshControl: UIRefreshControl) {
+        peripheralArray.removeAllObjects()
         self.tableView.reloadData()
         if self.centralManager.isScanning == false {
             centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
@@ -121,7 +129,10 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "peripheralControl" {
-            _ = segue.destinationViewController as? PeripheralControlViewController
+            let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
+            peripheralVC?.peripheralObj = peripheralObj
+            peripheralVC?.centralManager = centralManager
+            peripheralVC?.title = peripheralObj?.name
         }
     }
 
