@@ -29,7 +29,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
     func centralManagerDidUpdateState(central: CBCentralManager) {
         switch central.state {
         case CBCentralManagerState.PoweredOn:
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         case CBCentralManagerState.Unsupported:
             CustomAlertController.showErrorAlertController("Not support", message: "Your device doesn't support BLE", target: self)
         case CBCentralManagerState.PoweredOff:
@@ -40,8 +40,19 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
     }
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        var index = 0
+        while index < peripheralArray.count {
+            if peripheralArray[index].peripheral == peripheral {
+                peripheralArray.replaceObjectAtIndex(index, withObject: PeripheralInfo(peripheral: peripheral, RSSI: RSSI))
+                tableView.reloadData()
+                break
+            }
+            index += 1
+        }
+        if index == peripheralArray.count {
             self.peripheralArray.addObject(PeripheralInfo(peripheral: peripheral, RSSI: RSSI))
             self.tableView.reloadData()
+        }
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
@@ -103,7 +114,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate, C
     func tableViewRefresh(refreshControl: UIRefreshControl) {
         self.tableView.reloadData()
         if self.centralManager.isScanning == false {
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         }
         refreshControl.endRefreshing()
     }

@@ -48,18 +48,18 @@ class BLETableViewCell: UITableViewCell {
     private func changeRSSIValue(num: Int?) {
         let width = self.RSSIView.frame.size.width
         let height = self.RSSIView.frame.size.height
-        if num == nil || (num >= 0 && num <= 25) {
-            RSSISubView.frame = CGRectMake(0, height*3/4, width, height/4)
-            RSSISubView.backgroundColor = UIColor.customRed()
+        if num >= 0 && num <= 25 {
+            self.RSSISubView.frame = CGRectMake(0, height*3/4, width, height/4)
+            self.RSSISubView.backgroundColor = UIColor.customRed()
         } else if num > 25 && num <= 50 {
-            RSSISubView.frame = CGRectMake(0, height/2, width, height/2)
-            RSSISubView.backgroundColor = UIColor.customOrange()
+            self.RSSISubView.frame = CGRectMake(0, height/2, width, height/2)
+            self.RSSISubView.backgroundColor = UIColor.customOrange()
         } else if num > 50 && num <= 75 {
-            RSSISubView.frame = CGRectMake(0, height/4, width, height*3/4)
-            RSSISubView.backgroundColor = UIColor.customBlue()
+            self.RSSISubView.frame = CGRectMake(0, height/4, width, height*3/4)
+            self.RSSISubView.backgroundColor = UIColor.customBlue()
         } else if num > 75 {
-            RSSISubView.frame = RSSIView.frame
-            RSSISubView.backgroundColor = UIColor.customGreen()
+            self.RSSISubView.frame = self.RSSIView.frame
+            self.RSSISubView.backgroundColor = UIColor.customGreen()
         }
     }
 
