@@ -181,7 +181,7 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     }
     
     func openHiddenSubViewAtIndexPath(indexPath: NSIndexPath) {
-        cellIndexPath = indexPath
+        cellIndexPath = cellIndexPath == indexPath ? nil : indexPath
         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
     }
     

@@ -15,10 +15,14 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     private var peripheralArray = [PeripheralInfo]()
     private var peripheralObj: CBPeripheral?
     
+    var customIndexPath = NSIndexPath()
+    
     //MARK = viewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         centralManager.delegate = self
+        
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
         
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
@@ -45,7 +49,6 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         while index < peripheralArray.count {
             if peripheralArray[index].peripheral == peripheral {
                 peripheralArray[index].RSSI = RSSI
-                //tableView.reloadData()
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
                 cell.loadData(peripheralArray[index])
@@ -61,12 +64,19 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+        let cell = tableView.cellForRowAtIndexPath(customIndexPath) as! BLETableViewCell
+        if cell.indicator.isAnimating() {
+            cell.indicator.stopAnimating()
+        }
         peripheralObj = peripheral
         self.performSegueWithIdentifier("peripheralControl", sender: self)
     }
     
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        
+        let cell = tableView.cellForRowAtIndexPath(customIndexPath) as! BLETableViewCell
+        if cell.indicator.isAnimating() {
+            cell.indicator.stopAnimating()
+        }
         CustomAlertController.showErrorAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
     }
     
@@ -90,7 +100,8 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
          cell.indicator.startAnimating()
         if let connectPeripheral = cell.peripheralInfo?.peripheral {
-             self.centralManager.connectPeripheral(connectPeripheral, options: nil)
+             centralManager.connectPeripheral(connectPeripheral, options: nil)
+            customIndexPath = indexPath
         } else {
             print("Error")
         }
