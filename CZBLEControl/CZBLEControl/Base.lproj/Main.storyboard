@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Search BLE Devices-->
@@ -222,7 +223,7 @@ Reconnect by top right button or back to choose another device</string>
                                                             <rect key="frame" x="91" y="12" width="35" height="35"/>
                                                             <state key="normal" image="read"/>
                                                             <connections>
-                                                                <segue destination="tSN-aa-V9m" kind="show" id="e1W-Nf-ia7"/>
+                                                                <segue destination="tSN-aa-V9m" kind="show" identifier="read" id="e1W-Nf-ia7"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-is-Of4">
@@ -230,14 +231,23 @@ Reconnect by top right button or back to choose another device</string>
                                                             <state key="normal" image="write">
                                                                 <color key="titleColor" red="0.80784313725490198" green="0.96470588235294119" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <segue destination="tSN-aa-V9m" kind="show" identifier="write" id="HzD-95-Xyv"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5i-3E-ECh">
                                                             <rect key="frame" x="308" y="12" width="35" height="35"/>
                                                             <state key="normal" image="notify"/>
+                                                            <connections>
+                                                                <segue destination="tSN-aa-V9m" kind="show" identifier="notify" id="VgX-D5-x9H"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-19-tYh">
                                                             <rect key="frame" x="417" y="12" width="35" height="35"/>
                                                             <state key="normal" image="descriptor"/>
+                                                            <connections>
+                                                                <segue destination="tSN-aa-V9m" kind="show" identifier="descriptor" id="yM5-MC-nqx"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -325,17 +335,17 @@ Reconnect by top right button or back to choose another device</string>
             </objects>
             <point key="canvasLocation" x="3189" y="73"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Title-->
         <scene sceneID="xSh-ee-ZpG">
             <objects>
-                <tableViewController id="tSN-aa-V9m" sceneMemberID="viewController">
+                <tableViewController id="tSN-aa-V9m" customClass="RWNCTableViewController" customModule="CZBLEControl" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="snq-ip-uje">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.30980392159999998" green="0.76470588240000004" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wGM-ra-jFh">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="readCell" id="wGM-ra-jFh">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wGM-ra-jFh" id="6Kh-5x-KVB">
@@ -349,6 +359,19 @@ Reconnect by top right button or back to choose another device</string>
                             <outlet property="delegate" destination="tSN-aa-V9m" id="BIK-zD-gkN"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="tW5-wf-puc">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="rOa-bl-gRa">
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </barButtonItem>
+                            <barButtonItem systemItem="camera" id="Oj1-Gv-L8s">
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="connectBarItem" destination="rOa-bl-gRa" id="ExE-WY-nhs"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yC9-Bp-WPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -381,4 +404,7 @@ Reconnect by top right button or back to choose another device</string>
         <image name="read" width="35" height="35"/>
         <image name="write" width="35" height="35"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="HzD-95-Xyv"/>
+    </inferredMetricsTieBreakers>
 </document>

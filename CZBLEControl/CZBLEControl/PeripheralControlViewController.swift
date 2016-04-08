@@ -155,8 +155,26 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     @IBAction func connectSelfPeripheral(sender: AnyObject) {
         serviceDict.removeAll()
         tableView.reloadData()
-        
         centralManager.connectPeripheral(peripheralObj!, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segue.identifier! {
+        case "read":
+            let readVC = segue.destinationViewController as! RWNCTableViewController
+            readVC.peripheralObj = peripheralObj
+        case "write":
+            let writeVC = segue.destinationViewController as! RWNCTableViewController
+            writeVC.peripheralObj = peripheralObj
+        case "notify":
+           let notifyVC = segue.destinationViewController as! RWNCTableViewController
+            notifyVC.peripheralObj = peripheralObj
+        case "descriptor":
+            let descriptorVC = segue.destinationViewController as! RWNCTableViewController
+            descriptorVC.peripheralObj = peripheralObj
+        default:
+            break
+        }
     }
 
     

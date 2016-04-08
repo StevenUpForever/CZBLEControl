@@ -24,7 +24,6 @@ class ServiceTableViewCell: UITableViewCell {
         readButton.enabled = false
         writeButton.enabled = false
         notifyButton.enabled = false
-        descriptorButton.enabled = false
         
         let gradient = CAGradientLayer()
         gradient.frame = buttonCombineView.bounds
