@@ -19,6 +19,7 @@ class PeripheralInfo: NSObject {
         self.peripheral = peripheral
         self.RSSI = RSSI
         self.adData = adData
+        super.init()
     }
 
 }

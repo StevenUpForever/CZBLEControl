@@ -14,13 +14,14 @@ class BLETableViewCell: UITableViewCell {
     @IBOutlet weak var UUIDLabel: UILabel!
     @IBOutlet weak var RSSIView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var rssiNumberLabel: UILabel!
     
     var peripheralInfo: PeripheralInfo!
     let RSSISubView = UIView()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.RSSIView.addSubview(RSSISubView)
+        self.RSSIView.insertSubview(RSSISubView, belowSubview: rssiNumberLabel)
         self.RSSIView.layer.borderWidth = 1.0
         self.RSSIView.layer.borderColor = UIColor.darkGrayColor().CGColor
         // Initialization code
@@ -42,6 +43,7 @@ class BLETableViewCell: UITableViewCell {
         self.UUIDLabel.text = info?.peripheral.identifier.UUIDString
         self.changeRSSIValue(((info?.RSSI.integerValue)! + 100)*2)
         self.peripheralInfo = info
+        self.rssiNumberLabel.text = "\((info?.RSSI.integerValue)!)"
         self.RSSIView.layoutIfNeeded()
     }
     
