@@ -15,9 +15,11 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var connectBarItem: UIBarButtonItem!
+    
     var peripheralObj: CBPeripheral?
     var centralManager = CBCentralManager()
     var serviceDict = [CharacterInfo]()
+    var cellIndexPath = NSIndexPath()
 
     //MARK - viewController lifeCycle
     override func viewDidLoad() {
@@ -125,10 +127,16 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ServiceTableViewCell
-        //tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-            cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height * 2)
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
+        cellIndexPath = indexPath
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if cellIndexPath == indexPath {
+            return 160.0
+        } else {
+            return 90.0
+        }
     }
     
     //MARK methods and Selectors

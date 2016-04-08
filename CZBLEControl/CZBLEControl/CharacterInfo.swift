@@ -15,6 +15,5 @@ class CharacterInfo: NSObject {
     
     init(service: CBService) {
         serviceObj = service
-        //super.init()
     }
 }

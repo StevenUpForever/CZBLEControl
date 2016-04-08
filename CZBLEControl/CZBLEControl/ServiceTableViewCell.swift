@@ -12,7 +12,6 @@ class ServiceTableViewCell: UITableViewCell {
 
     @IBOutlet weak var uuidLabel: UILabel!
     @IBOutlet weak var propertyLabel: UILabel!
-   
     
     override func awakeFromNib() {
         super.awakeFromNib()
