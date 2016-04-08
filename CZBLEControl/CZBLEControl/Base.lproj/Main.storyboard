@@ -210,33 +210,33 @@
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="85.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primary Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNn-X5-Gan">
-                                                    <rect key="frame" x="8" y="8" width="114" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUID label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNn-X5-Gan">
+                                                    <rect key="frame" x="8" y="8" width="73" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="OGs-1H-Q3q"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5p-PR-1wh">
-                                                    <rect key="frame" x="8" y="36" width="37" height="36"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="36" id="NoK-sO-dXB"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="8" y="52" width="37" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="a5p-PR-1wh" secondAttribute="bottom" constant="7.5" id="3Ww-7V-kZy"/>
                                                 <constraint firstItem="a5p-PR-1wh" firstAttribute="leading" secondItem="NdH-s2-BeZ" secondAttribute="leadingMargin" id="3a6-UC-1CK"/>
-                                                <constraint firstItem="a5p-PR-1wh" firstAttribute="top" secondItem="QNn-X5-Gan" secondAttribute="bottom" constant="8" id="4wA-BZ-r1B"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="a5p-PR-1wh" secondAttribute="bottom" constant="5.5" id="6SA-E3-LjF"/>
+                                                <constraint firstItem="a5p-PR-1wh" firstAttribute="top" secondItem="QNn-X5-Gan" secondAttribute="bottom" constant="8" id="otS-Kg-7yO"/>
                                                 <constraint firstItem="QNn-X5-Gan" firstAttribute="leading" secondItem="NdH-s2-BeZ" secondAttribute="leadingMargin" id="u8A-0o-DSQ"/>
                                                 <constraint firstItem="QNn-X5-Gan" firstAttribute="top" secondItem="NdH-s2-BeZ" secondAttribute="topMargin" id="uWh-Bw-kUi"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="primaryServiceLabel" destination="QNn-X5-Gan" id="V7J-0l-sCp"/>
-                                            <outlet property="uuidLabel" destination="a5p-PR-1wh" id="YqZ-85-m9Q"/>
+                                            <outlet property="propertyLabel" destination="a5p-PR-1wh" id="aDe-KB-hSi"/>
+                                            <outlet property="uuidLabel" destination="QNn-X5-Gan" id="2Tq-Wl-cMu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

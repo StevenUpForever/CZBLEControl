@@ -12,7 +12,7 @@ import CoreBluetooth
 class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     
     private let centralManager = CBCentralManager()
-    private let peripheralArray = NSMutableArray()
+    private var peripheralArray = [PeripheralInfo]()
     private var peripheralObj: CBPeripheral?
     
     //MARK = viewController lifecycle
@@ -24,11 +24,6 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.view.addSubview(refresh)
         
-    }
-    
-    //Transfer delegate to this viewController when back to this page
-    override func viewWillAppear(animated: Bool) {
-        centralManager.delegate = self
     }
     
     //MARK - CBCentralManager delegate
@@ -49,15 +44,19 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         var index = 0
         while index < peripheralArray.count {
             if peripheralArray[index].peripheral == peripheral {
-                peripheralArray.replaceObjectAtIndex(index, withObject: PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
-                tableView.reloadData()
+                peripheralArray[index].RSSI = RSSI
+                //tableView.reloadData()
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
+                cell.loadData(peripheralArray[index])
                 break
             }
             index += 1
         }
         if index == peripheralArray.count {
-            self.peripheralArray.addObject(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
-            self.tableView.reloadData()
+            peripheralArray.append(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
+            let indexPath = NSIndexPath(forRow: index, inSection: 0)
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
     }
     
@@ -83,7 +82,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BLECell", forIndexPath: indexPath) as! BLETableViewCell
-        cell.loadData(self.peripheralArray.objectAtIndex(indexPath.row) as? PeripheralInfo)
+        cell.loadData(self.peripheralArray[indexPath.row])
         return cell
     }
     
@@ -119,8 +118,13 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
     
     func tableViewRefresh(refreshControl: UIRefreshControl) {
-        peripheralArray.removeAllObjects()
-        self.tableView.reloadData()
+        var indexPathArray = [NSIndexPath]()
+        for i in 0 ..< peripheralArray.count {
+            indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
+        }
+        peripheralArray.removeAll()
+        tableView.deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .Right)
+        
         if self.centralManager.isScanning == false {
             centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         }
@@ -131,7 +135,6 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         if segue.identifier == "peripheralControl" {
             let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
             peripheralVC?.peripheralObj = peripheralObj
-            peripheralVC?.centralManager = centralManager
             peripheralVC?.title = peripheralObj?.name
         }
     }
