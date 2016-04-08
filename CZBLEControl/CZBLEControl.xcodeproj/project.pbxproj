@@ -14,7 +14,6 @@
 		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
 		AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */; };
 		AF8BDEAC1CB7676000C49885 /* CharacterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEAB1CB7676000C49885 /* CharacterInfo.swift */; };
-		AF8BDEB11CB79AB400C49885 /* LaunchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEB01CB79AB400C49885 /* LaunchingViewController.swift */; };
 		AFD10C481CB214E300CD5E86 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */; };
 		AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */; };
 		AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */; };
@@ -48,7 +47,6 @@
 		AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewCell.swift; sourceTree = "<group>"; };
 		AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		AF8BDEAB1CB7676000C49885 /* CharacterInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterInfo.swift; sourceTree = "<group>"; };
-		AF8BDEB01CB79AB400C49885 /* LaunchingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchingViewController.swift; sourceTree = "<group>"; };
 		AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
 		AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralControlViewController.swift; sourceTree = "<group>"; };
 		AFD10C4D1CB23D1500CD5E86 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 				AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */,
 				AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */,
 				AF8BDEAB1CB7676000C49885 /* CharacterInfo.swift */,
-				AF8BDEB01CB79AB400C49885 /* LaunchingViewController.swift */,
 			);
 			name = BLE;
 			sourceTree = "<group>";
@@ -311,7 +308,6 @@
 				AFD10C4E1CB23D1500CD5E86 /* UIColorExtension.swift in Sources */,
 				AF7284A71CB1EF3D00B8D610 /* MainTableViewController.swift in Sources */,
 				AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */,
-				AF8BDEB11CB79AB400C49885 /* LaunchingViewController.swift in Sources */,
 				AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */,
 				AF8BDEAC1CB7676000C49885 /* CharacterInfo.swift in Sources */,
 				AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */,
