@@ -19,7 +19,7 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     var peripheralObj: CBPeripheral?
     var centralManager = CBCentralManager()
     var serviceDict = [CharacterInfo]()
-    var cellIndexPath = NSIndexPath()
+    var cellIndexPath: NSIndexPath?
 
     //MARK - viewController lifeCycle
     override func viewDidLoad() {
@@ -127,8 +127,7 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        cellIndexPath = indexPath
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        openHiddenSubViewAtIndexPath(indexPath)
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -173,6 +172,17 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
             propertyStr += "/WriteWithoutResponse"
         }
         return propertyStr
+    }
+    
+    @IBAction func dropDownProcess(sender: AnyObject) {
+        let buttonPosition = sender.convertPoint(CGPointZero, toView: tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(buttonPosition)
+        openHiddenSubViewAtIndexPath(indexPath!)
+    }
+    
+    func openHiddenSubViewAtIndexPath(indexPath: NSIndexPath) {
+        cellIndexPath = indexPath
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
     }
     
     @IBAction func connectSelfPeripheral(sender: AnyObject) {

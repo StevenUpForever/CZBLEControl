@@ -214,7 +214,7 @@ Reconnect by top right button or back to choose another device</string>
                                 <rect key="frame" x="20" y="271" width="560" height="329"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="serviceCell" rowHeight="160" id="YNh-bs-K8x" customClass="ServiceTableViewCell" customModule="CZBLEControl" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="serviceCell" rowHeight="160" id="YNh-bs-K8x" customClass="ServiceTableViewCell" customModule="CZBLEControl" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="560" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YNh-bs-K8x" id="NdH-s2-BeZ">
@@ -243,6 +243,9 @@ Reconnect by top right button or back to choose another device</string>
                                                         <constraint firstAttribute="width" constant="35" id="jxW-2y-ADD"/>
                                                     </constraints>
                                                     <state key="normal" image="dropDown"/>
+                                                    <connections>
+                                                        <action selector="dropDownProcess:" destination="WcB-xk-h5K" eventType="touchUpInside" id="hYR-v1-gRS"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
