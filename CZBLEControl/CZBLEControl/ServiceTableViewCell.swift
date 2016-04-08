@@ -13,10 +13,23 @@ class ServiceTableViewCell: UITableViewCell {
 
     @IBOutlet weak var uuidLabel: UILabel!
     @IBOutlet weak var propertyLabel: UILabel!
-    
+    @IBOutlet weak var readButton: UIButton!
+    @IBOutlet weak var writeButton: UIButton!
+    @IBOutlet weak var notifyButton: UIButton!
+    @IBOutlet weak var descriptorButton: UIButton!
+    @IBOutlet weak var buttonCombineView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        readButton.enabled = false
+        writeButton.enabled = false
+        notifyButton.enabled = false
+        descriptorButton.enabled = false
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = buttonCombineView.bounds
+        gradient.colors = [UIColor.whiteColor().CGColor, UIColor.gradientBlue().CGColor, UIColor.titleBlue().CGColor, UIColor.gradientBlue().CGColor, UIColor.whiteColor().CGColor]
+        buttonCombineView.layer.insertSublayer(gradient, atIndex: 0)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -33,34 +46,38 @@ class ServiceTableViewCell: UITableViewCell {
     func getPropertitesName(property: CBCharacteristicProperties) -> String {
         var propertyStr = "Propertites:"
         if property.rawValue & CBCharacteristicProperties.Broadcast.rawValue > 0 {
-            propertyStr += "/Broadcast"
+            propertyStr += " Broadcast"
         }
         if property.rawValue & CBCharacteristicProperties.AuthenticatedSignedWrites.rawValue > 0 {
-            propertyStr += "/AuthenticatedSignedWrites"
+            propertyStr += " AuthenticatedSignedWrites"
         }
         if property.rawValue & CBCharacteristicProperties.ExtendedProperties.rawValue > 0 {
-            propertyStr += "/ExtendedProperties"
+            propertyStr += " ExtendedProperties"
         }
         if property.rawValue & CBCharacteristicProperties.Indicate.rawValue > 0 {
-            propertyStr += "/Indicate"
+            propertyStr += " Indicate"
         }
         if property.rawValue & CBCharacteristicProperties.IndicateEncryptionRequired.rawValue > 0 {
-            propertyStr += "/IndicateEncryptionRequired"
+            propertyStr += " IndicateEncryptionRequired"
         }
         if property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0 {
-            propertyStr += "/Notify"
+            propertyStr += " Notify"
+            notifyButton.enabled = true
         }
         if property.rawValue & CBCharacteristicProperties.NotifyEncryptionRequired.rawValue > 0 {
-            propertyStr += "/NotifyEncryptionRequired"
+            propertyStr += " NotifyEncryptionRequired"
         }
         if property.rawValue & CBCharacteristicProperties.Read.rawValue > 0 {
-            propertyStr += "/Read"
+            propertyStr += " Read"
+            readButton.enabled = true
         }
         if property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 {
-            propertyStr += "/Write"
+            propertyStr += " Write"
+            writeButton.enabled = true
         }
         if property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 {
-            propertyStr += "/WriteWithoutResponse"
+            propertyStr += " WriteWithoutResponse"
+            writeButton.enabled = true
         }
         return propertyStr
     }

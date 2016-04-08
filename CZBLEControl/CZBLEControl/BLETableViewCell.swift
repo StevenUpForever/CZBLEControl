@@ -60,7 +60,7 @@ class BLETableViewCell: UITableViewCell {
             self.RSSISubView.frame = CGRectMake(0, height/4, width, height*3/4)
             self.RSSISubView.backgroundColor = UIColor.customBlue()
         } else if num > 75 {
-            self.RSSISubView.frame = self.RSSIView.frame
+            self.RSSISubView.frame = self.RSSIView.bounds
             self.RSSISubView.backgroundColor = UIColor.customGreen()
         }
     }

@@ -66,8 +66,9 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
                 if peripheralArray[index].peripheral == peripheral {
                     peripheralArray[index].RSSI = RSSI
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                    let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
-                    cell.loadData(peripheralArray[index])
+                    if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+                        cell.loadData(peripheralArray[index])
+                    }
                     break
                 }
             }
@@ -79,18 +80,20 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-        let cell = tableView.cellForRowAtIndexPath(customIndexPath) as! BLETableViewCell
-        if cell.indicator.isAnimating() {
-            cell.indicator.stopAnimating()
+        if let cell = tableView.cellForRowAtIndexPath(customIndexPath) as? BLETableViewCell {
+            if cell.indicator.isAnimating() {
+                cell.indicator.stopAnimating()
+            }
         }
         peripheralObj = peripheral
         self.performSegueWithIdentifier("peripheralControl", sender: self)
     }
     
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        let cell = tableView.cellForRowAtIndexPath(customIndexPath) as! BLETableViewCell
-        if cell.indicator.isAnimating() {
-            cell.indicator.stopAnimating()
+        if let cell = tableView.cellForRowAtIndexPath(customIndexPath) as? BLETableViewCell {
+            if cell.indicator.isAnimating() {
+                cell.indicator.stopAnimating()
+            }
         }
         CustomAlertController.showErrorAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
     }
@@ -112,22 +115,24 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
-        if cell.indicator.isAnimating() == false {
-            cell.indicator.startAnimating()
-        }
-        if let connectPeripheral = cell.peripheralInfo?.peripheral {
-             centralManager.connectPeripheral(connectPeripheral, options: nil)
-            customIndexPath = indexPath
-        } else {
-            print("Error")
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+            if cell.indicator.isAnimating() == false {
+                cell.indicator.startAnimating()
+            }
+            if let connectPeripheral = cell.peripheralInfo?.peripheral {
+                centralManager.connectPeripheral(connectPeripheral, options: nil)
+                customIndexPath = indexPath
+            } else {
+                print("Error")
+            }
         }
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell
-        if cell?.indicator.isAnimating() == true {
-            cell?.indicator.stopAnimating()
+        if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+            if cell.indicator.isAnimating() == true {
+                cell.indicator.stopAnimating()
+            }
         }
     }
     

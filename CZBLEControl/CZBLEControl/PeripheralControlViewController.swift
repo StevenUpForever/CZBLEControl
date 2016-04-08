@@ -43,6 +43,8 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
         }
         tableView.delegate = self
         tableView.dataSource = self
+        
+        self.title = peripheralObj?.name == nil ? "Name unavailable" : peripheralObj?.name
     }
 
     override func didReceiveMemoryWarning() {
@@ -131,7 +133,7 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if cellIndexPath == indexPath {
-            return 160.0
+            return 180.0
         } else {
             return 90.0
         }

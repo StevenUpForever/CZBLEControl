@@ -25,4 +25,12 @@ extension UIColor {
         return UIColor(red: 76.0/255, green: 175.0/255, blue: 80.0/255, alpha: 1.0)
     }
     
+    static func titleBlue() -> UIColor {
+        return UIColor(red: 169.0/255, green: 245.0/255, blue: 242.0/255, alpha: 1.0)
+    }
+    
+    static func gradientBlue() -> UIColor {
+        return UIColor(red: 206.0/255, green: 246.0/255, blue: 236.0/255, alpha: 1.0)
+    }
+    
 }
