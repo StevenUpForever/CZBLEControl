@@ -125,6 +125,9 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
         let cell = tableView.dequeueReusableCellWithIdentifier("serviceCell") as! ServiceTableViewCell
         let character = serviceDict[indexPath.section].characterArray[indexPath.row]
         cell.loadData(character)
+        cell.changeButtonEnable(character.properties)
+//        cell.writeButton.enabled = false
+//        cell.readButton.enabled = character.properties.rawValue & CBCharacteristicProperties.Read.rawValue > 0 ? true : false
         return cell
     }
     

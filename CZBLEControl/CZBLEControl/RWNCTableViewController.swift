@@ -19,6 +19,9 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     var peripheralObj: CBPeripheral?
     var characterObj: CBCharacteristic?
     
+    var valueArray = [NSData?]()
+    var responseArray = [String]()
+    
     var searchBar = UISearchBar()
     
     var prepareInfo: RWNCPrepareInfo?
@@ -36,18 +39,38 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             actionBarItem.enabled = false
         }
         peripheralObj = prepareInfo?.RWNCPeripheral
+        peripheralObj?.delegate = self
         characterObj = prepareInfo?.RWNCCharacter
+        centralManager.delegate = self
         
         switch (peripheralObj?.state)! {
         case CBPeripheralState.Connected:
             connectBarItem.enabled = false
+            
+            switch actionBarItem.tag {
+            case 0:
+                if peripheralObj != nil && characterObj != nil {
+                    peripheralObj?.readValueForCharacteristic(characterObj!)
+                } else {
+                    CustomAlertController.showErrorAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
+                }
+            case 3:
+                if peripheralObj != nil && characterObj != nil {
+                    peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
+                    actionBarItem.enabled = false
+                } else {
+                    CustomAlertController.showErrorAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
+                }
+            default:
+                break
+            }
+            
         case CBPeripheralState.Disconnected:
             CustomAlertController.showErrorAlertController("Peripheral not connected", message: "Peripheral is disconnected, please connect with refresh button", target: self)
             connectBarItem.enabled = true
         default:
             break
         }
-        centralManager.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,21 +81,36 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return actionBarItem.tag == 1 ? 2 : 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        if actionBarItem.tag == 1 {
+            return section == 0 ? valueArray.count : responseArray.count
+        } else {
+            return valueArray.count
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        if let data = valueArray[indexPath.row] {
+            cell.textLabel?.text = String(data: data, encoding: NSUTF8StringEncoding)
+        } else {
+            cell.textLabel?.text = "Value unavailable"
+        }
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "hh:mm:ss:SSS"
+        cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tableView.numberOfSections == 2 {
+            return section == 0 ? "Write value" : "Response value"
+        } else {
+            return actionBarItem.tag == 2 ? "Write value" : "Read value"
+        }
     }
     
     //MARK - CBCentral delegate
@@ -102,13 +140,23 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     }
     
     //MARK - CBPeripheral delegate
+    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        valueArray.append(characteristic.value)
+        let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+    }
+    
+    func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        actionBarItem.enabled = characteristic.isNotifying ? false : true
+    }
     
     //MARK - IBActions and Selectors
     @IBAction func connectProcess(sender: AnyObject) {
+        centralManager.connectPeripheral(peripheralObj!, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
     }
     
     @IBAction func actionProcess(sender: UIBarButtonItem) {
-        print(sender.tag)
+        
     }
     
     

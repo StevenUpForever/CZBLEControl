@@ -65,24 +65,30 @@ class ServiceTableViewCell: UITableViewCell {
         }
         if property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0 {
             propertyStr += " Notify"
-            notifyButton.enabled = true
+            //notifyButton.enabled = true
         }
         if property.rawValue & CBCharacteristicProperties.NotifyEncryptionRequired.rawValue > 0 {
             propertyStr += " NotifyEncryptionRequired"
         }
         if property.rawValue & CBCharacteristicProperties.Read.rawValue > 0 {
             propertyStr += " Read"
-            readButton.enabled = true
+            //readButton.enabled = true
         }
         if property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 {
             propertyStr += " Write"
-            writeButton.enabled = true
+            //writeButton.enabled = true
         }
         if property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 {
             propertyStr += " WriteWithoutResponse"
-            writeButton.enabled = true
+            //writeButton.enabled = true
         }
         return propertyStr
+    }
+    
+    func changeButtonEnable(property: CBCharacteristicProperties) {
+        notifyButton.enabled = property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0 ? true : false
+        readButton.enabled = property.rawValue & CBCharacteristicProperties.Read.rawValue > 0 ? true : false
+        writeButton.enabled = property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 || property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 ? true : false
     }
 
 }
