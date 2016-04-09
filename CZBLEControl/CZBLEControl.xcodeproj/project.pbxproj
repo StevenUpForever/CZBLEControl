@@ -231,7 +231,7 @@
 				TargetAttributes = {
 					AFDA746C1CB1EE5800F09BD8 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 78A73LK6Q3;
+						DevelopmentTeam = LPRD99FQ39;
 					};
 					AFDA74831CB1EE5800F09BD8 = {
 						CreatedOnToolsVersion = 7.3;
@@ -463,6 +463,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengzhiJia.CZBLEControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -475,9 +476,10 @@
 			baseConfigurationReference = 06D893E0F5AF0B906038144F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengzhi Jia (LPRD99FQ39)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengzhi Jia (LPRD99FQ39)";
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengzhiJia.CZBLEControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";

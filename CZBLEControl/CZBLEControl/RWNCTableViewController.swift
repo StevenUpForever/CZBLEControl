@@ -18,13 +18,15 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     var peripheralObj: CBPeripheral?
     var characterObj: CBCharacteristic?
     
-    var valueArray = [NSData?]()
+    var valueArray = [String]()
     var responseArray = [String]()
+    var descriptorArray = [AnyObject?]()
     
     //var searchBar = UISearchBar()
     
     var prepareInfo: RWNCPrepareInfo?
 
+    //MARK - viewController lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +58,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
                     CustomAlertController.showErrorAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
                 }
             case 3:
+                self.title = "Notify"
                 if peripheralObj != nil && characterObj != nil {
                     peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
                     actionBarItem.image = UIImage(named: "unnotifyItem")
@@ -63,6 +66,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
                     CustomAlertController.showErrorAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
                 }
             case 4:
+                self.title = "Descriptors"
                 if let descriptorArray = characterObj?.descriptors {
                     for descriptor: CBDescriptor in descriptorArray {
                         peripheralObj?.readValueForDescriptor(descriptor)
@@ -79,6 +83,13 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             break
         }
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        if characterObj?.isNotifying == true {
+            peripheralObj?.setNotifyValue(false, forCharacteristic: characterObj!)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -92,9 +103,16 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if actionBarItem.tag == 1 {
+        switch actionBarItem.tag {
+        case 1:
             return section == 0 ? responseArray.count : valueArray.count
-        } else {
+        case 2:
+            return responseArray.count
+        case 3:
+            return valueArray.count
+        case 4:
+            return descriptorArray.count
+        default:
             return valueArray.count
         }
     }
@@ -106,21 +124,28 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             if indexPath.section == 0 {
                 cell.textLabel?.text = responseArray[indexPath.row]
             } else {
-                if let data = valueArray[indexPath.row] {
-                    cell.textLabel?.text = String(data: data, encoding: NSUTF8StringEncoding)
-                } else {
-                    cell.textLabel?.text = "Value unavailable"
-                }
+                cell.textLabel?.text = valueArray[indexPath.row]
+            }
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+            cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
+        case 2:
+            cell.textLabel?.text = responseArray[indexPath.row]
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+            cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
+        case 4:
+            if let obj = descriptorArray[indexPath.row] {
+                cell.textLabel?.text = obj.description
+            } else {
+                cell.textLabel?.text = "Data not found"
             }
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
             cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
         default:
-            if let data = valueArray[indexPath.row] {
-                cell.textLabel?.text = String(data: data, encoding: NSUTF8StringEncoding)
-            } else {
-                cell.textLabel?.text = "Value unavailable"
-            }
+            cell.textLabel?.text = valueArray[indexPath.row]
+
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
             cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
@@ -166,11 +191,13 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
         switch actionBarItem.tag {
         case 1:
-            valueArray.append(characteristic.value)
+            let dataStr: String = characteristic.value == nil || String(data: characteristic.value!, encoding: NSUTF8StringEncoding) == nil ? "No data respond" : String(data: characteristic.value!, encoding: NSUTF8StringEncoding)!
+            valueArray.append(dataStr)
             let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 1)
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         default:
-            valueArray.append(characteristic.value)
+            let dataStr: String = characteristic.value == nil || String(data: characteristic.value!, encoding: NSUTF8StringEncoding) == nil ? "No data respond" : String(data: characteristic.value!, encoding: NSUTF8StringEncoding)!
+            valueArray.append(dataStr)
             let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
@@ -186,9 +213,9 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
-//       valueArray.append(descriptor.value)
-//        let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
-//        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+       descriptorArray.append(descriptor.value)
+        let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
     }
     
     func peripheral(peripheral: CBPeripheral, didWriteValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
@@ -241,14 +268,14 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     }
     
     func writeValueProcess(input: String) {
-        if actionBarItem.tag == 1 {
+        if actionBarItem.tag == 1 || actionBarItem.tag == 2 {
             if let data = input.dataUsingEncoding(NSUTF8StringEncoding) {
                 peripheralObj?.writeValue(data, forCharacteristic: characterObj!, type: .WithResponse)
                 responseArray.append(input)
                 let indexPath = NSIndexPath(forRow: responseArray.count - 1, inSection: 0)
                 tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
             }
-        } else {
+        }else {
             if let data = input.dataUsingEncoding(NSUTF8StringEncoding) {
                 peripheralObj?.writeValue(data, forCharacteristic: characterObj!, type: .WithoutResponse)
             }
