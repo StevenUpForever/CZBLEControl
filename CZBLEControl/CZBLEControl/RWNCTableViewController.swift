@@ -9,11 +9,10 @@
 import UIKit
 import CoreBluetooth
 
-class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate, detailsControlDelegate {
+class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate, UISearchBarDelegate, UISearchDisplayDelegate, detailsControlDelegate {
     
     @IBOutlet weak var connectBarItem: UIBarButtonItem!
     @IBOutlet weak var actionBarItem: UIBarButtonItem!
-    
     
     var centralManager = CBCentralManager()
     var peripheralObj: CBPeripheral?
@@ -22,14 +21,16 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     var valueArray = [NSData?]()
     var responseArray = [String]()
     
-    var searchBar = UISearchBar()
+    //var searchBar = UISearchBar()
     
     var prepareInfo: RWNCPrepareInfo?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.titleView = searchBar
+//        self.navigationItem.titleView = searchBar
+//        searchBar.delegate = self
+        self.title = prepareInfo?.barItemTitleStr
         
         actionBarItem.title = prepareInfo?.barItemTitleStr
         actionBarItem.tag = (prepareInfo?.barItemTag)!
@@ -60,6 +61,12 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
                     actionBarItem.image = UIImage(named: "unnotifyItem")
                 } else {
                     CustomAlertController.showErrorAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
+                }
+            case 4:
+                if let descriptorArray = characterObj?.descriptors {
+                    for descriptor: CBDescriptor in descriptorArray {
+                        peripheralObj?.readValueForDescriptor(descriptor)
+                    }
                 }
             default:
                 break
@@ -98,19 +105,16 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         case 1:
             if indexPath.section == 0 {
                 cell.textLabel?.text = responseArray[indexPath.row]
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
-                cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
             } else {
                 if let data = valueArray[indexPath.row] {
                     cell.textLabel?.text = String(data: data, encoding: NSUTF8StringEncoding)
                 } else {
                     cell.textLabel?.text = "Value unavailable"
                 }
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
-                cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
             }
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+            cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
         default:
             if let data = valueArray[indexPath.row] {
                 cell.textLabel?.text = String(data: data, encoding: NSUTF8StringEncoding)
@@ -176,6 +180,20 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         actionBarItem.image = characteristic.isNotifying ? UIImage(named: "unnotifyItem") : UIImage(named: "notifyItem")
     }
     
+    func peripheral(peripheral: CBPeripheral, didWriteValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+        print("write")
+    }
+    
+    func peripheral(peripheral: CBPeripheral, didUpdateValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
+//       valueArray.append(descriptor.value)
+//        let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
+//        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+    }
+    
+    func peripheral(peripheral: CBPeripheral, didWriteValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
+        
+    }
+    
     //MARK - IBActions and Selectors
     @IBAction func connectProcess(sender: AnyObject) {
         centralManager.connectPeripheral(peripheralObj!, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
@@ -198,7 +216,19 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             popController?.barButtonItem = sender
             popController?.delegate = self
             self.presentViewController(popVC, animated: true, completion: nil)
-            
+        case 3:
+            if characterObj!.isNotifying {
+                let alertController = UIAlertController(title: "Close notify", message: "Are you sure to close notify?", preferredStyle: .Alert)
+                let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                let sure = UIAlertAction(title: "Close notify", style: .Destructive, handler: { (action) in
+                    self.peripheralObj?.setNotifyValue(false, forCharacteristic: self.characterObj!)
+                })
+                alertController.addAction(cancel)
+                alertController.addAction(sure)
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
+            }
         default:
             break
         }
@@ -223,5 +253,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             }
         }
     }
+    
+    //MARK - searchBar delegate
     
 }
