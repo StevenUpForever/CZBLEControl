@@ -12,29 +12,42 @@ import CoreBluetooth
 class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     @IBOutlet weak var connectBarItem: UIBarButtonItem!
+    @IBOutlet weak var actionBarItem: UIBarButtonItem!
+    
     
     var centralManager = CBCentralManager()
     var peripheralObj: CBPeripheral?
+    var characterObj: CBCharacteristic?
+    
     var searchBar = UISearchBar()
+    
+    var prepareInfo: RWNCPrepareInfo?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.titleView = searchBar
         
+        actionBarItem.title = prepareInfo?.barItemTitleStr
+        actionBarItem.tag = (prepareInfo?.barItemTag)!
+        if actionBarItem.tag == 3 {
+            actionBarItem.image = UIImage(named: "notifyItem")
+        } else if actionBarItem.tag == 4 {
+            actionBarItem.enabled = false
+        }
+        peripheralObj = prepareInfo?.RWNCPeripheral
+        characterObj = prepareInfo?.RWNCCharacter
+        
         switch (peripheralObj?.state)! {
         case CBPeripheralState.Connected:
-            
             connectBarItem.enabled = false
         case CBPeripheralState.Disconnected:
-            CustomAlertController.showErrorAlertController("Peripheral not connected", message: "Peripheral is disconnected, please try agin", target: self)
+            CustomAlertController.showErrorAlertController("Peripheral not connected", message: "Peripheral is disconnected, please connect with refresh button", target: self)
             connectBarItem.enabled = true
         default:
             break
         }
         centralManager.delegate = self
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,5 +100,17 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         CustomAlertController.showErrorAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
         connectBarItem.enabled = true
     }
+    
+    //MARK - CBPeripheral delegate
+    
+    //MARK - IBActions and Selectors
+    @IBAction func connectProcess(sender: AnyObject) {
+    }
+    
+    @IBAction func actionProcess(sender: UIBarButtonItem) {
+        print(sender.tag)
+    }
+    
+    
 
 }

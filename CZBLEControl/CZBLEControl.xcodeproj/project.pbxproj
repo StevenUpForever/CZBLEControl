@@ -14,6 +14,7 @@
 		AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */; };
 		AF8BDEAC1CB7676000C49885 /* CharacterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEAB1CB7676000C49885 /* CharacterInfo.swift */; };
 		AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */; };
+		AF8BDEBE1CB878D900C49885 /* RWNCPrepareInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBD1CB878D900C49885 /* RWNCPrepareInfo.swift */; };
 		AFD10C481CB214E300CD5E86 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */; };
 		AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */; };
 		AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */; };
@@ -47,6 +48,7 @@
 		AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		AF8BDEAB1CB7676000C49885 /* CharacterInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterInfo.swift; sourceTree = "<group>"; };
 		AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCTableViewController.swift; sourceTree = "<group>"; };
+		AF8BDEBD1CB878D900C49885 /* RWNCPrepareInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCPrepareInfo.swift; sourceTree = "<group>"; };
 		AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
 		AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralControlViewController.swift; sourceTree = "<group>"; };
 		AFD10C4D1CB23D1500CD5E86 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -60,7 +62,7 @@
 		AFDA74841CB1EE5800F09BD8 /* CZBLEControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CZBLEControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFDA74881CB1EE5900F09BD8 /* CZBLEControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CZBLEControlTests.swift; sourceTree = "<group>"; };
 		AFDA748A1CB1EE5900F09BD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFDA74931CB1EE6600F09BD8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		AFDA74931CB1EE6600F09BD8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EF416EE927B22566EE362841 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */,
+				AF8BDEBD1CB878D900C49885 /* RWNCPrepareInfo.swift */,
 			);
 			name = DetailsControl;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */,
+				AF8BDEBE1CB878D900C49885 /* RWNCPrepareInfo.swift in Sources */,
 				AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */,
 				AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */,
 				AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */,

@@ -18,6 +18,9 @@ class ServiceTableViewCell: UITableViewCell {
     @IBOutlet weak var notifyButton: UIButton!
     @IBOutlet weak var descriptorButton: UIButton!
     @IBOutlet weak var buttonCombineView: UIView!
+    
+    var cellCharacter: CBCharacteristic?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,6 +41,7 @@ class ServiceTableViewCell: UITableViewCell {
     }
     
     func loadData(character: CBCharacteristic) {
+        cellCharacter = character
         uuidLabel.text = character.UUID.UUIDString
         propertyLabel.text = getPropertitesName(character.properties)
     }

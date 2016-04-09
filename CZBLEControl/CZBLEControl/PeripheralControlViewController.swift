@@ -45,6 +45,7 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
         tableView.dataSource = self
         
         self.title = peripheralObj?.name == nil ? "Name unavailable" : peripheralObj?.name
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
 
     override func didReceiveMemoryWarning() {
@@ -135,7 +136,7 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
         if cellIndexPath == indexPath {
             return 180.0
         } else {
-            return 90.0
+            return 95.0
         }
     }
     
@@ -159,21 +160,31 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        switch segue.identifier! {
-        case "read":
-            let readVC = segue.destinationViewController as! RWNCTableViewController
-            readVC.peripheralObj = peripheralObj
-        case "write":
-            let writeVC = segue.destinationViewController as! RWNCTableViewController
-            writeVC.peripheralObj = peripheralObj
-        case "notify":
-           let notifyVC = segue.destinationViewController as! RWNCTableViewController
-            notifyVC.peripheralObj = peripheralObj
-        case "descriptor":
-            let descriptorVC = segue.destinationViewController as! RWNCTableViewController
-            descriptorVC.peripheralObj = peripheralObj
-        default:
-            break
+        if cellIndexPath != nil {
+            if let cell = tableView.cellForRowAtIndexPath(cellIndexPath!) as? ServiceTableViewCell {
+                switch segue.identifier! {
+                case "read":
+                    let readVC = segue.destinationViewController as! RWNCTableViewController
+                    readVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.read, peripheral: peripheralObj, character: cell.cellCharacter)
+                case "write":
+                     let writeVC = segue.destinationViewController as! RWNCTableViewController
+                    if let property = cell.cellCharacter?.properties {
+                        if property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 {
+                            writeVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.write, peripheral: peripheralObj, character: cell.cellCharacter)
+                        } else {
+                            writeVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.writeWithNoResponse, peripheral: peripheralObj, character: cell.cellCharacter)
+                        }
+                    }
+                case "notify":
+                    let notifyVC = segue.destinationViewController as! RWNCTableViewController
+                    notifyVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.notify, peripheral: peripheralObj, character: cell.cellCharacter)
+                case "descriptor":
+                    let descriptorVC = segue.destinationViewController as! RWNCTableViewController
+                    descriptorVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.descriptor, peripheral: peripheralObj, character: cell.cellCharacter)
+                default:
+                    break
+                }
+            }
         }
     }
 

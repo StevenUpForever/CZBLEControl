@@ -363,13 +363,20 @@ Reconnect by top right button or back to choose another device</string>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="rOa-bl-gRa">
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="connectProcess:" destination="tSN-aa-V9m" id="4Xy-K8-Naq"/>
+                                </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="camera" id="Oj1-Gv-L8s">
+                            <barButtonItem title="Item" id="Oj1-Gv-L8s">
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="actionProcess:" destination="tSN-aa-V9m" id="lv9-Dq-9nX"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="actionBarItem" destination="Oj1-Gv-L8s" id="nL2-GK-gI2"/>
                         <outlet property="connectBarItem" destination="rOa-bl-gRa" id="ExE-WY-nhs"/>
                     </connections>
                 </tableViewController>
