@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopoverViewController" customModule="CZBLEControl" customModuleProvider="target">
+            <connections>
+                <outlet property="valueTextField" destination="Uit-W0-nwQ" id="PwE-ur-Lwu"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="124"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   Input your value here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uit-W0-nwQ">
+                    <rect key="frame" x="8" y="59" width="496" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="PQu-bc-Eak"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLJ-ZU-JWa">
+                    <rect key="frame" x="535" y="59" width="57" height="35"/>
+                    <color key="backgroundColor" red="0.30980392159999998" green="0.76470588240000004" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="18U-ke-8WL"/>
+                        <constraint firstAttribute="height" constant="35" id="Be9-XJ-COO"/>
+                        <constraint firstAttribute="width" constant="57" id="QUr-25-Jiz"/>
+                    </constraints>
+                    <state key="normal" title=" Submit ">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="submitProcess:" destination="-1" eventType="touchUpInside" id="eQU-I0-VmJ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write to characteristic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ey1-YK-YQG">
+                    <rect key="frame" x="8" y="30" width="174" height="21"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ey1-YK-YQG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="BvH-ZO-ale"/>
+                <constraint firstItem="ey1-YK-YQG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="GCM-6s-aS0"/>
+                <constraint firstItem="Uit-W0-nwQ" firstAttribute="top" secondItem="ey1-YK-YQG" secondAttribute="bottom" constant="8" id="RY3-ox-ItY"/>
+                <constraint firstItem="gLJ-ZU-JWa" firstAttribute="centerY" secondItem="Uit-W0-nwQ" secondAttribute="centerY" id="kTc-Ys-mbi"/>
+                <constraint firstAttribute="trailing" secondItem="gLJ-ZU-JWa" secondAttribute="trailing" constant="8" id="lNt-xU-WPu"/>
+                <constraint firstItem="gLJ-ZU-JWa" firstAttribute="leading" secondItem="Uit-W0-nwQ" secondAttribute="trailing" constant="31" id="orV-Ei-xpq"/>
+                <constraint firstItem="Uit-W0-nwQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="rpR-Ti-0Eu"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="255" y="164"/>
+        </view>
+    </objects>
+</document>

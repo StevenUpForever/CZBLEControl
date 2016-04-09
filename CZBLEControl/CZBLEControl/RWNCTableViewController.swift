@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
+class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate, detailsControlDelegate {
     
     @IBOutlet weak var connectBarItem: UIBarButtonItem!
     @IBOutlet weak var actionBarItem: UIBarButtonItem!
@@ -34,6 +34,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         actionBarItem.title = prepareInfo?.barItemTitleStr
         actionBarItem.tag = (prepareInfo?.barItemTag)!
         if actionBarItem.tag == 3 {
+            actionBarItem.title = nil
             actionBarItem.image = UIImage(named: "notifyItem")
         } else if actionBarItem.tag == 4 {
             actionBarItem.enabled = false
@@ -45,7 +46,6 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         
         switch (peripheralObj?.state)! {
         case CBPeripheralState.Connected:
-            connectBarItem.enabled = false
             
             switch actionBarItem.tag {
             case 0:
@@ -57,7 +57,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             case 3:
                 if peripheralObj != nil && characterObj != nil {
                     peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
-                    actionBarItem.enabled = false
+                    actionBarItem.image = UIImage(named: "unnotifyItem")
                 } else {
                     CustomAlertController.showErrorAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
                 }
@@ -100,7 +100,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             cell.textLabel?.text = "Value unavailable"
         }
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "hh:mm:ss:SSS"
+        dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
         cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
         return cell
     }
@@ -147,7 +147,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        actionBarItem.enabled = characteristic.isNotifying ? false : true
+        actionBarItem.image = characteristic.isNotifying ? UIImage(named: "unnotifyItem") : UIImage(named: "notifyItem")
     }
     
     //MARK - IBActions and Selectors
@@ -156,9 +156,42 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     }
     
     @IBAction func actionProcess(sender: UIBarButtonItem) {
-        
+        switch sender.tag {
+        case 0:
+            if peripheralObj != nil && characterObj != nil {
+                peripheralObj?.readValueForCharacteristic(characterObj!)
+            }
+        case 1, 2:
+            let popVC = PopoverViewController()
+            popVC.modalPresentationStyle = UIModalPresentationStyle.Popover
+            popVC.preferredContentSize = CGSizeMake(300, 125)
+            popVC.transitioningDelegate = self
+            let popController = popVC.popoverPresentationController
+            popController?.permittedArrowDirections = .Any
+            popController?.barButtonItem = sender
+            popController?.delegate = self
+            self.presentViewController(popVC, animated: true, completion: nil)
+            
+        default:
+            break
+        }
     }
     
+    //MARK - popoverPresentViewControlller delegate
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
     
-
+    func writeValueProcess(input: String) {
+        if actionBarItem.tag == 1 {
+            if let data = input.dataUsingEncoding(NSUTF8StringEncoding) {
+                peripheralObj?.writeValue(data, forCharacteristic: characterObj!, type: .WithResponse)
+            }
+        } else {
+            if let data = input.dataUsingEncoding(NSUTF8StringEncoding) {
+                peripheralObj?.writeValue(data, forCharacteristic: characterObj!, type: .WithoutResponse)
+            }
+        }
+    }
+    
 }
