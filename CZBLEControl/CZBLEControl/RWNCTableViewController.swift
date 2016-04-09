@@ -86,7 +86,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if actionBarItem.tag == 1 {
-            return section == 0 ? valueArray.count : responseArray.count
+            return section == 0 ? responseArray.count : valueArray.count
         } else {
             return valueArray.count
         }
@@ -94,14 +94,33 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-        if let data = valueArray[indexPath.row] {
-            cell.textLabel?.text = String(data: data, encoding: NSUTF8StringEncoding)
-        } else {
-            cell.textLabel?.text = "Value unavailable"
+        switch actionBarItem.tag {
+        case 1:
+            if indexPath.section == 0 {
+                cell.textLabel?.text = responseArray[indexPath.row]
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+                cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
+            } else {
+                if let data = valueArray[indexPath.row] {
+                    cell.textLabel?.text = String(data: data, encoding: NSUTF8StringEncoding)
+                } else {
+                    cell.textLabel?.text = "Value unavailable"
+                }
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+                cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
+            }
+        default:
+            if let data = valueArray[indexPath.row] {
+                cell.textLabel?.text = String(data: data, encoding: NSUTF8StringEncoding)
+            } else {
+                cell.textLabel?.text = "Value unavailable"
+            }
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+            cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
         }
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
-        cell.detailTextLabel?.text = actionBarItem.tag == 4 ? nil : dateFormatter.stringFromDate(NSDate())
         return cell
     }
     
@@ -141,9 +160,16 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     
     //MARK - CBPeripheral delegate
     func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        valueArray.append(characteristic.value)
-        let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+        switch actionBarItem.tag {
+        case 1:
+            valueArray.append(characteristic.value)
+            let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 1)
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+        default:
+            valueArray.append(characteristic.value)
+            let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+        }
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
@@ -163,6 +189,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             }
         case 1, 2:
             let popVC = PopoverViewController()
+            popVC.delegate = self
             popVC.modalPresentationStyle = UIModalPresentationStyle.Popover
             popVC.preferredContentSize = CGSizeMake(300, 125)
             popVC.transitioningDelegate = self
@@ -186,6 +213,9 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         if actionBarItem.tag == 1 {
             if let data = input.dataUsingEncoding(NSUTF8StringEncoding) {
                 peripheralObj?.writeValue(data, forCharacteristic: characterObj!, type: .WithResponse)
+                responseArray.append(input)
+                let indexPath = NSIndexPath(forRow: responseArray.count - 1, inSection: 0)
+                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
             }
         } else {
             if let data = input.dataUsingEncoding(NSUTF8StringEncoding) {
