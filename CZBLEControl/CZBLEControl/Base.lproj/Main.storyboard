@@ -377,7 +377,7 @@ Reconnect by top right button or back to choose another device</string>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="tW5-wf-puc">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="rOa-bl-gRa">
+                            <barButtonItem title="Connect" id="rOa-bl-gRa">
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="connectProcess:" destination="tSN-aa-V9m" id="4Xy-K8-Naq"/>

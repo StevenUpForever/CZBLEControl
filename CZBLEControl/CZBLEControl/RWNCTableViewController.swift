@@ -47,7 +47,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         
         switch (peripheralObj?.state)! {
         case CBPeripheralState.Connected:
-            
+            connectBarItem.enabled = false
             switch actionBarItem.tag {
             case 0:
                 if peripheralObj != nil && characterObj != nil {
@@ -253,7 +253,5 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             }
         }
     }
-    
-    //MARK - searchBar delegate
     
 }
