@@ -19,24 +19,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launching" translatesAutoresizingMaskIntoConstraints="NO" id="OwO-rK-gdp">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launching" translatesAutoresizingMaskIntoConstraints="NO" id="F6Z-jt-MyJ">
                                 <rect key="frame" x="75" y="219" width="450" height="161"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="OwO-rK-gdp" secondAttribute="height" multiplier="450:161" id="NeJ-d1-FMX"/>
+                                    <constraint firstAttribute="width" secondItem="F6Z-jt-MyJ" secondAttribute="height" multiplier="450:161" id="LId-xa-XJ5"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="OwO-rK-gdp" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="1P0-aR-atJ"/>
-                            <constraint firstItem="OwO-rK-gdp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Jf2-uH-d6S"/>
-                            <constraint firstItem="OwO-rK-gdp" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="3:4" id="MQu-0P-tiU"/>
+                            <constraint firstItem="F6Z-jt-MyJ" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="3:4" id="HNc-zM-4W0"/>
+                            <constraint firstItem="F6Z-jt-MyJ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="u75-JU-aOk"/>
+                            <constraint firstItem="F6Z-jt-MyJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vPu-TX-rZs"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="-48" y="349"/>
         </scene>
     </scenes>
     <resources>

@@ -182,6 +182,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     
     func peripheral(peripheral: CBPeripheral, didWriteValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
         print("write")
+        
     }
     
     func peripheral(peripheral: CBPeripheral, didUpdateValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
