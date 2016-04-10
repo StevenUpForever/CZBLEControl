@@ -45,7 +45,7 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
         tableView.dataSource = self
         
         self.title = peripheralObj?.name == nil ? "Name unavailable" : peripheralObj?.name
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont.boldSystemFontOfSize(20.0)]
     }
 
     override func didReceiveMemoryWarning() {
