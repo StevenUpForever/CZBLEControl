@@ -21,7 +21,7 @@ class CustomAlertController: UIAlertController {
         // Dispose of any resources that can be recreated.
     }
     
-    static func showErrorAlertController(title: String, message: String, target: AnyObject) {
+    static func showCancelAlertController(title: String, message: String, target: AnyObject) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert);
         let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
         alertController.addAction(cancelAction)

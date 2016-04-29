@@ -13,6 +13,7 @@
 		AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */; };
 		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
 		AF7403B21CD4094F004C98E6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AF7403B11CD4094F004C98E6 /* .gitignore */; };
+		AF7403B41CD40A84004C98E6 /* ClassExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7403B31CD40A84004C98E6 /* ClassExtension.swift */; };
 		AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */; };
 		AF8BDEAC1CB7676000C49885 /* CharacterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEAB1CB7676000C49885 /* CharacterInfo.swift */; };
 		AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */; };
@@ -22,7 +23,6 @@
 		AFD10C481CB214E300CD5E86 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */; };
 		AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */; };
 		AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */; };
-		AFD10C4E1CB23D1500CD5E86 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C4D1CB23D1500CD5E86 /* UIColorExtension.swift */; };
 		AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */; };
 		AFDA74761CB1EE5800F09BD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFDA74741CB1EE5800F09BD8 /* Main.storyboard */; };
 		AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AFDA74771CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld */; };
@@ -53,6 +53,7 @@
 		AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
 		AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewCell.swift; sourceTree = "<group>"; };
 		AF7403B11CD4094F004C98E6 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		AF7403B31CD40A84004C98E6 /* ClassExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtension.swift; sourceTree = "<group>"; };
 		AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		AF8BDEAB1CB7676000C49885 /* CharacterInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterInfo.swift; sourceTree = "<group>"; };
 		AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCTableViewController.swift; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverViewController.xib; sourceTree = "<group>"; };
 		AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
 		AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralControlViewController.swift; sourceTree = "<group>"; };
-		AFD10C4D1CB23D1500CD5E86 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		AFDA746D1CB1EE5800F09BD8 /* CZBLEControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZBLEControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFDA74751CB1EE5800F09BD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 			children = (
 				AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */,
 				AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */,
-				AFD10C4D1CB23D1500CD5E86 /* UIColorExtension.swift */,
+				AF7403B31CD40A84004C98E6 /* ClassExtension.swift */,
 				AF7284AA1CB1F17B00B8D610 /* BLE */,
 				AFDA74741CB1EE5800F09BD8 /* Main.storyboard */,
 				AFDA747A1CB1EE5800F09BD8 /* Assets.xcassets */,
@@ -362,10 +362,10 @@
 				AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */,
 				AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */,
 				AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */,
-				AFD10C4E1CB23D1500CD5E86 /* UIColorExtension.swift in Sources */,
 				AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */,
 				AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */,
 				AF8BDEAC1CB7676000C49885 /* CharacterInfo.swift in Sources */,
+				AF7403B41CD40A84004C98E6 /* ClassExtension.swift in Sources */,
 				AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

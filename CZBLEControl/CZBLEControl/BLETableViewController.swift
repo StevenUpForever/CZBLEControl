@@ -15,53 +15,60 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     private var peripheralArray = [PeripheralInfo]()
     private var peripheralObj: CBPeripheral?
     
-    var customIndexPath = NSIndexPath()
+    var SelectedIndexPath = NSIndexPath()
     
-    //MARK = viewController lifecycle
+    //MARK: - viewController lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         centralManager.delegate = self
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
         
         let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
         self.view.addSubview(refresh)
         
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        if centralManager.isScanning == false {
+        if !centralManager.isScanning {
             centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         }
     }
     
     override func viewWillDisappear(animated: Bool) {
-        super.viewDidDisappear(true)
-        if centralManager.isScanning == true {
+        if centralManager.isScanning {
             centralManager.stopScan()
         }
     }
     
-    //MARK - CBCentralManager delegate
+    //MARK: - CBCentralManager delegate
+    
     func centralManagerDidUpdateState(central: CBCentralManager) {
+        
         switch central.state {
-        case CBCentralManagerState.PoweredOn:
+        case .PoweredOn:
             centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-        case CBCentralManagerState.Unsupported:
-            CustomAlertController.showErrorAlertController("Not support", message: "Your device doesn't support BLE", target: self)
-        case CBCentralManagerState.PoweredOff:
-            CustomAlertController.showErrorAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
+        case .Unsupported:
+            CustomAlertController.showCancelAlertController("Not support", message: "Your device doesn't support BLE", target: self)
+        case .PoweredOff:
+            CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
+        case .Unknown:
+            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
+        case .Unauthorized:
+            CustomAlertController.showCancelAlertController("Unauthorized", message: "Your device is unauthorized to use Bluetooth low energy", target: self)
         default:
-            CustomAlertController.showErrorAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
+            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
         }
     }
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        
         if  peripheralArray.contains({ (blockInfo) -> Bool in
             blockInfo.peripheral == peripheral
-        }) == true {
+        }) {
             for index in 0 ..< peripheralArray.count {
                 if peripheralArray[index].peripheral == peripheral {
                     peripheralArray[index].RSSI = RSSI
@@ -80,22 +87,18 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-        if let cell = tableView.cellForRowAtIndexPath(customIndexPath) as? BLETableViewCell {
-            if cell.indicator.isAnimating() {
-                cell.indicator.stopAnimating()
-            }
-        }
+        
+        endIndicatorLoading(SelectedIndexPath)
+        
         peripheralObj = peripheral
         self.performSegueWithIdentifier("peripheralControl", sender: self)
     }
     
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        if let cell = tableView.cellForRowAtIndexPath(customIndexPath) as? BLETableViewCell {
-            if cell.indicator.isAnimating() {
-                cell.indicator.stopAnimating()
-            }
-        }
-        CustomAlertController.showErrorAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
+        
+        endIndicatorLoading(SelectedIndexPath)
+        
+        CustomAlertController.showCancelAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
     }
     
     // MARK: - Table view data source
@@ -115,25 +118,25 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        SelectedIndexPath = indexPath
+        
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
             if cell.indicator.isAnimating() == false {
                 cell.indicator.startAnimating()
             }
             if let connectPeripheral = cell.peripheralInfo?.peripheral {
                 centralManager.connectPeripheral(connectPeripheral, options: nil)
-                customIndexPath = indexPath
             } else {
-                print("Error")
+                CustomAlertController.showCancelAlertController("Peripheral error", message: "Cannot find such peripheral", target: self)
             }
         }
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-            if cell.indicator.isAnimating() == true {
-                cell.indicator.stopAnimating()
-            }
-        }
+        
+        endIndicatorLoading(indexPath)
+        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -144,13 +147,25 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         return 73.0
     }
 
-    //MARK - other methods
+    //MARK - Selectors
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func tableViewRefresh(refreshControl: UIRefreshControl) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "peripheralControl" {
+            let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
+            peripheralVC?.peripheralObj = peripheralObj
+            peripheralVC?.title = peripheralObj?.name
+        }
+    }
+    
+    //Private methods
+    
+    private func tableViewRefresh(refreshControl: UIRefreshControl) {
+        
         var indexPathArray = [NSIndexPath]()
         for i in 0 ..< peripheralArray.count {
             indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
@@ -164,12 +179,14 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         refreshControl.endRefreshing()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "peripheralControl" {
-            let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
-            peripheralVC?.peripheralObj = peripheralObj
-            peripheralVC?.title = peripheralObj?.name
+    private func endIndicatorLoading(indexPath: NSIndexPath) {
+        
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+            if cell.indicator.isAnimating() {
+                cell.indicator.stopAnimating()
+            }
         }
+        
     }
 
 }
