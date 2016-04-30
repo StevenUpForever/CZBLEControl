@@ -29,13 +29,20 @@ class CustomAlertController: UIAlertController {
     }
     
     class func showCancelAlertControllerWithBlock(title: String, message: String, target: AnyObject, actionHandler: (action: UIAlertAction) -> Void) {
-        
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action) in
             actionHandler(action: action)
         }))
         target.presentViewController(alertController, animated: true, completion: nil)
-        
+    }
+    
+    class func showChooseAlertControllerWithBlock(title: String, message: String, target: AnyObject, actionHandler: (action: UIAlertAction) -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+            actionHandler(action: action)
+        }))
+        target.presentViewController(alertController, animated: true, completion: nil)
     }
 
 }
