@@ -55,7 +55,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
                 if peripheralObj != nil && characterObj != nil {
                     peripheralObj?.readValueForCharacteristic(characterObj!)
                 } else {
-                    CustomAlertController.showErrorAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
+                    CustomAlertController.showCancelAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
                 }
             case 3:
                 self.title = "Notify"
@@ -63,7 +63,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
                     peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
                     actionBarItem.image = UIImage(named: "unnotifyItem")
                 } else {
-                    CustomAlertController.showErrorAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
+                    CustomAlertController.showCancelAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
                 }
             case 4:
                 self.title = "Descriptors"
@@ -77,7 +77,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             }
             
         case CBPeripheralState.Disconnected:
-            CustomAlertController.showErrorAlertController("Peripheral not connected", message: "Peripheral is disconnected, please connect with refresh button", target: self)
+            CustomAlertController.showCancelAlertController("Peripheral not connected", message: "Peripheral is disconnected, please connect with refresh button", target: self)
             connectBarItem.enabled = true
         default:
             break
@@ -167,9 +167,9 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         case CBCentralManagerState.PoweredOn:
             break
         case CBCentralManagerState.PoweredOff:
-            CustomAlertController.showErrorAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
+            CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
         default:
-            CustomAlertController.showErrorAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
+            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
         }
     }
     
@@ -179,11 +179,11 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     }
     
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        CustomAlertController.showErrorAlertController("Peripheral connect error", message: "Connect to device error, please try again", target: self)
+        CustomAlertController.showCancelAlertController("Peripheral connect error", message: "Connect to device error, please try again", target: self)
     }
     
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        CustomAlertController.showErrorAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
+        CustomAlertController.showCancelAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
         connectBarItem.enabled = true
     }
     

@@ -97,7 +97,9 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     
     func centralManagerDidUpdateState(central: CBCentralManager) {
         switch central.state {
-        case CBCentralManagerState.PoweredOff:
+        case .PoweredOn:
+            break
+        case .PoweredOff:
             CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
         default:
             CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
