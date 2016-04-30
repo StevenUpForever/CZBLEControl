@@ -146,8 +146,6 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
         let character = serviceArray[indexPath.section].characterArray[indexPath.row]
         cell.loadData(character)
         
-        //Load propertites button enable status
-        cell.changeButtonEnable(character.properties)
         return cell
     }
     

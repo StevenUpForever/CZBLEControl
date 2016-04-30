@@ -21,5 +21,13 @@ class PeripheralInfo: NSObject {
         self.adData = adData
         super.init()
     }
+}
 
+class CharacterInfo: NSObject {
+    var serviceObj: CBService
+    var characterArray = [CBCharacteristic]()
+    
+    init(service: CBService) {
+        serviceObj = service
+    }
 }
