@@ -66,6 +66,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
         
+        //If array contains this peripheral, replace relate object with it due to new RSSI number
         if  peripheralArray.contains({ (blockInfo) -> Bool in
             blockInfo.peripheral == peripheral
         }) {
@@ -79,6 +80,8 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
                     break
                 }
             }
+            
+            //If array doesn't contains such a peripheral, append it to array
         } else {
             peripheralArray.append(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
             let indexPath = NSIndexPath(forRow: peripheralArray.count - 1, inSection: 0)
@@ -158,13 +161,11 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         if segue.identifier == "peripheralControl" {
             let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
             peripheralVC?.peripheralObj = peripheralObj
-            peripheralVC?.title = peripheralObj?.name
+            peripheralVC?.navigationItem.title = peripheralObj?.name ?? "Name Unavailable"
         }
     }
     
-    //Private methods
-    
-    private func tableViewRefresh(refreshControl: UIRefreshControl) {
+    func tableViewRefresh(refreshControl: UIRefreshControl) {
         
         var indexPathArray = [NSIndexPath]()
         for i in 0 ..< peripheralArray.count {
@@ -178,6 +179,8 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         }
         refreshControl.endRefreshing()
     }
+    
+    //Private methods
     
     private func endIndicatorLoading(indexPath: NSIndexPath) {
         

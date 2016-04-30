@@ -296,6 +296,10 @@ Reconnect by top right button or back to choose another device</string>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="WcB-xk-h5K" id="R9x-EF-F3a"/>
+                                    <outlet property="delegate" destination="WcB-xk-h5K" id="9gO-sy-MDd"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

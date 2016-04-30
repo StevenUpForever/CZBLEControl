@@ -16,11 +16,13 @@ class BLETableViewCell: UITableViewCell {
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var rssiNumberLabel: UILabel!
     
-    var peripheralInfo: PeripheralInfo!
+    var peripheralInfo: PeripheralInfo?
+    
     let RSSISubView = UIView()
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         self.RSSIView.insertSubview(RSSISubView, belowSubview: rssiNumberLabel)
         self.RSSIView.layer.borderWidth = 1.0
         self.RSSIView.layer.borderColor = UIColor.darkGrayColor().CGColor
@@ -38,18 +40,26 @@ class BLETableViewCell: UITableViewCell {
     }
     
     func loadData(info: PeripheralInfo?) {
+        
+        self.peripheralInfo = info
+        
         self.RSSIView.layer.cornerRadius = self.RSSIView.frame.size.width/2.0
         self.nameLabel.text = info?.peripheral.name == nil ? "Name Unavailable" : info?.peripheral.name
         self.UUIDLabel.text = info?.peripheral.identifier.UUIDString
-        self.changeRSSIValue(((info?.RSSI.integerValue)! + 100)*2)
-        self.peripheralInfo = info
-        self.rssiNumberLabel.text = "\((info?.RSSI.integerValue)!)"
+        
+        let RSSINum = info?.RSSI.integerValue ?? 0
+        self.rssiNumberLabel.text = "\(RSSINum)"
+        self.changeRSSIValue((RSSINum + 100)*2)
+        
         self.RSSIView.layoutIfNeeded()
     }
     
+    //Change RSSI number shown
     private func changeRSSIValue(num: Int?) {
+        
         let width = self.RSSIView.frame.size.width
         let height = self.RSSIView.frame.size.height
+        
         if num >= 0 && num <= 25 {
             self.RSSISubView.frame = CGRectMake(0, height*3/4, width, height/4)
             self.RSSISubView.backgroundColor = UIColor.customRed()
