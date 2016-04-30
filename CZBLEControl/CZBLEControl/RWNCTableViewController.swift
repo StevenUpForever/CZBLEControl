@@ -22,9 +22,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     var responseArray = [String]()
     var descriptorArray = [AnyObject?]()
     
-    //var searchBar = UISearchBar()
-    
-    var prepareInfo: RWNCPrepareInfo?
+    var identifier: RWNCIdentifier?
 
     //MARK - viewController lifeCycle
     override func viewDidLoad() {

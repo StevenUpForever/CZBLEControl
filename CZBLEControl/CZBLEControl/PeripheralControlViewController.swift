@@ -188,28 +188,34 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if cellIndexPath != nil {
             if let cell = tableView.cellForRowAtIndexPath(cellIndexPath!) as? ServiceTableViewCell {
-                switch segue.identifier! {
-                case "read":
-                    let readVC = segue.destinationViewController as! RWNCTableViewController
-                    readVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.read, peripheral: peripheralObj, character: cell.cellCharacter)
-                case "write":
-                     let writeVC = segue.destinationViewController as! RWNCTableViewController
-                    if let property = cell.cellCharacter?.properties {
-                        if property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 {
-                            writeVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.write, peripheral: peripheralObj, character: cell.cellCharacter)
-                        } else {
-                            writeVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.writeWithNoResponse, peripheral: peripheralObj, character: cell.cellCharacter)
+                
+                if segue.identifier != "write" {
+                    
+                    //Prepare for destination viewController
+                    if let RWNCVC = segue.destinationViewController as? RWNCTableViewController {
+                        
+                        RWNCVC.peripheralObj = peripheralObj
+                        RWNCVC.characterObj = cell.cellCharacter
+                        
+                        switch segue.identifier! {
+                        case "read":
+                            RWNCVC.identifier = .read
+                        case "writeWithoutResponse":
+                            RWNCVC.identifier = .writeWithNoResponse
+                        case "notify":
+                            RWNCVC.identifier = .notify
+                        case "descriptor":
+                            RWNCVC.identifier = .descriptor
+                        default:
+                            break
                         }
+                        
                     }
-                case "notify":
-                    let notifyVC = segue.destinationViewController as! RWNCTableViewController
-                    notifyVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.notify, peripheral: peripheralObj, character: cell.cellCharacter)
-                case "descriptor":
-                    let descriptorVC = segue.destinationViewController as! RWNCTableViewController
-                    descriptorVC.prepareInfo = RWNCPrepareInfo(identifier: RWNCIdentifier.descriptor, peripheral: peripheralObj, character: cell.cellCharacter)
-                default:
-                    break
+                    
+                } else {
+                    
                 }
+                
             }
         }
     }

@@ -19,6 +19,7 @@
 		AF8BDEBE1CB878D900C49885 /* RWNCPrepareInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBD1CB878D900C49885 /* RWNCPrepareInfo.swift */; };
 		AF8BDEC11CB8BDE400C49885 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */; };
 		AF8BDEC21CB8BDE400C49885 /* PopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */; };
+		AF9242681CD48D3400E083E6 /* WriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9242671CD48D3400E083E6 /* WriteTableViewController.swift */; };
 		AFD10C481CB214E300CD5E86 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */; };
 		AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */; };
 		AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */; };
@@ -58,6 +59,7 @@
 		AF8BDEBD1CB878D900C49885 /* RWNCPrepareInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCPrepareInfo.swift; sourceTree = "<group>"; };
 		AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverViewController.xib; sourceTree = "<group>"; };
+		AF9242671CD48D3400E083E6 /* WriteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteTableViewController.swift; sourceTree = "<group>"; };
 		AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
 		AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralControlViewController.swift; sourceTree = "<group>"; };
 		AFDA746D1CB1EE5800F09BD8 /* CZBLEControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZBLEControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 			children = (
 				AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */,
 				AF8BDEBD1CB878D900C49885 /* RWNCPrepareInfo.swift */,
+				AF9242671CD48D3400E083E6 /* WriteTableViewController.swift */,
 				AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */,
 				AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */,
 			);
@@ -355,6 +358,7 @@
 				AF8BDEBE1CB878D900C49885 /* RWNCPrepareInfo.swift in Sources */,
 				AF8BDEC11CB8BDE400C49885 /* PopoverViewController.swift in Sources */,
 				AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */,
+				AF9242681CD48D3400E083E6 /* WriteTableViewController.swift in Sources */,
 				AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */,
 				AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */,
 				AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */,

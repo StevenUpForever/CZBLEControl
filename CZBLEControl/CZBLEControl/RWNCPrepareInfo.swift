@@ -9,12 +9,12 @@
 import UIKit
 import CoreBluetooth
 
-enum RWNCIdentifier: String {
-    case read = "read"
-    case write = "write"
-    case writeWithNoResponse = "writeWithNoResponse"
-    case notify = "notify"
-    case descriptor = "descriptor"
+enum RWNCIdentifier {
+    case read
+    case write
+    case writeWithNoResponse
+    case notify
+    case descriptor
 }
 
 class RWNCPrepareInfo: NSObject {
