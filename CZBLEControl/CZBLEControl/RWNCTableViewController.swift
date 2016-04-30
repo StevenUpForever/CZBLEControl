@@ -13,7 +13,6 @@ enum RWNCIdentifier {
     case read
     case writeWithNoResponse
     case notify
-    case descriptor
     case none
 }
 
@@ -30,6 +29,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     
     //tableView array
     var valueArray = [String]()
+    var descriptorArray = [String]()
     
     var identifier: RWNCIdentifier = .none
 
@@ -51,13 +51,6 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
                 peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
                 actionBarItem.image = UIImage(named: "unnotifyItem")
                 
-            case .descriptor:
-                actionBarItem.enabled = false
-                if let descriptorArray = characterObj?.descriptors {
-                    for descriptor: CBDescriptor in descriptorArray {
-                        peripheralObj?.readValueForDescriptor(descriptor)
-                    }
-                }
             default:
                 showPopAlertController()
             }
@@ -70,6 +63,12 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
                  CustomAlertController.showCancelAlertController("Peripheral not connected", message: "Peripheral is disconnected, please connect with refresh button", target: self)
             default:
                 break
+            }
+            
+            if let descriptorArray = characterObj?.descriptors {
+                for descriptor: CBDescriptor in descriptorArray {
+                    peripheralObj?.readValueForDescriptor(descriptor)
+                }
             }
             
         } else {
@@ -102,39 +101,50 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return valueArray.count
+        return section == 0 ? valueArray.count : descriptorArray.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
         
-        cell.textLabel?.text = valueArray[indexPath.row]
-        
-        //Show date label text
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
-        cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+        switch indexPath.section {
+        case 0:
+            cell.textLabel?.text = valueArray[indexPath.row]
+            
+            //Show date label text
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+            cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+            
+        case 1:
+            cell.textLabel?.text = descriptorArray[indexPath.row]
+            
+        default:
+            break
+        }
         
         return cell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        switch identifier {
-        case .read:
-            return "Read Value"
-        case .writeWithNoResponse:
-            return "Write Value, no response"
-        case .notify:
-            return "Return Value"
-        case .descriptor:
+        if section == 0 {
+            switch identifier {
+            case .read:
+                return "Read Value"
+            case .writeWithNoResponse:
+                return "Write Value, no response"
+            case .notify:
+                return "Return Value"
+            default:
+                return "Invalid data type"
+            }
+            
+        } else {
             return "Descriptors"
-        default:
-            return "Invalid data type"
         }
         
     }
@@ -198,8 +208,8 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     
     func peripheral(peripheral: CBPeripheral, didUpdateValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
         if let descriptorString = descriptor.value?.description {
-            valueArray.append(descriptorString)
-            let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
+            descriptorArray.append(descriptorString)
+            let indexPath = NSIndexPath(forRow: descriptorArray.count - 1, inSection: 1)
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
     }

@@ -204,8 +204,6 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
                             RWNCVC.identifier = .writeWithNoResponse
                         case "notify":
                             RWNCVC.identifier = .notify
-                        case "descriptor":
-                            RWNCVC.identifier = .descriptor
                         default:
                             RWNCVC.identifier = .none
                         }

@@ -155,14 +155,14 @@ Reconnect by top right button or back to choose another device</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SyM-UZ-FKF">
-                                <rect key="frame" x="20" y="271" width="560" height="329"/>
+                                <rect key="frame" x="0.0" y="271" width="600" height="329"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="serviceCell" rowHeight="180" id="YNh-bs-K8x" customClass="ServiceTableViewCell" customModule="CZBLEControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="560" height="180"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YNh-bs-K8x" id="NdH-s2-BeZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="179.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUID label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNn-X5-Gan">
@@ -181,7 +181,7 @@ Reconnect by top right button or back to choose another device</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J61-76-p3H">
-                                                    <rect key="frame" x="517" y="49" width="35" height="35"/>
+                                                    <rect key="frame" x="557" y="49" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="Ol1-F9-2xi"/>
                                                         <constraint firstAttribute="width" constant="35" id="jxW-2y-ADD"/>
@@ -192,50 +192,29 @@ Reconnect by top right button or back to choose another device</string>
                                                     </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54O-l5-QlJ">
-                                                    <rect key="frame" x="8" y="92" width="544" height="87.5"/>
+                                                    <rect key="frame" x="0.0" y="92" width="600" height="87.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duY-d7-Hwu">
-                                                            <rect key="frame" x="74" y="55" width="33" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLx-Hm-grf">
-                                                            <rect key="frame" x="343" y="55" width="39" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descriptors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Euo-GD-8tI">
-                                                            <rect key="frame" x="416" y="55" width="74" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                            <rect key="frame" x="105.5" y="55" width="29" height="15"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfR-ln-c85">
-                                                            <rect key="frame" x="164" y="55" width="34" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                            <rect key="frame" x="224.5" y="55" width="30" height="15"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFA-cy-i6s">
-                                                            <rect key="frame" x="73" y="12" width="35" height="35"/>
+                                                            <rect key="frame" x="102.5" y="12" width="35" height="35"/>
                                                             <state key="normal" image="read"/>
                                                             <connections>
                                                                 <segue destination="tSN-aa-V9m" kind="show" identifier="read" id="e1W-Nf-ia7"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-is-Of4">
-                                                            <rect key="frame" x="164" y="12" width="35" height="35"/>
-                                                            <state key="normal" image="write">
-                                                                <color key="titleColor" red="0.80784313725490198" green="0.96470588235294119" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
-                                                            </state>
-                                                            <connections>
-                                                                <segue destination="7b9-be-Vjo" kind="show" identifier="write" id="fpF-Oj-GxR"/>
-                                                            </connections>
-                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5i-3E-ECh">
-                                                            <rect key="frame" x="345" y="12" width="35" height="35"/>
+                                                            <rect key="frame" x="462.5" y="12" width="35" height="35"/>
                                                             <state key="normal" image="notify">
                                                                 <color key="titleColor" red="0.30980392159999998" green="0.76470588240000004" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
@@ -243,47 +222,51 @@ Reconnect by top right button or back to choose another device</string>
                                                                 <segue destination="tSN-aa-V9m" kind="show" identifier="notify" id="VgX-D5-x9H"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-19-tYh">
-                                                            <rect key="frame" x="436" y="12" width="35" height="35"/>
-                                                            <state key="normal" image="descriptor"/>
-                                                            <connections>
-                                                                <segue destination="tSN-aa-V9m" kind="show" identifier="descriptor" id="yM5-MC-nqx"/>
-                                                            </connections>
-                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLb-Mc-8jm">
-                                                            <rect key="frame" x="255" y="12" width="35" height="35"/>
+                                                            <rect key="frame" x="342.5" y="12" width="35" height="35"/>
                                                             <state key="normal" image="writeWithoutResponse"/>
                                                             <connections>
                                                                 <segue destination="tSN-aa-V9m" kind="show" identifier="writeWithoutResponse" id="2LF-CJ-rgc"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="W/NoResp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFd-Dw-kbv">
-                                                            <rect key="frame" x="239" y="55" width="67" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                            <rect key="frame" x="330.5" y="55" width="59" height="15"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-is-Of4">
+                                                            <rect key="frame" x="222.5" y="12" width="35" height="35"/>
+                                                            <state key="normal" image="write">
+                                                                <color key="titleColor" red="0.80784313725490198" green="0.96470588235294119" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <segue destination="7b9-be-Vjo" kind="show" identifier="write" id="fpF-Oj-GxR"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLx-Hm-grf">
+                                                            <rect key="frame" x="463.5" y="55" width="34" height="15"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="6iR-19-tYh" firstAttribute="centerY" secondItem="cFA-cy-i6s" secondAttribute="centerY" id="0H9-bo-tZC"/>
-                                                        <constraint firstItem="6iR-19-tYh" firstAttribute="centerX" secondItem="Euo-GD-8tI" secondAttribute="centerX" id="1Ds-Ob-HLy"/>
                                                         <constraint firstItem="cFA-cy-i6s" firstAttribute="top" secondItem="54O-l5-QlJ" secondAttribute="top" constant="12" id="7W2-YB-785"/>
                                                         <constraint firstItem="ZLx-Hm-grf" firstAttribute="top" secondItem="u5i-3E-ECh" secondAttribute="bottom" constant="8" id="8gx-gr-VpM"/>
-                                                        <constraint firstItem="Euo-GD-8tI" firstAttribute="top" secondItem="6iR-19-tYh" secondAttribute="bottom" constant="8" id="9jD-oa-dNC"/>
                                                         <constraint firstItem="hfR-ln-c85" firstAttribute="centerX" secondItem="dxD-is-Of4" secondAttribute="centerX" id="CpC-gC-03F"/>
-                                                        <constraint firstItem="6iR-19-tYh" firstAttribute="centerX" secondItem="54O-l5-QlJ" secondAttribute="centerX" multiplier="50:30" id="JIi-mN-AgT"/>
                                                         <constraint firstItem="duY-d7-Hwu" firstAttribute="top" secondItem="cFA-cy-i6s" secondAttribute="bottom" constant="8" id="JZR-ej-xue"/>
                                                         <constraint firstItem="hfR-ln-c85" firstAttribute="top" secondItem="dxD-is-Of4" secondAttribute="bottom" constant="8" id="Lzq-s5-Qj6"/>
                                                         <constraint firstItem="jLb-Mc-8jm" firstAttribute="centerX" secondItem="kFd-Dw-kbv" secondAttribute="centerX" id="M0r-RL-Cfo"/>
-                                                        <constraint firstItem="dxD-is-Of4" firstAttribute="centerX" secondItem="54O-l5-QlJ" secondAttribute="centerX" multiplier="2:3" id="Mlf-YH-BDo"/>
-                                                        <constraint firstItem="jLb-Mc-8jm" firstAttribute="centerX" secondItem="54O-l5-QlJ" secondAttribute="centerX" id="P0b-IL-ohG"/>
+                                                        <constraint firstItem="dxD-is-Of4" firstAttribute="centerX" secondItem="54O-l5-QlJ" secondAttribute="centerX" multiplier="240:300" id="Mlf-YH-BDo"/>
+                                                        <constraint firstItem="jLb-Mc-8jm" firstAttribute="centerX" secondItem="54O-l5-QlJ" secondAttribute="centerX" multiplier="360:300" id="P0b-IL-ohG"/>
+                                                        <constraint firstItem="cFA-cy-i6s" firstAttribute="centerX" secondItem="54O-l5-QlJ" secondAttribute="centerX" multiplier="120:300" id="PqR-Uu-6dD"/>
                                                         <constraint firstItem="jLb-Mc-8jm" firstAttribute="centerY" secondItem="cFA-cy-i6s" secondAttribute="centerY" id="RC6-eY-0xN"/>
                                                         <constraint firstItem="dxD-is-Of4" firstAttribute="centerY" secondItem="cFA-cy-i6s" secondAttribute="centerY" id="W80-Tb-wzq"/>
-                                                        <constraint firstItem="u5i-3E-ECh" firstAttribute="centerX" secondItem="54O-l5-QlJ" secondAttribute="centerX" multiplier="40:30" id="aSm-RA-DeX"/>
+                                                        <constraint firstItem="u5i-3E-ECh" firstAttribute="centerX" secondItem="54O-l5-QlJ" secondAttribute="centerX" multiplier="480:300" id="aSm-RA-DeX"/>
                                                         <constraint firstItem="u5i-3E-ECh" firstAttribute="centerY" secondItem="cFA-cy-i6s" secondAttribute="centerY" id="brQ-bD-uZc"/>
                                                         <constraint firstItem="ZLx-Hm-grf" firstAttribute="centerX" secondItem="u5i-3E-ECh" secondAttribute="centerX" id="fPt-Uq-0oB"/>
                                                         <constraint firstItem="duY-d7-Hwu" firstAttribute="centerX" secondItem="cFA-cy-i6s" secondAttribute="centerX" id="jPu-4I-DSK"/>
-                                                        <constraint firstItem="cFA-cy-i6s" firstAttribute="centerX" secondItem="54O-l5-QlJ" secondAttribute="centerX" multiplier="1:3" id="oSy-5m-FhQ"/>
                                                         <constraint firstItem="kFd-Dw-kbv" firstAttribute="top" secondItem="jLb-Mc-8jm" secondAttribute="bottom" constant="8" id="sMp-kf-11R"/>
                                                     </constraints>
                                                 </view>
@@ -294,16 +277,23 @@ Reconnect by top right button or back to choose another device</string>
                                                 <constraint firstAttribute="bottom" secondItem="54O-l5-QlJ" secondAttribute="bottom" id="KnR-Hy-kp3"/>
                                                 <constraint firstItem="54O-l5-QlJ" firstAttribute="top" secondItem="J61-76-p3H" secondAttribute="bottom" constant="8" id="Quc-G9-LsH"/>
                                                 <constraint firstItem="J61-76-p3H" firstAttribute="centerY" secondItem="a5p-PR-1wh" secondAttribute="centerY" id="UEG-Lv-UbL"/>
+                                                <constraint firstItem="54O-l5-QlJ" firstAttribute="leading" secondItem="NdH-s2-BeZ" secondAttribute="leading" id="WLY-N1-816"/>
                                                 <constraint firstItem="a5p-PR-1wh" firstAttribute="top" secondItem="QNn-X5-Gan" secondAttribute="bottom" constant="14" id="bkE-e7-0jQ"/>
                                                 <constraint firstItem="54O-l5-QlJ" firstAttribute="leading" secondItem="NdH-s2-BeZ" secondAttribute="leading" constant="8" id="dZw-Sk-0Sa"/>
                                                 <constraint firstItem="QNn-X5-Gan" firstAttribute="leading" secondItem="NdH-s2-BeZ" secondAttribute="leadingMargin" id="u8A-0o-DSQ"/>
                                                 <constraint firstItem="QNn-X5-Gan" firstAttribute="top" secondItem="NdH-s2-BeZ" secondAttribute="topMargin" id="uWh-Bw-kUi"/>
+                                                <constraint firstAttribute="trailing" secondItem="54O-l5-QlJ" secondAttribute="trailing" id="udC-wM-Zfo"/>
                                                 <constraint firstAttribute="trailing" secondItem="54O-l5-QlJ" secondAttribute="trailing" constant="8" id="yi2-J0-l5O"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="dZw-Sk-0Sa"/>
+                                                    <exclude reference="yi2-J0-l5O"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="buttonCombineView" destination="54O-l5-QlJ" id="22P-4j-CfW"/>
-                                            <outlet property="descriptorButton" destination="6iR-19-tYh" id="dI7-Np-hgJ"/>
                                             <outlet property="notifyButton" destination="u5i-3E-ECh" id="Qtu-ir-wJA"/>
                                             <outlet property="propertyLabel" destination="a5p-PR-1wh" id="aDe-KB-hSi"/>
                                             <outlet property="readButton" destination="cFA-cy-i6s" id="4tm-In-kT3"/>
@@ -322,12 +312,11 @@ Reconnect by top right button or back to choose another device</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1VJ-00-LTm" firstAttribute="leading" secondItem="rhe-AY-JWq" secondAttribute="leadingMargin" id="5Fc-Av-tXr"/>
-                            <constraint firstItem="SyM-UZ-FKF" firstAttribute="trailing" secondItem="rhe-AY-JWq" secondAttribute="trailingMargin" id="5PJ-vx-PsJ"/>
+                            <constraint firstItem="SyM-UZ-FKF" firstAttribute="leading" secondItem="rhe-AY-JWq" secondAttribute="leading" id="CAu-Qw-bec"/>
                             <constraint firstItem="J8W-h2-8Fy" firstAttribute="leading" secondItem="rhe-AY-JWq" secondAttribute="leadingMargin" id="Dst-Cu-clK"/>
                             <constraint firstItem="Wbp-Hi-4Vg" firstAttribute="top" secondItem="5bf-Ar-IeK" secondAttribute="bottom" constant="8" id="Nxd-YA-qqS"/>
                             <constraint firstItem="1VJ-00-LTm" firstAttribute="top" secondItem="J8W-h2-8Fy" secondAttribute="bottom" constant="20" id="RRw-1a-EXl"/>
                             <constraint firstItem="J8W-h2-8Fy" firstAttribute="top" secondItem="Jty-Mp-Pdk" secondAttribute="bottom" constant="8" id="TsQ-s9-L16"/>
-                            <constraint firstItem="SyM-UZ-FKF" firstAttribute="leading" secondItem="rhe-AY-JWq" secondAttribute="leadingMargin" id="c9A-cg-6ET"/>
                             <constraint firstItem="5Km-4B-vTl" firstAttribute="top" secondItem="Wbp-Hi-4Vg" secondAttribute="bottom" constant="8" id="dVn-rf-6uk"/>
                             <constraint firstItem="J8W-h2-8Fy" firstAttribute="trailing" secondItem="rhe-AY-JWq" secondAttribute="trailingMargin" id="gEK-Rm-luY"/>
                             <constraint firstItem="JRE-NO-0Dj" firstAttribute="top" secondItem="SyM-UZ-FKF" secondAttribute="bottom" id="hMI-xx-3U5"/>
@@ -335,6 +324,7 @@ Reconnect by top right button or back to choose another device</string>
                             <constraint firstItem="Wbp-Hi-4Vg" firstAttribute="leading" secondItem="rhe-AY-JWq" secondAttribute="leadingMargin" id="jwj-pY-USI"/>
                             <constraint firstItem="Jty-Mp-Pdk" firstAttribute="top" secondItem="5Km-4B-vTl" secondAttribute="bottom" constant="20" id="lCA-gT-Vaz"/>
                             <constraint firstItem="5Km-4B-vTl" firstAttribute="leading" secondItem="rhe-AY-JWq" secondAttribute="leadingMargin" id="leM-lZ-j4m"/>
+                            <constraint firstAttribute="trailing" secondItem="SyM-UZ-FKF" secondAttribute="trailing" id="pxN-gV-otE"/>
                             <constraint firstItem="SyM-UZ-FKF" firstAttribute="top" secondItem="1VJ-00-LTm" secondAttribute="bottom" constant="8" id="x1v-Nb-UNB"/>
                         </constraints>
                     </view>
@@ -474,7 +464,6 @@ Reconnect by top right button or back to choose another device</string>
         </scene>
     </scenes>
     <resources>
-        <image name="descriptor" width="35" height="35"/>
         <image name="dropDown" width="45" height="45"/>
         <image name="notify" width="35" height="35"/>
         <image name="read" width="35" height="35"/>
@@ -482,6 +471,6 @@ Reconnect by top right button or back to choose another device</string>
         <image name="writeWithoutResponse" width="35" height="35"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2LF-CJ-rgc"/>
+        <segue reference="VgX-D5-x9H"/>
     </inferredMetricsTieBreakers>
 </document>
