@@ -9,40 +9,77 @@
 import UIKit
 import CoreBluetooth
 
-class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate, UISearchBarDelegate, UISearchDisplayDelegate, detailsControlDelegate {
+enum RWNCIdentifier {
+    case read
+    case writeWithNoResponse
+    case notify
+    case descriptor
+    case none
+}
+
+class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate {
     
+    //IBOutlets
     @IBOutlet weak var connectBarItem: UIBarButtonItem!
     @IBOutlet weak var actionBarItem: UIBarButtonItem!
     
+    //Instance Objects
     var centralManager = CBCentralManager()
     var peripheralObj: CBPeripheral?
     var characterObj: CBCharacteristic?
     
+    //tableView array
     var valueArray = [String]()
-    var responseArray = [String]()
-    var descriptorArray = [AnyObject?]()
     
-    var identifier: RWNCIdentifier?
+    var identifier: RWNCIdentifier = .none
 
-    //MARK - viewController lifeCycle
+    //MARK: - viewController lifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.navigationItem.titleView = searchBar
-//        searchBar.delegate = self
-        self.title = prepareInfo?.barItemTitleStr
+        if peripheralObj != nil && characterObj != nil {
+            switch identifier {
+            case .read:
+                
+                actionBarItem.title = "read"
+                peripheralObj?.readValueForCharacteristic(characterObj!)
+                
+            case .writeWithNoResponse:
+                
+                actionBarItem.title = "write"
+                
+            case .notify:
+                
+                peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
+                actionBarItem.image = UIImage(named: "unnotifyItem")
+                
+            case .descriptor:
+                
+                actionBarItem.enabled = false
+                if let descriptorArray = characterObj?.descriptors {
+                    for descriptor: CBDescriptor in descriptorArray {
+                        peripheralObj?.readValueForDescriptor(descriptor)
+                    }
+                }
+                
+            default:
+                break
+            }
+        } else {
+            CustomAlertController.showCancelAlertControllerWithBlock("Peripheral not found", message: "Peripheral or characteristic not found, going back", target: self, actionHandler: { (action) in
+                self.navigationController?.popViewControllerAnimated(true)
+            })
+        }
         
-        actionBarItem.title = prepareInfo?.barItemTitleStr
-        actionBarItem.tag = (prepareInfo?.barItemTag)!
+        
         if actionBarItem.tag == 3 {
             actionBarItem.title = nil
             actionBarItem.image = UIImage(named: "notifyItem")
         } else if actionBarItem.tag == 4 {
-            actionBarItem.enabled = false
+            
         }
-        peripheralObj = prepareInfo?.RWNCPeripheral
         peripheralObj?.delegate = self
-        characterObj = prepareInfo?.RWNCCharacter
         centralManager.delegate = self
         
         switch (peripheralObj?.state)! {
@@ -50,26 +87,11 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             connectBarItem.enabled = false
             switch actionBarItem.tag {
             case 0:
-                if peripheralObj != nil && characterObj != nil {
-                    peripheralObj?.readValueForCharacteristic(characterObj!)
-                } else {
-                    CustomAlertController.showCancelAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
-                }
-            case 3:
-                self.title = "Notify"
-                if peripheralObj != nil && characterObj != nil {
-                    peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
-                    actionBarItem.image = UIImage(named: "unnotifyItem")
-                } else {
-                    CustomAlertController.showCancelAlertController("Information not found", message: "Cannot find peripheral and characteristic", target: self)
-                }
+                
+            
             case 4:
                 self.title = "Descriptors"
-                if let descriptorArray = characterObj?.descriptors {
-                    for descriptor: CBDescriptor in descriptorArray {
-                        peripheralObj?.readValueForDescriptor(descriptor)
-                    }
-                }
+                
             default:
                 break
             }
@@ -82,8 +104,15 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        if identifier == .none {
+            CustomAlertController.showCancelAlertControllerWithBlock("Segue error", message: "Not correct segue, going back", target: self, actionHandler: { (action) in
+                self.navigationController?.popViewControllerAnimated(true)
+            })
+        }
+    }
+    
     override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(true)
         if characterObj?.isNotifying == true {
             peripheralObj?.setNotifyValue(false, forCharacteristic: characterObj!)
         }

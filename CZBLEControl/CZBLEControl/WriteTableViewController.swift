@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import CoreBluetooth
 
 class WriteTableViewController: UITableViewController {
+    
+    var peripheralObj: CBPeripheral?
+    var characterObj: CBCharacteristic?
 
     override func viewDidLoad() {
         super.viewDidLoad()

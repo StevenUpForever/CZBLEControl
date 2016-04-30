@@ -16,7 +16,6 @@
 		AF7403B41CD40A84004C98E6 /* ClassExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7403B31CD40A84004C98E6 /* ClassExtension.swift */; };
 		AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */; };
 		AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */; };
-		AF8BDEBE1CB878D900C49885 /* RWNCPrepareInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBD1CB878D900C49885 /* RWNCPrepareInfo.swift */; };
 		AF8BDEC11CB8BDE400C49885 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */; };
 		AF8BDEC21CB8BDE400C49885 /* PopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */; };
 		AF9242681CD48D3400E083E6 /* WriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9242671CD48D3400E083E6 /* WriteTableViewController.swift */; };
@@ -56,7 +55,6 @@
 		AF7403B31CD40A84004C98E6 /* ClassExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtension.swift; sourceTree = "<group>"; };
 		AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCTableViewController.swift; sourceTree = "<group>"; };
-		AF8BDEBD1CB878D900C49885 /* RWNCPrepareInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCPrepareInfo.swift; sourceTree = "<group>"; };
 		AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverViewController.xib; sourceTree = "<group>"; };
 		AF9242671CD48D3400E083E6 /* WriteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteTableViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */,
-				AF8BDEBD1CB878D900C49885 /* RWNCPrepareInfo.swift */,
 				AF9242671CD48D3400E083E6 /* WriteTableViewController.swift */,
 				AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */,
 				AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */,
@@ -355,7 +352,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */,
-				AF8BDEBE1CB878D900C49885 /* RWNCPrepareInfo.swift in Sources */,
 				AF8BDEC11CB8BDE400C49885 /* PopoverViewController.swift in Sources */,
 				AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */,
 				AF9242681CD48D3400E083E6 /* WriteTableViewController.swift in Sources */,

@@ -190,12 +190,12 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
             if let cell = tableView.cellForRowAtIndexPath(cellIndexPath!) as? ServiceTableViewCell {
                 
                 if segue.identifier != "write" {
-                    
                     //Prepare for destination viewController
                     if let RWNCVC = segue.destinationViewController as? RWNCTableViewController {
                         
                         RWNCVC.peripheralObj = peripheralObj
                         RWNCVC.characterObj = cell.cellCharacter
+                        RWNCVC.navigationItem.title = cell.cellCharacter?.UUID.UUIDString
                         
                         switch segue.identifier! {
                         case "read":
@@ -207,13 +207,19 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
                         case "descriptor":
                             RWNCVC.identifier = .descriptor
                         default:
-                            break
+                            RWNCVC.identifier = .none
                         }
                         
                     }
                     
                 } else {
-                    
+                    if let writeVC = segue.destinationViewController as? WriteTableViewController {
+                        
+                        writeVC.peripheralObj = peripheralObj
+                        writeVC.characterObj = cell.cellCharacter
+                        writeVC.navigationItem.title = cell.cellCharacter?.UUID.UUIDString
+                        
+                    }
                 }
                 
             }
