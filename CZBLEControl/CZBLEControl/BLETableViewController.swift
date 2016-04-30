@@ -125,13 +125,19 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         SelectedIndexPath = indexPath
         
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-            if cell.indicator.isAnimating() == false {
-                cell.indicator.startAnimating()
-            }
-            if let connectPeripheral = cell.peripheralInfo?.peripheral {
-                centralManager.connectPeripheral(connectPeripheral, options: nil)
+            
+            if centralManager.state != .PoweredOn {
+                CustomAlertController.showCancelAlertController("Connection error", message: "Please check your device and open Bluetooth", target: self)
+                
             } else {
-                CustomAlertController.showCancelAlertController("Peripheral error", message: "Cannot find such peripheral", target: self)
+                if cell.indicator.isAnimating() == false {
+                    cell.indicator.startAnimating()
+                }
+                if let connectPeripheral = cell.peripheralInfo?.peripheral {
+                    centralManager.connectPeripheral(connectPeripheral, options: nil)
+                } else {
+                    CustomAlertController.showCancelAlertController("Peripheral error", message: "Cannot find such peripheral", target: self)
+                }
             }
         }
     }
