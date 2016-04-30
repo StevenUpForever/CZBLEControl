@@ -18,6 +18,7 @@ class ServiceTableViewCell: UITableViewCell {
     @IBOutlet weak var notifyButton: UIButton!
     @IBOutlet weak var descriptorButton: UIButton!
     @IBOutlet weak var buttonCombineView: UIView!
+    @IBOutlet weak var writeNoResponseButton: UIButton!
     
     var cellCharacter: CBCharacteristic?
     
@@ -87,7 +88,8 @@ class ServiceTableViewCell: UITableViewCell {
     func changeButtonEnable(property: CBCharacteristicProperties) {
         notifyButton.enabled = property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0 ? true : false
         readButton.enabled = property.rawValue & CBCharacteristicProperties.Read.rawValue > 0 ? true : false
-        writeButton.enabled = property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 || property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 ? true : false
+        writeButton.enabled = property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 ? true : false
+        writeNoResponseButton.enabled = property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 ? true : false
     }
 
 }

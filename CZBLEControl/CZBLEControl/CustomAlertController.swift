@@ -39,7 +39,7 @@ class CustomAlertController: UIAlertController {
     class func showChooseAlertControllerWithBlock(title: String, message: String, target: AnyObject, actionHandler: (action: UIAlertAction) -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: { (action) in
             actionHandler(action: action)
         }))
         target.presentViewController(alertController, animated: true, completion: nil)

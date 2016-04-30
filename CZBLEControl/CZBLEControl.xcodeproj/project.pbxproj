@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		65CCAB2C6898415A8DB5C641 /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D4A7522B10524E100AF4C0 /* Pods_CZBLEControl.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		ABFAE2DB8EC0C95B9C2A4F78 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B993CE7C738FDFE053CC181 /* libPods.a */; };
 		AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */; };
 		AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */; };
 		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
@@ -45,7 +44,6 @@
 		066ED2A6F8E151CE92CA291E /* Pods-CZBLEControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.release.xcconfig"; sourceTree = "<group>"; };
 		06D893E0F5AF0B906038144F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		45D4A7522B10524E100AF4C0 /* Pods_CZBLEControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CZBLEControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B993CE7C738FDFE053CC181 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3128F7D57607CC20F307918 /* Pods-CZBLEControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.debug.xcconfig"; sourceTree = "<group>"; };
 		AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewController.swift; sourceTree = "<group>"; };
 		AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -80,7 +78,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFD10C481CB214E300CD5E86 /* CoreBluetooth.framework in Frameworks */,
-				ABFAE2DB8EC0C95B9C2A4F78 /* libPods.a in Frameworks */,
 				65CCAB2C6898415A8DB5C641 /* Pods_CZBLEControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */,
-				7B993CE7C738FDFE053CC181 /* libPods.a */,
 				45D4A7522B10524E100AF4C0 /* Pods_CZBLEControl.framework */,
 			);
 			name = Frameworks;
@@ -511,7 +507,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengzhi Jia (LPRD99FQ39)";
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

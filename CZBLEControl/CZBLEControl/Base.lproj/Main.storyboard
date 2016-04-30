@@ -309,6 +309,7 @@ Reconnect by top right button or back to choose another device</string>
                                             <outlet property="readButton" destination="cFA-cy-i6s" id="4tm-In-kT3"/>
                                             <outlet property="uuidLabel" destination="QNn-X5-Gan" id="2Tq-Wl-cMu"/>
                                             <outlet property="writeButton" destination="dxD-is-Of4" id="QJQ-xn-yoq"/>
+                                            <outlet property="writeNoResponseButton" destination="jLb-Mc-8jm" id="3cX-KI-hF7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
