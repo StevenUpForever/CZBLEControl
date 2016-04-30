@@ -11,6 +11,7 @@ import CoreBluetooth
 
 enum RWNCIdentifier {
     case read
+    case write
     case writeWithNoResponse
     case notify
     case none
@@ -30,6 +31,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     //tableView array
     var valueArray = [String]()
     var descriptorArray = [String]()
+    var writeValueArray = [String]()
     
     var identifier: RWNCIdentifier = .none
 
@@ -44,7 +46,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
                 actionBarItem.title = "read"
                 peripheralObj?.readValueForCharacteristic(characterObj!)
                 
-            case .writeWithNoResponse:
+            case .write, .writeWithNoResponse:
                 actionBarItem.title = "write"
                 
             case .notify:
@@ -101,52 +103,107 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        if identifier == .write {
+            return 3
+        } else {
+            return 2
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? valueArray.count : descriptorArray.count
+        if identifier == .write {
+            switch section {
+            case 0:
+                return descriptorArray.count
+            case 1:
+                return writeValueArray.count
+            default:
+                return valueArray.count
+            }
+        } else {
+             return section == 0 ? descriptorArray.count : valueArray.count
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
         
-        switch indexPath.section {
-        case 0:
-            cell.textLabel?.text = valueArray[indexPath.row]
+        if identifier == .write {
             
-            //Show date label text
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
-            cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+            switch indexPath.section {
+            case 0:
+                cell.textLabel?.text = descriptorArray[indexPath.row]
+                
+            case 1:
+                cell.textLabel?.text = writeValueArray[indexPath.row]
+                
+                //Show date label text
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+                cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                
+            case 2:
+                cell.textLabel?.text = valueArray[indexPath.row]
+                
+                //Show date label text
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+                cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                
+            default:
+                break
+            }
             
-        case 1:
-            cell.textLabel?.text = descriptorArray[indexPath.row]
+        } else {
             
-        default:
-            break
+            switch indexPath.section {
+            case 0:
+                cell.textLabel?.text = descriptorArray[indexPath.row]
+                
+            case 1:
+                cell.textLabel?.text = valueArray[indexPath.row]
+                
+                //Show date label text
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
+                cell.detailTextLabel?.text = dateFormatter.stringFromDate(NSDate())
+                
+            default:
+                break
+            }
+            
         }
         
         return cell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            switch identifier {
-            case .read:
-                return "Read Value"
-            case .writeWithNoResponse:
-                return "Write Value, no response"
-            case .notify:
-                return "Return Value"
+        if identifier == .write {
+            switch section {
+            case 0:
+                return "Descriptors"
+            case 1:
+                return "Write Value"
             default:
-                return "Invalid data type"
+                return "Return Value"
             }
             
         } else {
-            return "Descriptors"
+            if section == 0 {
+                return "Descriptors"
+            } else {
+                switch identifier {
+                case .read:
+                    return "Read Value"
+                case .writeWithNoResponse:
+                    return "Write Value, no response"
+                case .notify:
+                    return "Return Value"
+                default:
+                    return "Invalid data type"
+                }
+            }
         }
-        
     }
     
     //MARK: - CBCentral delegate
@@ -184,7 +241,8 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             valueArray.append(dataString)
             
             //Insert new cell row
-            let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
+            let sectionNum = identifier == .write ? 2 : 1
+            let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: sectionNum)
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
         
@@ -209,7 +267,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     func peripheral(peripheral: CBPeripheral, didUpdateValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
         if let descriptorString = descriptor.value?.description {
             descriptorArray.append(descriptorString)
-            let indexPath = NSIndexPath(forRow: descriptorArray.count - 1, inSection: 1)
+            let indexPath = NSIndexPath(forRow: descriptorArray.count - 1, inSection: 0)
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
     }
@@ -230,7 +288,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         case .read:
             peripheralObj?.readValueForCharacteristic(characterObj!)
             
-        case .writeWithNoResponse:
+        case .write, .writeWithNoResponse:
             let popVC = PopoverViewController()
             popVC.delegate = self
             popVC.modalPresentationStyle = UIModalPresentationStyle.Popover
@@ -270,9 +328,16 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         
         if let data = input.dataUsingEncoding(NSUTF8StringEncoding) {
             peripheralObj?.writeValue(data, forCharacteristic: characterObj!, type: .WithoutResponse)
-            valueArray.append(input)
-            let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 0)
-            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+            
+            if identifier == .write {
+                writeValueArray.append(input)
+                let indexPath = NSIndexPath(forRow: writeValueArray.count - 1, inSection: 1)
+                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+            } else {
+                valueArray.append(input)
+                let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 1)
+                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+            }
         }
         
     }

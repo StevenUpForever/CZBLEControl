@@ -189,41 +189,33 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
         if cellIndexPath != nil {
             if let cell = tableView.cellForRowAtIndexPath(cellIndexPath!) as? ServiceTableViewCell {
                 
-                if segue.identifier != "write" {
                     //Prepare for destination viewController
-                    if let RWNCVC = segue.destinationViewController as? RWNCTableViewController {
+                if let RWNCVC = segue.destinationViewController as? RWNCTableViewController {
                         
-                        RWNCVC.peripheralObj = peripheralObj
-                        RWNCVC.characterObj = cell.cellCharacter
-                        RWNCVC.navigationItem.title = cell.cellCharacter?.UUID.UUIDString
-                        
-                        switch segue.identifier! {
-                        case "read":
-                            RWNCVC.identifier = .read
-                        case "writeWithoutResponse":
-                            RWNCVC.identifier = .writeWithNoResponse
-                        case "notify":
-                            RWNCVC.identifier = .notify
-                        default:
-                            RWNCVC.identifier = .none
-                        }
-                        
-                    }
+                RWNCVC.peripheralObj = peripheralObj
+                RWNCVC.characterObj = cell.cellCharacter
+                RWNCVC.navigationItem.title = cell.cellCharacter?.UUID.UUIDString
+                
+                switch segue.identifier! {
+                case "read":
+                    RWNCVC.identifier = .read
                     
-                } else {
-                    if let writeVC = segue.destinationViewController as? WriteTableViewController {
-                        
-                        writeVC.peripheralObj = peripheralObj
-                        writeVC.characterObj = cell.cellCharacter
-                        writeVC.navigationItem.title = cell.cellCharacter?.UUID.UUIDString
-                        
+                case "write":
+                    RWNCVC.identifier = .write
+                    
+                case "writeWithoutResponse":
+                    RWNCVC.identifier = .writeWithNoResponse
+                    
+                case "notify":
+                    RWNCVC.identifier = .notify
+                    
+                default:
+                    RWNCVC.identifier = .none
                     }
                 }
-                
             }
         }
     }
-
     
-
+    
 }

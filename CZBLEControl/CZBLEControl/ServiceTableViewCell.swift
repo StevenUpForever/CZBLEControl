@@ -24,10 +24,11 @@ class ServiceTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
         readButton.enabled = false
         writeButton.enabled = false
         notifyButton.enabled = false
+        writeNoResponseButton.enabled = false
         
         let gradient = CAGradientLayer()
         gradient.frame = buttonCombineView.bounds

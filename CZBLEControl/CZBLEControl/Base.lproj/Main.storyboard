@@ -240,7 +240,7 @@ Reconnect by top right button or back to choose another device</string>
                                                                 <color key="titleColor" red="0.80784313725490198" green="0.96470588235294119" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <segue destination="7b9-be-Vjo" kind="show" identifier="write" id="fpF-Oj-GxR"/>
+                                                                <segue destination="tSN-aa-V9m" kind="show" identifier="write" id="wUk-4Q-Twe"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLx-Hm-grf">
@@ -347,34 +347,6 @@ Reconnect by top right button or back to choose another device</string>
             </objects>
             <point key="canvasLocation" x="3189" y="73"/>
         </scene>
-        <!--Write Table View Controller-->
-        <scene sceneID="IX7-9M-nw9">
-            <objects>
-                <tableViewController id="7b9-be-Vjo" customClass="WriteTableViewController" customModule="CZBLEControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XNS-Vx-ewN">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PwK-Cx-fIb">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PwK-Cx-fIb" id="Qwn-GP-8Er">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="7b9-be-Vjo" id="xJ0-oc-6Jx"/>
-                            <outlet property="delegate" destination="7b9-be-Vjo" id="T2a-3A-xEx"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ObP-EH-ern" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3904" y="388"/>
-        </scene>
         <!--Title-->
         <scene sceneID="xSh-ee-ZpG">
             <objects>
@@ -471,6 +443,6 @@ Reconnect by top right button or back to choose another device</string>
         <image name="writeWithoutResponse" width="35" height="35"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VgX-D5-x9H"/>
+        <segue reference="wUk-4Q-Twe"/>
     </inferredMetricsTieBreakers>
 </document>
