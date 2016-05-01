@@ -15,11 +15,19 @@ class PeripheralInfo: NSObject {
     var RSSI: NSNumber
     var adData: [String : AnyObject]
     
-    init(peripheral: CBPeripheral, RSSI: NSNumber, adData: [String : AnyObject]) {
+    required init(peripheral: CBPeripheral, RSSI: NSNumber, adData: [String : AnyObject]) {
         self.peripheral = peripheral
         self.RSSI = RSSI
         self.adData = adData
         super.init()
     }
+}
 
+class CharacterInfo: NSObject {
+    var serviceObj: CBService
+    var characterArray = [CBCharacteristic]()
+    
+    init(service: CBService) {
+        serviceObj = service
+    }
 }

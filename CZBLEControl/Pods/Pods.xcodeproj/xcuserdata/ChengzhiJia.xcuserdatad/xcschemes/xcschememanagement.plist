@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-CZBLEControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>96B2763E2725AB370355E817AAEC6085</key>
+		<key>66D87170BDD9502B4DEB0DF65F0220D7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AF1E24951C8A7671C844B8C613B70051</key>
+		<key>967905DA0273B96940D4B097BC53CD28</key>
 		<dict>
 			<key>primary</key>
 			<true/>

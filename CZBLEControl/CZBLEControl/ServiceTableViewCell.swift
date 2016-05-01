@@ -18,15 +18,17 @@ class ServiceTableViewCell: UITableViewCell {
     @IBOutlet weak var notifyButton: UIButton!
     @IBOutlet weak var descriptorButton: UIButton!
     @IBOutlet weak var buttonCombineView: UIView!
+    @IBOutlet weak var writeNoResponseButton: UIButton!
     
     var cellCharacter: CBCharacteristic?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
         readButton.enabled = false
         writeButton.enabled = false
         notifyButton.enabled = false
+        writeNoResponseButton.enabled = false
         
         let gradient = CAGradientLayer()
         gradient.frame = buttonCombineView.bounds
@@ -44,10 +46,13 @@ class ServiceTableViewCell: UITableViewCell {
         cellCharacter = character
         uuidLabel.text = character.UUID.UUIDString
         propertyLabel.text = getPropertitesName(character.properties)
+        changeButtonEnable(character.properties)
     }
     
     func getPropertitesName(property: CBCharacteristicProperties) -> String {
+        
         var propertyStr = "Propertites:"
+        
         if property.rawValue & CBCharacteristicProperties.Broadcast.rawValue > 0 {
             propertyStr += " Broadcast"
         }
@@ -65,22 +70,18 @@ class ServiceTableViewCell: UITableViewCell {
         }
         if property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0 {
             propertyStr += " Notify"
-            //notifyButton.enabled = true
         }
         if property.rawValue & CBCharacteristicProperties.NotifyEncryptionRequired.rawValue > 0 {
             propertyStr += " NotifyEncryptionRequired"
         }
         if property.rawValue & CBCharacteristicProperties.Read.rawValue > 0 {
             propertyStr += " Read"
-            //readButton.enabled = true
         }
         if property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 {
             propertyStr += " Write"
-            //writeButton.enabled = true
         }
         if property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 {
             propertyStr += " WriteWithoutResponse"
-            //writeButton.enabled = true
         }
         return propertyStr
     }
@@ -88,7 +89,8 @@ class ServiceTableViewCell: UITableViewCell {
     func changeButtonEnable(property: CBCharacteristicProperties) {
         notifyButton.enabled = property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0 ? true : false
         readButton.enabled = property.rawValue & CBCharacteristicProperties.Read.rawValue > 0 ? true : false
-        writeButton.enabled = property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 || property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 ? true : false
+        writeButton.enabled = property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 ? true : false
+        writeNoResponseButton.enabled = property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 ? true : false
     }
 
 }

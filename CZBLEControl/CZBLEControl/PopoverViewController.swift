@@ -8,36 +8,38 @@
 
 import UIKit
 
-@objc protocol detailsControlDelegate {
-    optional func writeValueProcess(input: String)
+@objc protocol popoverDelegate {
+    func popOverVCWriteValueProcess(input: String)
 }
 
 class PopoverViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var valueTextField: UITextField!
     
-    weak var delegate: detailsControlDelegate?
+    weak var delegate: popoverDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         valueTextField.delegate = self
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - IBActions
+    
     @IBAction func submitProcess(sender: AnyObject) {
-        if valueTextField.text != nil && valueTextField.text?.characters.count != 0 {
-            delegate?.writeValueProcess!(valueTextField.text!)
+        if valueTextField.text != nil && !valueTextField.text!.isEmpty {
+            delegate?.popOverVCWriteValueProcess(valueTextField.text!)
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
             valueTextField.layer.borderWidth = 2.0
             valueTextField.layer.borderColor = UIColor.redColor().CGColor
         }
     }
+    
+    //MARK: - textField delegate
     
     func textFieldDidBeginEditing(textField: UITextField) {
         valueTextField.layer.borderWidth = 0.0
