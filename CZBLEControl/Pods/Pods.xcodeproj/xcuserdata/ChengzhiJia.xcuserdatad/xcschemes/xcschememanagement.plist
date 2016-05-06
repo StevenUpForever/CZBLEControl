@@ -3,8 +3,50 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict/>
+	<dict>
+		<key>GTMOAuth2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleAPIClient.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-CZBLEControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict/>
+	<dict>
+		<key>2E37E6E48C1BAFE8489779A24E7E0755</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>51BFC78D17FCE1054F23ECCCE369F2BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9FFC5E4374876289135866CBA4EA28A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F77528D1A7472BABF0A502E26165CAE3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
 </dict>
 </plist>

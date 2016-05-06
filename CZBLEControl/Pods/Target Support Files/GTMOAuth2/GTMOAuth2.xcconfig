@@ -1,0 +1,1 @@
+GTMOAUTH__OTHER_LDFLAGS = -framework "Security" -framework "SystemConfiguration"
