@@ -3,30 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict>
-		<key>MBProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-CZBLEControl.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-	</dict>
+	<dict/>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>66D87170BDD9502B4DEB0DF65F0220D7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>967905DA0273B96940D4B097BC53CD28</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
