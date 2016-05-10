@@ -65,11 +65,11 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-        
         //If array contains this peripheral, replace relate object with it due to new RSSI number
         if  peripheralArray.contains({ (blockInfo) -> Bool in
             blockInfo.peripheral == peripheral
         }) {
+            
             for index in 0 ..< peripheralArray.count {
                 if peripheralArray[index].peripheral == peripheral {
                     peripheralArray[index].RSSI = RSSI
