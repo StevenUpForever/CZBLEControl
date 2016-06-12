@@ -260,6 +260,8 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         print("write")
         if error != nil {
             print(error?.description)
+        } else {
+            peripheral.readValueForCharacteristic(characteristic)
         }
         
     }
@@ -270,10 +272,6 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             let indexPath = NSIndexPath(forRow: descriptorArray.count - 1, inSection: 0)
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
-    }
-    
-    func peripheral(peripheral: CBPeripheral, didWriteValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
-        
     }
     
     //MARK: - IBActions and Selectors
