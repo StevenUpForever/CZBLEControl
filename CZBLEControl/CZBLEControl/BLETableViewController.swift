@@ -70,13 +70,13 @@ class BLETableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "peripheralControl" {
-            let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
-            peripheralVC?.peripheralObj = peripheralObj
-            peripheralVC?.navigationItem.title = peripheralObj?.name ?? "Name Unavailable"
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "peripheralControl" {
+//            let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
+//            peripheralVC?.peripheralObj = peripheralObj
+//            peripheralVC?.navigationItem.title = peripheralObj?.name ?? "Name Unavailable"
+//        }
+//    }
     
     func endIndicatorLoading(indexPath: NSIndexPath) {
         if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {

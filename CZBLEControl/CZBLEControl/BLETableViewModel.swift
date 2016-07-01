@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class BLETableViewModel: NSObject, CBCentralManagerDelegate {
+class BLETableViewModel: NSObject {
     
     let centralManager = CBCentralManager()
     let refresh = UIRefreshControl()
@@ -23,9 +23,9 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     
     override init() {
         super.init()
-        centralManager.delegate = self
+//        centralManager.delegate = self
         
-        refresh.addTarget(self, action: #selector(BLETableViewModel.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
+//        refresh.addTarget(self, action: #selector(BLETableViewModel.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
     }
     
     func addTargetForViewModel(target: UITableViewController) {
@@ -67,23 +67,23 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     
     //MARK: - Selectors
     
-    func tableViewRefresh(refreshControl: UIRefreshControl) {
-        guard let initializedTarget = target else {
-            print("viewModel didn't invoke set target")
-        }
-        
-        var indexPathArray = [NSIndexPath]()
-        for i in 0 ..< peripheralArray.count {
-            indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
-        }
-        peripheralArray.removeAll()
-        
-        initializedTarget.tableView.deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .Right)
-        
-        if !self.centralManager.isScanning {
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-        }
-        refreshControl.endRefreshing()
-    }
+//    func tableViewRefresh(refreshControl: UIRefreshControl) {
+////        guard let initializedTarget = target else {
+////            print("viewModel didn't invoke set target")
+////        }
+//        
+//        var indexPathArray = [NSIndexPath]()
+//        for i in 0 ..< peripheralArray.count {
+//            indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
+//        }
+//        peripheralArray.removeAll()
+//        
+//        initializedTarget.tableView.deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .Right)
+//        
+//        if !self.centralManager.isScanning {
+//            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+//        }
+//        refreshControl.endRefreshing()
+//    }
 
 }
