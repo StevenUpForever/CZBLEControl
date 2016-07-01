@@ -33,7 +33,7 @@
                                             <rect key="frame" x="572" y="27" width="20" height="20"/>
                                             <color key="color" red="0.30980392159999998" green="0.76470588240000004" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbX-ww-fV0">
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbX-ww-fV0" customClass="CustomView" customModule="CZBLEControl" customModuleProvider="target">
                                             <rect key="frame" x="514" y="12" width="50" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXO-26-Fd7">
@@ -50,6 +50,15 @@
                                                 <constraint firstItem="TXO-26-Fd7" firstAttribute="centerX" secondItem="pbX-ww-fV0" secondAttribute="centerX" id="Hu8-Iv-FnO"/>
                                                 <constraint firstItem="TXO-26-Fd7" firstAttribute="centerY" secondItem="pbX-ww-fV0" secondAttribute="centerY" id="JkJ-kB-MkS"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isRound" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSSI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKE-Se-fun">
                                             <rect key="frame" x="474" y="27" width="32" height="18"/>
@@ -83,7 +92,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="RSSIView" destination="pbX-ww-fV0" id="WOB-KN-ayQ"/>
+                                    <outlet property="RSSIView" destination="pbX-ww-fV0" id="5kB-Es-QUw"/>
                                     <outlet property="UUIDLabel" destination="usK-Nw-UW2" id="K28-vo-V26"/>
                                     <outlet property="indicator" destination="MSS-l8-3u2" id="1wS-vQ-VcM"/>
                                     <outlet property="nameLabel" destination="4ek-5f-7A7" id="0Ib-PQ-EXw"/>

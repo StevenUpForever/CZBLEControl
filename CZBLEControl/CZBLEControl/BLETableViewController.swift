@@ -14,8 +14,6 @@ class BLETableViewController: UITableViewController {
     
     let viewModel = BLETableViewModel()
     
-    var SelectedIndexPath = NSIndexPath()
-    
     //MARK: - viewController lifecycle
     
     override func viewDidLoad() {
@@ -42,41 +40,21 @@ class BLETableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.peripheralArray.count
+        return self.viewModel.peripheralArray.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BLECell", forIndexPath: indexPath) as! BLETableViewCell
-        cell.loadData(self.peripheralArray[indexPath.row])
+        cell.loadData(self.viewModel.peripheralArray[indexPath.row])
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        SelectedIndexPath = indexPath
-        
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-            
-            if centralManager.state != .PoweredOn {
-                CustomAlertController.showCancelAlertController("Connection error", message: "Please check your device and open Bluetooth", target: self)
-                
-            } else {
-                if cell.indicator.isAnimating() == false {
-                    cell.indicator.startAnimating()
-                }
-                if let connectPeripheral = cell.peripheralInfo?.peripheral {
-                    centralManager.connectPeripheral(connectPeripheral, options: nil)
-                } else {
-                    CustomAlertController.showCancelAlertController("Peripheral error", message: "Cannot find such peripheral", target: self)
-                }
-            }
-        }
+        self.viewModel.connectPeripheralWithSelectedRow(indexPath)
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
         endIndicatorLoading(indexPath)
-        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -86,8 +64,6 @@ class BLETableViewController: UITableViewController {
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 73.0
     }
-
-    //MARK - Selectors
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -99,6 +75,14 @@ class BLETableViewController: UITableViewController {
             let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
             peripheralVC?.peripheralObj = peripheralObj
             peripheralVC?.navigationItem.title = peripheralObj?.name ?? "Name Unavailable"
+        }
+    }
+    
+    func endIndicatorLoading(indexPath: NSIndexPath) {
+        if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+            if cell.indicator.isAnimating() {
+                cell.indicator.stopAnimating()
+            }
         }
     }
 
