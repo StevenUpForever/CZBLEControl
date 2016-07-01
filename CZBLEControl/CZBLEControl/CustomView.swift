@@ -10,29 +10,27 @@ import UIKit
 
 @IBDesignable class CustomView: UIView {
 
-    @IBInspectable var cornerRadius: CGFloat = 0.0 {
+    @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
         didSet {
-            layer.cornerRadius = cornerRadius
+            self.layer.borderColor = borderColor.CGColor
         }
     }
     
     @IBInspectable var borderWidth: CGFloat = 0.0 {
         didSet {
-            layer.borderWidth = borderWidth
+            self.layer.borderWidth = borderWidth
         }
     }
     
-    @IBInspectable var borderColor: UIColor? {
+    @IBInspectable var cornerRadius: CGFloat = 0.0 {
         didSet {
-            layer.borderColor = borderColor?.CGColor
+            self.layer.cornerRadius = cornerRadius
         }
     }
     
-    @IBInspectable var isRound: Bool = false {
+    @IBInspectable var roundCornerRadius: Bool = false {
         didSet {
-            if isRound {
-                layer.cornerRadius = frame.width/2.0
-            }
+            self.layer.cornerRadius = roundCornerRadius ? self.frame.width/2.0 : 0.0
         }
     }
 

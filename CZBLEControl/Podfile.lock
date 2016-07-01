@@ -2,18 +2,18 @@ PODS:
   - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.7)
-  - GoogleAPIClient/Core (1.0.3):
+  - GoogleAPIClient/Core (1.0.4):
     - GTMSessionFetcher (~> 1.1)
-  - GoogleAPIClient/Drive (1.0.3):
+  - GoogleAPIClient/Drive (1.0.4):
     - GoogleAPIClient/Core
     - GTMSessionFetcher (~> 1.1)
   - GTMOAuth2 (1.1.1):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.3):
-    - GTMSessionFetcher/Full (= 1.1.3)
-  - GTMSessionFetcher/Core (1.1.3)
-  - GTMSessionFetcher/Full (1.1.3):
-    - GTMSessionFetcher/Core (= 1.1.3)
+  - GTMSessionFetcher (1.1.4):
+    - GTMSessionFetcher/Full (= 1.1.4)
+  - GTMSessionFetcher/Core (1.1.4)
+  - GTMSessionFetcher/Full (1.1.4):
+    - GTMSessionFetcher/Core (= 1.1.4)
 
 DEPENDENCIES:
   - Crashlytics
@@ -24,8 +24,8 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  GoogleAPIClient: 06a32889d31c0f1c9ae528e31139ec3680b25e0d
+  GoogleAPIClient: 4dedb6af613eb7d171814c343f8a82ee5411e13b
   GTMOAuth2: bdb12f3e0d2110bfe585f6151230b883beb4d042
-  GTMSessionFetcher: 86678550b1b2862b0df62e693a177c916debd7d2
+  GTMSessionFetcher: 174bc61d5238f81f9ddb807b0b0170420f67de85
 
 COCOAPODS: 0.38.2
