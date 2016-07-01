@@ -9,30 +9,31 @@
 import UIKit
 import CoreBluetooth
 
-class BLETableViewModel: NSObject {
+protocol BLETableViewModelDelegate: class {
+    func didGetResultConnectToPeripheral(success: Bool, indexPath: NSIndexPath)
+    func needUpdateTableViewUI(indexPaths: [NSIndexPath])
+    func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath)
+    func differentManagerStatus(errorMessage: String)
+}
+
+class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     
     let centralManager = CBCentralManager()
-    let centralManagerDelegate = BLETableViewCentralManager()
     
     let refresh = UIRefreshControl()
     
     var SelectedIndexPath = NSIndexPath()
     
     var peripheralArray = [PeripheralInfo]()
-    private var peripheralObj: CBPeripheral?
+    var selectedPeripheralInfo: PeripheralInfo?
     
-    private var target: UITableViewController?
+    weak var delegate: BLETableViewModelDelegate?
     
     override init() {
         super.init()
-        centralManager.delegate = centralManagerDelegate
+        centralManager.delegate = self
         
         refresh.addTarget(self, action: #selector(BLETableViewModel.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
-    }
-    
-    func addTargetForViewModel(target: UITableViewController) {
-        self.target = target
-        self.target!.view.addSubview(refresh)
     }
     
     func scanPeripheralInLifeCycle(viewWillAppear: Bool) {
@@ -43,45 +44,81 @@ class BLETableViewModel: NSObject {
         }
     }
     
-    func connectPeripheralWithSelectedRow(indexPath: NSIndexPath) {
+    func connectPeripheralWithSelectedRow(indexPath: NSIndexPath, callBack: (poweredOn: Bool) -> Void) {
         SelectedIndexPath = indexPath
-        
-        guard let initializedTarget = target else {
-            print("viewModel didn't invoke set target")
-            return
-        }
-        let cell = initializedTarget.tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
-            
         if centralManager.state != .PoweredOn {
-            CustomAlertController.showCancelAlertController("Connection error", message: "Please check your device and open Bluetooth", target: initializedTarget)
+            callBack(poweredOn: false)
         } else {
-            if !cell.indicator.isAnimating() {
-                cell.indicator.startAnimating()
-            }
-            if let connectPeripheral = cell.peripheralInfo?.peripheral {
-                centralManager.connectPeripheral(connectPeripheral, options: nil)
-            } else {
-                CustomAlertController.showCancelAlertController("Peripheral error", message: "Cannot find such peripheral", target: initializedTarget)
-            }
+            dispatch_async(dispatch_get_main_queue(), {
+                callBack(poweredOn: true)
+            })
         }
-
+    }
+    
+    func connectToPeripheral(peripheral: CBPeripheral) {
+        centralManager.connectPeripheral(peripheral, options: nil)
+    }
+    
+    //MARK: - CBCentralManager delegate
+    
+    func centralManagerDidUpdateState(central: CBCentralManager) {
+        switch central.state {
+        case .PoweredOn:
+            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+        case .Unsupported:
+            delegate?.differentManagerStatus("Your device doesn't support BLE")
+        case .PoweredOff:
+            delegate?.differentManagerStatus("Please turn on your Bluetooth")
+        case .Unknown:
+            delegate?.differentManagerStatus("Unknown error, please try again")
+        case .Unauthorized:
+            delegate?.differentManagerStatus("Your device is unauthorized to use Bluetooth")
+        default:
+            delegate?.differentManagerStatus("Unknown error, please try again")
+        }
+    }
+    
+    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        
+        //If array contains this peripheral, replace relate object with it due to new RSSI number
+        
+        var index = 0
+        while index < peripheralArray.count {
+            if peripheralArray[index].peripheral == peripheral {
+                peripheralArray[index].RSSI = RSSI
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                delegate?.updateNewTableViewRow(true, indexPath: indexPath)
+                break
+            }
+            index += 1
+        }
+        if index < peripheralArray.count {
+            peripheralArray.append(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
+            let indexPath = NSIndexPath(forRow: peripheralArray.count - 1, inSection: 0)
+            delegate?.updateNewTableViewRow(false, indexPath: indexPath)
+        }
+        
+    }
+    
+    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+        delegate?.didGetResultConnectToPeripheral(true, indexPath: SelectedIndexPath)
+        selectedPeripheralInfo = peripheralArray[SelectedIndexPath.row]
+    }
+    
+    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        delegate?.didGetResultConnectToPeripheral(false, indexPath: SelectedIndexPath)
     }
     
     //MARK: - Selectors
     
     func tableViewRefresh(refreshControl: UIRefreshControl) {
-        guard let initializedTarget = target else {
-            print("viewModel didn't invoke set target")
-            return
-        }
         
         var indexPathArray = [NSIndexPath]()
         for i in 0 ..< peripheralArray.count {
             indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
         }
         peripheralArray.removeAll()
-        
-        initializedTarget.tableView.deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .Right)
+        delegate?.needUpdateTableViewUI(indexPathArray)
         
         if !self.centralManager.isScanning {
             centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])

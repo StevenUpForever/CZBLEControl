@@ -10,7 +10,6 @@
 		65CCAB2C6898415A8DB5C641 /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D4A7522B10524E100AF4C0 /* Pods_CZBLEControl.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */; };
 		AF6E079F1D2655C80007E92F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E079E1D2655C80007E92F /* CustomView.swift */; };
-		AF6E07A11D26593A0007E92F /* BLETableViewCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07A01D26593A0007E92F /* BLETableViewCentralManager.swift */; };
 		AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */; };
 		AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */; };
 		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
@@ -48,7 +47,6 @@
 		A3128F7D57607CC20F307918 /* Pods-CZBLEControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.debug.xcconfig"; sourceTree = "<group>"; };
 		AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewModel.swift; sourceTree = "<group>"; };
 		AF6E079E1D2655C80007E92F /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
-		AF6E07A01D26593A0007E92F /* BLETableViewCentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewCentralManager.swift; sourceTree = "<group>"; };
 		AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewController.swift; sourceTree = "<group>"; };
 		AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */,
-				AF6E07A01D26593A0007E92F /* BLETableViewCentralManager.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -411,7 +408,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF6E07A11D26593A0007E92F /* BLETableViewCentralManager.swift in Sources */,
 				AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */,
 				AF8BDEC11CB8BDE400C49885 /* PopoverViewController.swift in Sources */,
 				AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */,

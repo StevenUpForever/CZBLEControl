@@ -10,7 +10,7 @@ import UIKit
 import CoreBluetooth
 import Crashlytics
 
-class BLETableViewController: UITableViewController {
+class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
     
     let viewModel = BLETableViewModel()
     
@@ -19,7 +19,8 @@ class BLETableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.addTargetForViewModel(self)
+        view.addSubview(viewModel.refresh)
+        viewModel.delegate = self
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
         
@@ -50,7 +51,19 @@ class BLETableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.viewModel.connectPeripheralWithSelectedRow(indexPath)
+        self.viewModel.connectPeripheralWithSelectedRow(indexPath) { [unowned self] (poweredOn) in
+            if !poweredOn {
+                CustomAlertController.showCancelAlertController("Connection error", message: "Please check your device and open Bluetooth", target: self)
+            } else {
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
+                if !cell.indicator.isAnimating() {
+                    cell.indicator.startAnimating()
+                }
+                if let peripheral = cell.peripheralInfo?.peripheral {
+                    self.viewModel.connectToPeripheral(peripheral)
+                }
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
@@ -65,25 +78,59 @@ class BLETableViewController: UITableViewController {
         return 73.0
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //MARK: - custom delegate
+    
+    func didGetResultConnectToPeripheral(success: Bool, indexPath: NSIndexPath) {
+        if success {
+            endIndicatorLoading(indexPath)
+            performSegueWithIdentifier("peripheralControl", sender: self)
+        } else {
+            endIndicatorLoading(indexPath)
+            CustomAlertController.showCancelAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
+        }
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "peripheralControl" {
-//            let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
-//            peripheralVC?.peripheralObj = peripheralObj
-//            peripheralVC?.navigationItem.title = peripheralObj?.name ?? "Name Unavailable"
-//        }
-//    }
+    func needUpdateTableViewUI(indexPaths: [NSIndexPath]) {
+        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
+    }
+    
+    func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath) {
+        if existed {
+            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+//            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+//                cell.loadData(peripheralArray[index])
+//                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+//            }
+        } else {
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+        }
+    }
+    
+    func differentManagerStatus(errorMessage: String) {
+        CustomAlertController.showCancelAlertController("BLE Device error", message: errorMessage, target: self)
+    }
+
+    //MARK: - Other selectors
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "peripheralControl" {
+            let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
+            peripheralVC?.peripheralObj = viewModel.selectedPeripheralInfo?.peripheral
+            peripheralVC?.navigationItem.title = viewModel.selectedPeripheralInfo?.peripheral.name ?? "Name Unavailable"
+        }
+    }
     
     func endIndicatorLoading(indexPath: NSIndexPath) {
-        if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
             if cell.indicator.isAnimating() {
                 cell.indicator.stopAnimating()
             }
         }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
 }
