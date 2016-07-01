@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class BLETableViewCentralManager: NSObject {
+class BLETableViewCentralManager: NSObject, CBCentralManagerDelegate {
     
 //    func centralManagerDidUpdateState(central: CBCentralManager) {
 //        guard let initializedTarget = target else {

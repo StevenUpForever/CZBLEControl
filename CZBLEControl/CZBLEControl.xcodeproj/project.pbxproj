@@ -129,6 +129,22 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		AF6E07A41D2660980007E92F /* Public View */ = {
+			isa = PBXGroup;
+			children = (
+				AF6E079E1D2655C80007E92F /* CustomView.swift */,
+			);
+			name = "Public View";
+			sourceTree = "<group>";
+		};
+		AF6E07A51D2660A40007E92F /* Public Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */,
+			);
+			name = "Public Controller";
+			sourceTree = "<group>";
+		};
 		AF7284AA1CB1F17B00B8D610 /* Peripheral List */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,9 +199,9 @@
 			isa = PBXGroup;
 			children = (
 				AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */,
-				AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */,
 				AF7403B31CD40A84004C98E6 /* ClassExtension.swift */,
-				AF6E079E1D2655C80007E92F /* CustomView.swift */,
+				AF6E07A41D2660980007E92F /* Public View */,
+				AF6E07A51D2660A40007E92F /* Public Controller */,
 				AF7284AA1CB1F17B00B8D610 /* Peripheral List */,
 				AF6E07981D263E4D0007E92F /* Peripheral Detail */,
 				AF8BDEB21CB8628400C49885 /* DetailsControl */,
@@ -545,7 +561,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengzhiJia.CZBLEControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -561,7 +577,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengzhi Jia (LPRD99FQ39)";
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(CONFIGURATION_BUILD_DIR)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ChengzhiJia.CZBLEControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

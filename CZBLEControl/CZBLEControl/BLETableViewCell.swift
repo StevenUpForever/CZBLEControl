@@ -35,7 +35,6 @@ class BLETableViewCell: UITableViewCell {
         
         self.peripheralInfo = info
         
-        self.RSSIView.layer.cornerRadius = self.RSSIView.frame.size.width/2.0
         self.nameLabel.text = info?.peripheral.name == nil ? "Name Unavailable" : info?.peripheral.name
         self.UUIDLabel.text = info?.peripheral.identifier.UUIDString
         
