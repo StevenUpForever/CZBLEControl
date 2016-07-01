@@ -22,7 +22,7 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     override init() {
         centralManager.delegate = self
         
-        refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
+        refresh.addTarget(self, action: #selector(BLETableViewModel.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
     }
     
     func addTargetForViewModel(target: UIViewController) {
@@ -36,6 +36,36 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         } else if !viewWillAppear && centralManager.isScanning {
             centralManager.stopScan()
         }
+    }
+    
+    //MARK: - Selectors
+    
+    func tableViewRefresh(refreshControl: UIRefreshControl) {
+        
+        var indexPathArray = [NSIndexPath]()
+        for i in 0 ..< peripheralArray.count {
+            indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
+        }
+        peripheralArray.removeAll()
+        
+        tableView.deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .Right)
+        
+        if self.centralManager.isScanning == false {
+            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+        }
+        refreshControl.endRefreshing()
+    }
+    
+    //Private methods
+    
+    private func endIndicatorLoading(indexPath: NSIndexPath) {
+        
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+            if cell.indicator.isAnimating() {
+                cell.indicator.stopAnimating()
+            }
+        }
+        
     }
     
     //MARK: - CBCentralManager delegate
@@ -64,26 +94,24 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         
         //If array contains this peripheral, replace relate object with it due to new RSSI number
         
-        if  peripheralArray.contains({ (peripheralElem) -> Bool in
-            peripheralElem.peripheral == peripheral
-        }) {
-            for index in 0 ..< peripheralArray.count {
-                if peripheralArray[index].peripheral == peripheral {
-                    peripheralArray[index].RSSI = RSSI
-                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                    if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-                        cell.loadData(peripheralArray[index])
-                    }
-                    break
+        var index = 0
+        while index < peripheralArray.count {
+            if peripheralArray[index].peripheral == peripheral {
+                peripheralArray[index].RSSI = RSSI
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+                    cell.loadData(peripheralArray[index])
                 }
+                break
             }
-            
-            //If array doesn't contains such a peripheral, append it to array
-        } else {
+            index += 1
+        }
+        if index < peripheralArray.count {
             peripheralArray.append(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
             let indexPath = NSIndexPath(forRow: peripheralArray.count - 1, inSection: 0)
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
+        
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {

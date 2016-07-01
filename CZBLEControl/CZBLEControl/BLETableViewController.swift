@@ -101,32 +101,5 @@ class BLETableViewController: UITableViewController {
             peripheralVC?.navigationItem.title = peripheralObj?.name ?? "Name Unavailable"
         }
     }
-    
-    func tableViewRefresh(refreshControl: UIRefreshControl) {
-        
-        var indexPathArray = [NSIndexPath]()
-        for i in 0 ..< peripheralArray.count {
-            indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
-        }
-        peripheralArray.removeAll()
-        tableView.deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .Right)
-        
-        if self.centralManager.isScanning == false {
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-        }
-        refreshControl.endRefreshing()
-    }
-    
-    //Private methods
-    
-    private func endIndicatorLoading(indexPath: NSIndexPath) {
-        
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-            if cell.indicator.isAnimating() {
-                cell.indicator.stopAnimating()
-            }
-        }
-        
-    }
 
 }
