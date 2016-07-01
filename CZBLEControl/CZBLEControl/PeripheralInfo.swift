@@ -9,25 +9,13 @@
 import UIKit
 import CoreBluetooth
 
-class PeripheralInfo: NSObject {
-    
+struct PeripheralInfo {
     var peripheral: CBPeripheral
     var RSSI: NSNumber
     var adData: [String : AnyObject]
-    
-    required init(peripheral: CBPeripheral, RSSI: NSNumber, adData: [String : AnyObject]) {
-        self.peripheral = peripheral
-        self.RSSI = RSSI
-        self.adData = adData
-        super.init()
-    }
 }
 
-class CharacterInfo: NSObject {
+struct CharacterInfo {
     var serviceObj: CBService
     var characterArray = [CBCharacteristic]()
-    
-    init(service: CBService) {
-        serviceObj = service
-    }
 }

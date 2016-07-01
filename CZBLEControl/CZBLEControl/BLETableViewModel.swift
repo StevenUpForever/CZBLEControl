@@ -14,6 +14,9 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     let centralManager = CBCentralManager()
     let refresh = UIRefreshControl()
     
+    var peripheralArray = [PeripheralInfo]()
+    private var peripheralObj: CBPeripheral?
+    
     private var target: UIViewController?
     
     override init() {
@@ -61,10 +64,9 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         
         //If array contains this peripheral, replace relate object with it due to new RSSI number
         
-        if  peripheralArray.contains({ (blockInfo) -> Bool in
-            blockInfo.peripheral == peripheral
+        if  peripheralArray.contains({ (peripheralElem) -> Bool in
+            peripheralElem.peripheral == peripheral
         }) {
-            
             for index in 0 ..< peripheralArray.count {
                 if peripheralArray[index].peripheral == peripheral {
                     peripheralArray[index].RSSI = RSSI

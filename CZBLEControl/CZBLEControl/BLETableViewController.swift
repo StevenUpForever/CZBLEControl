@@ -12,9 +12,6 @@ import Crashlytics
 
 class BLETableViewController: UITableViewController {
     
-    private var peripheralArray = [PeripheralInfo]()
-    private var peripheralObj: CBPeripheral?
-    
     let viewModel = BLETableViewModel()
     
     var SelectedIndexPath = NSIndexPath()
