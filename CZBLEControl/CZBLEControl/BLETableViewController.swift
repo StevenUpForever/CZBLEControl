@@ -8,12 +8,14 @@
 
 import UIKit
 import CoreBluetooth
+import Crashlytics
 
-class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
+class BLETableViewController: UITableViewController {
     
-    private let centralManager = CBCentralManager()
     private var peripheralArray = [PeripheralInfo]()
     private var peripheralObj: CBPeripheral?
+    
+    let viewModel = BLETableViewModel(target: self)
     
     var SelectedIndexPath = NSIndexPath()
     
@@ -22,13 +24,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        centralManager.delegate = self
-        
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
-        
-        let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
-        self.view.addSubview(refresh)
         
     }
     

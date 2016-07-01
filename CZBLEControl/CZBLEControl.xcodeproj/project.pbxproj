@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		65CCAB2C6898415A8DB5C641 /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D4A7522B10524E100AF4C0 /* Pods_CZBLEControl.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		AF6E07971D263CB40007E92F /* CentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07961D263CB40007E92F /* CentralManagerDelegate.swift */; };
+		AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */; };
 		AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */; };
 		AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */; };
 		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
@@ -43,6 +45,8 @@
 		066ED2A6F8E151CE92CA291E /* Pods-CZBLEControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.release.xcconfig"; sourceTree = "<group>"; };
 		45D4A7522B10524E100AF4C0 /* Pods_CZBLEControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CZBLEControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3128F7D57607CC20F307918 /* Pods-CZBLEControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.debug.xcconfig"; sourceTree = "<group>"; };
+		AF6E07961D263CB40007E92F /* CentralManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManagerDelegate.swift; sourceTree = "<group>"; };
+		AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewModel.swift; sourceTree = "<group>"; };
 		AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewController.swift; sourceTree = "<group>"; };
 		AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
@@ -88,17 +92,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AF7284AA1CB1F17B00B8D610 /* BLE */ = {
+		AF6E07981D263E4D0007E92F /* Peripheral Detail */ = {
+			isa = PBXGroup;
+			children = (
+				AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */,
+				AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */,
+			);
+			name = "Peripheral Detail";
+			sourceTree = "<group>";
+		};
+		AF7284AA1CB1F17B00B8D610 /* Peripheral List */ = {
 			isa = PBXGroup;
 			children = (
 				AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */,
+				AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */,
+				AF6E07961D263CB40007E92F /* CentralManagerDelegate.swift */,
 				AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */,
 				AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */,
-				AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */,
-				AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */,
-				AF8BDEB21CB8628400C49885 /* DetailsControl */,
 			);
-			name = BLE;
+			name = "Peripheral List";
 			sourceTree = "<group>";
 		};
 		AF7403B01CD40776004C98E6 /* Resources */ = {
@@ -147,7 +159,9 @@
 				AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */,
 				AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */,
 				AF7403B31CD40A84004C98E6 /* ClassExtension.swift */,
-				AF7284AA1CB1F17B00B8D610 /* BLE */,
+				AF7284AA1CB1F17B00B8D610 /* Peripheral List */,
+				AF6E07981D263E4D0007E92F /* Peripheral Detail */,
+				AF8BDEB21CB8628400C49885 /* DetailsControl */,
 				AFDA74741CB1EE5800F09BD8 /* Main.storyboard */,
 				AFDA747A1CB1EE5800F09BD8 /* Assets.xcassets */,
 				AFDA747C1CB1EE5800F09BD8 /* LaunchScreen.storyboard */,
@@ -360,6 +374,8 @@
 				AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */,
 				AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */,
 				AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */,
+				AF6E07971D263CB40007E92F /* CentralManagerDelegate.swift in Sources */,
+				AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */,
 				AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */,
 				AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */,
 				AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */,
