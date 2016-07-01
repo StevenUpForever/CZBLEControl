@@ -12,39 +12,55 @@ import CoreBluetooth
 class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     
     let centralManager = CBCentralManager()
+    let refresh = UIRefreshControl()
     
-    init(target: AnyObject) {
+    private var target: UIViewController?
+    
+    override init() {
         centralManager.delegate = self
         
-        let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
-        target.view.addSubview(refresh)
     }
     
-    func scanPeripheralInLifeCycle()
+    func addTargetForViewModel(target: UIViewController) {
+        self.target = target
+        self.target!.view.addSubview(refresh)
+    }
+    
+    func scanPeripheralInLifeCycle(viewWillAppear: Bool) {
+        if viewWillAppear && !centralManager.isScanning {
+            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+        } else if !viewWillAppear && centralManager.isScanning {
+            centralManager.stopScan()
+        }
+    }
     
     //MARK: - CBCentralManager delegate
     
     func centralManagerDidUpdateState(central: CBCentralManager) {
-        
+        guard let initializedTarget = target else {
+            print("viewModel didn't invoke set target")
+        }
         switch central.state {
         case .PoweredOn:
             centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         case .Unsupported:
-            CustomAlertController.showCancelAlertController("Not support", message: "Your device doesn't support BLE", target: self)
+            CustomAlertController.showCancelAlertController("Not support", message: "Your device doesn't support BLE", target: initializedTarget)
         case .PoweredOff:
-            CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
+            CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: initializedTarget)
         case .Unknown:
-            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
+            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: initializedTarget)
         case .Unauthorized:
-            CustomAlertController.showCancelAlertController("Unauthorized", message: "Your device is unauthorized to use Bluetooth low energy", target: self)
+            CustomAlertController.showCancelAlertController("Unauthorized", message: "Your device is unauthorized to use Bluetooth low energy", target: initializedTarget)
         default:
-            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
+            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: initializedTarget)
         }
     }
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        
         //If array contains this peripheral, replace relate object with it due to new RSSI number
+        
         if  peripheralArray.contains({ (blockInfo) -> Bool in
             blockInfo.peripheral == peripheral
         }) {
