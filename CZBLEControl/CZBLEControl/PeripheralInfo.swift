@@ -14,8 +14,3 @@ struct PeripheralInfo {
     var RSSI: NSNumber
     var adData: [String : AnyObject]
 }
-
-struct CharacterInfo {
-    var serviceObj: CBService
-    var characterArray = [CBCharacteristic]()
-}

@@ -11,6 +11,11 @@
 		AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */; };
 		AF6E079F1D2655C80007E92F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E079E1D2655C80007E92F /* CustomView.swift */; };
 		AF6E07A71D27A39D0007E92F /* BLECellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07A61D27A39D0007E92F /* BLECellViewModel.swift */; };
+		AF6E07AA1D28475F0007E92F /* CentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07A91D28475F0007E92F /* CentralManagerDelegate.swift */; };
+		AF6E07AE1D284A440007E92F /* PeripheralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07AD1D284A440007E92F /* PeripheralViewModel.swift */; };
+		AF6E07B01D284A590007E92F /* PeripheralCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07AF1D284A590007E92F /* PeripheralCellViewModel.swift */; };
+		AF6E07B31D284A8B0007E92F /* CharacterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07B21D284A8B0007E92F /* CharacterInfo.swift */; };
+		AF6E07B51D284AE80007E92F /* PeripheralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07B41D284AE80007E92F /* PeripheralDelegate.swift */; };
 		AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */; };
 		AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */; };
 		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
@@ -49,6 +54,11 @@
 		AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewModel.swift; sourceTree = "<group>"; };
 		AF6E079E1D2655C80007E92F /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		AF6E07A61D27A39D0007E92F /* BLECellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLECellViewModel.swift; sourceTree = "<group>"; };
+		AF6E07A91D28475F0007E92F /* CentralManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManagerDelegate.swift; sourceTree = "<group>"; };
+		AF6E07AD1D284A440007E92F /* PeripheralViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralViewModel.swift; sourceTree = "<group>"; };
+		AF6E07AF1D284A590007E92F /* PeripheralCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralCellViewModel.swift; sourceTree = "<group>"; };
+		AF6E07B21D284A8B0007E92F /* CharacterInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterInfo.swift; sourceTree = "<group>"; };
+		AF6E07B41D284AE80007E92F /* PeripheralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralDelegate.swift; sourceTree = "<group>"; };
 		AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewController.swift; sourceTree = "<group>"; };
 		AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
@@ -97,8 +107,9 @@
 		AF6E07981D263E4D0007E92F /* Peripheral Detail */ = {
 			isa = PBXGroup;
 			children = (
-				AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */,
-				AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */,
+				AF6E07AB1D284A220007E92F /* View */,
+				AF6E07AC1D284A300007E92F /* ViewModel */,
+				AF6E07B11D284A660007E92F /* Model */,
 			);
 			name = "Peripheral Detail";
 			sourceTree = "<group>";
@@ -143,6 +154,41 @@
 				AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */,
 			);
 			name = "Public Controller";
+			sourceTree = "<group>";
+		};
+		AF6E07A81D2847430007E92F /* Public Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				AF6E07A91D28475F0007E92F /* CentralManagerDelegate.swift */,
+				AF6E07B41D284AE80007E92F /* PeripheralDelegate.swift */,
+			);
+			name = "Public Delegate";
+			sourceTree = "<group>";
+		};
+		AF6E07AB1D284A220007E92F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */,
+				AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		AF6E07AC1D284A300007E92F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF6E07AD1D284A440007E92F /* PeripheralViewModel.swift */,
+				AF6E07AF1D284A590007E92F /* PeripheralCellViewModel.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		AF6E07B11D284A660007E92F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AF6E07B21D284A8B0007E92F /* CharacterInfo.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		AF7284AA1CB1F17B00B8D610 /* Peripheral List */ = {
@@ -205,6 +251,7 @@
 				AF7284AA1CB1F17B00B8D610 /* Peripheral List */,
 				AF6E07981D263E4D0007E92F /* Peripheral Detail */,
 				AF8BDEB21CB8628400C49885 /* DetailsControl */,
+				AF6E07A81D2847430007E92F /* Public Delegate */,
 				AFDA74741CB1EE5800F09BD8 /* Main.storyboard */,
 				AFDA747A1CB1EE5800F09BD8 /* Assets.xcassets */,
 				AFDA747C1CB1EE5800F09BD8 /* LaunchScreen.storyboard */,
@@ -420,9 +467,14 @@
 				AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */,
 				AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */,
 				AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */,
+				AF6E07AA1D28475F0007E92F /* CentralManagerDelegate.swift in Sources */,
 				AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */,
 				AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */,
+				AF6E07AE1D284A440007E92F /* PeripheralViewModel.swift in Sources */,
 				AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */,
+				AF6E07B01D284A590007E92F /* PeripheralCellViewModel.swift in Sources */,
+				AF6E07B31D284A8B0007E92F /* CharacterInfo.swift in Sources */,
+				AF6E07B51D284AE80007E92F /* PeripheralDelegate.swift in Sources */,
 				AF7403B41CD40A84004C98E6 /* ClassExtension.swift in Sources */,
 				AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */,
 			);

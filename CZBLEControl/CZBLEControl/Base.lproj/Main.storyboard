@@ -441,7 +441,7 @@ Reconnect by top right button or back to choose another device</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAa-aq-uxo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1715" y="73"/>
+            <point key="canvasLocation" x="1840" y="73"/>
         </scene>
     </scenes>
     <resources>
