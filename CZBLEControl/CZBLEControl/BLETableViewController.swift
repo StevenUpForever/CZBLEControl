@@ -96,11 +96,9 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
     
     func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath) {
         if existed {
-            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-//            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-//                cell.loadData(peripheralArray[index])
-//                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-//            }
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+                cell.loadData(viewModel.peripheralArray[indexPath.row])
+            }
         } else {
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }

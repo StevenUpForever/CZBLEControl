@@ -92,7 +92,7 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
             }
             index += 1
         }
-        if index < peripheralArray.count {
+        if peripheralArray.count == 0 || index == peripheralArray.count  {
             peripheralArray.append(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
             let indexPath = NSIndexPath(forRow: peripheralArray.count - 1, inSection: 0)
             delegate?.updateNewTableViewRow(false, indexPath: indexPath)
@@ -101,8 +101,8 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-        delegate?.didGetResultConnectToPeripheral(true, indexPath: SelectedIndexPath)
         selectedPeripheralInfo = peripheralArray[SelectedIndexPath.row]
+        delegate?.didGetResultConnectToPeripheral(true, indexPath: SelectedIndexPath)
     }
     
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
