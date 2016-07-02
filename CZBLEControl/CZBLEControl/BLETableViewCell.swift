@@ -23,6 +23,8 @@ class BLETableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        //Add colored view to show the changes about RSSI number
+        
         self.RSSIView.insertSubview(RSSISubView, belowSubview: rssiNumberLabel)
         // Initialization code
     }
@@ -31,7 +33,11 @@ class BLETableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func loadData() {
+    //Load data to viewMode and UI data from viewModel
+    
+    func loadData(peripheralObj: PeripheralInfo) {
+        
+        viewModel.loadDataFromPeripheralObj(peripheralObj)
         
         self.nameLabel.text = viewModel.nameString
         self.UUIDLabel.text = viewModel.uuidString

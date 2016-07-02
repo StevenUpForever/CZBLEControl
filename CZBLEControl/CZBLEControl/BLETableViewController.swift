@@ -48,8 +48,7 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BLECell", forIndexPath: indexPath) as! BLETableViewCell
-        cell.viewModel.loadDataFromPeripheralObj(viewModel.peripheralArray[indexPath.row])
-        cell.loadData()
+        cell.loadData(viewModel.peripheralArray[indexPath.row])
         return cell
     }
     
@@ -67,6 +66,8 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
         }
     }
     
+    //When deselect the cell, stop the animation of indicator on the deselected cell
+    
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         endIndicatorLoading(indexPath)
     }
@@ -81,6 +82,8 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
     
     //MARK: - custom delegate
     
+    //Delegate to check the state when connect to peripheral and update related UI
+    
     func didGetResultConnectToPeripheral(success: Bool, indexPath: NSIndexPath) {
         if success {
             endIndicatorLoading(indexPath)
@@ -91,20 +94,25 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
         }
     }
     
+    //Delegate when need to delete all cells
+    
     func needUpdateTableViewUI(indexPaths: [NSIndexPath]) {
         tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
     }
     
+    //Delegate to check if need to reload related cell or insert a new cell
+    
     func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath) {
         if existed {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-                cell.viewModel.loadDataFromPeripheralObj(viewModel.peripheralArray[indexPath.row])
-                cell.loadData()
+                cell.loadData(viewModel.peripheralArray[indexPath.row])
             }
         } else {
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
     }
+    
+    //Delegate from CBCentralManager updateState delegate with update related UI
     
     func differentManagerStatus(errorMessage: String) {
         CustomAlertController.showCancelAlertController("BLE Device error", message: errorMessage, target: self)

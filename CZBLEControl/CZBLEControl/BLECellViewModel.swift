@@ -38,7 +38,7 @@ class BLECellViewModel: NSObject {
         let width = RSSIView.frame.size.width
         let height = RSSIView.frame.size.height
         
-        let num = (RSSINum + 100)*2
+        let num = (RSSINum + 100) * 2
         
         if num >= 0 && num <= 25 {
             RSSISubView.frame = CGRectMake(0, height*3/4, width, height/4)

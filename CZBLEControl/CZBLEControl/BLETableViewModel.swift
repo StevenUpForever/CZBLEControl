@@ -63,6 +63,8 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         }
     }
     
+    //Connect peripheral method
+    
     func connectToPeripheral(cellViewModel: BLECellViewModel) {
         guard let peripheral = cellViewModel.peripheral else {
             return
@@ -93,6 +95,8 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
         
         //If array contains this peripheral, replace relate object with it due to new RSSI number
+        
+        //Call related code period every 1.5 seconds and update UI to make better user experience
         
         if NSDate.timeIntervalSinceReferenceDate() - date > 1.5 {
         
