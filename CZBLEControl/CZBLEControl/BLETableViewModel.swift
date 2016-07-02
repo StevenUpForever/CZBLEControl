@@ -29,6 +29,8 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     
     weak var delegate: BLETableViewModelDelegate?
     
+    var date = NSDate.timeIntervalSinceReferenceDate()
+    
     override init() {
         super.init()
         centralManager.delegate = self
@@ -68,6 +70,7 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         case .Unsupported:
             delegate?.differentManagerStatus("Your device doesn't support BLE")
         case .PoweredOff:
+            clearAllPeripherals()
             delegate?.differentManagerStatus("Please turn on your Bluetooth")
         case .Unknown:
             delegate?.differentManagerStatus("Unknown error, please try again")
@@ -82,20 +85,26 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         
         //If array contains this peripheral, replace relate object with it due to new RSSI number
         
-        var index = 0
-        while index < peripheralArray.count {
-            if peripheralArray[index].peripheral == peripheral {
-                peripheralArray[index].RSSI = RSSI
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                delegate?.updateNewTableViewRow(true, indexPath: indexPath)
-                break
+        if NSDate.timeIntervalSinceReferenceDate() - date > 1.5 {
+            
+            var index = 0
+            while index < peripheralArray.count {
+                if peripheralArray[index].peripheral == peripheral {
+                    peripheralArray[index].RSSI = RSSI
+                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                    delegate?.updateNewTableViewRow(true, indexPath: indexPath)
+                    break
+                }
+                index += 1
             }
-            index += 1
-        }
-        if peripheralArray.count == 0 || index == peripheralArray.count  {
-            peripheralArray.append(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
-            let indexPath = NSIndexPath(forRow: peripheralArray.count - 1, inSection: 0)
-            delegate?.updateNewTableViewRow(false, indexPath: indexPath)
+            if peripheralArray.count == 0 || index == peripheralArray.count  {
+                peripheralArray.append(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
+                let indexPath = NSIndexPath(forRow: peripheralArray.count - 1, inSection: 0)
+                delegate?.updateNewTableViewRow(false, indexPath: indexPath)
+            }
+            
+            date = NSDate.timeIntervalSinceReferenceDate()
+            
         }
         
     }
@@ -112,18 +121,21 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     //MARK: - Selectors
     
     func tableViewRefresh(refreshControl: UIRefreshControl) {
+        clearAllPeripherals()
         
+        if !self.centralManager.isScanning {
+            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+        }
+        refreshControl.endRefreshing()
+    }
+    
+    private func clearAllPeripherals() {
         var indexPathArray = [NSIndexPath]()
         for i in 0 ..< peripheralArray.count {
             indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
         }
         peripheralArray.removeAll()
         delegate?.needUpdateTableViewUI(indexPathArray)
-        
-        if !self.centralManager.isScanning {
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-        }
-        refreshControl.endRefreshing()
     }
 
 }
