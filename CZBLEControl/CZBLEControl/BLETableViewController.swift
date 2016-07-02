@@ -26,6 +26,8 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
         
     }
     
+    //Begin/Stop scan peripheral in lifeCycle when the view is appearing or dissappearing
+    
     override func viewWillAppear(animated: Bool) {
         viewModel.scanPeripheralInLifeCycle(true)
     }
@@ -41,17 +43,18 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.peripheralArray.count
+        return viewModel.peripheralArray.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BLECell", forIndexPath: indexPath) as! BLETableViewCell
-        cell.loadData(self.viewModel.peripheralArray[indexPath.row])
+        cell.viewModel.loadDataFromPeripheralObj(viewModel.peripheralArray[indexPath.row])
+        cell.loadData()
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.viewModel.connectPeripheralWithSelectedRow(indexPath) { [unowned self] (poweredOn) in
+        viewModel.connectPeripheralWithSelectedRow(indexPath) { [unowned self] (poweredOn) in
             if !poweredOn {
                 CustomAlertController.showCancelAlertController("Connection error", message: "Please check your device and open Bluetooth", target: self)
             } else {
@@ -59,9 +62,7 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
                 if !cell.indicator.isAnimating() {
                     cell.indicator.startAnimating()
                 }
-                if let peripheral = cell.peripheralInfo?.peripheral {
-                    self.viewModel.connectToPeripheral(peripheral)
-                }
+                self.viewModel.connectToPeripheral(cell.viewModel)
             }
         }
     }
@@ -97,7 +98,8 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
     func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath) {
         if existed {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-                cell.loadData(viewModel.peripheralArray[indexPath.row])
+                cell.viewModel.loadDataFromPeripheralObj(viewModel.peripheralArray[indexPath.row])
+                cell.loadData()
             }
         } else {
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)

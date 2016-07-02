@@ -19,7 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        //Thread wait for 1 second for Lauching screen
+        
         NSThread.sleepForTimeInterval(1.0)
+        
+        //Change navigation title Color and hide back button title
         
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0.0, -80.0), forBarMetrics: .Default)

@@ -9,6 +9,8 @@
 import UIKit
 import CoreBluetooth
 
+//Delegate to send action to BLETableView to update UI
+
 protocol BLETableViewModelDelegate: class {
     func didGetResultConnectToPeripheral(success: Bool, indexPath: NSIndexPath)
     func needUpdateTableViewUI(indexPaths: [NSIndexPath])
@@ -22,7 +24,11 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     
     let refresh = UIRefreshControl()
     
+    //Selected indexPath for selection action
+    
     var SelectedIndexPath = NSIndexPath()
+    
+    //
     
     var peripheralArray = [PeripheralInfo]()
     var selectedPeripheralInfo: PeripheralInfo?
@@ -57,7 +63,10 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         }
     }
     
-    func connectToPeripheral(peripheral: CBPeripheral) {
+    func connectToPeripheral(cellViewModel: BLECellViewModel) {
+        guard let peripheral = cellViewModel.peripheral else {
+            return
+        }
         centralManager.connectPeripheral(peripheral, options: nil)
     }
     
@@ -86,7 +95,7 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         //If array contains this peripheral, replace relate object with it due to new RSSI number
         
         if NSDate.timeIntervalSinceReferenceDate() - date > 1.5 {
-            
+        
             var index = 0
             while index < peripheralArray.count {
                 if peripheralArray[index].peripheral == peripheral {
