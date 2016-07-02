@@ -9,7 +9,13 @@
 import Foundation
 import CoreBluetooth
 
-struct CharacterInfo {
+class CharacterInfo {
     var serviceObj: CBService
+    var uuidString: String
+    
     var characterArray = [CBCharacteristic]()
+    init(service: CBService) {
+        serviceObj = service
+        uuidString = serviceObj.UUID.UUIDString
+    }
 }

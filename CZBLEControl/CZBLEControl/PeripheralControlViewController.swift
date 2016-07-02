@@ -9,13 +9,15 @@
 import UIKit
 import CoreBluetooth
 
-class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+class PeripheralControlViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, peripheralTableViewDelegate {
     
     //IBOutlets
     @IBOutlet weak var uuidLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var connectBarItem: UIBarButtonItem!
+    
+    var selectedIndexPath: NSIndexPath?
     
     let viewModel = PeripheralViewModel()
 
@@ -73,21 +75,21 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     //MARK: - tableView datasource & delegate
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return serviceArray.count
+        return viewModel.serviceArray.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return serviceArray[section].characterArray.count
+        return viewModel.serviceArray[section].characterArray.count
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return serviceArray[section].serviceObj.UUID.UUIDString
+        return viewModel.serviceArray[section].uuidString
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("serviceCell") as! ServiceTableViewCell
-        let character = serviceArray[indexPath.section].characterArray[indexPath.row]
-        cell.loadData(character)
+        let character = viewModel.serviceArray[indexPath.section].characterArray[indexPath.row]
+        cell.loadCellUI(character)
         
         return cell
     }
@@ -97,30 +99,26 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if cellIndexPath == indexPath {
-            return 180.0
-        } else {
-            return 95.0
-        }
+        return selectedIndexPath == indexPath ? 180.0 : 95.0
     }
     
     //MARK: - Selectors
     
     @IBAction func dropDownProcess(sender: AnyObject) {
         let buttonPosition = sender.convertPoint(CGPointZero, toView: tableView)
-        let indexPath = tableView.indexPathForRowAtPoint(buttonPosition)
-        openHiddenSubViewAtIndexPath(indexPath!)
+        if let indexPath = tableView.indexPathForRowAtPoint(buttonPosition) {
+            openHiddenSubViewAtIndexPath(indexPath)
+        }
     }
     
     private func openHiddenSubViewAtIndexPath(indexPath: NSIndexPath) {
-        cellIndexPath = cellIndexPath == indexPath ? nil : indexPath
+        selectedIndexPath = selectedIndexPath == indexPath ? nil : indexPath
         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
     }
     
     @IBAction func connectSelfPeripheral(sender: AnyObject) {
-        serviceArray.removeAll()
+        viewModel.reConnectPeripheral()
         tableView.reloadData()
-        centralManager.connectPeripheral(peripheralObj!, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
     }
     
     override func didReceiveMemoryWarning() {
@@ -160,15 +158,25 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
         }
     }
     
+    //MARK: - custom peripheral delegate
+    
+    func updateTableViewSectionUI(indexSet: NSIndexSet) {
+        tableView.insertSections(indexSet, withRowAnimation: .Left)
+    }
+    
+    func updateTableViewRowUI(indexPaths: [NSIndexPath]) {
+        tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Left)
+    }
+    
     //MARK: - private methods
     
-    private func connectedUI() {
+    func connectedUI() {
         statusLabel.text = "Connected"
         statusLabel.textColor = UIColor.blackColor()
         connectBarItem.enabled = false
     }
     
-    private func disconnectedUI() {
+    func disconnectedUI() {
         statusLabel.text = "Disconnected\nReconnect by top right button or back to choose another device"
         statusLabel.textColor = UIColor.redColor()
         connectBarItem.enabled = true

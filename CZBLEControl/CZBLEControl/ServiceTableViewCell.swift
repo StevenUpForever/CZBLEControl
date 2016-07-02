@@ -16,81 +16,44 @@ class ServiceTableViewCell: UITableViewCell {
     @IBOutlet weak var readButton: UIButton!
     @IBOutlet weak var writeButton: UIButton!
     @IBOutlet weak var notifyButton: UIButton!
-    @IBOutlet weak var descriptorButton: UIButton!
     @IBOutlet weak var buttonCombineView: UIView!
     @IBOutlet weak var writeNoResponseButton: UIButton!
+    
+    let viewModel = PeripheralCellViewModel()
     
     var cellCharacter: CBCharacteristic?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        var ss: UIViewController?
+        if let aa = ss as? PeripheralControlViewController {
+            
+        }
+        
         readButton.enabled = false
         writeButton.enabled = false
         notifyButton.enabled = false
         writeNoResponseButton.enabled = false
         
-        let gradient = CAGradientLayer()
-        gradient.frame = buttonCombineView.bounds
-        gradient.colors = [UIColor.whiteColor().CGColor, UIColor.gradientBlue().CGColor, UIColor.titleBlue().CGColor, UIColor.gradientBlue().CGColor, UIColor.whiteColor().CGColor]
-        buttonCombineView.layer.insertSublayer(gradient, atIndex: 0)
+        viewModel.addGradientToView(buttonCombineView)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    func loadData(character: CBCharacteristic) {
-        cellCharacter = character
-        uuidLabel.text = character.UUID.UUIDString
-        propertyLabel.text = getPropertitesName(character.properties)
-        changeButtonEnable(character.properties)
-    }
-    
-    func getPropertitesName(property: CBCharacteristicProperties) -> String {
+    func loadCellUI(character: CBCharacteristic) {
         
-        var propertyStr = "Propertites:"
+        viewModel.loadCharacter(character) { (notify, read, write, writeNoResponse) in
+            self.notifyButton.enabled = notify
+            self.readButton.enabled = read
+            self.writeButton.enabled = write
+            self.writeNoResponseButton.enabled = writeNoResponse
+        }
         
-        if property.rawValue & CBCharacteristicProperties.Broadcast.rawValue > 0 {
-            propertyStr += " Broadcast"
-        }
-        if property.rawValue & CBCharacteristicProperties.AuthenticatedSignedWrites.rawValue > 0 {
-            propertyStr += " AuthenticatedSignedWrites"
-        }
-        if property.rawValue & CBCharacteristicProperties.ExtendedProperties.rawValue > 0 {
-            propertyStr += " ExtendedProperties"
-        }
-        if property.rawValue & CBCharacteristicProperties.Indicate.rawValue > 0 {
-            propertyStr += " Indicate"
-        }
-        if property.rawValue & CBCharacteristicProperties.IndicateEncryptionRequired.rawValue > 0 {
-            propertyStr += " IndicateEncryptionRequired"
-        }
-        if property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0 {
-            propertyStr += " Notify"
-        }
-        if property.rawValue & CBCharacteristicProperties.NotifyEncryptionRequired.rawValue > 0 {
-            propertyStr += " NotifyEncryptionRequired"
-        }
-        if property.rawValue & CBCharacteristicProperties.Read.rawValue > 0 {
-            propertyStr += " Read"
-        }
-        if property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 {
-            propertyStr += " Write"
-        }
-        if property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 {
-            propertyStr += " WriteWithoutResponse"
-        }
-        return propertyStr
-    }
-    
-    func changeButtonEnable(property: CBCharacteristicProperties) {
-        notifyButton.enabled = property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0 ? true : false
-        readButton.enabled = property.rawValue & CBCharacteristicProperties.Read.rawValue > 0 ? true : false
-        writeButton.enabled = property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 ? true : false
-        writeNoResponseButton.enabled = property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 ? true : false
+        uuidLabel.text = viewModel.uuidString
+        propertyLabel.text = viewModel.propertyString
     }
 
 }

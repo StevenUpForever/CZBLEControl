@@ -15,7 +15,7 @@
 		AF6E07AE1D284A440007E92F /* PeripheralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07AD1D284A440007E92F /* PeripheralViewModel.swift */; };
 		AF6E07B01D284A590007E92F /* PeripheralCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07AF1D284A590007E92F /* PeripheralCellViewModel.swift */; };
 		AF6E07B31D284A8B0007E92F /* CharacterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07B21D284A8B0007E92F /* CharacterInfo.swift */; };
-		AF6E07B51D284AE80007E92F /* PeripheralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07B41D284AE80007E92F /* PeripheralDelegate.swift */; };
+		AF6E07B81D28764F0007E92F /* CentralManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07B71D28764F0007E92F /* CentralManagerFactory.swift */; };
 		AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */; };
 		AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */; };
 		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
@@ -58,7 +58,7 @@
 		AF6E07AD1D284A440007E92F /* PeripheralViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralViewModel.swift; sourceTree = "<group>"; };
 		AF6E07AF1D284A590007E92F /* PeripheralCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralCellViewModel.swift; sourceTree = "<group>"; };
 		AF6E07B21D284A8B0007E92F /* CharacterInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterInfo.swift; sourceTree = "<group>"; };
-		AF6E07B41D284AE80007E92F /* PeripheralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralDelegate.swift; sourceTree = "<group>"; };
+		AF6E07B71D28764F0007E92F /* CentralManagerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManagerFactory.swift; sourceTree = "<group>"; };
 		AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewController.swift; sourceTree = "<group>"; };
 		AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				AF6E07A91D28475F0007E92F /* CentralManagerDelegate.swift */,
-				AF6E07B41D284AE80007E92F /* PeripheralDelegate.swift */,
+				AF6E07B71D28764F0007E92F /* CentralManagerFactory.swift */,
 			);
 			name = "Public Delegate";
 			sourceTree = "<group>";
@@ -472,6 +472,7 @@
 				AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */,
 				AF6E079F1D2655C80007E92F /* CustomView.swift in Sources */,
 				AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */,
+				AF6E07B81D28764F0007E92F /* CentralManagerFactory.swift in Sources */,
 				AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */,
 				AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */,
 				AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */,
@@ -482,7 +483,6 @@
 				AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */,
 				AF6E07B01D284A590007E92F /* PeripheralCellViewModel.swift in Sources */,
 				AF6E07B31D284A8B0007E92F /* CharacterInfo.swift in Sources */,
-				AF6E07B51D284AE80007E92F /* PeripheralDelegate.swift in Sources */,
 				AF7403B41CD40A84004C98E6 /* ClassExtension.swift in Sources */,
 				AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */,
 			);
