@@ -17,81 +17,24 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var connectBarItem: UIBarButtonItem!
     
-    //BLE objects
-    var peripheralObj: CBPeripheral?
-    var centralManager = CBCentralManager()
-    var cellIndexPath: NSIndexPath?
-    
-    //TableView array
-    var serviceArray = [CharacterInfo]()
+    let viewModel = PeripheralViewModel()
 
     //MARK: - viewController lifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        peripheralObj?.delegate = self
-        peripheralObj?.discoverServices(nil)
-        centralManager.delegate = self
+        uuidLabel.text = viewModel.uuidString
         
-        uuidLabel.text = peripheralObj?.identifier.UUIDString
-        
-        switch (peripheralObj?.state)! {
-            
-        case .Connected:
-            
-            statusLabel.text = "Connected"
-            statusLabel.textColor = UIColor.blackColor()
-            connectBarItem.enabled = false
-            
-        case .Disconnected:
-            
-            statusLabel.text = "Disconnected\nReconnect by top right button or back to choose another device"
-            statusLabel.textColor = UIColor.redColor()
-            connectBarItem.enabled = true
-            
-        default:
-            print("Unknow connection status")
+        viewModel.loadUI {[unowned self] (connected) in
+            if connected {
+                self.connectedUI()
+            } else {
+                self.disconnectedUI()
+            }
         }
         
     }
-    
-    //MARK: - peripheral delegate
-    
-//    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
-//        
-//        //If find new service, insert it into peripheral array
-//        if let peripheralServiceArray = peripheral.services {
-//            for service: CBService in peripheralServiceArray {
-//                serviceArray.append(CharacterInfo(service: service))
-//                peripheral.discoverCharacteristics(nil, forService: service)
-//                let indexSet = NSIndexSet(index: serviceArray.count - 1)
-//                tableView.insertSections(indexSet, withRowAnimation: .Left)
-//            }
-//        }
-//        
-//    }
-//    
-//    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
-//        
-//        if let characterArray = service.characteristics {
-//            for character: CBCharacteristic in characterArray {
-//                for info in serviceArray {
-//                    
-//                    if info.serviceObj == service {
-//                        info.characterArray.append(character)
-//                        
-//                        if let sectionNum = serviceArray.indexOf(info) {
-//                            let indexPath = NSIndexPath(forRow: info.characterArray.count - 1, inSection: sectionNum)
-//                            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Left)
-//                        }
-//                        
-//                    }
-//                }
-//            }
-//        }
-//        
-//    }
     
     //MARK - centralManager delegate
     
@@ -215,6 +158,20 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, C
                 }
             }
         }
+    }
+    
+    //MARK: - private methods
+    
+    private func connectedUI() {
+        statusLabel.text = "Connected"
+        statusLabel.textColor = UIColor.blackColor()
+        connectBarItem.enabled = false
+    }
+    
+    private func disconnectedUI() {
+        statusLabel.text = "Disconnected\nReconnect by top right button or back to choose another device"
+        statusLabel.textColor = UIColor.redColor()
+        connectBarItem.enabled = true
     }
     
     

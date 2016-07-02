@@ -191,6 +191,16 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		AF6E07B61D284B270007E92F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */,
+				AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */,
+				AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		AF7284AA1CB1F17B00B8D610 /* Peripheral List */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,9 +223,7 @@
 		AF8BDEB21CB8628400C49885 /* DetailsControl */ = {
 			isa = PBXGroup;
 			children = (
-				AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */,
-				AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */,
-				AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */,
+				AF6E07B61D284B270007E92F /* View */,
 			);
 			name = DetailsControl;
 			sourceTree = "<group>";

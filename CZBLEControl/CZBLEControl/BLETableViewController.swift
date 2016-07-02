@@ -121,11 +121,7 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
     //MARK: - Other selectors
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "peripheralControl" {
-            let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
-            peripheralVC?.peripheralObj = viewModel.selectedPeripheralInfo?.peripheral
-            peripheralVC?.navigationItem.title = viewModel.selectedPeripheralInfo?.peripheral.name ?? "Name Unavailable"
-        }
+        viewModel.pushToPeripheralController(segue)
     }
     
     func endIndicatorLoading(indexPath: NSIndexPath) {

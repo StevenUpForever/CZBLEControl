@@ -72,6 +72,19 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         centralManager.connectPeripheral(peripheral, options: nil)
     }
     
+    //Segue to destination viewController
+    
+    func pushToPeripheralController(segue: UIStoryboardSegue) {
+        if segue.identifier == "peripheralControl" {
+            if let peripheralVC = segue.destinationViewController as? PeripheralControlViewController {
+                if let validPeripheral = selectedPeripheralInfo?.peripheral {
+                    peripheralVC.viewModel.loadBLEObjects(validPeripheral)
+                    peripheralVC.navigationItem.title = validPeripheral.name ?? "Name Unavailable"
+                }
+            }
+        }
+    }
+    
     //MARK: - CBCentralManager delegate
     
     func centralManagerDidUpdateState(central: CBCentralManager) {
@@ -93,8 +106,6 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
     }
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-        
-        //If array contains this peripheral, replace relate object with it due to new RSSI number
         
         //Call related code period every 1.5 seconds and update UI to make better user experience
         
@@ -141,6 +152,8 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
         }
         refreshControl.endRefreshing()
     }
+    
+    //Clear all array elements and call clear UI delegate
     
     private func clearAllPeripherals() {
         var indexPathArray = [NSIndexPath]()
