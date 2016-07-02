@@ -12,67 +12,40 @@ class BLETableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var UUIDLabel: UILabel!
-    @IBOutlet weak var RSSIView: UIView!
+    @IBOutlet weak var RSSIView: CustomView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var rssiNumberLabel: UILabel!
     
-    var peripheralInfo: PeripheralInfo?
+    let viewModel = BLECellViewModel()
     
     let RSSISubView = UIView()
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        //Add colored view to show the changes about RSSI number
+        
         self.RSSIView.insertSubview(RSSISubView, belowSubview: rssiNumberLabel)
-        self.RSSIView.layer.borderWidth = 1.0
-        self.RSSIView.layer.borderColor = UIColor.darkGrayColor().CGColor
         // Initialization code
     }
-    
-    override func layoutSubviews() {
-        self.RSSIView.layer.cornerRadius = self.RSSIView.frame.size.width/2.0
-    }
-    
-    
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func loadData(info: PeripheralInfo?) {
+    //Load data to viewMode and UI data from viewModel
+    
+    func loadData(peripheralObj: PeripheralInfo) {
         
-        self.peripheralInfo = info
+        viewModel.loadDataFromPeripheralObj(peripheralObj)
         
-        self.RSSIView.layer.cornerRadius = self.RSSIView.frame.size.width/2.0
-        self.nameLabel.text = info?.peripheral.name == nil ? "Name Unavailable" : info?.peripheral.name
-        self.UUIDLabel.text = info?.peripheral.identifier.UUIDString
+        self.nameLabel.text = viewModel.nameString
+        self.UUIDLabel.text = viewModel.uuidString
+        self.rssiNumberLabel.text = viewModel.RSSIString
         
-        let RSSINum = info?.RSSI.integerValue ?? 0
-        self.rssiNumberLabel.text = "\(RSSINum)"
-        self.changeRSSIValue((RSSINum + 100)*2)
+        viewModel.changeRSSIValue(RSSIView, RSSISubView: RSSISubView)
         
         self.RSSIView.layoutIfNeeded()
-    }
-    
-    //Change RSSI number shown
-    private func changeRSSIValue(num: Int?) {
-        
-        let width = self.RSSIView.frame.size.width
-        let height = self.RSSIView.frame.size.height
-        
-        if num >= 0 && num <= 25 {
-            self.RSSISubView.frame = CGRectMake(0, height*3/4, width, height/4)
-            self.RSSISubView.backgroundColor = UIColor.customRed()
-        } else if num > 25 && num <= 50 {
-            self.RSSISubView.frame = CGRectMake(0, height/2, width, height/2)
-            self.RSSISubView.backgroundColor = UIColor.customOrange()
-        } else if num > 50 && num <= 75 {
-            self.RSSISubView.frame = CGRectMake(0, height/4, width, height*3/4)
-            self.RSSISubView.backgroundColor = UIColor.customBlue()
-        } else if num > 75 {
-            self.RSSISubView.frame = self.RSSIView.bounds
-            self.RSSISubView.backgroundColor = UIColor.customGreen()
-        }
     }
 
 }

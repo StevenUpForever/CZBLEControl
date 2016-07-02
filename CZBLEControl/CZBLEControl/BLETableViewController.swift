@@ -8,100 +8,32 @@
 
 import UIKit
 import CoreBluetooth
+import Crashlytics
 
-class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
+class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
     
-    private let centralManager = CBCentralManager()
-    private var peripheralArray = [PeripheralInfo]()
-    private var peripheralObj: CBPeripheral?
-    
-    var SelectedIndexPath = NSIndexPath()
+    let viewModel = BLETableViewModel()
     
     //MARK: - viewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        centralManager.delegate = self
+        view.addSubview(viewModel.refresh)
+        viewModel.delegate = self
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
         
-        let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
-        self.view.addSubview(refresh)
-        
     }
     
+    //Begin/Stop scan peripheral in lifeCycle when the view is appearing or dissappearing
+    
     override func viewWillAppear(animated: Bool) {
-        if !centralManager.isScanning {
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-        }
+        viewModel.scanPeripheralInLifeCycle(true)
     }
     
     override func viewWillDisappear(animated: Bool) {
-        if centralManager.isScanning {
-            centralManager.stopScan()
-        }
-    }
-    
-    //MARK: - CBCentralManager delegate
-    
-    func centralManagerDidUpdateState(central: CBCentralManager) {
-        
-        switch central.state {
-        case .PoweredOn:
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-        case .Unsupported:
-            CustomAlertController.showCancelAlertController("Not support", message: "Your device doesn't support BLE", target: self)
-        case .PoweredOff:
-            CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
-        case .Unknown:
-            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
-        case .Unauthorized:
-            CustomAlertController.showCancelAlertController("Unauthorized", message: "Your device is unauthorized to use Bluetooth low energy", target: self)
-        default:
-            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
-        }
-    }
-    
-    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-        //If array contains this peripheral, replace relate object with it due to new RSSI number
-        if  peripheralArray.contains({ (blockInfo) -> Bool in
-            blockInfo.peripheral == peripheral
-        }) {
-            
-            for index in 0 ..< peripheralArray.count {
-                if peripheralArray[index].peripheral == peripheral {
-                    peripheralArray[index].RSSI = RSSI
-                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                    if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-                        cell.loadData(peripheralArray[index])
-                    }
-                    break
-                }
-            }
-            
-            //If array doesn't contains such a peripheral, append it to array
-        } else {
-            peripheralArray.append(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: advertisementData))
-            let indexPath = NSIndexPath(forRow: peripheralArray.count - 1, inSection: 0)
-            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
-        }
-    }
-    
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-        
-        endIndicatorLoading(SelectedIndexPath)
-        
-        peripheralObj = peripheral
-        self.performSegueWithIdentifier("peripheralControl", sender: self)
-    }
-    
-    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        
-        endIndicatorLoading(SelectedIndexPath)
-        
-        CustomAlertController.showCancelAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
+        viewModel.scanPeripheralInLifeCycle(false)
     }
     
     // MARK: - Table view data source
@@ -111,41 +43,33 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.peripheralArray.count
+        return viewModel.peripheralArray.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BLECell", forIndexPath: indexPath) as! BLETableViewCell
-        cell.loadData(self.peripheralArray[indexPath.row])
+        cell.loadData(viewModel.peripheralArray[indexPath.row])
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        SelectedIndexPath = indexPath
-        
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-            
-            if centralManager.state != .PoweredOn {
+        viewModel.connectPeripheralWithSelectedRow(indexPath) { [unowned self] (poweredOn) in
+            if !poweredOn {
                 CustomAlertController.showCancelAlertController("Connection error", message: "Please check your device and open Bluetooth", target: self)
-                
             } else {
-                if cell.indicator.isAnimating() == false {
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
+                if !cell.indicator.isAnimating() {
                     cell.indicator.startAnimating()
                 }
-                if let connectPeripheral = cell.peripheralInfo?.peripheral {
-                    centralManager.connectPeripheral(connectPeripheral, options: nil)
-                } else {
-                    CustomAlertController.showCancelAlertController("Peripheral error", message: "Cannot find such peripheral", target: self)
-                }
+                self.viewModel.connectToPeripheral(cell.viewModel)
             }
         }
     }
     
+    //When deselect the cell, stop the animation of indicator on the deselected cell
+    
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
         endIndicatorLoading(indexPath)
-        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -155,47 +79,62 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 73.0
     }
-
-    //MARK - Selectors
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //MARK: - custom delegate
+    
+    //Delegate to check the state when connect to peripheral and update related UI
+    
+    func didGetResultConnectToPeripheral(success: Bool, indexPath: NSIndexPath) {
+        if success {
+            endIndicatorLoading(indexPath)
+            performSegueWithIdentifier("peripheralControl", sender: self)
+        } else {
+            endIndicatorLoading(indexPath)
+            CustomAlertController.showCancelAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
+        }
     }
+    
+    //Delegate when need to delete all cells
+    
+    func needUpdateTableViewUI(indexPaths: [NSIndexPath]) {
+        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
+    }
+    
+    //Delegate to check if need to reload related cell or insert a new cell
+    
+    func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath) {
+        if existed {
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+                cell.loadData(viewModel.peripheralArray[indexPath.row])
+            }
+        } else {
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+        }
+    }
+    
+    //Delegate from CBCentralManager updateState delegate with update related UI
+    
+    func differentManagerStatus(errorMessage: String) {
+        CustomAlertController.showCancelAlertController("BLE Device error", message: errorMessage, target: self)
+    }
+
+    //MARK: - Other selectors
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "peripheralControl" {
-            let peripheralVC = segue.destinationViewController as? PeripheralControlViewController
-            peripheralVC?.peripheralObj = peripheralObj
-            peripheralVC?.navigationItem.title = peripheralObj?.name ?? "Name Unavailable"
-        }
+        viewModel.pushToPeripheralController(segue)
     }
     
-    func tableViewRefresh(refreshControl: UIRefreshControl) {
-        
-        var indexPathArray = [NSIndexPath]()
-        for i in 0 ..< peripheralArray.count {
-            indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
-        }
-        peripheralArray.removeAll()
-        tableView.deleteRowsAtIndexPaths(indexPathArray, withRowAnimation: .Right)
-        
-        if self.centralManager.isScanning == false {
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-        }
-        refreshControl.endRefreshing()
-    }
-    
-    //Private methods
-    
-    private func endIndicatorLoading(indexPath: NSIndexPath) {
-        
+    func endIndicatorLoading(indexPath: NSIndexPath) {
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
             if cell.indicator.isAnimating() {
                 cell.indicator.stopAnimating()
             }
         }
-        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
 }
