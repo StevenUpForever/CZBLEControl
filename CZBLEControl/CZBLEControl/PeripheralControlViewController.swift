@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class PeripheralControlViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, peripheralTableViewDelegate {
+class PeripheralControlViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CBCentralManagerDelegate, peripheralTableViewDelegate {
     
     //IBOutlets
     @IBOutlet weak var uuidLabel: UILabel!
@@ -17,9 +17,9 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var connectBarItem: UIBarButtonItem!
     
-    var selectedIndexPath: NSIndexPath?
-    
     let viewModel = PeripheralViewModel()
+    
+    var selectedIndexPath: NSIndexPath?
 
     //MARK: - viewController lifeCycle
     
@@ -27,6 +27,9 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         super.viewDidLoad()
         
         uuidLabel.text = viewModel.uuidString
+        viewModel.centralManager.delegate = self
+        viewModel.delegate = self
+        
         
         viewModel.loadUI {[unowned self] (connected) in
             if connected {
@@ -53,12 +56,9 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
         
-        statusLabel.text = "Connected"
-        statusLabel.textColor = UIColor.blackColor()
-        connectBarItem.enabled = false
+        connectedUI()
         
-        peripheralObj = peripheral
-        peripheralObj?.discoverServices(nil)
+        viewModel.scanCharacteristics(peripheral)
     }
     
     func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
@@ -67,9 +67,8 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         CustomAlertController.showCancelAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
-        statusLabel.text = "Disconnected\nReconnect by top right button or back to choose another device"
-        statusLabel.textColor = UIColor.redColor()
-        connectBarItem.enabled = true
+        
+        disconnectedUI()
     }
     
     //MARK: - tableView datasource & delegate
@@ -127,33 +126,16 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if cellIndexPath != nil {
-            if let cell = tableView.cellForRowAtIndexPath(cellIndexPath!) as? ServiceTableViewCell {
+        guard let notNilSelectedIndexPath = selectedIndexPath else {
+            return
+        }
+        if let cell = tableView.cellForRowAtIndexPath(notNilSelectedIndexPath) as? ServiceTableViewCell {
+            
+            //Prepare for destination viewController
+            if let RWNCVC = segue.destinationViewController as? RWNCTableViewController {
                 
-                    //Prepare for destination viewController
-                if let RWNCVC = segue.destinationViewController as? RWNCTableViewController {
-                        
-                RWNCVC.peripheralObj = peripheralObj
-                RWNCVC.characterObj = cell.cellCharacter
-                RWNCVC.navigationItem.title = cell.cellCharacter?.UUID.UUIDString
+                viewModel.segueAction(RWNCVC, cellViewModel: cell.viewModel, segue: segue)
                 
-                switch segue.identifier! {
-                case "read":
-                    RWNCVC.identifier = .read
-                    
-                case "write":
-                    RWNCVC.identifier = .write
-                    
-                case "writeWithoutResponse":
-                    RWNCVC.identifier = .writeWithNoResponse
-                    
-                case "notify":
-                    RWNCVC.identifier = .notify
-                    
-                default:
-                    RWNCVC.identifier = .none
-                    }
-                }
             }
         }
     }

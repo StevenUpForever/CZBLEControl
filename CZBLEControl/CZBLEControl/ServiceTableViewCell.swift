@@ -26,11 +26,6 @@ class ServiceTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        var ss: UIViewController?
-        if let aa = ss as? PeripheralControlViewController {
-            
-        }
-        
         readButton.enabled = false
         writeButton.enabled = false
         notifyButton.enabled = false

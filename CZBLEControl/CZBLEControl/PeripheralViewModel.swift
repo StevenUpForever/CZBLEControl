@@ -25,8 +25,6 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     
     //Public delegate for centralManager and peripheral
     
-    let managerDelegate = CentralManagerDelegate()
-    
     func loadBLEObjects(peripheral: CBPeripheral) {
         
         peripheralObj = peripheral
@@ -34,8 +32,6 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
         peripheralObj?.discoverServices(nil)
         
         uuidString = peripheralObj!.identifier.UUIDString
-        
-        centralManager.delegate = managerDelegate
     }
     
     func loadUI(callBack: (connected: Bool) -> Void) {
@@ -57,6 +53,41 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
             return
         }
         centralManager.connectPeripheral(peripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+    }
+    
+    func scanCharacteristics(peripheral: CBPeripheral) {
+        peripheralObj = peripheral
+        peripheralObj?.discoverServices(nil)
+    }
+    
+    func segueAction(RWNCVC: RWNCTableViewController, cellViewModel: PeripheralCellViewModel, segue: UIStoryboardSegue) {
+        
+        if let identifyStr = segue.identifier {
+            RWNCVC.viewModel.identifier = swichIdentifier(identifyStr)
+        }
+        RWNCVC.viewModel.peripheralObj = peripheralObj
+        RWNCVC.viewModel.characterObj = cellViewModel.characterObj
+        RWNCVC.viewModel.uuidString = cellViewModel.uuidString
+        
+    }
+    
+    private func swichIdentifier(identifier: String) -> RWNCIdentifier {
+        switch identifier {
+        case "read":
+            return .read
+            
+        case "write":
+            return .write
+            
+        case "writeWithoutResponse":
+            return .writeWithNoResponse
+            
+        case "notify":
+            return .notify
+            
+        default:
+            return .none
+        }
     }
     
 //    MARK: - peripheral delegate

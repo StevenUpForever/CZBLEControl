@@ -19,6 +19,8 @@ enum RWNCIdentifier {
 
 class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate, popoverDelegate {
     
+    let viewModel = RWNCViewModel()
+    
     //IBOutlets
     @IBOutlet weak var connectBarItem: UIBarButtonItem!
     @IBOutlet weak var actionBarItem: UIBarButtonItem!
