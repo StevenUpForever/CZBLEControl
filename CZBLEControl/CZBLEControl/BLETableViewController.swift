@@ -10,17 +10,19 @@ import UIKit
 import CoreBluetooth
 import Crashlytics
 
-class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
+class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     
     let viewModel = BLETableViewModel()
+    
+    let refresh = UIRefreshControl()
     
     //MARK: - viewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(viewModel.refresh)
-        viewModel.delegate = self
+        refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), forControlEvents: .ValueChanged)
+        view.addSubview(refresh)
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
         
@@ -29,6 +31,7 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
     //Begin/Stop scan peripheral in lifeCycle when the view is appearing or dissappearing
     
     override func viewWillAppear(animated: Bool) {
+        viewModel.centralManager.delegate = self
         viewModel.scanPeripheralInLifeCycle(true)
     }
     
@@ -80,42 +83,50 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
         return 73.0
     }
     
-    //MARK: - custom delegate
+    //MARK: - CBCentralManager delegate
     
-    //Delegate to check the state when connect to peripheral and update related UI
-    
-    func didGetResultConnectToPeripheral(success: Bool, indexPath: NSIndexPath) {
-        if success {
-            endIndicatorLoading(indexPath)
-            performSegueWithIdentifier("peripheralControl", sender: self)
-        } else {
-            endIndicatorLoading(indexPath)
-            CustomAlertController.showCancelAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
+    func centralManagerDidUpdateState(central: CBCentralManager) {
+        switch central.state {
+        case .PoweredOn:
+            viewModel.scanPeripheral()
+        case .Unsupported:
+            CustomAlertController.showCancelAlertController("BLE Unsupported", message: "Your device doesn't support BLE", target: self)
+        case .PoweredOff:
+            CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
+            viewModel.clearAllPeripherals({[unowned self] (indexPaths) in
+                self.tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
+            })
+        case .Unknown:
+            CustomAlertController.showCancelAlertController("BLE Device error", message: "Unknown error, please try again", target: self)
+        case .Unauthorized:
+            CustomAlertController.showCancelAlertController("BLE unauthorized", message: "Your device is unauthorized to use Bluetooth", target: self)
+        default:
+            CustomAlertController.showCancelAlertController("BLE Device error", message: "Unknown error, please try again", target: self)
         }
     }
     
-    //Delegate when need to delete all cells
-    
-    func needUpdateTableViewUI(indexPaths: [NSIndexPath]) {
-        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
-    }
-    
-    //Delegate to check if need to reload related cell or insert a new cell
-    
-    func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath) {
-        if existed {
-            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-                cell.loadData(viewModel.peripheralArray[indexPath.row])
+    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        
+        viewModel.discoverPeripheral(peripheral, RSSI: RSSI, adData: advertisementData) {[unowned self] (newRow, indexPath) in
+            if newRow {
+                if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+                    cell.loadData(self.viewModel.peripheralArray[indexPath.row])
+                }
+            } else {
+                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
             }
-        } else {
-            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
         }
+        
     }
     
-    //Delegate from CBCentralManager updateState delegate with update related UI
+    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+        endIndicatorLoading(viewModel.replaceSelectedPeripheral())
+        performSegueWithIdentifier("peripheralControl", sender: self)
+    }
     
-    func differentManagerStatus(errorMessage: String) {
-        CustomAlertController.showCancelAlertController("BLE Device error", message: errorMessage, target: self)
+    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        endIndicatorLoading(viewModel.replaceSelectedPeripheral())
+        CustomAlertController.showCancelAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
     }
 
     //MARK: - Other selectors
@@ -130,6 +141,16 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
                 cell.indicator.stopAnimating()
             }
         }
+    }
+    
+    //MARK: - Selectors
+    
+    func tableViewRefresh(refreshControl: UIRefreshControl) {
+        viewModel.clearAllPeripherals {[unowned self] (indexPaths) in
+            self.tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Right)
+        }
+        viewModel.scanPeripheral()
+        refreshControl.endRefreshing()
     }
     
     override func didReceiveMemoryWarning() {

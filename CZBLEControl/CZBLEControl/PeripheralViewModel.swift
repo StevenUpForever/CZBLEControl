@@ -17,7 +17,7 @@ protocol peripheralTableViewDelegate: class {
 class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     
     var peripheralObj: CBPeripheral?
-    var centralManager = CBCentralManager()
+    var centralManager: CBCentralManager?
     
     var uuidString = "UUID unavailable"
     
@@ -25,22 +25,20 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     
     //Public delegate for centralManager and peripheral
     
-    let managerDelegate = CentralManagerDelegate()
-    
-    func loadBLEObjects(peripheral: CBPeripheral) {
+    func loadBLEObjects(peripheral: CBPeripheral, central: CBCentralManager) {
+        
+        centralManager = central
         
         peripheralObj = peripheral
         peripheralObj?.delegate = self
         peripheralObj?.discoverServices(nil)
         
         uuidString = peripheralObj!.identifier.UUIDString
-        
-        centralManager.delegate = managerDelegate
     }
     
     func loadUI(callBack: (connected: Bool) -> Void) {
-        if let state = peripheralObj?.state {
-            switch state {
+        if let peripheral = peripheralObj {
+            switch peripheral.state {
             case .Connected:
                 callBack(connected: true)
                 
@@ -48,15 +46,54 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
                 callBack(connected: false)
                 
             }
+        } else {
+            callBack(connected: false)
         }
     }
     
     func reConnectPeripheral() {
         serviceArray.removeAll()
-        guard let peripheral = peripheralObj else {
-            return
+        if let peripheral = peripheralObj {
+            if let central = centralManager {
+                central.connectPeripheral(peripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+            }
         }
-        centralManager.connectPeripheral(peripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+    }
+    
+    func scanCharacteristics(peripheral: CBPeripheral) {
+        peripheralObj = peripheral
+        peripheralObj?.discoverServices(nil)
+    }
+    
+    func segueAction(RWNCVC: RWNCTableViewController, cellViewModel: PeripheralCellViewModel, segue: UIStoryboardSegue) {
+        
+        if let identifyStr = segue.identifier {
+            RWNCVC.viewModel.identifier = swichIdentifier(identifyStr)
+        }
+        RWNCVC.viewModel.centralManager = centralManager
+        RWNCVC.viewModel.peripheralObj = peripheralObj
+        RWNCVC.viewModel.characterObj = cellViewModel.characterObj
+        RWNCVC.viewModel.uuidString = cellViewModel.uuidString
+        
+    }
+    
+    private func swichIdentifier(identifier: String) -> RWNCIdentifier {
+        switch identifier {
+        case "read":
+            return .read
+            
+        case "write":
+            return .write
+            
+        case "writeWithoutResponse":
+            return .writeWithNoResponse
+            
+        case "notify":
+            return .notify
+            
+        default:
+            return .none
+        }
     }
     
 //    MARK: - peripheral delegate
