@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class PeripheralControlViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CBCentralManagerDelegate, peripheralTableViewDelegate, BLETableViewModelDelegate {
+class PeripheralControlViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CBCentralManagerDelegate, peripheralTableViewDelegate {
     
     //IBOutlets
     @IBOutlet weak var uuidLabel: UILabel!
@@ -28,7 +28,6 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         
         uuidLabel.text = viewModel.uuidString
         viewModel.delegate = self
-        viewModel.centralManager.delegate = self
         
         viewModel.loadUI {[unowned self] (connected) in
             if connected {
@@ -38,6 +37,10 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
             }
         }
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        viewModel.centralManager?.delegate = self
     }
     
     //MARK - centralManager delegate
@@ -67,8 +70,6 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        
-        print("Disconnet")
         CustomAlertController.showCancelAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
         
         disconnectedUI()
@@ -165,20 +166,6 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         statusLabel.text = "Disconnected\nReconnect by top right button or back to choose another device"
         statusLabel.textColor = UIColor.redColor()
         connectBarItem.enabled = true
-    }
-    
-    
-    func differentManagerStatus(errorMessage: String) {
-        
-    }
-    func didGetResultConnectToPeripheral(success: Bool, indexPath: NSIndexPath) {
-        print("Disconnect")
-    }
-    func needUpdateTableViewUI(indexPaths: [NSIndexPath]) {
-        
-    }
-    func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath) {
-        
     }
     
     

@@ -35,6 +35,10 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        viewModel.centralManager?.delegate = self
+    }
+    
     override func viewDidLayoutSubviews() {
         if viewModel.identifier == .none {
             showfallBackAlertController()

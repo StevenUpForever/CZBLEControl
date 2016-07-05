@@ -17,7 +17,7 @@ protocol peripheralTableViewDelegate: class {
 class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     
     var peripheralObj: CBPeripheral?
-    var centralManager = CBCentralManager()
+    var centralManager: CBCentralManager?
     
     var uuidString = "UUID unavailable"
     
@@ -25,7 +25,9 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     
     //Public delegate for centralManager and peripheral
     
-    func loadBLEObjects(peripheral: CBPeripheral) {
+    func loadBLEObjects(peripheral: CBPeripheral, central: CBCentralManager) {
+        
+        centralManager = central
         
         peripheralObj = peripheral
         peripheralObj?.delegate = self
@@ -51,13 +53,11 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     
     func reConnectPeripheral() {
         serviceArray.removeAll()
-        guard let peripheral = peripheralObj else {
-            return
+        if let peripheral = peripheralObj {
+            if let central = centralManager {
+                central.connectPeripheral(peripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+            }
         }
-        if let aaa = peripheralObj {
-            centralManager.connectPeripheral(aaa, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
-        }
-//        centralManager.connectPeripheral(peripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
     }
     
     func scanCharacteristics(peripheral: CBPeripheral) {
@@ -70,6 +70,7 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
         if let identifyStr = segue.identifier {
             RWNCVC.viewModel.identifier = swichIdentifier(identifyStr)
         }
+        RWNCVC.viewModel.centralManager = centralManager
         RWNCVC.viewModel.peripheralObj = peripheralObj
         RWNCVC.viewModel.characterObj = cellViewModel.characterObj
         RWNCVC.viewModel.uuidString = cellViewModel.uuidString

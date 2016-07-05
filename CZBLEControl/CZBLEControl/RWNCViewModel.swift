@@ -26,7 +26,7 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
     
     var identifier: RWNCIdentifier = .none
     
-    var centralManager = CBCentralManager()
+    var centralManager: CBCentralManager?
     
     var peripheralObj: CBPeripheral?
     var characterObj: CBCharacteristic?
@@ -194,11 +194,14 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
     
     func replacePeripheral(peripheral: CBPeripheral) {
         peripheralObj = peripheral
+        peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
     }
     
     func reconnectPeripheral() {
         if let validPeripheral = peripheralObj {
-            centralManager.connectPeripheral(validPeripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+            if let central = centralManager {
+                central.connectPeripheral(validPeripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+            }
         }
     }
     
