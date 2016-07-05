@@ -9,6 +9,14 @@
 import UIKit
 import CoreBluetooth
 
+enum RWNCIdentifier {
+    case read
+    case write
+    case writeWithNoResponse
+    case notify
+    case none
+}
+
 class RWNCViewModel: NSObject {
     
     var identifier: RWNCIdentifier = .none

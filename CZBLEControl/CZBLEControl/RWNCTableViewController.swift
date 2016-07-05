@@ -9,14 +9,6 @@
 import UIKit
 import CoreBluetooth
 
-enum RWNCIdentifier {
-    case read
-    case write
-    case writeWithNoResponse
-    case notify
-    case none
-}
-
 class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate, popoverDelegate {
     
     let viewModel = RWNCViewModel()
@@ -27,15 +19,11 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     
     //Instance Objects
     var centralManager = CBCentralManager()
-    var peripheralObj: CBPeripheral?
-    var characterObj: CBCharacteristic?
     
     //tableView array
     var valueArray = [String]()
     var descriptorArray = [String]()
     var writeValueArray = [String]()
-    
-    var identifier: RWNCIdentifier = .none
 
     //MARK: - viewController lifeCycle
     
@@ -226,13 +214,13 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         peripheralObj = peripheral
     }
     
-    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        CustomAlertController.showCancelAlertController("Peripheral connect error", message: "Connect to device error, please try again", target: self)
-    }
-    
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
         CustomAlertController.showCancelAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
         connectBarItem.enabled = true
+    }
+    
+    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        CustomAlertController.showCancelAlertController("Peripheral connect error", message: "Connect to device error, please try again", target: self)
     }
     
     //MARK: - CBPeripheral delegate
@@ -249,7 +237,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         }
         
         if error != nil {
-            print(error?.description)
+            print(error?.localizedDescription)
         }
         
     }

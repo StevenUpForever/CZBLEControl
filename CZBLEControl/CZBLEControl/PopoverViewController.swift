@@ -31,7 +31,9 @@ class PopoverViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func submitProcess(sender: AnyObject) {
         if valueTextField.text != nil && !valueTextField.text!.isEmpty {
+            
             delegate?.popOverVCWriteValueProcess(valueTextField.text!)
+            
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
             valueTextField.layer.borderWidth = 2.0
