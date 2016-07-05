@@ -40,7 +40,7 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
     var descriptorArray = [String]()
     var writeValueArray = [String]()
     
-    func setUIElement(actionBarItem: UIBarButtonItem, connectBarItem: UIBarButtonItem, fallBackAction: () -> Void, disConnectAction: () -> Void) {
+    func setUIElement(actionBarItem: UIBarButtonItem, fallBackAction: () -> Void) {
         
         if peripheralObj != nil && characterObj != nil {
             
@@ -60,18 +60,6 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
                 
             default:
                 fallBackAction()
-            }
-            
-            switch peripheralObj!.state {
-            case .Connected:
-                connectBarItem.enabled = false
-            case .Disconnected:
-                connectBarItem.enabled = true
-                
-                disConnectAction()
-                
-            default:
-                break
             }
             
             if let descriptorArray = characterObj?.descriptors {
@@ -188,19 +176,6 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
                 default:
                     return "Invalid data type"
                 }
-            }
-        }
-    }
-    
-    func replacePeripheral(peripheral: CBPeripheral) {
-        peripheralObj = peripheral
-        peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
-    }
-    
-    func reconnectPeripheral() {
-        if let validPeripheral = peripheralObj {
-            if let central = centralManager {
-                central.connectPeripheral(validPeripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
             }
         }
     }

@@ -30,10 +30,14 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
         centralManager = central
         
         peripheralObj = peripheral
-        peripheralObj?.delegate = self
+        setPeripheralDelegate()
         peripheralObj?.discoverServices(nil)
         
         uuidString = peripheralObj!.identifier.UUIDString
+    }
+    
+    func setPeripheralDelegate() {
+        peripheralObj?.delegate = self
     }
     
     func loadUI(callBack: (connected: Bool) -> Void) {

@@ -4,7 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Search BLE Devices-->
@@ -396,24 +395,15 @@ Reconnect by top right button or back to choose another device</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="tW5-wf-puc">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Connect" id="rOa-bl-gRa">
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="connectProcess:" destination="tSN-aa-V9m" id="4Xy-K8-Naq"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem id="Oj1-Gv-L8s">
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="actionProcess:" destination="tSN-aa-V9m" id="lv9-Dq-9nX"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" id="Oj1-Gv-L8s">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="actionProcess:" destination="tSN-aa-V9m" id="lv9-Dq-9nX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="actionBarItem" destination="Oj1-Gv-L8s" id="nL2-GK-gI2"/>
-                        <outlet property="connectBarItem" destination="rOa-bl-gRa" id="ExE-WY-nhs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yC9-Bp-WPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
