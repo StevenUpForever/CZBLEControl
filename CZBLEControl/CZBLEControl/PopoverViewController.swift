@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol popoverDelegate {
+protocol popoverDelegate: class {
     func popOverVCWriteValueProcess(input: String)
 }
 
