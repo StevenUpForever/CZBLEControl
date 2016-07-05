@@ -11,11 +11,11 @@ import CoreBluetooth
 
 //Delegate to send action to BLETableView to update UI
 
-protocol BLETableViewModelDelegate: class {
+@objc protocol BLETableViewModelDelegate: class {
+    func differentManagerStatus(errorMessage: String)
     func didGetResultConnectToPeripheral(success: Bool, indexPath: NSIndexPath)
     func needUpdateTableViewUI(indexPaths: [NSIndexPath])
     func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath)
-    func differentManagerStatus(errorMessage: String)
 }
 
 class BLETableViewModel: NSObject, CBCentralManagerDelegate {

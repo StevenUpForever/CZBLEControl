@@ -115,7 +115,11 @@ class BLETableViewController: UITableViewController, BLETableViewModelDelegate {
     //Delegate from CBCentralManager updateState delegate with update related UI
     
     func differentManagerStatus(errorMessage: String) {
-        CustomAlertController.showCancelAlertController("BLE Device error", message: errorMessage, target: self)
+        if let nav = self.navigationController {
+            CustomAlertController.showCancelAlertControllerWithBlock("BLE Device error", message: errorMessage, target: nav, actionHandler: { (action) in
+                nav.popToRootViewControllerAnimated(true)
+            })
+        }
     }
 
     //MARK: - Other selectors

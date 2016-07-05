@@ -337,16 +337,8 @@ Reconnect by top right button or back to choose another device</string>
                             <constraint firstItem="SyM-UZ-FKF" firstAttribute="top" secondItem="1VJ-00-LTm" secondAttribute="bottom" constant="8" id="x1v-Nb-UNB"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="xdb-9D-5Bx">
-                        <barButtonItem key="rightBarButtonItem" title="Connect" id="Z2U-kR-9iC">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="connectSelfPeripheral:" destination="WcB-xk-h5K" id="QG0-KI-Pfr"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="xdb-9D-5Bx"/>
                     <connections>
-                        <outlet property="connectBarItem" destination="Z2U-kR-9iC" id="p6Y-0L-oie"/>
                         <outlet property="statusLabel" destination="J8W-h2-8Fy" id="J1D-vW-Pr9"/>
                         <outlet property="tableView" destination="SyM-UZ-FKF" id="zYJ-nX-fq2"/>
                         <outlet property="uuidLabel" destination="5Km-4B-vTl" id="7cN-ha-QpA"/>

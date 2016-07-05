@@ -22,7 +22,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.centralManager.delegate = self
+//        viewModel.centralManager.delegate = self
         viewModel.delegate = self
         
         viewModel.setUIElement( actionBarItem, connectBarItem: connectBarItem, fallBackAction: {[unowned self] in

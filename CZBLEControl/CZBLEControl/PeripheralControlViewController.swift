@@ -27,9 +27,8 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         super.viewDidLoad()
         
         uuidLabel.text = viewModel.uuidString
-        viewModel.centralManager.delegate = self
         viewModel.delegate = self
-        
+        viewModel.centralManager.delegate = self
         
         viewModel.loadUI {[unowned self] (connected) in
             if connected {
@@ -48,7 +47,9 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         case .PoweredOn:
             break
         case .PoweredOff:
-            CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
+            CustomAlertController.showCancelAlertControllerWithBlock("BLE turned off", message: "Turn on your Bluetooth, going back", target: self, actionHandler: { (action) in
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            })
         default:
             CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
         }
@@ -66,6 +67,8 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+        
+        print("Disconnet")
         CustomAlertController.showCancelAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
         
         disconnectedUI()
