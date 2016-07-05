@@ -35,8 +35,8 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     }
     
     func loadUI(callBack: (connected: Bool) -> Void) {
-        if let state = peripheralObj?.state {
-            switch state {
+        if let peripheral = peripheralObj {
+            switch peripheral.state {
             case .Connected:
                 callBack(connected: true)
                 
@@ -44,6 +44,8 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
                 callBack(connected: false)
                 
             }
+        } else {
+            callBack(connected: false)
         }
     }
     
@@ -52,7 +54,10 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
         guard let peripheral = peripheralObj else {
             return
         }
-        centralManager.connectPeripheral(peripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+        if let aaa = peripheralObj {
+            centralManager.connectPeripheral(aaa, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+        }
+//        centralManager.connectPeripheral(peripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
     }
     
     func scanCharacteristics(peripheral: CBPeripheral) {

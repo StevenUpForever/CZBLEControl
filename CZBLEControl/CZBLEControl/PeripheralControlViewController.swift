@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class PeripheralControlViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CBCentralManagerDelegate, peripheralTableViewDelegate {
+class PeripheralControlViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CBCentralManagerDelegate, peripheralTableViewDelegate, BLETableViewModelDelegate {
     
     //IBOutlets
     @IBOutlet weak var uuidLabel: UILabel!
@@ -165,6 +165,20 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         statusLabel.text = "Disconnected\nReconnect by top right button or back to choose another device"
         statusLabel.textColor = UIColor.redColor()
         connectBarItem.enabled = true
+    }
+    
+    
+    func differentManagerStatus(errorMessage: String) {
+        
+    }
+    func didGetResultConnectToPeripheral(success: Bool, indexPath: NSIndexPath) {
+        print("Disconnect")
+    }
+    func needUpdateTableViewUI(indexPaths: [NSIndexPath]) {
+        
+    }
+    func updateNewTableViewRow(existed: Bool, indexPath: NSIndexPath) {
+        
     }
     
     

@@ -79,6 +79,7 @@ class BLETableViewModel: NSObject, CBCentralManagerDelegate {
             if let peripheralVC = segue.destinationViewController as? PeripheralControlViewController {
                 if let validPeripheral = selectedPeripheralInfo?.peripheral {
                     peripheralVC.viewModel.loadBLEObjects(validPeripheral)
+                    peripheralVC.viewModel.centralManager = centralManager
                     peripheralVC.navigationItem.title = validPeripheral.name ?? "Name Unavailable"
                 }
             }
