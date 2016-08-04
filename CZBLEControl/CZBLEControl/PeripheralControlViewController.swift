@@ -29,6 +29,12 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         uuidLabel.text = viewModel.uuidString
         viewModel.delegate = self
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        viewModel.centralManager?.delegate = self
+        viewModel.setPeripheralDelegate()
+        
         viewModel.loadUI {[unowned self] (connected) in
             if connected {
                 self.connectedUI()
@@ -37,10 +43,6 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
             }
         }
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        viewModel.centralManager?.delegate = self
     }
     
     //MARK - centralManager delegate

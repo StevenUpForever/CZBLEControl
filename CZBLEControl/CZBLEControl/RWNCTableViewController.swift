@@ -14,7 +14,6 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     let viewModel = RWNCViewModel()
     
     //IBOutlets
-    @IBOutlet weak var connectBarItem: UIBarButtonItem!
     @IBOutlet weak var actionBarItem: UIBarButtonItem!
 
     //MARK: - viewController lifeCycle
@@ -22,15 +21,12 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        viewModel.centralManager.delegate = self
         viewModel.delegate = self
         
-        viewModel.setUIElement( actionBarItem, connectBarItem: connectBarItem, fallBackAction: {[unowned self] in
-            
+        navigationItem.title = viewModel.uuidString
+        
+        viewModel.setUIElement(actionBarItem) { 
             self.showfallBackAlertController()
-            
-            }) { 
-                CustomAlertController.showCancelAlertController("Peripheral not connected", message: "Peripheral is disconnected, please connect with refresh button", target: self)
         }
         
     }
@@ -84,25 +80,18 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         }
     }
     
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-        connectBarItem.enabled = false
-        viewModel.replacePeripheral(peripheral)
-    }
-    
     func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        CustomAlertController.showCancelAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
-        connectBarItem.enabled = true
-    }
-    
-    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        CustomAlertController.showCancelAlertController("Peripheral connect error", message: "Connect to device error, please try again", target: self)
+        let alertController = UIAlertController(title: "Peripheral disconnected", message: "Fallback or save your data", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "back", style: .Default, handler: { (action) in
+            if let nav = self.navigationController {
+                nav.popViewControllerAnimated(true)
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "Stay", style: .Cancel, handler: nil))
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     //MARK: - IBActions and Selectors
-    
-    @IBAction func connectProcess(sender: AnyObject) {
-        viewModel.reconnectPeripheral()
-    }
     
     @IBAction func actionProcess(sender: UIBarButtonItem) {
         viewModel.actionButtonProcess(sender, target: self)
