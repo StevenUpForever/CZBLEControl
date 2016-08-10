@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pz-xa-ckd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pz-xa-ckd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Search BLE Devices-->
@@ -11,15 +12,15 @@
             <objects>
                 <tableViewController id="OSP-Jr-g2x" customClass="BLETableViewController" customModule="CZBLEControl" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="28" sectionFooterHeight="28" id="ffG-9J-hja">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BLECell" rowHeight="73" id="dk7-C8-C2s" customClass="BLETableViewCell" customModule="CZBLEControl" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="73"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dk7-C8-C2s" id="LQo-cB-Nen">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="72.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="72.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ek-5f-7A7">
@@ -29,11 +30,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MSS-l8-3u2">
-                                            <rect key="frame" x="572" y="27" width="20" height="20"/>
+                                            <rect key="frame" x="347" y="27" width="20" height="20"/>
                                             <color key="color" red="0.30980392159999998" green="0.76470588240000004" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbX-ww-fV0" customClass="CustomView" customModule="CZBLEControl" customModuleProvider="target">
-                                            <rect key="frame" x="514" y="12" width="50" height="50"/>
+                                            <rect key="frame" x="289" y="12" width="50" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TXO-26-Fd7">
                                                     <rect key="frame" x="6" y="16" width="38" height="18"/>
@@ -60,7 +61,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSSI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKE-Se-fun">
-                                            <rect key="frame" x="474" y="27" width="32" height="18"/>
+                                            <rect key="frame" x="249" y="27" width="32" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="32" id="Sqf-K4-wLZ"/>
                                             </constraints>
@@ -69,7 +70,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usK-Nw-UW2">
-                                            <rect key="frame" x="8" y="38" width="441" height="18"/>
+                                            <rect key="frame" x="8" y="38" width="216" height="18"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -124,35 +125,35 @@
                         <viewControllerLayoutGuide type="bottom" id="JRE-NO-0Dj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rhe-AY-JWq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peripheral UUID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbp-Hi-4Vg">
-                                <rect key="frame" x="20" y="72" width="126" height="21"/>
+                                <rect key="frame" x="16" y="72" width="126" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Km-4B-vTl">
-                                <rect key="frame" x="20" y="101" width="37" height="18"/>
+                                <rect key="frame" x="16" y="101" width="37" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jty-Mp-Pdk">
-                                <rect key="frame" x="20" y="139" width="51" height="21"/>
+                                <rect key="frame" x="16" y="139" width="51" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Services" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1VJ-00-LTm">
-                                <rect key="frame" x="20" y="242" width="68" height="21"/>
+                                <rect key="frame" x="16" y="242" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8W-h2-8Fy">
-                                <rect key="frame" x="20" y="168" width="560" height="54"/>
+                                <rect key="frame" x="16" y="168" width="343" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="bcr-Bd-hb1"/>
                                 </constraints>
@@ -163,14 +164,14 @@ Reconnect by top right button or back to choose another device</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SyM-UZ-FKF">
-                                <rect key="frame" x="0.0" y="271" width="600" height="329"/>
+                                <rect key="frame" x="0.0" y="271" width="375" height="396"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="serviceCell" rowHeight="180" id="YNh-bs-K8x" customClass="ServiceTableViewCell" customModule="CZBLEControl" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="180"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YNh-bs-K8x" id="NdH-s2-BeZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="179.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUID label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNn-X5-Gan">
@@ -189,7 +190,7 @@ Reconnect by top right button or back to choose another device</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J61-76-p3H">
-                                                    <rect key="frame" x="557" y="49" width="35" height="35"/>
+                                                    <rect key="frame" x="332" y="49" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="Ol1-F9-2xi"/>
                                                         <constraint firstAttribute="width" constant="35" id="jxW-2y-ADD"/>
@@ -200,29 +201,29 @@ Reconnect by top right button or back to choose another device</string>
                                                     </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54O-l5-QlJ">
-                                                    <rect key="frame" x="0.0" y="92" width="600" height="87.5"/>
+                                                    <rect key="frame" x="0.0" y="92" width="375" height="87.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duY-d7-Hwu">
-                                                            <rect key="frame" x="105.5" y="55" width="29" height="15"/>
+                                                            <rect key="frame" x="60.5" y="55" width="29" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfR-ln-c85">
-                                                            <rect key="frame" x="224.5" y="55" width="30" height="15"/>
+                                                            <rect key="frame" x="134.5" y="55" width="30" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFA-cy-i6s">
-                                                            <rect key="frame" x="102.5" y="12" width="35" height="35"/>
+                                                            <rect key="frame" x="57.5" y="12" width="35" height="35"/>
                                                             <state key="normal" image="read"/>
                                                             <connections>
                                                                 <segue destination="tSN-aa-V9m" kind="show" identifier="read" id="e1W-Nf-ia7"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5i-3E-ECh">
-                                                            <rect key="frame" x="462.5" y="12" width="35" height="35"/>
+                                                            <rect key="frame" x="282.5" y="12" width="35" height="35"/>
                                                             <state key="normal" image="notify">
                                                                 <color key="titleColor" red="0.30980392159999998" green="0.76470588240000004" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
@@ -231,19 +232,19 @@ Reconnect by top right button or back to choose another device</string>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLb-Mc-8jm">
-                                                            <rect key="frame" x="342.5" y="12" width="35" height="35"/>
+                                                            <rect key="frame" x="207.5" y="12" width="35" height="35"/>
                                                             <state key="normal" image="writeWithoutResponse"/>
                                                             <connections>
                                                                 <segue destination="tSN-aa-V9m" kind="show" identifier="writeWithoutResponse" id="2LF-CJ-rgc"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="W/NoResp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFd-Dw-kbv">
-                                                            <rect key="frame" x="330.5" y="55" width="59" height="15"/>
+                                                            <rect key="frame" x="195.5" y="55" width="59" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-is-Of4">
-                                                            <rect key="frame" x="222.5" y="12" width="35" height="35"/>
+                                                            <rect key="frame" x="132.5" y="12" width="35" height="35"/>
                                                             <state key="normal" image="write">
                                                                 <color key="titleColor" red="0.80784313725490198" green="0.96470588235294119" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
@@ -252,7 +253,7 @@ Reconnect by top right button or back to choose another device</string>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLx-Hm-grf">
-                                                            <rect key="frame" x="463.5" y="55" width="34" height="15"/>
+                                                            <rect key="frame" x="283.5" y="55" width="34" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -360,15 +361,15 @@ Reconnect by top right button or back to choose another device</string>
             <objects>
                 <tableViewController id="tSN-aa-V9m" customClass="RWNCTableViewController" customModule="CZBLEControl" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="snq-ip-uje">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="cvi-8a-wAl" detailTextLabel="u72-K3-iuJ" style="IBUITableViewCellStyleSubtitle" id="wGM-ra-jFh">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wGM-ra-jFh" id="6Kh-5x-KVB">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cvi-8a-wAl">
@@ -395,26 +396,32 @@ Reconnect by top right button or back to choose another device</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="tW5-wf-puc">
-                        <barButtonItem key="rightBarButtonItem" id="Oj1-Gv-L8s">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="actionProcess:" destination="tSN-aa-V9m" id="lv9-Dq-9nX"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" id="vnh-N2-cXG">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="actionProcess:" destination="tSN-aa-V9m" id="887-7s-PsY"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Save" id="EEm-Pk-d23">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="actionBarItem" destination="Oj1-Gv-L8s" id="nL2-GK-gI2"/>
+                        <outlet property="actionBarItem" destination="vnh-N2-cXG" id="ATV-zu-u6g"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yC9-Bp-WPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3189" y="788"/>
+            <point key="canvasLocation" x="3188.5" y="853.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bLq-rO-XSd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9pz-xa-ckd" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k6C-hN-ttL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

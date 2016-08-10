@@ -34,6 +34,7 @@
 		AFDA74941CB1EE6600F09BD8 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AFDA74931CB1EE6600F09BD8 /* Podfile */; };
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
 		B2674D901D5A7A3F00BCC441 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */; };
+		B2674D931D5A9A9300BCC441 /* GoogleDriveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */; };
 		F166EA52CF9A46DB5586816B /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282D07E11D04929118FA4303 /* Pods_CZBLEControl.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		AFDA74931CB1EE6600F09BD8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModel.swift; sourceTree = "<group>"; };
 		B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDriveManager.swift; sourceTree = "<group>"; };
 		E1EB2B8A0E5D5F15FDA3D249 /* Pods-CZBLEControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -225,6 +227,7 @@
 			children = (
 				AF6E07B61D284B270007E92F /* View */,
 				AFE578051D2B1B5300DFED23 /* ViewModel */,
+				B2674D911D5A9A5100BCC441 /* Data Persistence */,
 			);
 			name = DetailsControl;
 			sourceTree = "<group>";
@@ -290,9 +293,17 @@
 		B2674D8E1D5A7A2500BCC441 /* Public Model */ = {
 			isa = PBXGroup;
 			children = (
-				B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */,
 			);
 			name = "Public Model";
+			sourceTree = "<group>";
+		};
+		B2674D911D5A9A5100BCC441 /* Data Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */,
+				B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */,
+			);
+			name = "Data Persistence";
 			sourceTree = "<group>";
 		};
 		C70898AF65AABA5604E6720E /* Frameworks */ = {
@@ -479,6 +490,7 @@
 				AF6E07A71D27A39D0007E92F /* BLECellViewModel.swift in Sources */,
 				B2674D901D5A7A3F00BCC441 /* CoreDataManager.swift in Sources */,
 				AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */,
+				B2674D931D5A9A9300BCC441 /* GoogleDriveManager.swift in Sources */,
 				AF6E079F1D2655C80007E92F /* CustomView.swift in Sources */,
 				AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */,
 				AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */,
