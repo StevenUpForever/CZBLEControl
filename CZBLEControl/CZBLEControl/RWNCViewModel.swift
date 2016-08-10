@@ -56,6 +56,7 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
                 
             case .notify:
                 peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
+                actionBarItem.title = nil
                 actionBarItem.image = UIImage(named: "unnotifyItem")
                 
             default:
