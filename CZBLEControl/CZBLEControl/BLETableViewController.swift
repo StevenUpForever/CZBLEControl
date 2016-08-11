@@ -56,15 +56,17 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        viewModel.connectPeripheralWithSelectedRow(indexPath) { [unowned self] (poweredOn) in
-            if !poweredOn {
-                CustomAlertController.showCancelAlertController("Connection error", message: "Please check your device and open Bluetooth", target: self)
-            } else {
-                let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
-                if !cell.indicator.isAnimating() {
-                    cell.indicator.startAnimating()
+        viewModel.connectPeripheralWithSelectedRow(indexPath) { [weak self] (poweredOn) in
+            if let strongSelf = self {
+                if !poweredOn {
+                    CustomAlertController.showCancelAlertController("Connection error", message: "Please check your device and open Bluetooth", target: strongSelf)
+                } else {
+                    let cell = tableView.cellForRowAtIndexPath(indexPath) as! BLETableViewCell
+                    if !cell.indicator.isAnimating() {
+                        cell.indicator.startAnimating()
+                    }
+                    strongSelf.viewModel.connectToPeripheral(cell.viewModel)
                 }
-                self.viewModel.connectToPeripheral(cell.viewModel)
             }
         }
     }
@@ -107,13 +109,15 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
         
-        viewModel.discoverPeripheral(peripheral, RSSI: RSSI, adData: advertisementData) {[unowned self] (newRow, indexPath) in
-            if newRow {
-                if let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
-                    cell.loadData(self.viewModel.peripheralArray[indexPath.row])
+        viewModel.discoverPeripheral(peripheral, RSSI: RSSI, adData: advertisementData) {[weak self] (newRow, indexPath) in
+            if let strongSelf = self {
+                if newRow {
+                    if let cell = strongSelf.tableView.cellForRowAtIndexPath(indexPath) as? BLETableViewCell {
+                        cell.loadData(strongSelf.viewModel.peripheralArray[indexPath.row])
+                    }
+                } else {
+                    strongSelf.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
                 }
-            } else {
-                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
             }
         }
         

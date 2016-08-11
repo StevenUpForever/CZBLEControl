@@ -21,9 +21,9 @@ class GoogleDriveManager: NSObject {
         if auth.canAuthorize {
             
         } else {
-            let authVC = GTMOAuth2ViewControllerTouch(scope: scopes, clientID: kClientId, clientSecret: nil, keychainItemName: kKeyChainItemName, completionHandler: { (GTAuthVCTouch, GTAuthAuthorization, error) in
-                <#code#>
-            })
+//            let authVC = GTMOAuth2ViewControllerTouch(scope: scopes, clientID: kClientId, clientSecret: nil, keychainItemName: kKeyChainItemName, completionHandler: { (GTAuthVCTouch, GTAuthAuthorization, error) in
+//                
+//            })
         }
 
     }
