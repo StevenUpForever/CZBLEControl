@@ -109,7 +109,9 @@ class BLETableViewModel: NSObject {
     }
     
     func replaceSelectedPeripheral() -> NSIndexPath {
-        selectedPeripheralInfo = peripheralArray[SelectedIndexPath.row]
+        if SelectedIndexPath.row < peripheralArray.count {
+            selectedPeripheralInfo = peripheralArray[SelectedIndexPath.row]
+        }
         return SelectedIndexPath
     }
     
