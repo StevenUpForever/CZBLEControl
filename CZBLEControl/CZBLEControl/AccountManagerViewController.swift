@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwiftyDropbox
 
-class AccountManagerViewController: UIViewController {
+class AccountManagerViewController: UIViewController, dropboxDelegate {
 
     @IBOutlet weak var googleDriveLabel: UILabel!
     @IBOutlet weak var dropBoxLabel: UILabel!
@@ -19,6 +20,7 @@ class AccountManagerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dropBoxManager.delegate = self
         changeLabelState(self.googleDriveLabel, success: googleDriveManager.isAuthorized())
         changeLabelState(self.dropBoxLabel, success: dropBoxManager.isAuthorized())
     }
@@ -50,11 +52,22 @@ class AccountManagerViewController: UIViewController {
     }
     
     @IBAction func dropBoxAction(sender: UITapGestureRecognizer) {
-        if !dropBoxManager.isAuthorized() {
-            dropBoxManager.deauthorizeUser()
+        if dropBoxManager.isAuthorized() {
+            CustomAlertController.showChooseAlertControllerWithBlock("Are you sure to logoff Dropbox account?", message: nil, target: self, actionHandler: { (action) in
+                self.dropBoxManager.deauthorizeUser()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.changeLabelState(self.dropBoxLabel, success: false)
+                })
+            })
         } else {
             dropBoxManager.authorizeUser(self)
         }
+    }
+    
+    //MARK: delegate
+    
+    func didSuccessfullyAuthorizeUser(token: DropboxAccessToken) {
+        changeLabelState(self.dropBoxLabel, success: true)
     }
     
     private func changeLabelState(sender: UILabel, success:Bool) {

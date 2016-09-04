@@ -9,15 +9,13 @@
 import UIKit
 import SwiftyDropbox
 
+protocol dropboxDelegate: class {
+    func didSuccessfullyAuthorizeUser(token: DropboxAccessToken)
+}
+
 class DropBoxManager: NSObject {
-//    
-//    func authorizeUser(viewControllerTarget: UIViewController, completionHandler: (authorizeSuccess: Bool) -> Void) {
-//        if Dropbox.authorizedClient != nil {
-//            completionHandler(authorizeSuccess: true)
-//        } else {
-//            Dropbox.authorizeFromController(viewControllerTarget)
-//        }
-//    }
+    
+    weak var delegate: dropboxDelegate?
     
     static let sharedManager: DropBoxManager = {
         let manager = DropBoxManager()
@@ -26,6 +24,7 @@ class DropBoxManager: NSObject {
     
     func authorizeUser(viewControllerTarget: UIViewController) {
         Dropbox.authorizeFromController(viewControllerTarget)
+        
     }
     
     func deauthorizeUser() {

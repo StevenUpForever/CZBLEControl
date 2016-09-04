@@ -35,6 +35,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(app: UIApplication, openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+        
+        if let authResult = Dropbox.handleRedirectURL(url) {
+            switch authResult {
+            case .Success(let token):
+                DropBoxManager.sharedManager.delegate?.didSuccessfullyAuthorizeUser(token)
+                print("Success! User is logged into Dropbox with token: \(token)")
+            case .Cancel:
+                print("Authorization flow was manually canceled by user.")
+            case .Error(let error, let description):
+                print("Error \(error): \(description)")
+            }
+        }
+        
+        return false
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
