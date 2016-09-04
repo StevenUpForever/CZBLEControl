@@ -12,6 +12,13 @@ import GTMOAuth2
 
 class GoogleDriveManager: NSObject {
     
+    static let sharedServiceDrive: GTLServiceDrive = {
+        let serviceDrive = GTLServiceDrive()
+        serviceDrive.shouldFetchNextPages = true
+        serviceDrive.retryEnabled = true
+        return serviceDrive
+    }()
+    
     let kKeyChainItemName = "CZBLEControl Google Drive"
     let kClientId = "628215016696-m3b5glkere874v5es45os8mfr23conhd.apps.googleusercontent.com"
     let scopes = "https://www.googleapis.com/auth/drive.file"
@@ -19,6 +26,10 @@ class GoogleDriveManager: NSObject {
     func authorizeGoogleAccount() {
         let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(kKeyChainItemName, clientID: kClientId, clientSecret: nil)
         if auth.canAuthorize {
+            
+            GoogleDriveManager.sharedServiceDrive.authorizer = auth
+            
+            
             
         } else {
 //            let authVC = GTMOAuth2ViewControllerTouch(scope: scopes, clientID: kClientId, clientSecret: nil, keychainItemName: kKeyChainItemName, completionHandler: { (GTAuthVCTouch, GTAuthAuthorization, error) in
