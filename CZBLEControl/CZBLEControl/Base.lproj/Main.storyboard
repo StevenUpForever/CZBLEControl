@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pz-xa-ckd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qUk-r5-v1J">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -114,7 +115,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q6B-HM-lBD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2527" y="73"/>
+            <point key="canvasLocation" x="3138.5" y="72.5"/>
         </scene>
         <!--Title-->
         <scene sceneID="cXW-i9-H0T">
@@ -163,7 +164,7 @@ Reconnect by top right button or back to choose another device</string>
                                 <color key="textColor" red="0.87058823529999996" green="0.0" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SyM-UZ-FKF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SyM-UZ-FKF">
                                 <rect key="frame" x="0.0" y="271" width="375" height="396"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -354,7 +355,205 @@ Reconnect by top right button or back to choose another device</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DQi-fl-14i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3189" y="73"/>
+            <point key="canvasLocation" x="3618.5" y="72.5"/>
+        </scene>
+        <!--Saved Data-->
+        <scene sceneID="bqo-qV-D2i">
+            <objects>
+                <tableViewController id="PG4-si-VCN" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BQi-Ob-sso">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tOm-tB-cKb">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tOm-tB-cKb" id="8aO-ZO-9dG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="PG4-si-VCN" id="5qz-Vo-tHL"/>
+                            <outlet property="delegate" destination="PG4-si-VCN" id="KBQ-rT-7Lt"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Saved Data" id="6pQ-A1-4Is"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TIU-3b-toC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3618.5" y="812.5"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="m67-Wp-vL4">
+            <objects>
+                <tableViewController id="54T-Ut-c65" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="paH-Yn-Gas">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="3vN-Bk-W8o">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="IXh-lX-upb">
+                                        <rect key="frame" x="0.0" y="99" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IXh-lX-upb" id="HYp-L6-HoH">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5F-hC-sd7">
+                                                    <rect key="frame" x="8" y="11" width="88" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="b5F-hC-sd7" firstAttribute="leading" secondItem="HYp-L6-HoH" secondAttribute="leadingMargin" id="sdH-oZ-SOv"/>
+                                                <constraint firstItem="b5F-hC-sd7" firstAttribute="centerY" secondItem="HYp-L6-HoH" secondAttribute="centerY" id="vWf-ot-4rt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="PG4-si-VCN" kind="show" id="QXF-Ib-2Te"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Ee5-ql-dwf">
+                                        <rect key="frame" x="0.0" y="143" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ee5-ql-dwf" id="WDB-PN-IoT">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloud Drive Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3x-9A-bTP">
+                                                    <rect key="frame" x="8" y="11" width="157" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="p3x-9A-bTP" firstAttribute="leading" secondItem="WDB-PN-IoT" secondAttribute="leadingMargin" id="OUx-Va-ZCP"/>
+                                                <constraint firstItem="p3x-9A-bTP" firstAttribute="centerY" secondItem="WDB-PN-IoT" secondAttribute="centerY" id="wPb-uv-xi2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="kcS-4m-MgN" kind="show" id="JAI-ij-g1Y"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="54T-Ut-c65" id="SVy-pB-MpP"/>
+                            <outlet property="delegate" destination="54T-Ut-c65" id="rPw-i4-paI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="G3z-tb-DWy"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SKc-Ga-l4r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3138.5" y="812.5"/>
+        </scene>
+        <!--Cloud Accounts-->
+        <scene sceneID="2pJ-yW-Rx4">
+            <objects>
+                <viewController id="kcS-4m-MgN" customClass="AccountManagerViewController" customModule="CZBLEControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qbz-JH-5Fo"/>
+                        <viewControllerLayoutGuide type="bottom" id="TKS-gd-HeG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xyl-RK-Pc3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GoogleDrive" translatesAutoresizingMaskIntoConstraints="NO" id="kiA-IC-fbb">
+                                <rect key="frame" x="31" y="270" width="128" height="128"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="kiA-IC-fbb" secondAttribute="height" multiplier="1:1" id="Fym-hy-SNF"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="xqC-nJ-6lP" appends="YES" id="fYQ-KR-syS"/>
+                                </connections>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXo-1r-seQ">
+                                <rect key="frame" x="57" y="406" width="77" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzb-vu-3Rk">
+                                <rect key="frame" x="253" y="406" width="77" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropBox" translatesAutoresizingMaskIntoConstraints="NO" id="aM2-ry-jam">
+                                <rect key="frame" x="227" y="270" width="128" height="128"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="SvA-9d-M8L" appends="YES" id="Zk5-10-2LB"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aM2-ry-jam" firstAttribute="width" secondItem="kiA-IC-fbb" secondAttribute="width" id="0j1-TE-GXh"/>
+                            <constraint firstItem="kiA-IC-fbb" firstAttribute="centerY" secondItem="xyl-RK-Pc3" secondAttribute="centerY" id="4Av-NP-ogC"/>
+                            <constraint firstItem="aM2-ry-jam" firstAttribute="centerY" secondItem="xyl-RK-Pc3" secondAttribute="centerY" id="4Ca-7H-FIO"/>
+                            <constraint firstItem="kiA-IC-fbb" firstAttribute="centerX" secondItem="xyl-RK-Pc3" secondAttribute="centerX" multiplier="95:187" id="HXQ-lm-yB8"/>
+                            <constraint firstItem="eXo-1r-seQ" firstAttribute="centerX" secondItem="kiA-IC-fbb" secondAttribute="centerX" id="N4U-Jh-3yn"/>
+                            <constraint firstItem="kiA-IC-fbb" firstAttribute="width" secondItem="xyl-RK-Pc3" secondAttribute="width" multiplier="128:376" id="ZVe-Pz-9eS"/>
+                            <constraint firstItem="aM2-ry-jam" firstAttribute="height" secondItem="kiA-IC-fbb" secondAttribute="height" id="cCl-Gs-svf"/>
+                            <constraint firstItem="aM2-ry-jam" firstAttribute="centerX" secondItem="xyl-RK-Pc3" secondAttribute="centerX" multiplier="291:187" id="lDk-Fn-fho"/>
+                            <constraint firstItem="eXo-1r-seQ" firstAttribute="top" secondItem="kiA-IC-fbb" secondAttribute="bottom" constant="8" id="ldl-Xk-KFn"/>
+                            <constraint firstItem="kzb-vu-3Rk" firstAttribute="centerX" secondItem="aM2-ry-jam" secondAttribute="centerX" id="n9d-qs-Zt8"/>
+                            <constraint firstItem="kzb-vu-3Rk" firstAttribute="top" secondItem="aM2-ry-jam" secondAttribute="bottom" constant="8" id="ugM-2S-Str"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Cloud Accounts" id="7U5-tT-xjV"/>
+                    <connections>
+                        <outlet property="dropBoxLabel" destination="kzb-vu-3Rk" id="gCI-Xd-kdG"/>
+                        <outlet property="googleDriveLabel" destination="eXo-1r-seQ" id="uN1-FT-NM7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qjz-Dk-2YU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="xqC-nJ-6lP">
+                    <connections>
+                        <action selector="googleDriveAction:" destination="kcS-4m-MgN" id="zbn-Yd-e7F"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="SvA-9d-M8L">
+                    <connections>
+                        <action selector="dropBoxAction:" destination="kcS-4m-MgN" id="Fvt-pd-f8y"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3138.5" y="1574.5"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="ldR-y7-AIB">
+            <objects>
+                <navigationController id="faM-pU-tIN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="fpt-aJ-OkP"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MDr-ve-65H">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.30980392159999998" green="0.76470588240000004" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="54T-Ut-c65" kind="relationship" relationship="rootViewController" id="F7b-oD-R4Z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vhE-xn-7RW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2638" y="813"/>
         </scene>
         <!--Title-->
         <scene sceneID="xSh-ee-ZpG">
@@ -414,12 +613,13 @@ Reconnect by top right button or back to choose another device</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yC9-Bp-WPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3188.5" y="853.5"/>
+            <point key="canvasLocation" x="4082.5" y="72.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Bluetooth-->
         <scene sceneID="bLq-rO-XSd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9pz-xa-ckd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Bluetooth" image="bluetooth" id="AY4-5b-c3T"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k6C-hN-ttL">
@@ -438,13 +638,37 @@ Reconnect by top right button or back to choose another device</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAa-aq-uxo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1840" y="73"/>
+            <point key="canvasLocation" x="2651.5" y="72.5"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="7tk-lY-VgX">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qUk-r5-v1J" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="ykK-V3-Ikv">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.30980392159999998" green="0.76470588240000004" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="9pz-xa-ckd" kind="relationship" relationship="viewControllers" id="DxV-b8-TsN"/>
+                        <segue destination="faM-pU-tIN" kind="relationship" relationship="viewControllers" id="bq4-HT-Zf5"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i6e-pK-Fhs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2077.5" y="432.5"/>
         </scene>
     </scenes>
     <resources>
+        <image name="DropBox" width="85" height="85"/>
+        <image name="GoogleDrive" width="85" height="85"/>
+        <image name="bluetooth" width="24" height="24"/>
         <image name="dropDown" width="45" height="45"/>
         <image name="notify" width="35" height="35"/>
         <image name="read" width="35" height="35"/>
+        <image name="settings" width="24" height="24"/>
         <image name="write" width="35" height="35"/>
         <image name="writeWithoutResponse" width="35" height="35"/>
     </resources>

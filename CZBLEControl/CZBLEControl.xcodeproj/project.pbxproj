@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF68D29B1D7BC043008F320A /* AccountManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68D29A1D7BC043008F320A /* AccountManagerViewController.swift */; };
+		AF68D29E1D7BF246008F320A /* DropBoxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68D29D1D7BF246008F320A /* DropBoxManager.swift */; };
 		AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */; };
 		AF6E079F1D2655C80007E92F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E079E1D2655C80007E92F /* CustomView.swift */; };
 		AF6E07A71D27A39D0007E92F /* BLECellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07A61D27A39D0007E92F /* BLECellViewModel.swift */; };
@@ -35,7 +37,7 @@
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
 		B2674D901D5A7A3F00BCC441 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */; };
 		B2674D931D5A9A9300BCC441 /* GoogleDriveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */; };
-		F166EA52CF9A46DB5586816B /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282D07E11D04929118FA4303 /* Pods_CZBLEControl.framework */; };
+		F166EA52CF9A46DB5586816B /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282D07E11D04929118FA4303 /* Pods_CZBLEControl.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 /* Begin PBXFileReference section */
 		282D07E11D04929118FA4303 /* Pods_CZBLEControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CZBLEControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CA0B711D4A0CC88DDA1ADC /* Pods-CZBLEControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.debug.xcconfig"; sourceTree = "<group>"; };
+		AF68D29A1D7BC043008F320A /* AccountManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerViewController.swift; sourceTree = "<group>"; };
+		AF68D29D1D7BF246008F320A /* DropBoxManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropBoxManager.swift; sourceTree = "<group>"; };
 		AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewModel.swift; sourceTree = "<group>"; };
 		AF6E079E1D2655C80007E92F /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		AF6E07A61D27A39D0007E92F /* BLECellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLECellViewModel.swift; sourceTree = "<group>"; };
@@ -113,6 +117,24 @@
 				E1EB2B8A0E5D5F15FDA3D249 /* Pods-CZBLEControl.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		AF68D2991D7BC01F008F320A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AF68D29A1D7BC043008F320A /* AccountManagerViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		AF68D29C1D7BF224008F320A /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				AF7284AA1CB1F17B00B8D610 /* Peripheral List */,
+				AF6E07981D263E4D0007E92F /* Peripheral Detail */,
+				AF8BDEB21CB8628400C49885 /* DetailsControl */,
+			);
+			name = Bluetooth;
 			sourceTree = "<group>";
 		};
 		AF6E07981D263E4D0007E92F /* Peripheral Detail */ = {
@@ -227,7 +249,6 @@
 			children = (
 				AF6E07B61D284B270007E92F /* View */,
 				AFE578051D2B1B5300DFED23 /* ViewModel */,
-				B2674D911D5A9A5100BCC441 /* Data Persistence */,
 			);
 			name = DetailsControl;
 			sourceTree = "<group>";
@@ -261,9 +282,9 @@
 				AF6E07A41D2660980007E92F /* Public View */,
 				AF6E07A51D2660A40007E92F /* Public Controller */,
 				B2674D8E1D5A7A2500BCC441 /* Public Model */,
-				AF7284AA1CB1F17B00B8D610 /* Peripheral List */,
-				AF6E07981D263E4D0007E92F /* Peripheral Detail */,
-				AF8BDEB21CB8628400C49885 /* DetailsControl */,
+				AF68D29C1D7BF224008F320A /* Bluetooth */,
+				AF68D2991D7BC01F008F320A /* Settings */,
+				B2674D911D5A9A5100BCC441 /* Data Persistence */,
 				AFDA74741CB1EE5800F09BD8 /* Main.storyboard */,
 				AFDA747A1CB1EE5800F09BD8 /* Assets.xcassets */,
 				AFDA747C1CB1EE5800F09BD8 /* LaunchScreen.storyboard */,
@@ -302,6 +323,7 @@
 			children = (
 				B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */,
 				B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */,
+				AF68D29D1D7BF246008F320A /* DropBoxManager.swift */,
 			);
 			name = "Data Persistence";
 			sourceTree = "<group>";
@@ -503,8 +525,10 @@
 				AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */,
 				AF6E07B01D284A590007E92F /* PeripheralCellViewModel.swift in Sources */,
 				AF6E07B31D284A8B0007E92F /* CharacterInfo.swift in Sources */,
+				AF68D29E1D7BF246008F320A /* DropBoxManager.swift in Sources */,
 				AF7403B41CD40A84004C98E6 /* ClassExtension.swift in Sources */,
 				AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */,
+				AF68D29B1D7BC043008F320A /* AccountManagerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
