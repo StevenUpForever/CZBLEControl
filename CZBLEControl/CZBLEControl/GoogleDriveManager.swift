@@ -64,6 +64,7 @@ class GoogleDriveManager: NSObject {
         GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName(kKeyChainItemName)
     }
     
+    
 //    func fetchFiles() {
 //        output.text = "Getting files..."
 //        let query = GTLQueryDrive.queryForFilesList()
@@ -101,50 +102,5 @@ class GoogleDriveManager: NSObject {
 //    }
 //    
 //    
-//    // Creates the auth controller for authorizing access to Drive API
-//    
-//    private func createAuthController() -> GTMOAuth2ViewControllerTouch {
-//        let scopeString = scopes.joinWithSeparator(" ")
-//        return GTMOAuth2ViewControllerTouch(
-//            scope: scopeString,
-//            clientID: kClientId,
-//            clientSecret: nil,
-//            keychainItemName: kKeyChainItemName,
-//            delegate: self,
-//            finishedSelector: "viewController:finishedWithAuth:error:"
-//        )
-//    }
-//    
-//    // Handle completion of the authorization process, and update the Drive API
-//    // with the new credentials.
-//    func viewController(vc : UIViewController,
-//                        finishedWithAuth authResult : GTMOAuth2Authentication, error : NSError?) {
-//        
-//        if let error = error {
-//            service.authorizer = nil
-//            showAlert("Authentication Error", message: error.localizedDescription)
-//            return
-//        }
-//        
-//        service.authorizer = authResult
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
-//    
-//    // Helper for showing an alert
-//    
-//    func showAlert(title : String, message: String) {
-//        let alert = UIAlertController(
-//            title: title,
-//            message: message,
-//            preferredStyle: UIAlertControllerStyle.Alert
-//        )
-//        let ok = UIAlertAction(
-//            title: "OK",
-//            style: UIAlertActionStyle.Default,
-//            handler: nil
-//        )
-//        alert.addAction(ok)
-//        presentViewController(alert, animated: true, completion: nil)
-//    }
 
 }

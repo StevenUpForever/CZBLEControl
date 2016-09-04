@@ -36,9 +36,9 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
     weak var delegate: RWNCDelegate?
     
     //tableView array
-    var valueArray = [String]()
+    var valueArray = [(String, String)]()
     var descriptorArray = [String]()
-    var writeValueArray = [String]()
+    var writeValueArray = [(String, String)]()
     
     func setUIElement(actionBarItem: UIBarButtonItem, fallBackAction: () -> Void) {
         
@@ -111,16 +111,16 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
                 cell.textLabel?.text = descriptorArray[indexPath.row]
                 
             case 1:
-                cell.textLabel?.text = writeValueArray[indexPath.row]
+                cell.textLabel?.text = writeValueArray[indexPath.row].0
                 
                 //Show date label text
-                cell.detailTextLabel?.text = dateFormatTransfer()
+                cell.detailTextLabel?.text = writeValueArray[indexPath.row].1
                 
             case 2:
-                cell.textLabel?.text = valueArray[indexPath.row]
+                cell.textLabel?.text = valueArray[indexPath.row].0
                 
                 //Show date label text
-                cell.detailTextLabel?.text = dateFormatTransfer()
+                cell.detailTextLabel?.text = valueArray[indexPath.row].1
                 
             default:
                 break
@@ -131,10 +131,10 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
                 cell.textLabel?.text = descriptorArray[indexPath.row]
                 
             case 1:
-                cell.textLabel?.text = valueArray[indexPath.row]
+                cell.textLabel?.text = valueArray[indexPath.row].0
                 
                 //Show date label text
-                cell.detailTextLabel?.text = dateFormatTransfer()
+                cell.detailTextLabel?.text = valueArray[indexPath.row].1
                 
             default:
                 break
@@ -249,13 +249,13 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
             peripheralObj?.writeValue(data, forCharacteristic: characterObj!, type: .WithoutResponse)
             
             if identifier == .write {
-                writeValueArray.append(input)
+                writeValueArray.append((input, dateFormatTransfer()))
                 let indexPath = NSIndexPath(forRow: writeValueArray.count - 1, inSection: 1)
                 
                 delegate?.updateTableViewUI(indexPath)
                 
             } else {
-                valueArray.append(input)
+                valueArray.append((input, dateFormatTransfer()))
                 let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 1)
                 
                 delegate?.updateTableViewUI(indexPath)
@@ -274,7 +274,7 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
         } else {
             if let dataValue = characteristic.value {
                 let dataString = String(data: dataValue, encoding: NSUTF8StringEncoding) ?? "No data respond"
-                valueArray.append(dataString)
+                valueArray.append((dataString, dateFormatTransfer()))
                 
                 //Insert new cell row
                 let sectionNum = identifier == .write ? 2 : 1
