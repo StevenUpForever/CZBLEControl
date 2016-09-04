@@ -469,7 +469,7 @@ Reconnect by top right button or back to choose another device</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GoogleDrive" translatesAutoresizingMaskIntoConstraints="NO" id="kiA-IC-fbb">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GoogleDrive" translatesAutoresizingMaskIntoConstraints="NO" id="kiA-IC-fbb">
                                 <rect key="frame" x="31" y="270" width="128" height="128"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -491,7 +491,7 @@ Reconnect by top right button or back to choose another device</string>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropBox" translatesAutoresizingMaskIntoConstraints="NO" id="aM2-ry-jam">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropBox" translatesAutoresizingMaskIntoConstraints="NO" id="aM2-ry-jam">
                                 <rect key="frame" x="227" y="270" width="128" height="128"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -515,10 +515,22 @@ Reconnect by top right button or back to choose another device</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Cloud Accounts" id="7U5-tT-xjV"/>
+                    <connections>
+                        <outlet property="dropBoxLabel" destination="kzb-vu-3Rk" id="gCI-Xd-kdG"/>
+                        <outlet property="googleDriveLabel" destination="eXo-1r-seQ" id="uN1-FT-NM7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qjz-Dk-2YU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="xqC-nJ-6lP"/>
-                <tapGestureRecognizer id="SvA-9d-M8L"/>
+                <tapGestureRecognizer id="xqC-nJ-6lP">
+                    <connections>
+                        <action selector="googleDriveAction:" destination="kcS-4m-MgN" id="zbn-Yd-e7F"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="SvA-9d-M8L">
+                    <connections>
+                        <action selector="dropBoxAction:" destination="kcS-4m-MgN" id="Fvt-pd-f8y"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3138.5" y="1574.5"/>
         </scene>
@@ -530,6 +542,10 @@ Reconnect by top right button or back to choose another device</string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MDr-ve-65H">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.30980392159999998" green="0.76470588240000004" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="54T-Ut-c65" kind="relationship" relationship="rootViewController" id="F7b-oD-R4Z"/>
