@@ -57,14 +57,27 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-        
         viewModel.cellText(cell, indexPath: indexPath)
-        
         return cell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.sectionTitle(section)
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return indexPath.section == 0 ? false : true
+    }
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .Delete
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            viewModel.deleteObjectAtIndexPath(indexPath)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+        }
     }
     
     //MARK: - CBCentral delegate
@@ -95,6 +108,10 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     
     @IBAction func actionProcess(sender: UIBarButtonItem) {
         viewModel.actionButtonProcess(sender, target: self)
+    }
+    
+    @IBAction func saveAction(sender: UIBarButtonItem) {
+        
     }
     
     //MARK: - viewModel delegate

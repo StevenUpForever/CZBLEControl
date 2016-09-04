@@ -106,7 +106,6 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
     
     func cellText(cell: UITableViewCell, indexPath: NSIndexPath) {
         if identifier == .write {
-            
             switch indexPath.section {
             case 0:
                 cell.textLabel?.text = descriptorArray[indexPath.row]
@@ -126,9 +125,7 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
             default:
                 break
             }
-            
         } else {
-            
             switch indexPath.section {
             case 0:
                 cell.textLabel?.text = descriptorArray[indexPath.row]
@@ -142,7 +139,29 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
             default:
                 break
             }
-            
+        }
+    }
+    
+    func deleteObjectAtIndexPath(indexPath: NSIndexPath) {
+        if identifier == .write {
+            switch indexPath.section {
+            case 1:
+                writeValueArray.removeAtIndex(indexPath.row)
+                
+            case 2:
+                valueArray.removeAtIndex(indexPath.row)
+                
+            default:
+                break
+            }
+        } else {
+            switch indexPath.section {
+            case 1:
+                valueArray.removeAtIndex(indexPath.row)
+                
+            default:
+                break
+            }
         }
     }
     
@@ -182,11 +201,9 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
     }
     
     func actionButtonProcess(sender: UIBarButtonItem, target: RWNCTableViewController) {
-        
         guard let character = characterObj else {
             return
         }
-        
         switch identifier {
         case .read:
             peripheralObj?.readValueForCharacteristic(character)
