@@ -14,11 +14,13 @@ class AccountManagerViewController: UIViewController {
     @IBOutlet weak var dropBoxLabel: UILabel!
     
     private let googleDriveManager = GoogleDriveManager.sharedManager
+    private let dropBoxManager = DropBoxManager.sharedManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         changeLabelState(self.googleDriveLabel, success: googleDriveManager.isAuthorized())
+        changeLabelState(self.dropBoxLabel, success: dropBoxManager.isAuthorized())
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +50,11 @@ class AccountManagerViewController: UIViewController {
     }
     
     @IBAction func dropBoxAction(sender: UITapGestureRecognizer) {
+        if dropBoxManager.isAuthorized() {
+            dropBoxManager.deauthorizeUser()
+        } else {
+            dropBoxManager.authorizeUser(self)
+        }
     }
     
     private func changeLabelState(sender: UILabel, success:Bool) {

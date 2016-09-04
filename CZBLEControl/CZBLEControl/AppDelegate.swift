@@ -9,6 +9,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import SwiftyDropbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        Dropbox.setupWithAppKey("9cc6hhoqm5u7ipn")
         
         //Thread wait for 1 second for Lauching screen
         
