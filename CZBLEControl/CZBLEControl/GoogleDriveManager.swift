@@ -22,6 +22,9 @@ class GoogleDriveManager: NSObject {
     override init() {
         serviceDrive.shouldFetchNextPages = true
         serviceDrive.retryEnabled = true
+        if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(kKeyChainItemName, clientID: kClientId, clientSecret: nil) {
+            serviceDrive.authorizer = auth
+        }
     }
     
     private let kKeyChainItemName = "CZBLEControl Google Drive"
@@ -29,10 +32,6 @@ class GoogleDriveManager: NSObject {
     private let scopes = [kGTLAuthScopeDriveMetadata, kGTLAuthScopeDriveFile]
     
     func authorizeGoogleAccount(targetViewController: UIViewController, completionHandler: (authSuccess: Bool) -> Void) {
-        if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(kKeyChainItemName, clientID: kClientId, clientSecret: nil) {
-            serviceDrive.authorizer = auth
-        }
-        
         if let authorizer = serviceDrive.authorizer, canAuth = authorizer.canAuthorize where canAuth {
             completionHandler(authSuccess: true)
         } else {

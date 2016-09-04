@@ -50,7 +50,7 @@ class AccountManagerViewController: UIViewController {
     }
     
     @IBAction func dropBoxAction(sender: UITapGestureRecognizer) {
-        if dropBoxManager.isAuthorized() {
+        if !dropBoxManager.isAuthorized() {
             dropBoxManager.deauthorizeUser()
         } else {
             dropBoxManager.authorizeUser(self)
