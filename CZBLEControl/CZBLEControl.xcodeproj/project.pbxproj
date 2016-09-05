@@ -38,6 +38,7 @@
 		AFDB2E621D7CE683005ADC38 /* RWNCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E611D7CE683005ADC38 /* RWNCExtension.swift */; };
 		AFDB2E641D7DF684005ADC38 /* RWNCViewModelTBExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E631D7DF684005ADC38 /* RWNCViewModelTBExtension.swift */; };
 		AFDB2E681D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E671D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift */; };
+		AFDB2E6C1D7DFA99005ADC38 /* RWNCBLEExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */; };
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
 		B2674D901D5A7A3F00BCC441 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */; };
 		B2674D931D5A9A9300BCC441 /* GoogleDriveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */; };
@@ -92,6 +93,7 @@
 		AFDB2E611D7CE683005ADC38 /* RWNCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCExtension.swift; sourceTree = "<group>"; };
 		AFDB2E631D7DF684005ADC38 /* RWNCViewModelTBExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModelTBExtension.swift; sourceTree = "<group>"; };
 		AFDB2E671D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModelSaveExtension.swift; sourceTree = "<group>"; };
+		AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCBLEExtension.swift; sourceTree = "<group>"; };
 		AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModel.swift; sourceTree = "<group>"; };
 		B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDriveManager.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			children = (
 				AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */,
 				AFDB2E611D7CE683005ADC38 /* RWNCExtension.swift */,
+				AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */,
 				AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */,
 				AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */,
 			);
@@ -542,6 +545,7 @@
 				AF6E07B01D284A590007E92F /* PeripheralCellViewModel.swift in Sources */,
 				AF6E07B31D284A8B0007E92F /* CharacterInfo.swift in Sources */,
 				AF68D29E1D7BF246008F320A /* DropBoxManager.swift in Sources */,
+				AFDB2E6C1D7DFA99005ADC38 /* RWNCBLEExtension.swift in Sources */,
 				AF7403B41CD40A84004C98E6 /* ClassExtension.swift in Sources */,
 				AFDA74711CB1EE5800F09BD8 /* AppDelegate.swift in Sources */,
 				AF68D29B1D7BC043008F320A /* AccountManagerViewController.swift in Sources */,

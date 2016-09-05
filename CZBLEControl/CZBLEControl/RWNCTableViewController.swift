@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import CoreBluetooth
 import MBProgressHUD
 
-class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, RWNCDelegate {
+class RWNCTableViewController: UITableViewController, RWNCDelegate {
     
     let viewModel = RWNCViewModel()
     var indicator: MBProgressHUD!
@@ -38,6 +37,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     
     override func viewWillAppear(animated: Bool) {
         viewModel.centralManager?.delegate = self
+        viewModel.peripheralObj?.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,30 +83,6 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
             viewModel.deleteObjectAtIndexPath(indexPath)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
         }
-    }
-    
-    //MARK: - CBCentral delegate
-    
-    func centralManagerDidUpdateState(central: CBCentralManager) {
-        switch central.state {
-        case CBCentralManagerState.PoweredOn:
-            break
-        case CBCentralManagerState.PoweredOff:
-            CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
-        default:
-            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
-        }
-    }
-    
-    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        let alertController = UIAlertController(title: "Peripheral disconnected", message: "Fallback or save your data", preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "back", style: .Default, handler: { (action) in
-            if let nav = self.navigationController {
-                nav.popViewControllerAnimated(true)
-            }
-        }))
-        alertController.addAction(UIAlertAction(title: "Stay", style: .Cancel, handler: nil))
-        presentViewController(alertController, animated: true, completion: nil)
     }
     
     //MARK: - IBActions and Selectors

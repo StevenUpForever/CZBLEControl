@@ -22,7 +22,7 @@ enum RWNCIdentifier {
     case none
 }
 
-class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate, popoverDelegate {
+class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewControllerTransitioningDelegate, popoverDelegate {
     
     //BLE Objects
     
@@ -53,8 +53,6 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
         
         if peripheralObj != nil && characterObj != nil {
             
-            peripheralObj?.delegate = self
-            
             switch identifier {
             case .read:
                 actionBarItem.title = "read"
@@ -79,12 +77,6 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
             }
         } else {
             fallBackAction()
-        }
-    }
-    
-    func disconnectPeripheral() {
-        if characterObj?.isNotifying == true {
-            peripheralObj?.setNotifyValue(false, forCharacteristic: characterObj!)
         }
     }
     
@@ -151,51 +143,34 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
         }
     }
     
-    //MARK: - CBPeripheral delegate
+    //MARK: BLE viewModel
     
-    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        
-        if error != nil {
-            print(error?.localizedDescription)
-        } else {
-            if let dataValue = characteristic.value {
-                let dataString = String(data: dataValue, encoding: NSUTF8StringEncoding) ?? "No data respond"
-                valueArray.append((dataString, dateFormatTransfer()))
-                
-                //Insert new cell row
-                let sectionNum = identifier == .write ? 2 : 1
-                let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: sectionNum)
-                delegate?.updateTableViewUI(indexPath)
-            }
+    func disconnectPeripheral() {
+        if characterObj?.isNotifying == true {
+            peripheralObj?.setNotifyValue(false, forCharacteristic: characterObj!)
         }
-        
     }
     
-    func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        delegate?.replaceNotifyImage(characteristic.isNotifying ? UIImage(named: "unnotifyItem") : UIImage(named: "notifyItem"))
+    func appendDataToValueArray(characteristic: CBCharacteristic) -> NSIndexPath? {
+        if let dataValue = characteristic.value {
+            let dataString = String(data: dataValue, encoding: NSUTF8StringEncoding) ?? "No data respond"
+            valueArray.append((dataString, dateFormatTransfer()))
+            
+            //Insert new cell row
+            let sectionNum = identifier == .write ? 2 : 1
+            return NSIndexPath(forRow: valueArray.count - 1, inSection: sectionNum)
+        } else {
+            return nil
+        }
     }
     
-    func peripheral(peripheral: CBPeripheral, didWriteValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
-        if error != nil {
-            print(error?.localizedDescription)
+    func appendDataToDescriptorArray(descriptor: CBDescriptor) -> NSIndexPath? {
+        if let descriptorString = descriptor.value?.description {
+            descriptorArray.append(descriptorString)
+            return NSIndexPath(forRow: descriptorArray.count - 1, inSection: 0)
         } else {
-            peripheral.readValueForCharacteristic(characteristic)
+            return nil
         }
-        
-    }
-    
-    func peripheral(peripheral: CBPeripheral, didUpdateValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
-        
-        if error != nil {
-            print(error?.localizedDescription)
-        } else {
-            if let descriptorString = descriptor.value?.description {
-                descriptorArray.append(descriptorString)
-                let indexPath = NSIndexPath(forRow: descriptorArray.count - 1, inSection: 0)
-                delegate?.updateTableViewUI(indexPath)
-            }
-        }
-        
     }
 
 }
