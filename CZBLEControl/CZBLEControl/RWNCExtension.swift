@@ -29,7 +29,6 @@ extension RWNCTableViewController: UITextFieldDelegate {
     }
     
     func showDriveActionSheet() {
-        let googleDriveManager = GoogleDriveManager.sharedManager
         let alertController = UIAlertController(title: "Where would you like to save?", message: nil, preferredStyle: .ActionSheet)
         alertController.addAction(UIAlertAction(title: "iCloud Drive", style: .Default, handler: { (action) in
             
@@ -38,21 +37,12 @@ extension RWNCTableViewController: UITextFieldDelegate {
             dispatch_async(dispatch_get_main_queue(), {
                 self.indicator!.showAnimated(true)
             })
-            if self.viewModel.identifier == .write {
-                googleDriveManager.saveWriteAndValueData(self.fileName ?? "Default file", writeArray: self.viewModel.writeValueArray, valueArray: self.viewModel.valueArray, completionHandler: { (success) in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.indicator!.hideAnimated(true)
-                        CustomAlertController.showCancelAlertController(success ? "Save successfully" : "Save failed", message: nil, target: self)
-                    })
+            self.viewModel.uploadToGoogleDrive(self.fileName ?? "Default file", target: self, completionHandler: { (success) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.indicator!.hideAnimated(true)
+                    CustomAlertController.showCancelAlertController(success ? "Save successfully" : "Save failed", message: nil, target: self)
                 })
-            } else {
-                googleDriveManager.saveValueData(self.fileName ?? "Default file", dataArray: self.viewModel.valueArray, completionHandler: { (success) in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.indicator!.hideAnimated(true)
-                        CustomAlertController.showCancelAlertController(success ? "Save successfully" : "Save failed", message: nil, target: self)
-                    })
-                })
-            }
+            })
         }))
         alertController.addAction(UIAlertAction(title: "Dropbox", style: .Default, handler: { (action) in
             

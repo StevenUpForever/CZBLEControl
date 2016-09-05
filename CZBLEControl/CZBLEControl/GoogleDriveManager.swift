@@ -64,6 +64,8 @@ class GoogleDriveManager: NSObject {
         GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName(kKeyChainItemName)
     }
     
+    //MARK: Save data
+    
     func saveValueData(title: String, dataArray: [(String, String)], completionHandler: (success: Bool) -> Void) {
         if let data = tupleJoinStr(dataArray).dataUsingEncoding(NSUTF8StringEncoding) {
             uploadData(title, data: data, completionHandler: completionHandler)
@@ -101,6 +103,16 @@ class GoogleDriveManager: NSObject {
                 completionHandler(success: true)
             }
         })
+    }
+    
+    //MARK: Fetch data
+    
+    func loadFiles() {
+        let query = GTLQueryDrive.queryForFilesList()
+        query.q = "mimeType = 'text/plain'"
+        serviceDrive.executeQuery(query) { (ticket, files, error) in
+            
+        }
     }
     
     
