@@ -425,6 +425,9 @@ Reconnect by top right button or back to choose another device</string>
                                                 <constraint firstItem="7K6-zF-lfe" firstAttribute="leading" secondItem="SN4-pp-rVT" secondAttribute="trailing" constant="8" id="qmi-VP-Pkm"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="fuX-sg-Dfi" kind="show" id="LTp-bH-Gln"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="57" id="5M8-b3-VIh">
                                         <rect key="frame" x="0.0" y="213" width="375" height="57"/>
@@ -497,6 +500,34 @@ Reconnect by top right button or back to choose another device</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TIU-3b-toC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3618.5" y="812.5"/>
+        </scene>
+        <!--Saved Data Table View Controller-->
+        <scene sceneID="FEt-NO-6RE">
+            <objects>
+                <tableViewController id="fuX-sg-Dfi" customClass="SavedDataTableViewController" customModule="CZBLEControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="X98-bi-PNR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wxw-65-qlP">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wxw-65-qlP" id="3VS-i7-aHn">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fuX-sg-Dfi" id="WmN-ic-wbD"/>
+                            <outlet property="delegate" destination="fuX-sg-Dfi" id="O1t-Zd-3Oz"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Imr-eK-fcA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4082.5" y="812.5"/>
         </scene>
         <!--Settings-->
         <scene sceneID="m67-Wp-vL4">

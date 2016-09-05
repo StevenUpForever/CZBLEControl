@@ -38,12 +38,21 @@ extension RWNCTableViewController: UITextFieldDelegate {
             dispatch_async(dispatch_get_main_queue(), {
                 self.indicator!.showAnimated(true)
             })
-            googleDriveManager.saveValueData(self.fileName ?? "Default file", dataArray: self.viewModel.valueArray, completionHandler: { (success) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.indicator!.hideAnimated(true)
-                    CustomAlertController.showCancelAlertController(success ? "Save successfully" : "Save failed", message: nil, target: self)
+            if self.viewModel.identifier == .write {
+                googleDriveManager.saveWriteAndValueData(self.fileName ?? "Default file", writeArray: self.viewModel.writeValueArray, valueArray: self.viewModel.valueArray, completionHandler: { (success) in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.indicator!.hideAnimated(true)
+                        CustomAlertController.showCancelAlertController(success ? "Save successfully" : "Save failed", message: nil, target: self)
+                    })
                 })
-            })
+            } else {
+                googleDriveManager.saveValueData(self.fileName ?? "Default file", dataArray: self.viewModel.valueArray, completionHandler: { (success) in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.indicator!.hideAnimated(true)
+                        CustomAlertController.showCancelAlertController(success ? "Save successfully" : "Save failed", message: nil, target: self)
+                    })
+                })
+            }
         }))
         alertController.addAction(UIAlertAction(title: "Dropbox", style: .Default, handler: { (action) in
             

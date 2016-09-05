@@ -66,25 +66,19 @@ class GoogleDriveManager: NSObject {
     
     func saveValueData(title: String, dataArray: [(String, String)], completionHandler: (success: Bool) -> Void) {
         if let data = tupleJoinStr(dataArray).dataUsingEncoding(NSUTF8StringEncoding) {
-            let parameter = GTLUploadParameters(data: data, MIMEType: "text/plain")
-            let driveFile = GTLDriveFile()
-//            driveFile.identifier = "CZBLEControl"
-            driveFile.name = title
-            let query = GTLQueryDrive.queryForFilesCreateWithObject(driveFile, uploadParameters: parameter)
-            serviceDrive.executeQuery(query, completionHandler: { (ticket, updatedFile, error) in
-                if error != nil {
-                    completionHandler(success: false)
-                } else {
-                    completionHandler(success: true)
-                }
-            })
+            uploadData(title, data: data, completionHandler: completionHandler)
         } else {
             completionHandler(success: false)
         }
     }
     
-    func saveWriteAndValueData(writeArray: [(String, String)], valueArray: [(String, String)]) {
-        
+    func saveWriteAndValueData(title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: (success: Bool) -> Void) {
+        let dataStr = tupleJoinStr(writeArray) + tupleJoinStr(valueArray)
+        if let data = dataStr.dataUsingEncoding(NSUTF8StringEncoding) {
+            uploadData(title, data: data, completionHandler: completionHandler)
+        } else {
+            completionHandler(success: false)
+        }
     }
     
     private func tupleJoinStr(dataArray: [(String, String)]) -> String {
@@ -93,6 +87,20 @@ class GoogleDriveManager: NSObject {
             result.appendContentsOf(tuple.0 + "\n" + tuple.1 + "\n\n")
         }
         return result
+    }
+    
+    private func uploadData(title: String, data: NSData, completionHandler: (success: Bool) -> Void) {
+        let parameter = GTLUploadParameters(data: data, MIMEType: "text/plain")
+        let driveFile = GTLDriveFile()
+        driveFile.name = title
+        let query = GTLQueryDrive.queryForFilesCreateWithObject(driveFile, uploadParameters: parameter)
+        serviceDrive.executeQuery(query, completionHandler: { (ticket, updatedFile, error) in
+            if error != nil {
+                completionHandler(success: false)
+            } else {
+                completionHandler(success: true)
+            }
+        })
     }
     
     
