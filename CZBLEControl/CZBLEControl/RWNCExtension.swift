@@ -29,12 +29,23 @@ extension RWNCTableViewController: UITextFieldDelegate {
     }
     
     func showDriveActionSheet() {
+        let googleDriveManager = GoogleDriveManager.sharedManager
         let alertController = UIAlertController(title: "Where would you like to save?", message: nil, preferredStyle: .ActionSheet)
         alertController.addAction(UIAlertAction(title: "iCloud Drive", style: .Default, handler: { (action) in
             
         }))
         alertController.addAction(UIAlertAction(title: "Google Drive", style: .Default, handler: { (action) in
             
+            dispatch_async(dispatch_get_main_queue(), {
+                self.indicator!.showAnimated(true)
+            })
+            
+            googleDriveManager.saveValueData(self.fileName ?? "Default file", dataArray: self.viewModel.valueArray, completionHandler: { (success) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.indicator!.hideAnimated(true)
+                    CustomAlertController.showCancelAlertController(success ? "Save successfully" : "Save failed", message: nil, target: self)
+                })
+            })
         }))
         alertController.addAction(UIAlertAction(title: "Dropbox", style: .Default, handler: { (action) in
             

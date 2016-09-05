@@ -8,10 +8,12 @@
 
 import UIKit
 import CoreBluetooth
+import MBProgressHUD
 
 class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, RWNCDelegate {
     
     let viewModel = RWNCViewModel()
+    var indicator: MBProgressHUD!
     
     //IBOutlets
     @IBOutlet weak var actionBarItem: UIBarButtonItem!
@@ -24,6 +26,9 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         viewModel.delegate = self
         
         navigationItem.title = viewModel.uuidString
+        indicator = MBProgressHUD(view: tableView)
+        tableView.addSubview(indicator)
+        indicator.label.text = "Saving..."
         
         viewModel.setUIElement(actionBarItem) { 
             self.showfallBackAlertController()

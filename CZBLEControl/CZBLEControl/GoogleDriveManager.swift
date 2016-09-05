@@ -64,15 +64,22 @@ class GoogleDriveManager: NSObject {
         GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName(kKeyChainItemName)
     }
     
-    func saveValueData(title: String, dataArray: [(String, String)]) {
+    func saveValueData(title: String, dataArray: [(String, String)], completionHandler: (success: Bool) -> Void) {
         if let data = tupleJoinStr(dataArray).dataUsingEncoding(NSUTF8StringEncoding) {
             let parameter = GTLUploadParameters(data: data, MIMEType: "text/plain")
             let driveFile = GTLDriveFile()
+//            driveFile.identifier = "CZBLEControl"
             driveFile.name = title
             let query = GTLQueryDrive.queryForFilesCreateWithObject(driveFile, uploadParameters: parameter)
             serviceDrive.executeQuery(query, completionHandler: { (ticket, updatedFile, error) in
-//                sss
+                if error != nil {
+                    completionHandler(success: false)
+                } else {
+                    completionHandler(success: true)
+                }
             })
+        } else {
+            completionHandler(success: false)
         }
     }
     
