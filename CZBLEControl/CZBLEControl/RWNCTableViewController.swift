@@ -120,7 +120,11 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     var fileName: String?
     
     @IBAction func saveAction(sender: UIBarButtonItem) {
-        showFileNameAlertController()
+        if viewModel.dataExisted() {
+            showFileNameAlertController()
+        } else {
+            CustomAlertController.showCancelAlertController("No data to save", message: nil, target: self)
+        }
     }
     
     //MARK: - viewModel delegate

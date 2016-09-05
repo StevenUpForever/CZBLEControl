@@ -35,11 +35,9 @@ extension RWNCTableViewController: UITextFieldDelegate {
             
         }))
         alertController.addAction(UIAlertAction(title: "Google Drive", style: .Default, handler: { (action) in
-            
             dispatch_async(dispatch_get_main_queue(), {
                 self.indicator!.showAnimated(true)
             })
-            
             googleDriveManager.saveValueData(self.fileName ?? "Default file", dataArray: self.viewModel.valueArray, completionHandler: { (success) in
                 dispatch_async(dispatch_get_main_queue(), {
                     self.indicator!.hideAnimated(true)

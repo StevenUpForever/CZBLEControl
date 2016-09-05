@@ -233,6 +233,14 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
         }
     }
     
+    func dataExisted() -> Bool {
+        if identifier == .write {
+            return writeValueArray.count != 0 || valueArray.count != 0
+        } else {
+            return valueArray.count != 0
+        }
+    }
+    
     //MARK: - popoverPresentViewControlller delegate
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -242,7 +250,6 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
     //MARK: - PopoverVC delegate
     
     func popOverVCWriteValueProcess(input: String) {
-        
         if let data = input.dataUsingEncoding(NSUTF8StringEncoding) {
             peripheralObj?.writeValue(data, forCharacteristic: characterObj!, type: .WithoutResponse)
             
@@ -260,7 +267,6 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
                 
             }
         }
-        
     }
     
     //MARK: - CBPeripheral delegate
@@ -277,7 +283,6 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
                 //Insert new cell row
                 let sectionNum = identifier == .write ? 2 : 1
                 let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: sectionNum)
-                
                 delegate?.updateTableViewUI(indexPath)
             }
         }
@@ -305,7 +310,6 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
             if let descriptorString = descriptor.value?.description {
                 descriptorArray.append(descriptorString)
                 let indexPath = NSIndexPath(forRow: descriptorArray.count - 1, inSection: 0)
-                
                 delegate?.updateTableViewUI(indexPath)
             }
         }
