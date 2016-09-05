@@ -110,24 +110,12 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         viewModel.actionButtonProcess(sender, target: self)
     }
     
+    weak var fileNameTextField: UITextField?
+    weak var submitAction: UIAlertAction?
+    var fileName: String?
+    
     @IBAction func saveAction(sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Where would you like to save?", message: nil, preferredStyle: .ActionSheet)
-        alertController.addAction(UIAlertAction(title: "iCloud Drive", style: .Default, handler: { (action) in
-            
-        }))
-        alertController.addAction(UIAlertAction(title: "Google Drive", style: .Default, handler: { (action) in
-            
-        }))
-        alertController.addAction(UIAlertAction(title: "Dropbox", style: .Default, handler: { (action) in
-            
-        }))
-        alertController.addAction(UIAlertAction(title: "Local Disk", style: .Default, handler: { (action) in
-            
-        }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) in
-            
-        }))
-        presentViewController(alertController, animated: true, completion: nil)
+        showFileNameAlertController()
     }
     
     //MARK: - viewModel delegate

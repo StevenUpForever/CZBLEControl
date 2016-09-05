@@ -35,6 +35,7 @@
 		AFDA74891CB1EE5900F09BD8 /* CZBLEControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDA74881CB1EE5900F09BD8 /* CZBLEControlTests.swift */; };
 		AFDA74941CB1EE6600F09BD8 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AFDA74931CB1EE6600F09BD8 /* Podfile */; };
 		AFDB2E601D7CD0D3005ADC38 /* SavedDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E5F1D7CD0D3005ADC38 /* SavedDataTableViewController.swift */; };
+		AFDB2E621D7CE683005ADC38 /* RWNCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E611D7CE683005ADC38 /* RWNCExtension.swift */; };
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
 		B2674D901D5A7A3F00BCC441 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */; };
 		B2674D931D5A9A9300BCC441 /* GoogleDriveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */; };
@@ -86,6 +87,7 @@
 		AFDA748A1CB1EE5900F09BD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFDA74931CB1EE6600F09BD8 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AFDB2E5F1D7CD0D3005ADC38 /* SavedDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataTableViewController.swift; sourceTree = "<group>"; };
+		AFDB2E611D7CE683005ADC38 /* RWNCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCExtension.swift; sourceTree = "<group>"; };
 		AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModel.swift; sourceTree = "<group>"; };
 		B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDriveManager.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */,
+				AFDB2E611D7CE683005ADC38 /* RWNCExtension.swift */,
 				AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */,
 				AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */,
 			);
@@ -523,6 +526,7 @@
 				AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */,
 				AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */,
 				AFDB2E601D7CD0D3005ADC38 /* SavedDataTableViewController.swift in Sources */,
+				AFDB2E621D7CE683005ADC38 /* RWNCExtension.swift in Sources */,
 				AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */,
 				AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */,
 				AF6E07AE1D284A440007E92F /* PeripheralViewModel.swift in Sources */,

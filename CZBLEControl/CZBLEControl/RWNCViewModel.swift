@@ -69,9 +69,7 @@ class RWNCViewModel: NSObject, CBPeripheralDelegate, UIPopoverPresentationContro
                 }
             }
         } else {
-            
             fallBackAction()
-            
         }
     }
     

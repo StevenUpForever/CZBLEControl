@@ -34,3 +34,16 @@ extension UIColor {
     }
     
 }
+
+extension UITextField {
+    func showAlertBorder() {
+        self.layer.borderColor = UIColor.redColor().CGColor
+        self.layer.borderWidth = 1.5
+    }
+    
+    func resetBorder() {
+        self.layer.borderColor = UIColor.clearColor().CGColor
+        self.layer.borderWidth = 0.0
+    }
+    
+}
