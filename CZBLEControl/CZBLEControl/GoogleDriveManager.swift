@@ -107,11 +107,21 @@ class GoogleDriveManager: NSObject {
     
     //MARK: Fetch data
     
-    func loadFiles() {
+    func loadFiles(completionHandler: (success: Bool, files :[GTLDriveFile]?) -> Void) {
         let query = GTLQueryDrive.queryForFilesList()
         query.q = "mimeType = 'text/plain'"
         serviceDrive.executeQuery(query) { (ticket, files, error) in
-            
+            if error != nil {
+                completionHandler(success: false, files: nil)
+            } else if let fileList = files as? GTLDriveFileList {
+                if let filesArray = fileList.files as? [GTLDriveFile] {
+                    completionHandler(success: true, files: filesArray)
+                } else {
+                    completionHandler(success: false, files: nil)
+                }
+            } else {
+                completionHandler(success: false, files: nil)
+            }
         }
     }
     
