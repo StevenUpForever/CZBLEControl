@@ -56,6 +56,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-CZBLEControl/GTMOAuth2.framework'
   install_framework 'Pods-CZBLEControl/GTMSessionFetcher.framework'
   install_framework 'Pods-CZBLEControl/GoogleAPIClient.framework'
+  install_framework 'Pods-CZBLEControl/MBProgressHUD.framework'
   install_framework 'Pods-CZBLEControl/SwiftyDropbox.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -63,5 +64,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-CZBLEControl/GTMOAuth2.framework'
   install_framework 'Pods-CZBLEControl/GTMSessionFetcher.framework'
   install_framework 'Pods-CZBLEControl/GoogleAPIClient.framework'
+  install_framework 'Pods-CZBLEControl/MBProgressHUD.framework'
   install_framework 'Pods-CZBLEControl/SwiftyDropbox.framework'
 fi

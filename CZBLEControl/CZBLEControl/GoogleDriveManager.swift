@@ -64,6 +64,68 @@ class GoogleDriveManager: NSObject {
         GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName(kKeyChainItemName)
     }
     
+    //MARK: Save data
+    
+    func saveValueData(title: String, dataArray: [(String, String)], completionHandler: (success: Bool) -> Void) {
+        if let data = tupleJoinStr(dataArray).dataUsingEncoding(NSUTF8StringEncoding) {
+            uploadData(title, data: data, completionHandler: completionHandler)
+        } else {
+            completionHandler(success: false)
+        }
+    }
+    
+    func saveWriteAndValueData(title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: (success: Bool) -> Void) {
+        let dataStr = tupleJoinStr(writeArray) + tupleJoinStr(valueArray)
+        if let data = dataStr.dataUsingEncoding(NSUTF8StringEncoding) {
+            uploadData(title, data: data, completionHandler: completionHandler)
+        } else {
+            completionHandler(success: false)
+        }
+    }
+    
+    private func tupleJoinStr(dataArray: [(String, String)]) -> String {
+        var result = ""
+        for tuple in dataArray {
+            result.appendContentsOf(tuple.0 + "\n" + tuple.1 + "\n\n")
+        }
+        return result
+    }
+    
+    private func uploadData(title: String, data: NSData, completionHandler: (success: Bool) -> Void) {
+        let parameter = GTLUploadParameters(data: data, MIMEType: "text/plain")
+        let driveFile = GTLDriveFile()
+        driveFile.name = title
+        let query = GTLQueryDrive.queryForFilesCreateWithObject(driveFile, uploadParameters: parameter)
+        serviceDrive.executeQuery(query, completionHandler: { (ticket, updatedFile, error) in
+            if error != nil {
+                completionHandler(success: false)
+            } else {
+                completionHandler(success: true)
+            }
+        })
+    }
+    
+    //MARK: Fetch data
+    
+    func loadFiles(completionHandler: (success: Bool, files :[GTLDriveFile]?) -> Void) {
+        let query = GTLQueryDrive.queryForFilesList()
+        query.q = "mimeType = 'text/plain'"
+        serviceDrive.executeQuery(query) { (ticket, files, error) in
+            if error != nil {
+                completionHandler(success: false, files: nil)
+            } else if let fileList = files as? GTLDriveFileList {
+                if let filesArray = fileList.files as? [GTLDriveFile] {
+                    completionHandler(success: true, files: filesArray)
+                } else {
+                    completionHandler(success: false, files: nil)
+                }
+            } else {
+                completionHandler(success: false, files: nil)
+            }
+        }
+    }
+    
+    
 //    func fetchFiles() {
 //        output.text = "Getting files..."
 //        let query = GTLQueryDrive.queryForFilesList()
@@ -101,50 +163,5 @@ class GoogleDriveManager: NSObject {
 //    }
 //    
 //    
-//    // Creates the auth controller for authorizing access to Drive API
-//    
-//    private func createAuthController() -> GTMOAuth2ViewControllerTouch {
-//        let scopeString = scopes.joinWithSeparator(" ")
-//        return GTMOAuth2ViewControllerTouch(
-//            scope: scopeString,
-//            clientID: kClientId,
-//            clientSecret: nil,
-//            keychainItemName: kKeyChainItemName,
-//            delegate: self,
-//            finishedSelector: "viewController:finishedWithAuth:error:"
-//        )
-//    }
-//    
-//    // Handle completion of the authorization process, and update the Drive API
-//    // with the new credentials.
-//    func viewController(vc : UIViewController,
-//                        finishedWithAuth authResult : GTMOAuth2Authentication, error : NSError?) {
-//        
-//        if let error = error {
-//            service.authorizer = nil
-//            showAlert("Authentication Error", message: error.localizedDescription)
-//            return
-//        }
-//        
-//        service.authorizer = authResult
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
-//    
-//    // Helper for showing an alert
-//    
-//    func showAlert(title : String, message: String) {
-//        let alert = UIAlertController(
-//            title: title,
-//            message: message,
-//            preferredStyle: UIAlertControllerStyle.Alert
-//        )
-//        let ok = UIAlertAction(
-//            title: "OK",
-//            style: UIAlertActionStyle.Default,
-//            handler: nil
-//        )
-//        alert.addAction(ok)
-//        presentViewController(alert, animated: true, completion: nil)
-//    }
 
 }

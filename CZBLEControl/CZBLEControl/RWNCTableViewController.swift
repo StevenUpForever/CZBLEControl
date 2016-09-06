@@ -7,11 +7,12 @@
 //
 
 import UIKit
-import CoreBluetooth
+import MBProgressHUD
 
-class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, RWNCDelegate {
+class RWNCTableViewController: UITableViewController, RWNCDelegate {
     
     let viewModel = RWNCViewModel()
+    var indicator: MBProgressHUD!
     
     //IBOutlets
     @IBOutlet weak var actionBarItem: UIBarButtonItem!
@@ -24,6 +25,9 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         viewModel.delegate = self
         
         navigationItem.title = viewModel.uuidString
+        indicator = MBProgressHUD(view: tableView)
+        tableView.addSubview(indicator)
+        indicator.label.text = "Saving..."
         
         viewModel.setUIElement(actionBarItem) { 
             self.showfallBackAlertController()
@@ -33,6 +37,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
     
     override func viewWillAppear(animated: Bool) {
         viewModel.centralManager?.delegate = self
+        viewModel.peripheralObj?.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,9 +62,7 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-        
         viewModel.cellText(cell, indexPath: indexPath)
-        
         return cell
     }
     
@@ -67,34 +70,37 @@ class RWNCTableViewController: UITableViewController, CBCentralManagerDelegate, 
         return viewModel.sectionTitle(section)
     }
     
-    //MARK: - CBCentral delegate
-    
-    func centralManagerDidUpdateState(central: CBCentralManager) {
-        switch central.state {
-        case CBCentralManagerState.PoweredOn:
-            break
-        case CBCentralManagerState.PoweredOff:
-            CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
-        default:
-            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
-        }
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return indexPath.section == 0 ? false : true
     }
     
-    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        let alertController = UIAlertController(title: "Peripheral disconnected", message: "Fallback or save your data", preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "back", style: .Default, handler: { (action) in
-            if let nav = self.navigationController {
-                nav.popViewControllerAnimated(true)
-            }
-        }))
-        alertController.addAction(UIAlertAction(title: "Stay", style: .Cancel, handler: nil))
-        presentViewController(alertController, animated: true, completion: nil)
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .Delete
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            viewModel.deleteObjectAtIndexPath(indexPath)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+        }
     }
     
     //MARK: - IBActions and Selectors
     
     @IBAction func actionProcess(sender: UIBarButtonItem) {
         viewModel.actionButtonProcess(sender, target: self)
+    }
+    
+    weak var fileNameTextField: UITextField?
+    weak var submitAction: UIAlertAction?
+    var fileName: String?
+    
+    @IBAction func saveAction(sender: UIBarButtonItem) {
+        if viewModel.dataExisted() {
+            showFileNameAlertController()
+        } else {
+            CustomAlertController.showCancelAlertController("No data to save", message: nil, target: self)
+        }
     }
     
     //MARK: - viewModel delegate
