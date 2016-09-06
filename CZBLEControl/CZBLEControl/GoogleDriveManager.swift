@@ -107,7 +107,7 @@ class GoogleDriveManager: NSObject {
     
     //MARK: Fetch data
     
-    func loadFiles(completionHandler: (success: Bool, files :[GTLDriveFile]?) -> Void) {
+    func loadFiles(completionHandler: (success: Bool, files:[GTLDriveFile]?) -> Void) {
         let query = GTLQueryDrive.queryForFilesList()
         query.q = "mimeType = 'text/plain'"
         serviceDrive.executeQuery(query) { (ticket, files, error) in
@@ -125,43 +125,4 @@ class GoogleDriveManager: NSObject {
         }
     }
     
-    
-//    func fetchFiles() {
-//        output.text = "Getting files..."
-//        let query = GTLQueryDrive.queryForFilesList()
-//        query.pageSize = 10
-//        query.fields = "nextPageToken, files(id, name)"
-//        service.executeQuery(
-//            query,
-//            delegate: self,
-//            didFinishSelector: "displayResultWithTicket:finishedWithObject:error:"
-//        )
-//    }
-//    
-//    // Parse results and display
-//    func displayResultWithTicket(ticket : GTLServiceTicket,
-//                                 finishedWithObject response : GTLDriveFileList,
-//                                                    error : NSError?) {
-//        
-//        if let error = error {
-//            showAlert("Error", message: error.localizedDescription)
-//            return
-//        }
-//        
-//        var filesString = ""
-//        
-//        if let files = response.files() where !files.isEmpty {
-//            filesString += "Files:\n"
-//            for file in files as! [GTLDriveFile] {
-//                filesString += "\(file.name) (\(file.identifier))\n"
-//            }
-//        } else {
-//            filesString = "No files found."
-//        }
-//        
-//        output.text = filesString
-//    }
-//    
-//    
-
 }
