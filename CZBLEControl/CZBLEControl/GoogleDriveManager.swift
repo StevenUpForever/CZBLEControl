@@ -66,20 +66,20 @@ class GoogleDriveManager: NSObject {
     
     //MARK: Save data
     
-    func saveValueData(title: String, dataArray: [(String, String)], completionHandler: (success: Bool) -> Void) {
+    func saveValueData(title: String, dataArray: [(String, String)], completionHandler: statusMessageHandler) {
         if let data = tupleJoinStr(dataArray).dataUsingEncoding(NSUTF8StringEncoding) {
             uploadData(title, data: data, completionHandler: completionHandler)
         } else {
-            completionHandler(success: false)
+            completionHandler(success: false, errorMessage: "Data cannot be transferred to file")
         }
     }
     
-    func saveWriteAndValueData(title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: (success: Bool) -> Void) {
+    func saveWriteAndValueData(title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: statusMessageHandler) {
         let dataStr = tupleJoinStr(writeArray) + tupleJoinStr(valueArray)
         if let data = dataStr.dataUsingEncoding(NSUTF8StringEncoding) {
             uploadData(title, data: data, completionHandler: completionHandler)
         } else {
-            completionHandler(success: false)
+            completionHandler(success: false, errorMessage: "Data cannot be transferred to file")
         }
     }
     
@@ -91,18 +91,66 @@ class GoogleDriveManager: NSObject {
         return result
     }
     
-    private func uploadData(title: String, data: NSData, completionHandler: (success: Bool) -> Void) {
-        let parameter = GTLUploadParameters(data: data, MIMEType: "text/plain")
-        let driveFile = GTLDriveFile()
-        driveFile.name = title
-        let query = GTLQueryDrive.queryForFilesCreateWithObject(driveFile, uploadParameters: parameter)
-        serviceDrive.executeQuery(query, completionHandler: { (ticket, updatedFile, error) in
-            if error != nil {
-                completionHandler(success: false)
+    private func uploadData(title: String, data: NSData, completionHandler: statusMessageHandler) {
+        
+        createFolder {[unowned self] (success, errorMessage) in
+            if success {
+                let parameter = GTLUploadParameters(data: data, MIMEType: "text/plain")
+                let driveFile = GTLDriveFile()
+                driveFile.name = title
+                driveFile.parents = [self.BLEFolder.identifier]
+                let query = GTLQueryDrive.queryForFilesCreateWithObject(driveFile, uploadParameters: parameter)
+                self.serviceDrive.executeQuery(query, completionHandler: { (ticket, updatedFile, error) in
+                    if error != nil {
+                        completionHandler(success: false, errorMessage: "Upload file failed")
+                    } else {
+                        completionHandler(success: true, errorMessage: "Upload file successfully")
+                    }
+                })
             } else {
-                completionHandler(success: true)
+                completionHandler(success: false, errorMessage: errorMessage)
             }
-        })
+        }
+        
+    }
+    
+    private var BLEFolder: GTLDriveFile!
+    
+    func createFolder(completionHandler: statusMessageHandler) {
+        let query = GTLQueryDrive.queryForFilesList()
+        query.q = "mimeType = 'application/vnd.google-apps.folder'"
+        serviceDrive.executeQuery(query) { [unowned self] (checkTicket, files, checkError) in
+            if let tempFileList = files as? GTLDriveFileList {
+                if let fileList = tempFileList.files as? [GTLDriveFile] {
+                    var folderExisted = false
+                    for folderFile in fileList {
+                        if folderFile.name == kFolderName {
+                            self.BLEFolder = folderFile
+                            folderExisted = true
+                            completionHandler(success: true, errorMessage: "Correct folder found")
+                            return
+                        }
+                    }
+                    if folderExisted == false {
+                        let folder = GTLDriveFile()
+                        folder.name = kFolderName
+                        folder.mimeType = "application/vnd.google-apps.folder"
+                        let newFolderQuery = GTLQueryDrive.queryForFilesCreateWithObject(folder, uploadParameters: nil)
+                        self.serviceDrive.executeQuery(newFolderQuery) { (ticket, updatedFile, error) in
+                            if error == nil {
+                                completionHandler(success: true, errorMessage: "Create folder successfully")
+                            } else {
+                                completionHandler(success: false, errorMessage: "Create folder failed")
+                            }
+                        }
+                    }
+                } else {
+                    completionHandler(success: false, errorMessage: "Files are not correct type")
+                }
+            } else {
+                completionHandler(success: false, errorMessage: "Files are not correct type")
+            }
+        }
     }
     
     //MARK: Fetch data

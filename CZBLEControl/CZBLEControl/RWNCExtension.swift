@@ -37,10 +37,10 @@ extension RWNCTableViewController: UITextFieldDelegate {
             dispatch_async(dispatch_get_main_queue(), {
                 self.indicator!.showAnimated(true)
             })
-            self.viewModel.uploadToGoogleDrive(self.fileName ?? "Default file", target: self, completionHandler: { (success) in
+            self.viewModel.uploadToGoogleDrive(self.fileName ?? "Default file", target: self, completionHandler: { (success, errorMessage) in
                 dispatch_async(dispatch_get_main_queue(), {
                     self.indicator!.hideAnimated(true)
-                    CustomAlertController.showCancelAlertController(success ? "Save successfully" : "Save failed", message: nil, target: self)
+                    CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             })
         }))

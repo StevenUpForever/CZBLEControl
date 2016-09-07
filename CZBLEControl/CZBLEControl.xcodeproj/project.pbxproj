@@ -40,6 +40,7 @@
 		AFDB2E681D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E671D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift */; };
 		AFDB2E6C1D7DFA99005ADC38 /* RWNCBLEExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */; };
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
+		B260F6DA1D80D4E9007A9378 /* DataPublicHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */; };
 		B2674D901D5A7A3F00BCC441 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */; };
 		B2674D931D5A9A9300BCC441 /* GoogleDriveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */; };
 		F166EA52CF9A46DB5586816B /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282D07E11D04929118FA4303 /* Pods_CZBLEControl.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -95,6 +96,7 @@
 		AFDB2E671D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModelSaveExtension.swift; sourceTree = "<group>"; };
 		AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCBLEExtension.swift; sourceTree = "<group>"; };
 		AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModel.swift; sourceTree = "<group>"; };
+		B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPublicHeader.swift; sourceTree = "<group>"; };
 		B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDriveManager.swift; sourceTree = "<group>"; };
 		E1EB2B8A0E5D5F15FDA3D249 /* Pods-CZBLEControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.release.xcconfig"; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */,
 				B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */,
 				AF68D29D1D7BF246008F320A /* DropBoxManager.swift */,
+				B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */,
 			);
 			name = "Data Persistence";
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */,
 				AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */,
 				AF6E07AE1D284A440007E92F /* PeripheralViewModel.swift in Sources */,
+				B260F6DA1D80D4E9007A9378 /* DataPublicHeader.swift in Sources */,
 				AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */,
 				AF6E07B01D284A590007E92F /* PeripheralCellViewModel.swift in Sources */,
 				AF6E07B31D284A8B0007E92F /* CharacterInfo.swift in Sources */,

@@ -12,7 +12,7 @@ extension RWNCViewModel {
     
     //MARK: Google Drive
     
-    func uploadToGoogleDrive(fileName: String, target: UIViewController, completionHandler: (success: Bool) -> Void) {
+    func uploadToGoogleDrive(fileName: String, target: UIViewController, completionHandler: statusMessageHandler) {
         if googleDriveManager.isAuthorized() {
             googleDriveSaveData(fileName, completionHandler: completionHandler)
         } else {
@@ -20,21 +20,17 @@ extension RWNCViewModel {
                 if let strongSelf = self where authSuccess {
                     strongSelf.googleDriveSaveData(fileName, completionHandler: completionHandler)
                 } else {
-                    completionHandler(success: false)
+                    completionHandler(success: false, errorMessage: "Authorize user failed")
                 }
             })
         }
     }
     
-    private func googleDriveSaveData(fileName: String, completionHandler: (success: Bool) -> Void) {
+    private func googleDriveSaveData(fileName: String, completionHandler: statusMessageHandler) {
         if identifier == .write {
-            googleDriveManager.saveWriteAndValueData(fileName ?? "Default file", writeArray: writeValueArray, valueArray: valueArray, completionHandler: { (success) in
-                completionHandler(success: success)
-            })
+            googleDriveManager.saveWriteAndValueData(fileName ?? "Default file", writeArray: writeValueArray, valueArray: valueArray, completionHandler: completionHandler)
         } else {
-            googleDriveManager.saveValueData(fileName ?? "Default file", dataArray: valueArray, completionHandler: { (success) in
-                completionHandler(success: success)
-            })
+            googleDriveManager.saveValueData(fileName ?? "Default file", dataArray: valueArray, completionHandler: completionHandler)
         }
     }
     
