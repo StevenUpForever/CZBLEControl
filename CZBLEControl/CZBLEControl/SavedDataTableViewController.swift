@@ -8,29 +8,32 @@
 
 import UIKit
 import GoogleAPIClient
+import MBProgressHUD
+
+enum savedDataSource {
+    case iCloudDrive
+    case GoogleDrive
+    case Dropbox
+    case localDrive
+}
 
 class SavedDataTableViewController: UITableViewController {
     
     var googleDriveArray = [GTLDriveFile]()
+    var indicator: MBProgressHUD!
+    
+    var dataSource: savedDataSource!
 
     //MARK: viewController lifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let g = GoogleDriveManager.sharedManager
-        g.loadFiles { (success, errorMessage, files) in
-            if success {
-                self.googleDriveArray = files!
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadData()
-                })
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
-                })
-            }
-        }
+        indicator = MBProgressHUD(view: view)
+        indicator.label.text = "Loading files..."
+        view.addSubview(indicator)
+        
+        loadProperDataSource(dataSource)
     }
 
     override func didReceiveMemoryWarning() {
