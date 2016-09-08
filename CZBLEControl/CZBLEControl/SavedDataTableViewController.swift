@@ -19,7 +19,7 @@ class SavedDataTableViewController: UITableViewController {
         super.viewDidLoad()
         
         let g = GoogleDriveManager.sharedManager
-        g.loadFiles { (success, files) in
+        g.loadFiles { (success, errorMessage, files) in
             if success {
                 self.googleDriveArray = files!
                 dispatch_async(dispatch_get_main_queue(), {
@@ -27,7 +27,7 @@ class SavedDataTableViewController: UITableViewController {
                 })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
-                    CustomAlertController.showCancelAlertController("Fetch Google Drive file failed", message: nil, target: self)
+                    CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             }
         }

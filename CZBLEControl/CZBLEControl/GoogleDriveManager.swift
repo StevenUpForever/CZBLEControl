@@ -20,7 +20,7 @@ class GoogleDriveManager: NSObject {
     private let serviceDrive = GTLServiceDrive()
     
     override init() {
-        serviceDrive.shouldFetchNextPages = true
+//        serviceDrive.shouldFetchNextPages = true
         serviceDrive.retryEnabled = true
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(kKeyChainItemName, clientID: kClientId, clientSecret: nil) {
             serviceDrive.authorizer = auth
@@ -119,62 +119,73 @@ class GoogleDriveManager: NSObject {
     
     func createFolder(completionHandler: statusMessageHandler) {
         let query = GTLQueryDrive.queryForFilesList()
-        query.q = "mimeType = 'application/vnd.google-apps.folder'"
+        query.q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false"
         serviceDrive.executeQuery(query) { [unowned self] (checkTicket, files, checkError) in
-            if let tempFileList = files as? GTLDriveFileList {
-                if let fileList = tempFileList.files as? [GTLDriveFile] {
-                    var folderExisted = false
-                    for folderFile in fileList {
-                        if folderFile.name == kFolderName {
-                            self.BLEFolder = folderFile
-                            folderExisted = true
-                            completionHandler(success: true, errorMessage: "Correct folder found")
-                            return
+            if checkError != nil {
+                completionHandler(success: false, errorMessage: "Error to find correct folder")
+            } else {
+                if let tempFileList = files as? GTLDriveFileList {
+                    if let fileList = tempFileList.files as? [GTLDriveFile] {
+                        var folderExisted = false
+                        for folderFile in fileList {
+                            if folderFile.name == kFolderName {
+                                self.BLEFolder = folderFile
+                                folderExisted = true
+                                completionHandler(success: true, errorMessage: "Correct folder found")
+                                return
+                            }
                         }
-                    }
-                    if folderExisted == false {
-                        let folder = GTLDriveFile()
-                        folder.name = kFolderName
-                        folder.mimeType = "application/vnd.google-apps.folder"
-                        let newFolderQuery = GTLQueryDrive.queryForFilesCreateWithObject(folder, uploadParameters: nil)
-                        self.serviceDrive.executeQuery(newFolderQuery) {[unowned self] (ticket, updatedFile, error) in
-                            if error == nil {
-                                if let properFile = updatedFile as? GTLDriveFile {
-                                    self.BLEFolder = properFile
-                                    completionHandler(success: true, errorMessage: "Create folder successfully")
+                        if folderExisted == false {
+                            let folder = GTLDriveFile()
+                            folder.name = kFolderName
+                            folder.mimeType = "application/vnd.google-apps.folder"
+                            let newFolderQuery = GTLQueryDrive.queryForFilesCreateWithObject(folder, uploadParameters: nil)
+                            self.serviceDrive.executeQuery(newFolderQuery) {[unowned self] (ticket, updatedFile, error) in
+                                if error == nil {
+                                    if let properFile = updatedFile as? GTLDriveFile {
+                                        self.BLEFolder = properFile
+                                        completionHandler(success: true, errorMessage: "Create folder successfully")
+                                    } else {
+                                        completionHandler(success: false, errorMessage: "Create folder failed")
+                                    }
                                 } else {
                                     completionHandler(success: false, errorMessage: "Create folder failed")
                                 }
-                            } else {
-                                completionHandler(success: false, errorMessage: "Create folder failed")
                             }
                         }
+                    } else {
+                        completionHandler(success: false, errorMessage: "Files are not correct type")
                     }
                 } else {
                     completionHandler(success: false, errorMessage: "Files are not correct type")
                 }
-            } else {
-                completionHandler(success: false, errorMessage: "Files are not correct type")
             }
         }
     }
     
     //MARK: Fetch data
     
-    func loadFiles(completionHandler: (success: Bool, files:[GTLDriveFile]?) -> Void) {
-        let query = GTLQueryDrive.queryForFilesList()
-        query.q = "mimeType = 'text/plain'"
-        serviceDrive.executeQuery(query) { (ticket, files, error) in
-            if error != nil {
-                completionHandler(success: false, files: nil)
-            } else if let fileList = files as? GTLDriveFileList {
-                if let filesArray = fileList.files as? [GTLDriveFile] {
-                    completionHandler(success: true, files: filesArray)
-                } else {
-                    completionHandler(success: false, files: nil)
+    func loadFiles(completionHandler: (success: Bool, errorMessage: String?, files:[GTLDriveFile]?) -> Void) {
+        createFolder {[unowned self] (success, errorMessage) in
+            if success {
+                let query = GTLQueryDrive.queryForFilesList()
+                query.q = "'\(self.BLEFolder.identifier)' in parents and mimeType = 'text/plain'"
+                self.serviceDrive.executeQuery(query) { (ticket, files, error) in
+                    if error != nil {
+                        print(error)
+                        completionHandler(success: false, errorMessage: "Error when load file", files: nil)
+                    } else if let fileList = files as? GTLDriveFileList {
+                        if let filesArray = fileList.files as? [GTLDriveFile] {
+                            completionHandler(success: true, errorMessage: "Load files successfully", files: filesArray)
+                        } else {
+                            completionHandler(success: false, errorMessage: "No file to show", files: nil)
+                        }
+                    } else {
+                        completionHandler(success: false, errorMessage: "Error when load file", files: nil)
+                    }
                 }
             } else {
-                completionHandler(success: false, files: nil)
+                completionHandler(success: false, errorMessage: errorMessage, files: nil)
             }
         }
     }
