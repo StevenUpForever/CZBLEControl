@@ -341,8 +341,8 @@
 			children = (
 				B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */,
 				AFDB2E5F1D7CD0D3005ADC38 /* SavedDataTableViewController.swift */,
-				B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */,
 				B260F6DE1D821BDE007A9378 /* SavedDataVCExtension.swift */,
+				B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */,
 				B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */,
 			);
 			name = "Saved Data TableViews";

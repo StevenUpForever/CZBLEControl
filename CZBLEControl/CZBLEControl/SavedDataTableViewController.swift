@@ -53,8 +53,7 @@ class SavedDataTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! SavedDataTableViewCell
         
-        cell.textLabel?.text = googleDriveArray[indexPath.row].name
-        cell.dataSourceObj = googleDriveArray[indexPath.row]
+        cell.loadData(googleDriveArray[indexPath.row])
 
         return cell
     }

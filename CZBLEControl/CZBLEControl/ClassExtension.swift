@@ -47,6 +47,10 @@ extension UITextField {
     }
 }
 
-extension String {
+extension NSString {
+    
+    func parseToDataTableView() -> [NSString] {
+        return componentsSeparatedByString("\n\n")
+    }
     
 }

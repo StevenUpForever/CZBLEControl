@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleAPIClient
 
 class SavedDataTableViewCell: UITableViewCell {
     
@@ -21,6 +22,15 @@ class SavedDataTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func loadData(sourceObj: AnyObject) {
+        
+        dataSourceObj = sourceObj
+        
+        if sourceObj is GTLDriveFile {
+            textLabel?.text = sourceObj.name
+        }
     }
 
 }
