@@ -41,6 +41,7 @@
 		AFDB2E6C1D7DFA99005ADC38 /* RWNCBLEExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */; };
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
 		B260F6DA1D80D4E9007A9378 /* DataPublicHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */; };
+		B260F6DD1D81F54A007A9378 /* SavedDataDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */; };
 		B2674D901D5A7A3F00BCC441 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */; };
 		B2674D931D5A9A9300BCC441 /* GoogleDriveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */; };
 		F166EA52CF9A46DB5586816B /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282D07E11D04929118FA4303 /* Pods_CZBLEControl.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -97,6 +98,7 @@
 		AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCBLEExtension.swift; sourceTree = "<group>"; };
 		AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModel.swift; sourceTree = "<group>"; };
 		B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPublicHeader.swift; sourceTree = "<group>"; };
+		B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataDetailTableViewController.swift; sourceTree = "<group>"; };
 		B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDriveManager.swift; sourceTree = "<group>"; };
 		E1EB2B8A0E5D5F15FDA3D249 /* Pods-CZBLEControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.release.xcconfig"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				AF68D29A1D7BC043008F320A /* AccountManagerViewController.swift */,
 				AFDB2E5F1D7CD0D3005ADC38 /* SavedDataTableViewController.swift */,
+				B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -338,10 +341,10 @@
 		B2674D911D5A9A5100BCC441 /* Data Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */,
 				B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */,
 				B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */,
 				AF68D29D1D7BF246008F320A /* DropBoxManager.swift */,
-				B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */,
 			);
 			name = "Data Persistence";
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */,
 				AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */,
 				AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */,
+				B260F6DD1D81F54A007A9378 /* SavedDataDetailTableViewController.swift in Sources */,
 				AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */,
 				AFDB2E601D7CD0D3005ADC38 /* SavedDataTableViewController.swift in Sources */,
 				AFDB2E621D7CE683005ADC38 /* RWNCExtension.swift in Sources */,
