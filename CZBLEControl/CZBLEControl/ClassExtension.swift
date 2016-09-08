@@ -45,5 +45,8 @@ extension UITextField {
         self.layer.borderColor = UIColor.clearColor().CGColor
         self.layer.borderWidth = 0.0
     }
+}
+
+extension String {
     
 }

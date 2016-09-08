@@ -41,6 +41,7 @@
 		AFDB2E6C1D7DFA99005ADC38 /* RWNCBLEExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */; };
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
 		B23B35AF1D821D5500E90E08 /* SavedDataSourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */; };
+		B23B35B31D8226D100E90E08 /* SavedDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */; };
 		B260F6DA1D80D4E9007A9378 /* DataPublicHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */; };
 		B260F6DD1D81F54A007A9378 /* SavedDataDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */; };
 		B260F6DF1D821BDE007A9378 /* SavedDataVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6DE1D821BDE007A9378 /* SavedDataVCExtension.swift */; };
@@ -100,6 +101,7 @@
 		AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCBLEExtension.swift; sourceTree = "<group>"; };
 		AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModel.swift; sourceTree = "<group>"; };
 		B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataSourceTableViewController.swift; sourceTree = "<group>"; };
+		B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataTableViewCell.swift; sourceTree = "<group>"; };
 		B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPublicHeader.swift; sourceTree = "<group>"; };
 		B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataDetailTableViewController.swift; sourceTree = "<group>"; };
 		B260F6DE1D821BDE007A9378 /* SavedDataVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataVCExtension.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 			children = (
 				B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */,
 				AFDB2E5F1D7CD0D3005ADC38 /* SavedDataTableViewController.swift */,
+				B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */,
 				B260F6DE1D821BDE007A9378 /* SavedDataVCExtension.swift */,
 				B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */,
 			);
@@ -549,6 +552,7 @@
 				AFDA74791CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld in Sources */,
 				B2674D931D5A9A9300BCC441 /* GoogleDriveManager.swift in Sources */,
 				AFDB2E681D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift in Sources */,
+				B23B35B31D8226D100E90E08 /* SavedDataTableViewCell.swift in Sources */,
 				AF6E079F1D2655C80007E92F /* CustomView.swift in Sources */,
 				AFDB2E641D7DF684005ADC38 /* RWNCViewModelTBExtension.swift in Sources */,
 				AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */,

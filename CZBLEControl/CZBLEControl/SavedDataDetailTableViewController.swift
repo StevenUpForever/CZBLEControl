@@ -7,11 +7,18 @@
 //
 
 import UIKit
+import GoogleAPIClient
 
 class SavedDataDetailTableViewController: UITableViewController {
+    
+    var sourceObj: AnyObject!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if sourceObj is GTLDriveFile {
+            GoogleDriveManager.sharedManager.readFileContent(sourceObj as! GTLDriveFile)
+        }
         
     }
 

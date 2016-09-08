@@ -18,6 +18,7 @@ extension SavedDataTableViewController {
         case .iCloudDrive:
             break
         case .GoogleDrive:
+            navigationItem.title = "Google Drive"
             loadGoogleDriveFilesWithAuthorize()
         case .Dropbox:
             break

@@ -51,11 +51,18 @@ class SavedDataTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! SavedDataTableViewCell
         
         cell.textLabel?.text = googleDriveArray[indexPath.row].name
+        cell.dataSourceObj = googleDriveArray[indexPath.row]
 
         return cell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationVC = segue.destinationViewController as? SavedDataDetailTableViewController, senderCell = sender as? SavedDataTableViewCell {
+            destinationVC.sourceObj = senderCell.dataSourceObj
+        }
     }
 
 }

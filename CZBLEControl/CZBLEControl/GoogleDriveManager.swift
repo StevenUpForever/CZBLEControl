@@ -142,6 +142,34 @@ class GoogleDriveManager: NSObject {
         }
     }
     
+    func readFileContent(driveFile: GTLDriveFile) {
+        let fetcher = serviceDrive.fetcherService.fetcherWithURLString("https://www.googleapis.com/drive/v3/files/\(driveFile.identifier)?alt=media")
+        fetcher.beginFetchWithCompletionHandler { (data, error) in
+            if data != nil {
+                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                print(dataString)
+            }
+        }
+//        GTMHTTPFetcher *fetcher =
+//            [self.driveService.fetcherService fetcherWithURLString:self.driveFile.downloadUrl];
+//        
+//        [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
+//            [alert dismissWithClickedButtonIndex:0 animated:YES];
+//            if (error == nil) {
+//            NSString* fileContent = [[NSString alloc] initWithData:data
+//            encoding:NSUTF8StringEncoding];
+//            self.textView.text = fileContent;
+//            self.originalContent = [fileContent copy];
+//            } else {
+//            NSLog(@"An error occurred: %@", error);
+//            [QEUtilities showErrorMessageWithTitle:@"Unable to load file"
+//            message:[error description]
+//            delegate:self];
+//            }
+//            }];
+        
+    }
+    
     //MARK: Helper methods
     
     private var BLEFolder: GTLDriveFile!
