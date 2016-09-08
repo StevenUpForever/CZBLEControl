@@ -102,6 +102,7 @@ class GoogleDriveManager: NSObject {
                 let query = GTLQueryDrive.queryForFilesCreateWithObject(driveFile, uploadParameters: parameter)
                 self.serviceDrive.executeQuery(query, completionHandler: { (ticket, updatedFile, error) in
                     if error != nil {
+                        print(error)
                         completionHandler(success: false, errorMessage: "Upload file failed")
                     } else {
                         completionHandler(success: true, errorMessage: "Upload file successfully")
@@ -136,9 +137,14 @@ class GoogleDriveManager: NSObject {
                         folder.name = kFolderName
                         folder.mimeType = "application/vnd.google-apps.folder"
                         let newFolderQuery = GTLQueryDrive.queryForFilesCreateWithObject(folder, uploadParameters: nil)
-                        self.serviceDrive.executeQuery(newFolderQuery) { (ticket, updatedFile, error) in
+                        self.serviceDrive.executeQuery(newFolderQuery) {[unowned self] (ticket, updatedFile, error) in
                             if error == nil {
-                                completionHandler(success: true, errorMessage: "Create folder successfully")
+                                if let properFile = updatedFile as? GTLDriveFile {
+                                    self.BLEFolder = properFile
+                                    completionHandler(success: true, errorMessage: "Create folder successfully")
+                                } else {
+                                    completionHandler(success: false, errorMessage: "Create folder failed")
+                                }
                             } else {
                                 completionHandler(success: false, errorMessage: "Create folder failed")
                             }
