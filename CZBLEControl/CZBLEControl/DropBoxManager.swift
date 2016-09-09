@@ -120,4 +120,27 @@ class DropBoxManager: NSObject {
         })
     }
     
+    func readFileContent(fileObj: Files.Metadata, completionHandler: (success: Bool, dataArray: [[NSString]]?, errorMessage: String?) -> Void) {
+        Dropbox.authorizedClient?.files.download(path: "/\(kFolderName)/\(fileObj.name)", destination: { (url, urlResponse) -> NSURL in
+            let pathStr = NSTemporaryDirectory().stringByAppendingString("/Dropbox/" + fileObj.name)
+            return NSURL(fileURLWithPath: pathStr)
+        }).response({ (response, error) in
+            if error != nil {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Failed to read file content")
+            } else if let (_, url) = response {
+                if let data = NSData(contentsOfURL: url) {
+                    if let dataString = NSString(data: data, encoding: NSUTF8StringEncoding) {
+                        completionHandler(success: true, dataArray: dataString.parseToDataTableView(), errorMessage: "Parse file content successfully")
+                    } else {
+                        completionHandler(success: false, dataArray: nil, errorMessage: "Failed to parse file content")
+                    }
+                } else {
+                    completionHandler(success: false, dataArray: nil, errorMessage: "Failed to transfer file content")
+                }
+            } else {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Failed to read file content")
+            }
+        })
+    }
+    
 }

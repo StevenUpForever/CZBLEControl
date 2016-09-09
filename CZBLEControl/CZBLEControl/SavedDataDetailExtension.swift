@@ -8,6 +8,7 @@
 
 import Foundation
 import GoogleAPIClient
+import SwiftyDropbox
 
 extension SavedDataDetailTableViewController {
     
@@ -20,21 +21,33 @@ extension SavedDataDetailTableViewController {
             navigationItem.title = sourceObj.name
             
             GoogleDriveManager.sharedManager.readFileContent(sourceObj as! GTLDriveFile, completionHandler: { (success, dataArray, errorMessage) in
-                if success && dataArray != nil {
-                    self.dataSourceArray = dataArray!
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.indicator.hideAnimated(true)
-                        self.tableView.reloadData()
-                    })
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.indicator.hideAnimated(true)
-                        CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
-                    })
-                }
+                self.parseResponse(success, dataArray: dataArray, errorMessage: errorMessage)
             })
+        } else if sourceObj is Files.Metadata {
+            
+            navigationItem.title = sourceObj.name
+            
+            DropBoxManager.sharedManager.readFileContent(sourceObj as! Files.Metadata, completionHandler: { (success, dataArray, errorMessage) in
+                self.parseResponse(success, dataArray: dataArray, errorMessage: errorMessage)
+            })
+            
         }
         
+    }
+    
+    private func parseResponse(success: Bool, dataArray: [[NSString]]?, errorMessage: String?) {
+        if success && dataArray != nil {
+            self.dataSourceArray = dataArray!
+            dispatch_async(dispatch_get_main_queue(), {
+                self.indicator.hideAnimated(true)
+                self.tableView.reloadData()
+            })
+        } else {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.indicator.hideAnimated(true)
+                CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
+            })
+        }
     }
     
 }
