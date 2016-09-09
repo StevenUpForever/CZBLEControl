@@ -45,5 +45,17 @@ extension UITextField {
         self.layer.borderColor = UIColor.clearColor().CGColor
         self.layer.borderWidth = 0.0
     }
+}
+
+extension NSString {
+    
+    func parseToDataTableView() -> [[NSString]] {
+        let dataArray = componentsSeparatedByString("\n\n")
+        var result = [[NSString]]()
+        for str in dataArray {
+            result.append(str.componentsSeparatedByString("\n"))
+        }
+        return result
+    }
     
 }

@@ -8,29 +8,32 @@
 
 import UIKit
 import GoogleAPIClient
+import MBProgressHUD
+
+enum savedDataSource {
+    case iCloudDrive
+    case GoogleDrive
+    case Dropbox
+    case localDrive
+}
 
 class SavedDataTableViewController: UITableViewController {
     
-    var googleDriveArray = [GTLDriveFile]()
+    var dataSourceArray = [AnyObject]()
+    var indicator: MBProgressHUD!
+    
+    var dataSource: savedDataSource!
 
     //MARK: viewController lifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let g = GoogleDriveManager.sharedManager
-        g.loadFiles { (success, files) in
-            if success {
-                self.googleDriveArray = files!
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadData()
-                })
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    CustomAlertController.showCancelAlertController("Fetch Google Drive file failed", message: nil, target: self)
-                })
-            }
-        }
+        indicator = MBProgressHUD(view: view)
+        indicator.label.text = "Loading files..."
+        view.addSubview(indicator)
+        
+        loadProperDataSource(dataSource)
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,15 +47,21 @@ class SavedDataTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return googleDriveArray.count
+        return dataSourceArray.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! SavedDataTableViewCell
         
-        cell.textLabel?.text = googleDriveArray[indexPath.row].name
+        cell.loadData(dataSourceArray[indexPath.row])
 
         return cell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationVC = segue.destinationViewController as? SavedDataDetailTableViewController, senderCell = sender as? SavedDataTableViewCell {
+            destinationVC.sourceObj = senderCell.dataSourceObj
+        }
     }
 
 }
