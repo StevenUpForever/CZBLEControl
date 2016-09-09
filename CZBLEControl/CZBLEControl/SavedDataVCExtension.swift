@@ -22,6 +22,7 @@ extension SavedDataTableViewController {
             loadGoogleDriveFilesWithAuthorize()
         case .Dropbox:
             navigationItem.title = "Dropbox"
+            loadDropboxFilesWithAuthorize()
         case .localDrive: 
             break
         }
@@ -61,6 +62,14 @@ extension SavedDataTableViewController {
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             }
+        }
+    }
+    
+    //MARK: Dropbox stack
+    
+    private func loadDropboxFilesWithAuthorize() {
+        DropBoxManager.sharedManager.createFolder { (success, errorMessage) in
+            
         }
     }
     
