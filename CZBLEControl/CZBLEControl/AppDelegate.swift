@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+//        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
         Dropbox.setupWithAppKey("9cc6hhoqm5u7ipn")
         
         //Thread wait for 1 second for Lauching screen
