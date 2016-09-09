@@ -46,6 +46,7 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
     //Data Save objects
     
     let googleDriveManager = GoogleDriveManager.sharedManager
+    let dropboxManager = DropBoxManager.sharedManager
     
     //UI viewModel
     

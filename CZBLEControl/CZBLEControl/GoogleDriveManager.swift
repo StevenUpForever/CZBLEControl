@@ -83,14 +83,6 @@ class GoogleDriveManager: NSObject {
         }
     }
     
-    private func tupleJoinStr(dataArray: [(String, String)]) -> String {
-        var result = ""
-        for tuple in dataArray {
-            result.appendContentsOf(tuple.0 + "\n" + tuple.1 + "\n\n")
-        }
-        return result
-    }
-    
     private func uploadData(title: String, data: NSData, completionHandler: statusMessageHandler) {
         
         createFolder {[unowned self] (success, errorMessage) in

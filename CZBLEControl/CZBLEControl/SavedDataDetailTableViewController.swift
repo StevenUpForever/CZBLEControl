@@ -25,7 +25,6 @@ class SavedDataDetailTableViewController: UITableViewController {
         view.addSubview(indicator)
         
         loadProperFileContent()
-        
     }
 
     override func didReceiveMemoryWarning() {

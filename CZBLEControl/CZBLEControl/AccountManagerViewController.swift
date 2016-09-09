@@ -66,8 +66,13 @@ class AccountManagerViewController: UIViewController, dropboxDelegate {
     
     //MARK: delegate
     
-    func didSuccessfullyAuthorizeUser(token: DropboxAccessToken) {
-        changeLabelState(self.dropBoxLabel, success: true)
+    
+    func didFinishAuthorizeUser(success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?) {
+        if success {
+            changeLabelState(self.dropBoxLabel, success: true)
+        } else {
+            CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
+        }
     }
     
     private func changeLabelState(sender: UILabel, success:Bool) {
