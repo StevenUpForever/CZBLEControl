@@ -121,8 +121,8 @@ class DropBoxManager: NSObject {
     }
     
     func readFileContent(fileObj: Files.Metadata, completionHandler: (success: Bool, dataArray: [[NSString]]?, errorMessage: String?) -> Void) {
-        Dropbox.authorizedClient?.files.download(path: "/\(kFolderName)/\(fileObj.name)", destination: { (url, urlResponse) -> NSURL in
-            let pathStr = NSTemporaryDirectory().stringByAppendingString("/Dropbox/" + fileObj.name)
+        Dropbox.authorizedClient?.files.download(path: "/\(kFolderName)/\(fileObj.name)", rev: nil, overwrite: true, destination: { (url, urlResponse) -> NSURL in
+            let pathStr = NSTemporaryDirectory().stringByAppendingString(fileObj.name)
             return NSURL(fileURLWithPath: pathStr)
         }).response({ (response, error) in
             if error != nil {
