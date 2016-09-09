@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleAPIClient
+import SwiftyDropbox
 
 class SavedDataTableViewCell: UITableViewCell {
     
@@ -29,6 +30,8 @@ class SavedDataTableViewCell: UITableViewCell {
         dataSourceObj = sourceObj
         
         if sourceObj is GTLDriveFile {
+            textLabel?.text = sourceObj.name
+        } else if sourceObj is Files.Metadata {
             textLabel?.text = sourceObj.name
         }
     }

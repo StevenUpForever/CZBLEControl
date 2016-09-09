@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import SwiftyDropbox
 
-extension SavedDataTableViewController {
+extension SavedDataTableViewController: dropboxDelegate {
     
     func loadProperDataSource(type: savedDataSource) {
         
@@ -67,9 +68,37 @@ extension SavedDataTableViewController {
     
     //MARK: Dropbox stack
     
-    private func loadDropboxFilesWithAuthorize() {
-        DropBoxManager.sharedManager.createFolder { (success, errorMessage) in
-            
+    func loadDropboxFilesWithAuthorize() {
+        let dropboxManager = DropBoxManager.sharedManager
+        dropboxManager.delegate = self
+        if dropboxManager.isAuthorized() {
+            dropboxManager.loadFileList { (success, dataArray, errorMessage) in
+                if success && dataArray != nil {
+                    self.dataSourceArray = dataArray!
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.indicator.hideAnimated(true)
+                        self.tableView.reloadData()
+                    })
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.indicator.hideAnimated(true)
+                        CustomAlertController.showCancelAlertController("Failed to get file list", message: nil, target: self)
+                    })
+                }
+            }
+        } else {
+            dropboxManager.authorizeUser(self)
+        }
+    }
+    
+    func didFinishAuthorizeUser(success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?) {
+        if success {
+            loadDropboxFilesWithAuthorize()
+        } else {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.indicator.hideAnimated(true)
+                CustomAlertController.showCancelAlertController("Authorize Dropbox user failed", message: nil, target: self)
+            })
         }
     }
     

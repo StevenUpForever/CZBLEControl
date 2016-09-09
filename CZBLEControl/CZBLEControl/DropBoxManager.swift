@@ -73,7 +73,7 @@ class DropBoxManager: NSObject {
     
     private var DropboxFolder: Files.Metadata!
     
-    func createFolder(completionHandler: statusMessageHandler) {
+    private func createFolder(completionHandler: statusMessageHandler) {
         Dropbox.authorizedClient?.files.listFolder(path: "", recursive: false, includeMediaInfo: false, includeDeleted: false, includeHasExplicitSharedMembers: false).response({ (response, error) in
             if error != nil {
                 completionHandler(success: false, errorMessage: "Error when chenck file list")
@@ -101,6 +101,21 @@ class DropBoxManager: NSObject {
                 }
             } else {
                 completionHandler(success: false, errorMessage: "No data available")
+            }
+        })
+    }
+    
+    func loadFileList(completionHandler: (success: Bool, dataArray: [Files.Metadata]?, errorMessage: String?) -> Void) {
+        Dropbox.authorizedClient?.files.listFolder(path: "/\(kFolderName)", recursive: false, includeMediaInfo: false, includeDeleted: false, includeHasExplicitSharedMembers: false).response({ (response, error) in
+            if error != nil {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Error when chenck file list")
+            } else if let filesList = response?.entries {
+                let validTextList = filesList.filter({ (file) -> Bool in
+                    file.name.hasSuffix(".txt")
+                })
+                completionHandler(success: true, dataArray: validTextList, errorMessage: "Successfully get files list")
+            } else {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Error when chenck file list")
             }
         })
     }
