@@ -40,11 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let authResult = Dropbox.handleRedirectURL(url) {
             switch authResult {
             case .Success(let token):
-                DropBoxManager.sharedManager.delegate?.didSuccessfullyAuthorizeUser(token)
-                print("Success! User is logged into Dropbox with token: \(token)")
+                DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(true, token: token, error: nil, errorMessage: nil)
+//                print("Success! User is logged into Dropbox with token: \(token)")
             case .Cancel:
-                print("Authorization flow was manually canceled by user.")
+                DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(false, token: nil, error: nil, errorMessage: "You canceled login")
+//                print("Authorization flow was manually canceled by user.")
             case .Error(let error, let description):
+                DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(false, token: nil, error: error, errorMessage: description)
                 print("Error \(error): \(description)")
             }
         }

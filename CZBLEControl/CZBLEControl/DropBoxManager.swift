@@ -10,7 +10,7 @@ import UIKit
 import SwiftyDropbox
 
 protocol dropboxDelegate: class {
-    func didSuccessfullyAuthorizeUser(token: DropboxAccessToken)
+    func didFinishAuthorizeUser(success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?)
 }
 
 class DropBoxManager: NSObject {
@@ -24,7 +24,6 @@ class DropBoxManager: NSObject {
     
     func authorizeUser(viewControllerTarget: UIViewController) {
         Dropbox.authorizeFromController(viewControllerTarget)
-        
     }
     
     func deauthorizeUser() {
