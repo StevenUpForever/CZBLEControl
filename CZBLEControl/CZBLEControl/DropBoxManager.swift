@@ -45,7 +45,7 @@ class DropBoxManager: NSObject {
     }
     
     func saveWriteAndValueData(title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: statusMessageHandler) {
-        let dataStr = tupleJoinStr(writeArray) + tupleJoinStr(valueArray)
+        let dataStr = "Write Value\n\n" + tupleJoinStr(writeArray) + "Read Value\n\n" + tupleJoinStr(valueArray)
         if let data = dataStr.dataUsingEncoding(NSUTF8StringEncoding) {
             uploadData(title, data: data, completionHandler: completionHandler)
         } else {
