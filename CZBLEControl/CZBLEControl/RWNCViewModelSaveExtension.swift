@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwiftyDropbox
 
-extension RWNCViewModel {
+extension RWNCViewModel: dropboxDelegate {
     
     //MARK: Google Drive
     
@@ -31,6 +32,31 @@ extension RWNCViewModel {
             googleDriveManager.saveWriteAndValueData(fileName ?? "Default file", writeArray: writeValueArray, valueArray: valueArray, completionHandler: completionHandler)
         } else {
             googleDriveManager.saveValueData(fileName ?? "Default file", dataArray: valueArray, completionHandler: completionHandler)
+        }
+    }
+    
+    //MARK: Dropbox
+    
+    func uploadToDropbox(fileName: String, target: UIViewController, completionHandler: statusMessageHandler) {
+        dropboxManager.delegate = self
+        if dropboxManager.isAuthorized() {
+            dropboxSaveData(fileName, completionHandler: completionHandler)
+        } else {
+            dropboxManager.authorizeUser(target)
+        }
+    }
+    
+    private func dropboxSaveData(fileName: String, completionHandler: statusMessageHandler) {
+        if identifier == .write {
+            dropboxManager.saveWriteAndValueData(fileName ?? "Default file", writeArray: writeValueArray, valueArray: valueArray, completionHandler: completionHandler)
+        } else {
+            dropboxManager.saveValueData(fileName ?? "Default file", dataArray: valueArray, completionHandler: completionHandler)
+        }
+    }
+    
+    func didFinishAuthorizeUser(success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?) {
+        if success {
+            <#code#>
         }
     }
     

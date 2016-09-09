@@ -54,44 +54,55 @@ class DropBoxManager: NSObject {
     }
     
     private func uploadData(title: String, data: NSData, completionHandler: statusMessageHandler) {
-        
-//        Dropbox.authorizedClient?.files.listFolder(path: <#T##String#>)
-        
-        createFolder {[unowned self] (success, errorMessage) in
-//            if success {
-//                let parameter = GTLUploadParameters(data: data, MIMEType: "text/plain")
-//                let driveFile = GTLDriveFile()
-//                driveFile.name = title
-//                driveFile.parents = [self.BLEFolder.identifier]
-//                let query = GTLQueryDrive.queryForFilesCreateWithObject(driveFile, uploadParameters: parameter)
-//                self.serviceDrive.executeQuery(query, completionHandler: { (ticket, updatedFile, error) in
-//                    if error != nil {
-//                        print(error)
-//                        completionHandler(success: false, errorMessage: "Upload file failed")
-//                    } else {
-//                        completionHandler(success: true, errorMessage: "Upload file successfully")
-//                    }
-//                })
-//            } else {
-//                completionHandler(success: false, errorMessage: errorMessage)
-//            }
+        createFolder {(success, errorMessage) in
+            if success {
+                Dropbox.authorizedClient?.files.upload(path: "/\(kFolderName)/\(title).txt", input: data).response({ (metaData, error) in
+                    if error != nil {
+                        completionHandler(success: false, errorMessage: "Upload file failed")
+                    } else if metaData != nil {
+                        completionHandler(success: true, errorMessage: "Upload file successfully")
+                    } else {
+                        completionHandler(success: false, errorMessage: "File data unavailable")
+                    }
+                })
+            } else {
+                completionHandler(success: false, errorMessage: errorMessage)
+            }
         }
-        
     }
+    
+    private var DropboxFolder: Files.Metadata!
     
     func createFolder(completionHandler: statusMessageHandler) {
         Dropbox.authorizedClient?.files.listFolder(path: "", recursive: false, includeMediaInfo: false, includeDeleted: false, includeHasExplicitSharedMembers: false).response({ (response, error) in
-            if let entries = response?.entries {
+            if error != nil {
+                completionHandler(success: false, errorMessage: "Error when chenck file list")
+            } else if let entries = response?.entries {
+                var folderExisted = false
                 for entry in entries {
-                    print(entry.name + "\n" + entry.description)
-                    
-                    
+                    if entry.name == kFolderName {
+                        self.DropboxFolder = entry
+                        folderExisted = true
+                        completionHandler(success: true, errorMessage: "Folder existed")
+                        return
+                    }
                 }
+                if !folderExisted {
+                    Dropbox.authorizedClient?.files.createFolder(path: "/\(kFolderName)").response({ (fileMetaData, error) in
+                        if error != nil {
+                            completionHandler(success: false, errorMessage: "Create folder failed")
+                        } else if fileMetaData != nil {
+                            self.DropboxFolder = fileMetaData!
+                            completionHandler(success: true, errorMessage: "Create folder successfully")
+                        } else {
+                            completionHandler(success: false, errorMessage: "Folder data unavailable")
+                        }
+                    })
+                }
+            } else {
+                completionHandler(success: false, errorMessage: "No data available")
             }
         })
-//        Dropbox.authorizedClient?.files.createFolder(path: <#T##String#>)
     }
     
-    
-
 }
