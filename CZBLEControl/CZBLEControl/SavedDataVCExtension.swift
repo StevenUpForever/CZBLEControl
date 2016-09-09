@@ -21,7 +21,7 @@ extension SavedDataTableViewController {
             navigationItem.title = "Google Drive"
             loadGoogleDriveFilesWithAuthorize()
         case .Dropbox:
-            break
+            navigationItem.title = "Dropbox"
         case .localDrive: 
             break
         }
@@ -50,7 +50,7 @@ extension SavedDataTableViewController {
     private func loadGoogleDriveFiles(googleDriveManager: GoogleDriveManager) {
         googleDriveManager.loadFiles { (success, errorMessage, files) in
             if success {
-                self.googleDriveArray = files!
+                self.dataSourceArray = files!
                 dispatch_async(dispatch_get_main_queue(), {
                     self.indicator.hideAnimated(true)
                     self.tableView.reloadData()

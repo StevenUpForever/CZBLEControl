@@ -142,13 +142,19 @@ class GoogleDriveManager: NSObject {
         }
     }
     
-    func readFileContent(driveFile: GTLDriveFile) {
+    func readFileContent(driveFile: GTLDriveFile, completionHandler: (success: Bool, dataArray: [[NSString]]?, errorMessage: String?) -> Void) {
         let fetcher = serviceDrive.fetcherService.fetcherWithURLString("https://www.googleapis.com/drive/v3/files/\(driveFile.identifier)?alt=media")
         fetcher.beginFetchWithCompletionHandler { (data, error) in
-            if data != nil {
+            if error != nil {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Failed to download file")
+            } else if data != nil {
                 if let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding) {
-                    print(dataString.parseToDataTableView())
+                    completionHandler(success: true, dataArray: dataString.parseToDataTableView(), errorMessage: "Parse file content successfully")
+                } else {
+                    completionHandler(success: false, dataArray: nil, errorMessage: "Failed to parse file content")
                 }
+            } else {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Unknown error to download file")
             }
         }
     }

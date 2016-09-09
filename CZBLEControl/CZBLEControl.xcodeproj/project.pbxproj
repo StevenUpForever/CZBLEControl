@@ -42,6 +42,7 @@
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
 		B23B35AF1D821D5500E90E08 /* SavedDataSourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */; };
 		B23B35B31D8226D100E90E08 /* SavedDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */; };
+		B23B35B71D8234B100E90E08 /* SavedDataDetailExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35B61D8234B100E90E08 /* SavedDataDetailExtension.swift */; };
 		B260F6DA1D80D4E9007A9378 /* DataPublicHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */; };
 		B260F6DD1D81F54A007A9378 /* SavedDataDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */; };
 		B260F6DF1D821BDE007A9378 /* SavedDataVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6DE1D821BDE007A9378 /* SavedDataVCExtension.swift */; };
@@ -102,6 +103,7 @@
 		AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModel.swift; sourceTree = "<group>"; };
 		B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataSourceTableViewController.swift; sourceTree = "<group>"; };
 		B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataTableViewCell.swift; sourceTree = "<group>"; };
+		B23B35B61D8234B100E90E08 /* SavedDataDetailExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataDetailExtension.swift; sourceTree = "<group>"; };
 		B260F6D91D80D4E9007A9378 /* DataPublicHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPublicHeader.swift; sourceTree = "<group>"; };
 		B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataDetailTableViewController.swift; sourceTree = "<group>"; };
 		B260F6DE1D821BDE007A9378 /* SavedDataVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataVCExtension.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				B260F6DE1D821BDE007A9378 /* SavedDataVCExtension.swift */,
 				B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */,
 				B260F6DC1D81F54A007A9378 /* SavedDataDetailTableViewController.swift */,
+				B23B35B61D8234B100E90E08 /* SavedDataDetailExtension.swift */,
 			);
 			name = "Saved Data TableViews";
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */,
 				B260F6DD1D81F54A007A9378 /* SavedDataDetailTableViewController.swift in Sources */,
 				AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */,
+				B23B35B71D8234B100E90E08 /* SavedDataDetailExtension.swift in Sources */,
 				AFDB2E601D7CD0D3005ADC38 /* SavedDataTableViewController.swift in Sources */,
 				AFDB2E621D7CE683005ADC38 /* RWNCExtension.swift in Sources */,
 				AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */,

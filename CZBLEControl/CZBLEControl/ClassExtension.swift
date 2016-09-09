@@ -49,8 +49,13 @@ extension UITextField {
 
 extension NSString {
     
-    func parseToDataTableView() -> [NSString] {
-        return componentsSeparatedByString("\n\n")
+    func parseToDataTableView() -> [[NSString]] {
+        let dataArray = componentsSeparatedByString("\n\n")
+        var result = [[NSString]]()
+        for str in dataArray {
+            result.append(str.componentsSeparatedByString("\n"))
+        }
+        return result
     }
     
 }

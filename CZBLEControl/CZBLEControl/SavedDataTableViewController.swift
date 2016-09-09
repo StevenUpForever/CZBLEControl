@@ -19,7 +19,7 @@ enum savedDataSource {
 
 class SavedDataTableViewController: UITableViewController {
     
-    var googleDriveArray = [GTLDriveFile]()
+    var dataSourceArray = [AnyObject]()
     var indicator: MBProgressHUD!
     
     var dataSource: savedDataSource!
@@ -47,13 +47,13 @@ class SavedDataTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return googleDriveArray.count
+        return dataSourceArray.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! SavedDataTableViewCell
         
-        cell.loadData(googleDriveArray[indexPath.row])
+        cell.loadData(dataSourceArray[indexPath.row])
 
         return cell
     }

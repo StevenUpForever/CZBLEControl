@@ -7,18 +7,24 @@
 //
 
 import UIKit
-import GoogleAPIClient
+import MBProgressHUD
 
 class SavedDataDetailTableViewController: UITableViewController {
     
     var sourceObj: AnyObject!
+    
+    var dataSourceArray = [[NSString]]()
+    
+    var indicator: MBProgressHUD!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if sourceObj is GTLDriveFile {
-            GoogleDriveManager.sharedManager.readFileContent(sourceObj as! GTLDriveFile)
-        }
+        indicator = MBProgressHUD(view: view)
+        indicator.label.text = "Loading file content..."
+        view.addSubview(indicator)
+        
+        loadProperFileContent()
         
     }
 
@@ -29,17 +35,23 @@ class SavedDataDetailTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return dataSourceArray.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
-        // Configure the cell...
+        let stringArray = dataSourceArray[indexPath.row]
+        if let firstStr = stringArray.first {
+            cell.textLabel?.text = firstStr as String
+        }
+        if stringArray.count > 1 {
+            cell.detailTextLabel?.text = stringArray[1] as String
+        }
 
         return cell
     }

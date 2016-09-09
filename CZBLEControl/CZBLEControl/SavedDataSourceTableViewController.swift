@@ -23,6 +23,8 @@ class SavedDataSourceTableViewController: UITableViewController {
             switch segue.identifier! {
             case "GoogleDrive":
                 destinationVC.dataSource = .GoogleDrive
+            case "Dropbox":
+                destinationVC.dataSource = .Dropbox
             default:
                 destinationVC.dataSource = .localDrive
             }
