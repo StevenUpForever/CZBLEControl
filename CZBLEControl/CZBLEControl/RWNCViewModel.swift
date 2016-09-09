@@ -48,6 +48,14 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
     let googleDriveManager = GoogleDriveManager.sharedManager
     let dropboxManager = DropBoxManager.sharedManager
     
+    var tempInfo: tempUploadInfo?
+    
+    struct tempUploadInfo {
+        var tempFileName: String
+        var tempTarget: UIViewController
+        var completionHandler: statusMessageHandler
+    }
+    
     //UI viewModel
     
     func setUIElement(actionBarItem: UIBarButtonItem, fallBackAction: () -> Void) {

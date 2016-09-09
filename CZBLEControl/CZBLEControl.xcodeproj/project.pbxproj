@@ -242,8 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */,
-				AFDB2E611D7CE683005ADC38 /* RWNCExtension.swift */,
 				AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */,
+				AFDB2E611D7CE683005ADC38 /* RWNCExtension.swift */,
 				AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */,
 				AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */,
 			);

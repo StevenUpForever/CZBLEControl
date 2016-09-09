@@ -42,6 +42,7 @@ extension RWNCViewModel: dropboxDelegate {
         if dropboxManager.isAuthorized() {
             dropboxSaveData(fileName, completionHandler: completionHandler)
         } else {
+            tempInfo = tempUploadInfo(tempFileName: fileName, tempTarget: target, completionHandler: completionHandler)
             dropboxManager.authorizeUser(target)
         }
     }
@@ -55,8 +56,12 @@ extension RWNCViewModel: dropboxDelegate {
     }
     
     func didFinishAuthorizeUser(success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?) {
-        if success {
-            <#code#>
+        if success && tempInfo != nil {
+            uploadToDropbox(tempInfo!.tempFileName, target: tempInfo!.tempTarget, completionHandler: tempInfo!.completionHandler)
+        } else {
+            if tempInfo != nil {
+                CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: tempInfo!.tempTarget)
+            }
         }
     }
     
