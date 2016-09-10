@@ -151,6 +151,17 @@ class GoogleDriveManager: NSObject {
         }
     }
     
+    func deleteFile(driveFile: GTLDriveFile, completionHandler: statusMessageHandler) {
+        let query = GTLQueryDrive.queryForFilesDeleteWithFileId(driveFile.identifier)
+        serviceDrive.executeQuery(query) { (ticket, files, error) in
+            if error != nil {
+                completionHandler(success: false, errorMessage: "Failed to delete the file")
+            } else {
+                completionHandler(success: true, errorMessage: "Successfully delete the file")
+            }
+        }
+    }
+    
     //MARK: Helper methods
     
     private var BLEFolder: GTLDriveFile!

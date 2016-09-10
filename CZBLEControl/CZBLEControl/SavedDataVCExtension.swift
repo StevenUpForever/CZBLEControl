@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GoogleAPIClient
 import SwiftyDropbox
 
 extension SavedDataTableViewController: dropboxDelegate {
@@ -27,6 +28,33 @@ extension SavedDataTableViewController: dropboxDelegate {
         case .localDrive: 
             break
         }
+    }
+    
+    func deleteData(indexPath: NSIndexPath) {
+        
+        indicator.showAnimated(true)
+        
+        let handleDeleteResponse = { (success: Bool, errorMessage: String?) in
+            if success {
+                self.dataSourceArray.removeAtIndex(indexPath.row)
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.indicator.hideAnimated(true)
+                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.indicator.hideAnimated(true)
+                    CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
+                })
+            }
+        }
+        
+        if let googleFile = dataSourceArray[indexPath.row] as? GTLDriveFile {
+            GoogleDriveManager.sharedManager.deleteFile(googleFile, completionHandler: handleDeleteResponse)
+        } else if let dropboxFile = dataSourceArray[indexPath.row] as? Files.Metadata {
+            DropBoxManager.sharedManager.deleteFile(dropboxFile, completionHandler: handleDeleteResponse)
+        }
+        
     }
     
     //MARK: Google Drive Stack

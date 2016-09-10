@@ -143,4 +143,14 @@ class DropBoxManager: NSObject {
         })
     }
     
+    func deleteFile(fileObj: Files.Metadata, completionHandler: statusMessageHandler) {
+        Dropbox.authorizedClient?.files.delete(path: "/\(kFolderName)/\(fileObj.name)").response({ (response, error) in
+            if error != nil {
+                completionHandler(success: false, errorMessage: "Failed to delete the file")
+            } else {
+                completionHandler(success: true, errorMessage: "Successfully delete the file")
+            }
+        })
+    }
+    
 }
