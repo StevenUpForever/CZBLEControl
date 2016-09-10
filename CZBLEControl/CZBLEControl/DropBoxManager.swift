@@ -45,7 +45,7 @@ class DropBoxManager: NSObject {
     }
     
     func saveWriteAndValueData(title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: statusMessageHandler) {
-        let dataStr = tupleJoinStr(writeArray) + tupleJoinStr(valueArray)
+        let dataStr = "Write Value\n\n" + tupleJoinStr(writeArray) + "Read Value\n\n" + tupleJoinStr(valueArray)
         if let data = dataStr.dataUsingEncoding(NSUTF8StringEncoding) {
             uploadData(title, data: data, completionHandler: completionHandler)
         } else {
@@ -73,7 +73,7 @@ class DropBoxManager: NSObject {
     
     private var DropboxFolder: Files.Metadata!
     
-    func createFolder(completionHandler: statusMessageHandler) {
+    private func createFolder(completionHandler: statusMessageHandler) {
         Dropbox.authorizedClient?.files.listFolder(path: "", recursive: false, includeMediaInfo: false, includeDeleted: false, includeHasExplicitSharedMembers: false).response({ (response, error) in
             if error != nil {
                 completionHandler(success: false, errorMessage: "Error when chenck file list")
@@ -101,6 +101,54 @@ class DropBoxManager: NSObject {
                 }
             } else {
                 completionHandler(success: false, errorMessage: "No data available")
+            }
+        })
+    }
+    
+    func loadFileList(completionHandler: (success: Bool, dataArray: [Files.Metadata]?, errorMessage: String?) -> Void) {
+        Dropbox.authorizedClient?.files.listFolder(path: "/\(kFolderName)", recursive: false, includeMediaInfo: false, includeDeleted: false, includeHasExplicitSharedMembers: false).response({ (response, error) in
+            if error != nil {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Error when chenck file list")
+            } else if let filesList = response?.entries {
+                let validTextList = filesList.filter({ (file) -> Bool in
+                    file.name.hasSuffix(".txt")
+                })
+                completionHandler(success: true, dataArray: validTextList, errorMessage: "Successfully get files list")
+            } else {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Error when chenck file list")
+            }
+        })
+    }
+    
+    func readFileContent(fileObj: Files.Metadata, completionHandler: (success: Bool, dataArray: [[NSString]]?, errorMessage: String?) -> Void) {
+        Dropbox.authorizedClient?.files.download(path: "/\(kFolderName)/\(fileObj.name)", rev: nil, overwrite: true, destination: { (url, urlResponse) -> NSURL in
+            let pathStr = NSTemporaryDirectory().stringByAppendingString(fileObj.name)
+            return NSURL(fileURLWithPath: pathStr)
+        }).response({ (response, error) in
+            if error != nil {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Failed to read file content")
+            } else if let (_, url) = response {
+                if let data = NSData(contentsOfURL: url) {
+                    if let dataString = NSString(data: data, encoding: NSUTF8StringEncoding) {
+                        completionHandler(success: true, dataArray: dataString.parseToDataTableView(), errorMessage: "Parse file content successfully")
+                    } else {
+                        completionHandler(success: false, dataArray: nil, errorMessage: "Failed to parse file content")
+                    }
+                } else {
+                    completionHandler(success: false, dataArray: nil, errorMessage: "Failed to transfer file content")
+                }
+            } else {
+                completionHandler(success: false, dataArray: nil, errorMessage: "Failed to read file content")
+            }
+        })
+    }
+    
+    func deleteFile(fileObj: Files.Metadata, completionHandler: statusMessageHandler) {
+        Dropbox.authorizedClient?.files.delete(path: "/\(kFolderName)/\(fileObj.name)").response({ (response, error) in
+            if error != nil {
+                completionHandler(success: false, errorMessage: "Failed to delete the file")
+            } else {
+                completionHandler(success: true, errorMessage: "Successfully delete the file")
             }
         })
     }

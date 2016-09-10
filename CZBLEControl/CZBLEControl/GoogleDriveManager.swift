@@ -75,7 +75,7 @@ class GoogleDriveManager: NSObject {
     }
     
     func saveWriteAndValueData(title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: statusMessageHandler) {
-        let dataStr = tupleJoinStr(writeArray) + tupleJoinStr(valueArray)
+        let dataStr = "Write Value\n\n" + tupleJoinStr(writeArray) + "Read Value\n\n" +  tupleJoinStr(valueArray)
         if let data = dataStr.dataUsingEncoding(NSUTF8StringEncoding) {
             uploadData(title, data: data, completionHandler: completionHandler)
         } else {
@@ -147,6 +147,17 @@ class GoogleDriveManager: NSObject {
                 }
             } else {
                 completionHandler(success: false, dataArray: nil, errorMessage: "Unknown error to download file")
+            }
+        }
+    }
+    
+    func deleteFile(driveFile: GTLDriveFile, completionHandler: statusMessageHandler) {
+        let query = GTLQueryDrive.queryForFilesDeleteWithFileId(driveFile.identifier)
+        serviceDrive.executeQuery(query) { (ticket, files, error) in
+            if error != nil {
+                completionHandler(success: false, errorMessage: "Failed to delete the file")
+            } else {
+                completionHandler(success: true, errorMessage: "Successfully delete the file")
             }
         }
     }
