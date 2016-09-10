@@ -31,14 +31,14 @@ extension SavedDataDetailTableViewController {
             }
         }
         
-        if sourceObj is GTLDriveFile {
+        if let googleFile = sourceObj as? GTLDriveFile {
             
-            navigationItem.title = sourceObj.name
+            navigationItem.title = googleFile.name
             
             GoogleDriveManager.sharedManager.readFileContent(sourceObj as! GTLDriveFile, completionHandler: handleFileContentResponse)
-        } else if sourceObj is Files.Metadata {
+        } else if let dropboxFile = sourceObj as? Files.Metadata {
             
-            navigationItem.title = sourceObj.name
+            navigationItem.title = dropboxFile.name
             
             DropBoxManager.sharedManager.readFileContent(sourceObj as! Files.Metadata, completionHandler: handleFileContentResponse)
             
