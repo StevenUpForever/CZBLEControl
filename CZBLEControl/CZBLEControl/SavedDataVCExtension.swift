@@ -14,6 +14,7 @@ extension SavedDataTableViewController: dropboxDelegate {
     
     func loadProperDataSource(type: savedDataSource) {
         
+        indicator.label.text = "Loading files..."
         indicator.showAnimated(true)
         
         switch type {
@@ -32,6 +33,7 @@ extension SavedDataTableViewController: dropboxDelegate {
     
     func deleteData(indexPath: NSIndexPath) {
         
+        indicator.label.text = "Deleting files..."
         indicator.showAnimated(true)
         
         let handleDeleteResponse = { (success: Bool, errorMessage: String?) in
