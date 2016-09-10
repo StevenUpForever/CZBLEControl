@@ -30,11 +30,11 @@ extension RWNCTableViewController: UITextFieldDelegate {
     
     func showDriveActionSheet() {
         let alertController = UIAlertController(title: "Where would you like to save?", message: nil, preferredStyle: .ActionSheet)
-        alertController.addAction(UIAlertAction(title: "iCloud Drive", style: .Default, handler: { (action) in
-            dispatch_async(dispatch_get_main_queue(), {
-                CustomAlertController.showCancelAlertController("iCloud save will coming soon", message: nil, target: self)
-            })
-        }))
+//        alertController.addAction(UIAlertAction(title: "iCloud Drive", style: .Default, handler: { (action) in
+//            dispatch_async(dispatch_get_main_queue(), {
+//                CustomAlertController.showCancelAlertController("iCloud save will coming soon", message: nil, target: self)
+//            })
+//        }))
         alertController.addAction(UIAlertAction(title: "Google Drive", style: .Default, handler: { (action) in
             dispatch_async(dispatch_get_main_queue(), {
                 self.indicator!.showAnimated(true)
@@ -57,11 +57,11 @@ extension RWNCTableViewController: UITextFieldDelegate {
                 })
             })
         }))
-        alertController.addAction(UIAlertAction(title: "Local Disk", style: .Default, handler: { (action) in
-            dispatch_async(dispatch_get_main_queue(), {
-                CustomAlertController.showCancelAlertController("Locally save will coming soon", message: nil, target: self)
-            })
-        }))
+//        alertController.addAction(UIAlertAction(title: "Local Disk", style: .Default, handler: { (action) in
+//            dispatch_async(dispatch_get_main_queue(), {
+//                CustomAlertController.showCancelAlertController("Locally save will coming soon", message: nil, target: self)
+//            })
+//        }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         presentViewController(alertController, animated: true, completion: nil)
     }
