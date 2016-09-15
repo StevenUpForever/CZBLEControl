@@ -10,7 +10,6 @@ Search characteristics in specific peripheral and manage it with read, write and
 **System supported:** iOS 9.0 and above<br/><br/>
 
 **AppStore Link:** [https://itunes.apple.com/us/app/czblecontrol/id1102097079?mt=8](https://itunes.apple.com/us/app/czblecontrol/id1102097079?mt=8)
-<br/><br/><br/>
 
 ####updates:
 **2.0:** Support save, review and delete data on cloud drives (Google Drive, Dropbox) 
