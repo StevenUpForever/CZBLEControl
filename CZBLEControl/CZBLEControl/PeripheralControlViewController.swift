@@ -19,7 +19,7 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     
     let viewModel = PeripheralViewModel()
     
-    var selectedIndexPath: NSIndexPath?
+    var selectedIndexPath: IndexPath?
 
     //MARK: - viewController lifeCycle
     
@@ -31,7 +31,7 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         viewModel.centralManager?.delegate = self
         viewModel.setPeripheralDelegate()
         
@@ -47,31 +47,31 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     
     //MARK - centralManager delegate
     
-    func centralManagerDidUpdateState(central: CBCentralManager) {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
-        case .PoweredOn:
+        case .poweredOn:
             break
-        case .PoweredOff:
+        case .poweredOff:
             CustomAlertController.showCancelAlertControllerWithBlock("BLE turned off", message: "Turn on your Bluetooth, going back", target: self, actionHandler: { (action) in
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                _ = self.navigationController?.popToRootViewController(animated: true)
             })
         default:
             CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
         }
     }
     
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         
         connectedUI()
         
         viewModel.scanCharacteristics(peripheral)
     }
     
-    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         CustomAlertController.showCancelAlertController("Peripheral connect error", message: "Connect to device error, please try again", target: self)
     }
     
-    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         CustomAlertController.showCancelAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
         
         disconnectedUI()
@@ -79,49 +79,49 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     
     //MARK: - tableView datasource & delegate
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.serviceArray.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.serviceArray[section].characterArray.count
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.serviceArray[section].uuidString
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("serviceCell") as! ServiceTableViewCell
-        let character = viewModel.serviceArray[indexPath.section].characterArray[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "serviceCell") as! ServiceTableViewCell
+        let character = viewModel.serviceArray[(indexPath as NSIndexPath).section].characterArray[(indexPath as NSIndexPath).row]
         cell.loadCellUI(character)
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         openHiddenSubViewAtIndexPath(indexPath)
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return selectedIndexPath == indexPath ? 180.0 : 95.0
     }
     
     //MARK: - Selectors
     
-    @IBAction func dropDownProcess(sender: AnyObject) {
-        let buttonPosition = sender.convertPoint(CGPointZero, toView: tableView)
-        if let indexPath = tableView.indexPathForRowAtPoint(buttonPosition) {
+    @IBAction func dropDownProcess(_ sender: AnyObject) {
+        let buttonPosition = sender.convert(CGPoint.zero, to: tableView)
+        if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
             openHiddenSubViewAtIndexPath(indexPath)
         }
     }
     
-    private func openHiddenSubViewAtIndexPath(indexPath: NSIndexPath) {
+    fileprivate func openHiddenSubViewAtIndexPath(_ indexPath: IndexPath) {
         selectedIndexPath = selectedIndexPath == indexPath ? nil : indexPath
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
     
-    @IBAction func connectSelfPeripheral(sender: AnyObject) {
+    @IBAction func connectSelfPeripheral(_ sender: AnyObject) {
         viewModel.reConnectPeripheral()
         tableView.reloadData()
     }
@@ -131,14 +131,14 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let notNilSelectedIndexPath = selectedIndexPath else {
             return
         }
-        if let cell = tableView.cellForRowAtIndexPath(notNilSelectedIndexPath) as? ServiceTableViewCell {
+        if let cell = tableView.cellForRow(at: notNilSelectedIndexPath) as? ServiceTableViewCell {
             
             //Prepare for destination viewController
-            if let RWNCVC = segue.destinationViewController as? RWNCTableViewController {
+            if let RWNCVC = segue.destination as? RWNCTableViewController {
                 
                 viewModel.segueAction(RWNCVC, cellViewModel: cell.viewModel, segue: segue)
                 
@@ -148,26 +148,26 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     
     //MARK: - custom peripheral delegate
     
-    func updateTableViewSectionUI(indexSet: NSIndexSet) {
-        tableView.insertSections(indexSet, withRowAnimation: .Left)
+    func updateTableViewSectionUI(_ indexSet: IndexSet) {
+        tableView.insertSections(indexSet, with: .left)
     }
     
-    func updateTableViewRowUI(indexPaths: [NSIndexPath]) {
-        tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Left)
+    func updateTableViewRowUI(_ indexPaths: [IndexPath]) {
+        tableView.insertRows(at: indexPaths, with: UITableViewRowAnimation.left)
     }
     
     //MARK: - private methods
     
     func connectedUI() {
         statusLabel.text = "Connected"
-        statusLabel.textColor = UIColor.blackColor()
-        connectBarItem.enabled = false
+        statusLabel.textColor = UIColor.black
+        connectBarItem.isEnabled = false
     }
     
     func disconnectedUI() {
         statusLabel.text = "Disconnected\nReconnect by top right button or back to choose another device"
-        statusLabel.textColor = UIColor.redColor()
-        connectBarItem.enabled = true
+        statusLabel.textColor = UIColor.red
+        connectBarItem.isEnabled = true
     }
     
     

@@ -21,28 +21,28 @@ class CustomAlertController: UIAlertController {
         // Dispose of any resources that can be recreated.
     }
     
-    class func showCancelAlertController(title: String?, message: String?, target: UIViewController) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert);
-        let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+    class func showCancelAlertController(_ title: String?, message: String?, target: UIViewController) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert);
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-        target.presentViewController(alertController, animated: true, completion: nil)
+        target.present(alertController, animated: true, completion: nil)
     }
     
-    class func showCancelAlertControllerWithBlock(title: String, message: String, target: UIViewController, actionHandler: (action: UIAlertAction) -> Void) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action) in
-            actionHandler(action: action)
+    class func showCancelAlertControllerWithBlock(_ title: String, message: String, target: UIViewController, actionHandler: @escaping (_ action: UIAlertAction) -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            actionHandler(action)
         }))
-        target.presentViewController(alertController, animated: true, completion: nil)
+        target.present(alertController, animated: true, completion: nil)
     }
     
-    class func showChooseAlertControllerWithBlock(title: String?, message: String?, target: UIViewController, actionHandler: (action: UIAlertAction) -> Void) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: { (action) in
-            actionHandler(action: action)
+    class func showChooseAlertControllerWithBlock(_ title: String?, message: String?, target: UIViewController, actionHandler: @escaping (_ action: UIAlertAction) -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
+            actionHandler(action)
         }))
-        target.presentViewController(alertController, animated: true, completion: nil)
+        target.present(alertController, animated: true, completion: nil)
     }
 
 }

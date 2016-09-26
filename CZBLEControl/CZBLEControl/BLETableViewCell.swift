@@ -29,13 +29,13 @@ class BLETableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
     //Load data to viewMode and UI data from viewModel
     
-    func loadData(peripheralObj: PeripheralInfo) {
+    func loadData(_ peripheralObj: PeripheralInfo) {
         
         viewModel.loadDataFromPeripheralObj(peripheralObj)
         

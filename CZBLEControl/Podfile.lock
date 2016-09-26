@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (3.3.1)
-  - Crashlytics (3.8.1):
+  - Alamofire (4.0.1)
+  - Crashlytics (3.8.2):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.8)
   - GoogleAPIClient/Core (1.0.5):
@@ -16,8 +16,8 @@ PODS:
   - GTMSessionFetcher/Full (1.1.6):
     - GTMSessionFetcher/Core (= 1.1.6)
   - MBProgressHUD (1.0.0)
-  - SwiftyDropbox (3.2.0):
-    - Alamofire (~> 3.3.1)
+  - SwiftyDropbox (4.0.5):
+    - Alamofire (~> 4.0.0)
 
 DEPENDENCIES:
   - Crashlytics
@@ -28,13 +28,13 @@ DEPENDENCIES:
   - SwiftyDropbox
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
-  Crashlytics: 4391d8df0b125345e9f209c5db6e7f40a6a8435d
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
   Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   GoogleAPIClient: 4a6b0b807de8b1115a2835180b25dd93dc60f1ea
   GTMOAuth2: 1707e2f7fe3a6d7240223c23c473ba5a2d104474
   GTMSessionFetcher: 6aacd0ab48ddf0c3633ab2642d792abfcad1b08a
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  SwiftyDropbox: fba9da0b1b72ae51edfeb1ee2a13aaef852ea6d7
+  SwiftyDropbox: 9bd7a3ab55eccd4e5e10dd9eff89519af3cbfc30
 
 COCOAPODS: 0.38.2

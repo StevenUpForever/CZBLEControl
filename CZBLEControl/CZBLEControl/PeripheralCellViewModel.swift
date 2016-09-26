@@ -15,56 +15,56 @@ class PeripheralCellViewModel: NSObject {
     var uuidString = "UUID unavailable"
     var propertyString = "Propertites:"
     
-    func addGradientToView(view: UIView) {
+    func addGradientToView(_ view: UIView) {
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        gradient.colors = [UIColor.whiteColor().CGColor, UIColor.gradientBlue().CGColor, UIColor.titleBlue().CGColor, UIColor.gradientBlue().CGColor, UIColor.whiteColor().CGColor]
-        view.layer.insertSublayer(gradient, atIndex: 0)
+        gradient.colors = [UIColor.white.cgColor, UIColor.gradientBlue().cgColor, UIColor.titleBlue().cgColor, UIColor.gradientBlue().cgColor, UIColor.white.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
     }
     
-    func loadCharacter(character: CBCharacteristic, enable: (notify: Bool, read: Bool, write: Bool, writeNoResponse: Bool) -> Void) {
+    func loadCharacter(_ character: CBCharacteristic, enable: (_ notify: Bool, _ read: Bool, _ write: Bool, _ writeNoResponse: Bool) -> Void) {
         characterObj = character
-        uuidString = character.UUID.UUIDString
+        uuidString = character.uuid.uuidString
         
         let property = character.properties
         propertyString = getPropertitesName(property)
         
-        enable(notify: property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0, read: property.rawValue & CBCharacteristicProperties.Read.rawValue > 0, write: property.rawValue & CBCharacteristicProperties.Write.rawValue > 0, writeNoResponse: property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0)
+        enable(property.rawValue & CBCharacteristicProperties.notify.rawValue > 0, property.rawValue & CBCharacteristicProperties.read.rawValue > 0, property.rawValue & CBCharacteristicProperties.write.rawValue > 0, property.rawValue & CBCharacteristicProperties.writeWithoutResponse.rawValue > 0)
         
     }
     
-    private func getPropertitesName(property: CBCharacteristicProperties) -> String {
+    fileprivate func getPropertitesName(_ property: CBCharacteristicProperties) -> String {
         
         var propertyStr = "Propertites:"
         
-        if property.rawValue & CBCharacteristicProperties.Broadcast.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.broadcast.rawValue > 0 {
             propertyStr += " Broadcast"
         }
-        if property.rawValue & CBCharacteristicProperties.AuthenticatedSignedWrites.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.authenticatedSignedWrites.rawValue > 0 {
             propertyStr += " AuthenticatedSignedWrites"
         }
-        if property.rawValue & CBCharacteristicProperties.ExtendedProperties.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.extendedProperties.rawValue > 0 {
             propertyStr += " ExtendedProperties"
         }
-        if property.rawValue & CBCharacteristicProperties.Indicate.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.indicate.rawValue > 0 {
             propertyStr += " Indicate"
         }
-        if property.rawValue & CBCharacteristicProperties.IndicateEncryptionRequired.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.indicateEncryptionRequired.rawValue > 0 {
             propertyStr += " IndicateEncryptionRequired"
         }
-        if property.rawValue & CBCharacteristicProperties.Notify.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.notify.rawValue > 0 {
             propertyStr += " Notify"
         }
-        if property.rawValue & CBCharacteristicProperties.NotifyEncryptionRequired.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.notifyEncryptionRequired.rawValue > 0 {
             propertyStr += " NotifyEncryptionRequired"
         }
-        if property.rawValue & CBCharacteristicProperties.Read.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.read.rawValue > 0 {
             propertyStr += " Read"
         }
-        if property.rawValue & CBCharacteristicProperties.Write.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.write.rawValue > 0 {
             propertyStr += " Write"
         }
-        if property.rawValue & CBCharacteristicProperties.WriteWithoutResponse.rawValue > 0 {
+        if property.rawValue & CBCharacteristicProperties.writeWithoutResponse.rawValue > 0 {
             propertyStr += " WriteWithoutResponse"
         }
         return propertyStr

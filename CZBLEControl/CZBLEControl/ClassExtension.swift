@@ -37,12 +37,12 @@ extension UIColor {
 
 extension UITextField {
     func showAlertBorder() {
-        self.layer.borderColor = UIColor.redColor().CGColor
+        self.layer.borderColor = UIColor.red.cgColor
         self.layer.borderWidth = 1.5
     }
     
     func resetBorder() {
-        self.layer.borderColor = UIColor.clearColor().CGColor
+        self.layer.borderColor = UIColor.clear.cgColor
         self.layer.borderWidth = 0.0
     }
 }
@@ -50,10 +50,10 @@ extension UITextField {
 extension NSString {
     
     func parseToDataTableView() -> [[NSString]] {
-        let dataArray = componentsSeparatedByString("\n\n")
+        let dataArray = components(separatedBy: "\n\n")
         var result = [[NSString]]()
         for str in dataArray {
-            result.append(str.componentsSeparatedByString("\n"))
+            result.append(str.components(separatedBy: "\n") as [NSString])
         }
         return result
     }

@@ -12,18 +12,18 @@ import SwiftyDropbox
 
 extension SavedDataTableViewController: dropboxDelegate {
     
-    func loadProperDataSource(type: savedDataSource) {
+    func loadProperDataSource(_ type: savedDataSource) {
         
         indicator.label.text = "Loading files..."
-        indicator.showAnimated(true)
+        indicator.show(animated: true)
         
         switch type {
         case .iCloudDrive:
             break
-        case .GoogleDrive:
+        case .googleDrive:
             navigationItem.title = "Google Drive"
             loadGoogleDriveFilesWithAuthorize()
-        case .Dropbox:
+        case .dropbox:
             navigationItem.title = "Dropbox"
             loadDropboxFilesWithAuthorize()
         case .localDrive: 
@@ -31,27 +31,27 @@ extension SavedDataTableViewController: dropboxDelegate {
         }
     }
     
-    func deleteData(indexPath: NSIndexPath) {
+    func deleteData(_ indexPath: IndexPath) {
         
         indicator.label.text = "Deleting files..."
-        indicator.showAnimated(true)
+        indicator.show(animated: true)
         
         let handleDeleteResponse = { (success: Bool, errorMessage: String?) in
             if success {
-                self.dataSourceArray.removeAtIndex(indexPath.row)
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.indicator.hideAnimated(true)
-                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+                self.dataSourceArray.remove(at: (indexPath as NSIndexPath).row)
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
+                    self.tableView.deleteRows(at: [indexPath], with: .right)
                 })
             } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.indicator.hideAnimated(true)
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             }
         }
         
-        if let googleFile = dataSourceArray[indexPath.row] as? GTLDriveFile {
+        if let googleFile = dataSourceArray[(indexPath as NSIndexPath).row] as? GTLDriveFile {
             GoogleDriveManager.sharedManager.deleteFile(googleFile, completionHandler: handleDeleteResponse)
         } else if let dropboxFile = dataSourceArray[indexPath.row] as? Files.Metadata {
             DropBoxManager.sharedManager.deleteFile(dropboxFile, completionHandler: handleDeleteResponse)
@@ -61,7 +61,7 @@ extension SavedDataTableViewController: dropboxDelegate {
     
     //MARK: Google Drive Stack
     
-    private func loadGoogleDriveFilesWithAuthorize() {
+    fileprivate func loadGoogleDriveFilesWithAuthorize() {
         let googleDriveManager = GoogleDriveManager.sharedManager
         if googleDriveManager.isAuthorized() {
             loadGoogleDriveFiles(googleDriveManager)
@@ -70,8 +70,8 @@ extension SavedDataTableViewController: dropboxDelegate {
                 if authSuccess {
                     self.loadGoogleDriveFiles(googleDriveManager)
                 } else {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.indicator.hideAnimated(true)
+                    DispatchQueue.main.async(execute: {
+                        self.indicator.hide(animated: true)
                         CustomAlertController.showCancelAlertController("Authorize google user failed", message: nil, target: self)
                     })
                 }
@@ -79,17 +79,17 @@ extension SavedDataTableViewController: dropboxDelegate {
         }
     }
     
-    private func loadGoogleDriveFiles(googleDriveManager: GoogleDriveManager) {
+    fileprivate func loadGoogleDriveFiles(_ googleDriveManager: GoogleDriveManager) {
         googleDriveManager.loadFiles { (success, errorMessage, files) in
             if success {
                 self.dataSourceArray = files!
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.indicator.hideAnimated(true)
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
                     self.tableView.reloadData()
                 })
             } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.indicator.hideAnimated(true)
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             }
@@ -105,13 +105,13 @@ extension SavedDataTableViewController: dropboxDelegate {
             dropboxManager.loadFileList { (success, dataArray, errorMessage) in
                 if success && dataArray != nil {
                     self.dataSourceArray = dataArray!
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.indicator.hideAnimated(true)
+                    DispatchQueue.main.async(execute: {
+                        self.indicator.hide(animated: true)
                         self.tableView.reloadData()
                     })
                 } else {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.indicator.hideAnimated(true)
+                    DispatchQueue.main.async(execute: {
+                        self.indicator.hide(animated: true)
                         CustomAlertController.showCancelAlertController("Failed to get file list", message: nil, target: self)
                     })
                 }
@@ -121,12 +121,12 @@ extension SavedDataTableViewController: dropboxDelegate {
         }
     }
     
-    func didFinishAuthorizeUser(success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?) {
+    func didFinishAuthorizeUser(_ success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?) {
         if success {
             loadDropboxFilesWithAuthorize()
         } else {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.indicator.hideAnimated(true)
+            DispatchQueue.main.async(execute: {
+                self.indicator.hide(animated: true)
                 CustomAlertController.showCancelAlertController("Authorize Dropbox user failed", message: nil, target: self)
             })
         }

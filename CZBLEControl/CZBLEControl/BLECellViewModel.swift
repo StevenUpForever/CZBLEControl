@@ -14,18 +14,18 @@ class BLECellViewModel: NSObject {
     var nameString: String = "Name Unavailable"
     var uuidString: String = "UUID Unavailable"
     
-    private var RSSINum = 0
+    fileprivate var RSSINum = 0
     var RSSIString: String = "0"
     
     var peripheral: CBPeripheral?
     
-    func loadDataFromPeripheralObj(peripheralObj: PeripheralInfo) {
+    func loadDataFromPeripheralObj(_ peripheralObj: PeripheralInfo) {
         if let name = peripheralObj.peripheral.name {
             nameString = name
         }
-        uuidString = peripheralObj.peripheral.identifier.UUIDString
+        uuidString = peripheralObj.peripheral.identifier.uuidString
         
-        RSSINum = peripheralObj.RSSI.integerValue
+        RSSINum = peripheralObj.RSSI.intValue
         RSSIString = "\(RSSINum)"
         
         peripheral = peripheralObj.peripheral
@@ -33,7 +33,7 @@ class BLECellViewModel: NSObject {
     
     //Change RSSI number shown
     
-    func changeRSSIValue(RSSIView: UIView, RSSISubView: UIView) {
+    func changeRSSIValue(_ RSSIView: UIView, RSSISubView: UIView) {
         
         let width = RSSIView.frame.size.width
         let height = RSSIView.frame.size.height
@@ -41,13 +41,13 @@ class BLECellViewModel: NSObject {
         let num = (RSSINum + 100) * 2
         
         if num >= 0 && num <= 25 {
-            RSSISubView.frame = CGRectMake(0, height*3/4, width, height/4)
+            RSSISubView.frame = CGRect(x: 0, y: height*3/4, width: width, height: height/4)
             RSSISubView.backgroundColor = UIColor.customRed()
         } else if num > 25 && num <= 50 {
-            RSSISubView.frame = CGRectMake(0, height/2, width, height/2)
+            RSSISubView.frame = CGRect(x: 0, y: height/2, width: width, height: height/2)
             RSSISubView.backgroundColor = UIColor.customOrange()
         } else if num > 50 && num <= 75 {
-            RSSISubView.frame = CGRectMake(0, height/4, width, height*3/4)
+            RSSISubView.frame = CGRect(x: 0, y: height/4, width: width, height: height*3/4)
             RSSISubView.backgroundColor = UIColor.customBlue()
         } else if num > 75 {
             RSSISubView.frame = RSSIView.bounds

@@ -16,6 +16,6 @@ class CharacterInfo {
     var characterArray = [CBCharacteristic]()
     init(service: CBService) {
         serviceObj = service
-        uuidString = serviceObj.UUID.UUIDString
+        uuidString = serviceObj.uuid.uuidString
     }
 }

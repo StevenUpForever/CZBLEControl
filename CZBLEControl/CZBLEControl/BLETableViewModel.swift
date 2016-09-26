@@ -15,46 +15,46 @@ class BLETableViewModel: NSObject {
     
     //Selected indexPath for selection action
     
-    var SelectedIndexPath = NSIndexPath()
+    var SelectedIndexPath = IndexPath()
     
     var peripheralArray = [PeripheralInfo]()
     var selectedPeripheralInfo: PeripheralInfo?
     
-    var date = NSDate.timeIntervalSinceReferenceDate()
+    var date = Date.timeIntervalSinceReferenceDate
     
-    func scanPeripheralInLifeCycle(viewWillAppear: Bool) {
+    func scanPeripheralInLifeCycle(_ viewWillAppear: Bool) {
         if viewWillAppear && !centralManager.isScanning {
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+            centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         } else if !viewWillAppear && centralManager.isScanning {
             centralManager.stopScan()
         }
     }
     
-    func connectPeripheralWithSelectedRow(indexPath: NSIndexPath, callBack: (poweredOn: Bool) -> Void) {
+    func connectPeripheralWithSelectedRow(_ indexPath: IndexPath, callBack: @escaping (_ poweredOn: Bool) -> Void) {
         SelectedIndexPath = indexPath
-        if centralManager.state != .PoweredOn {
-            callBack(poweredOn: false)
+        if centralManager.state != .poweredOn {
+            callBack(false)
         } else {
-            dispatch_async(dispatch_get_main_queue(), {
-                callBack(poweredOn: true)
+            DispatchQueue.main.async(execute: {
+                callBack(true)
             })
         }
     }
     
     //Connect peripheral method
     
-    func connectToPeripheral(cellViewModel: BLECellViewModel) {
+    func connectToPeripheral(_ cellViewModel: BLECellViewModel) {
         guard let peripheral = cellViewModel.peripheral else {
             return
         }
-        centralManager.connectPeripheral(peripheral, options: nil)
+        centralManager.connect(peripheral, options: nil)
     }
     
     //Segue to destination viewController
     
-    func pushToPeripheralController(segue: UIStoryboardSegue) {
+    func pushToPeripheralController(_ segue: UIStoryboardSegue) {
         if segue.identifier == "peripheralControl" {
-            if let peripheralVC = segue.destinationViewController as? PeripheralControlViewController {
+            if let peripheralVC = segue.destination as? PeripheralControlViewController {
                 if let validPeripheral = selectedPeripheralInfo?.peripheral {
                     peripheralVC.viewModel.loadBLEObjects(validPeripheral, central: centralManager)
                     peripheralVC.viewModel.centralManager = centralManager
@@ -66,30 +66,30 @@ class BLETableViewModel: NSObject {
     
     func scanPeripheral() {
         if !self.centralManager.isScanning {
-            centralManager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+            centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         }
     }
     
-    func clearAllPeripherals(callBack: (indexPaths: [NSIndexPath]) -> Void) {
-        var indexPathArray = [NSIndexPath]()
+    func clearAllPeripherals(_ callBack: (_ indexPaths: [IndexPath]) -> Void) {
+        var indexPathArray = [IndexPath]()
         for i in 0 ..< peripheralArray.count {
-            indexPathArray.append(NSIndexPath(forRow: i, inSection: 0))
+            indexPathArray.append(IndexPath(row: i, section: 0))
         }
         peripheralArray.removeAll()
         
-        callBack(indexPaths: indexPathArray)
+        callBack(indexPathArray)
     }
     
-    func discoverPeripheral(peripheral: CBPeripheral, RSSI: NSNumber, adData: [String: AnyObject], callBack: (newRow: Bool, indexPath: NSIndexPath) -> Void) {
-        if NSDate.timeIntervalSinceReferenceDate() - date > 1.5 {
+    func discoverPeripheral(_ peripheral: CBPeripheral, RSSI: NSNumber, adData: [String: AnyObject], callBack: (_ newRow: Bool, _ indexPath: IndexPath) -> Void) {
+        if Date.timeIntervalSinceReferenceDate - date > 1.5 {
             
             var index = 0
             while index < peripheralArray.count {
                 if peripheralArray[index].peripheral == peripheral {
                     peripheralArray[index].RSSI = RSSI
-                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                    let indexPath = IndexPath(row: index, section: 0)
                     
-                    callBack(newRow: true, indexPath: indexPath)
+                    callBack(true, indexPath)
                     
                     break
                 }
@@ -97,20 +97,20 @@ class BLETableViewModel: NSObject {
             }
             if peripheralArray.count == 0 || index == peripheralArray.count  {
                 peripheralArray.append(PeripheralInfo(peripheral: peripheral, RSSI: RSSI, adData: adData))
-                let indexPath = NSIndexPath(forRow: peripheralArray.count - 1, inSection: 0)
+                let indexPath = IndexPath(row: peripheralArray.count - 1, section: 0)
                 
-                callBack(newRow: false, indexPath: indexPath)
+                callBack(false, indexPath)
                 
             }
             
-            date = NSDate.timeIntervalSinceReferenceDate()
+            date = Date.timeIntervalSinceReferenceDate
             
         }
     }
     
-    func replaceSelectedPeripheral() -> NSIndexPath {
-        if SelectedIndexPath.row < peripheralArray.count {
-            selectedPeripheralInfo = peripheralArray[SelectedIndexPath.row]
+    func replaceSelectedPeripheral() -> IndexPath {
+        if (SelectedIndexPath as NSIndexPath).row < peripheralArray.count {
+            selectedPeripheralInfo = peripheralArray[(SelectedIndexPath as NSIndexPath).row]
         }
         return SelectedIndexPath
     }

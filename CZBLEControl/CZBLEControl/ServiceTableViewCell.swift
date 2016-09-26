@@ -26,25 +26,25 @@ class ServiceTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        readButton.enabled = false
-        writeButton.enabled = false
-        notifyButton.enabled = false
-        writeNoResponseButton.enabled = false
+        readButton.isEnabled = false
+        writeButton.isEnabled = false
+        notifyButton.isEnabled = false
+        writeNoResponseButton.isEnabled = false
         
         viewModel.addGradientToView(buttonCombineView)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func loadCellUI(character: CBCharacteristic) {
+    func loadCellUI(_ character: CBCharacteristic) {
         
         viewModel.loadCharacter(character) { (notify, read, write, writeNoResponse) in
-            self.notifyButton.enabled = notify
-            self.readButton.enabled = read
-            self.writeButton.enabled = write
-            self.writeNoResponseButton.enabled = writeNoResponse
+            self.notifyButton.isEnabled = notify
+            self.readButton.isEnabled = read
+            self.writeButton.isEnabled = write
+            self.writeNoResponseButton.isEnabled = writeNoResponse
         }
         
         uuidLabel.text = viewModel.uuidString
