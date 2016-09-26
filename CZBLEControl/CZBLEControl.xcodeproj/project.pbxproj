@@ -135,6 +135,7 @@
 		8994A5E92655306A89DBE12D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				AF5C43CC1D98D3AD00B0C863 /* Podfile */,
 				67589EB608D98CF861B32A42 /* Pods-CZBLEControl.debug.xcconfig */,
 				9E61ED170054ED5E194F9EB5 /* Pods-CZBLEControl.release.xcconfig */,
 			);
@@ -280,7 +281,6 @@
 		AFDA74641CB1EE5800F09BD8 = {
 			isa = PBXGroup;
 			children = (
-				AF5C43CC1D98D3AD00B0C863 /* Podfile */,
 				AFDA746F1CB1EE5800F09BD8 /* CZBLEControl */,
 				AFDA74871CB1EE5800F09BD8 /* CZBLEControlTests */,
 				AFDA746E1CB1EE5800F09BD8 /* Products */,
@@ -306,7 +306,6 @@
 				AF7403B31CD40A84004C98E6 /* ClassExtension.swift */,
 				AF6E07A41D2660980007E92F /* Public View */,
 				AF6E07A51D2660A40007E92F /* Public Controller */,
-				B2674D8E1D5A7A2500BCC441 /* Public Model */,
 				AF68D29C1D7BF224008F320A /* Bluetooth */,
 				AF68D2991D7BC01F008F320A /* Settings */,
 				B2674D911D5A9A5100BCC441 /* Data Persistence */,
@@ -349,13 +348,6 @@
 				B23B35B61D8234B100E90E08 /* SavedDataDetailExtension.swift */,
 			);
 			name = "Saved Data TableViews";
-			sourceTree = "<group>";
-		};
-		B2674D8E1D5A7A2500BCC441 /* Public Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Public Model";
 			sourceTree = "<group>";
 		};
 		B2674D911D5A9A5100BCC441 /* Data Persistence */ = {
