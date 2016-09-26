@@ -35,7 +35,7 @@ class RWNCTableViewController: UITableViewController, RWNCDelegate {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         viewModel.centralManager?.delegate = self
         viewModel.peripheralObj?.delegate = self
     }
@@ -46,48 +46,48 @@ class RWNCTableViewController: UITableViewController, RWNCDelegate {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         viewModel.disconnectPeripheral()
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.sectionNum()
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.rowNum(section)
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         viewModel.cellText(cell, indexPath: indexPath)
         return cell
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.sectionTitle(section)
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return indexPath.section == 0 ? false : true
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return (indexPath as NSIndexPath).section == 0 ? false : true
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return .Delete
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             viewModel.deleteObjectAtIndexPath(indexPath)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+            tableView.deleteRows(at: [indexPath], with: .right)
         }
     }
     
     //MARK: - IBActions and Selectors
     
-    @IBAction func actionProcess(sender: UIBarButtonItem) {
+    @IBAction func actionProcess(_ sender: UIBarButtonItem) {
         viewModel.actionButtonProcess(sender, target: self)
     }
     
@@ -95,7 +95,7 @@ class RWNCTableViewController: UITableViewController, RWNCDelegate {
     weak var submitAction: UIAlertAction?
     var fileName: String?
     
-    @IBAction func saveAction(sender: UIBarButtonItem) {
+    @IBAction func saveAction(_ sender: UIBarButtonItem) {
         if viewModel.dataExisted() {
             showFileNameAlertController()
         } else {
@@ -105,19 +105,19 @@ class RWNCTableViewController: UITableViewController, RWNCDelegate {
     
     //MARK: - viewModel delegate
     
-    func updateTableViewUI(indexPath: NSIndexPath) {
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+    func updateTableViewUI(_ indexPath: IndexPath) {
+        tableView.insertRows(at: [indexPath], with: .left)
     }
     
-    func replaceNotifyImage(image: UIImage?) {
+    func replaceNotifyImage(_ image: UIImage?) {
         actionBarItem.image = image
     }
     
     //MARK: - private methods
     
-    private func showfallBackAlertController() {
+    fileprivate func showfallBackAlertController() {
         CustomAlertController.showCancelAlertControllerWithBlock("Peripheral not found", message: "Peripheral or characteristic not found, going back", target: self, actionHandler: { (action) in
-            self.navigationController?.popViewControllerAnimated(true)
+            _ = self.navigationController?.popViewController(animated: true)
         })
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol popoverDelegate: class {
-    func popOverVCWriteValueProcess(input: String)
+    func popOverVCWriteValueProcess(_ input: String)
 }
 
 class PopoverViewController: UIViewController, UITextFieldDelegate {
@@ -29,23 +29,23 @@ class PopoverViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: - IBActions
     
-    @IBAction func submitProcess(sender: AnyObject) {
+    @IBAction func submitProcess(_ sender: AnyObject) {
         if valueTextField.text != nil && !valueTextField.text!.isEmpty {
             
             delegate?.popOverVCWriteValueProcess(valueTextField.text!)
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         } else {
             valueTextField.layer.borderWidth = 2.0
-            valueTextField.layer.borderColor = UIColor.redColor().CGColor
+            valueTextField.layer.borderColor = UIColor.red.cgColor
         }
     }
     
     //MARK: - textField delegate
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         valueTextField.layer.borderWidth = 0.0
-        valueTextField.layer.borderColor = UIColor.clearColor().CGColor
+        valueTextField.layer.borderColor = UIColor.clear.cgColor
     }
     
 

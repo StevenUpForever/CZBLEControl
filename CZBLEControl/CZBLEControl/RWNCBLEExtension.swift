@@ -13,60 +13,60 @@ extension RWNCTableViewController: CBCentralManagerDelegate, CBPeripheralDelegat
     
     //MARK: - CBCentral delegate
     
-    func centralManagerDidUpdateState(central: CBCentralManager) {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
-        case CBCentralManagerState.PoweredOn:
+        case .poweredOn:
             break
-        case CBCentralManagerState.PoweredOff:
+        case .poweredOff:
             CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
         default:
             CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
         }
     }
     
-    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
-        let alertController = UIAlertController(title: "Peripheral disconnected", message: "Fallback or save your data", preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "back", style: .Default, handler: { (action) in
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        let alertController = UIAlertController(title: "Peripheral disconnected", message: "Fallback or save your data", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "back", style: .default, handler: { (action) in
             if let nav = self.navigationController {
-                nav.popViewControllerAnimated(true)
+                nav.popViewController(animated: true)
             }
         }))
-        alertController.addAction(UIAlertAction(title: "Stay", style: .Cancel, handler: nil))
-        presentViewController(alertController, animated: true, completion: nil)
+        alertController.addAction(UIAlertAction(title: "Stay", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
     //MARK: - CBPeripheral delegate
     
-    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if error != nil {
             print(error?.localizedDescription)
         } else {
             let indexPath = viewModel.appendDataToValueArray(characteristic)
             if indexPath != nil {
-                tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Left)
+                tableView.insertRows(at: [indexPath!], with: .left)
             }
         }
     }
     
-    func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
         actionBarItem.image = characteristic.isNotifying ? UIImage(named: "unnotifyItem") : UIImage(named: "notifyItem")
     }
     
-    func peripheral(peripheral: CBPeripheral, didWriteValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         if error != nil {
             print(error?.localizedDescription)
         } else {
-            peripheral.readValueForCharacteristic(characteristic)
+            peripheral.readValue(for: characteristic)
         }
     }
     
-    func peripheral(peripheral: CBPeripheral, didUpdateValueForDescriptor descriptor: CBDescriptor, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Error?) {
         if error != nil {
             print(error?.localizedDescription)
         } else {
             let indexPath = viewModel.appendDataToDescriptorArray(descriptor)
             if indexPath != nil {
-                tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Left)
+                tableView.insertRows(at: [indexPath!], with: .left)
             }
         }
     }

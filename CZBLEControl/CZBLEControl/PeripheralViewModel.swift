@@ -10,8 +10,8 @@ import UIKit
 import CoreBluetooth
 
 protocol peripheralTableViewDelegate: class {
-    func updateTableViewSectionUI(indexSet: NSIndexSet)
-    func updateTableViewRowUI(indexPaths: [NSIndexPath])
+    func updateTableViewSectionUI(_ indexSet: IndexSet)
+    func updateTableViewRowUI(_ indexPaths: [IndexPath])
 }
 
 class PeripheralViewModel: NSObject, CBPeripheralDelegate {
@@ -25,7 +25,7 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     
     //Public delegate for centralManager and peripheral
     
-    func loadBLEObjects(peripheral: CBPeripheral, central: CBCentralManager) {
+    func loadBLEObjects(_ peripheral: CBPeripheral, central: CBCentralManager) {
         
         centralManager = central
         
@@ -33,25 +33,25 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
         setPeripheralDelegate()
         peripheralObj?.discoverServices(nil)
         
-        uuidString = peripheralObj!.identifier.UUIDString
+        uuidString = peripheralObj!.identifier.uuidString
     }
     
     func setPeripheralDelegate() {
         peripheralObj?.delegate = self
     }
     
-    func loadUI(callBack: (connected: Bool) -> Void) {
+    func loadUI(_ callBack: (_ connected: Bool) -> Void) {
         if let peripheral = peripheralObj {
             switch peripheral.state {
-            case .Connected:
-                callBack(connected: true)
+            case .connected:
+                callBack(true)
                 
             default:
-                callBack(connected: false)
+                callBack(false)
                 
             }
         } else {
-            callBack(connected: false)
+            callBack(false)
         }
     }
     
@@ -59,17 +59,17 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
         serviceArray.removeAll()
         if let peripheral = peripheralObj {
             if let central = centralManager {
-                central.connectPeripheral(peripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
+                central.connect(peripheral, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
             }
         }
     }
     
-    func scanCharacteristics(peripheral: CBPeripheral) {
+    func scanCharacteristics(_ peripheral: CBPeripheral) {
         peripheralObj = peripheral
         peripheralObj?.discoverServices(nil)
     }
     
-    func segueAction(RWNCVC: RWNCTableViewController, cellViewModel: PeripheralCellViewModel, segue: UIStoryboardSegue) {
+    func segueAction(_ RWNCVC: RWNCTableViewController, cellViewModel: PeripheralCellViewModel, segue: UIStoryboardSegue) {
         
         if let identifyStr = segue.identifier {
             RWNCVC.viewModel.identifier = swichIdentifier(identifyStr)
@@ -81,7 +81,7 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
         
     }
     
-    private func swichIdentifier(identifier: String) -> RWNCIdentifier {
+    fileprivate func swichIdentifier(_ identifier: String) -> RWNCIdentifier {
         switch identifier {
         case "read":
             return .read
@@ -104,30 +104,30 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     
     var serviceArray = [CharacterInfo]()
     
-    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         
         if let peripheralServiceArray = peripheral.services {
             for service: CBService in peripheralServiceArray {
                 serviceArray.append(CharacterInfo(service: service))
-                peripheral.discoverCharacteristics(nil, forService: service)
+                peripheral.discoverCharacteristics(nil, for: service)
                 
-                delegate?.updateTableViewSectionUI(NSIndexSet(index: serviceArray.count - 1))
+                delegate?.updateTableViewSectionUI(IndexSet(integer: serviceArray.count - 1))
             }
         }
         
     }
     
-    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         
         for i in 0 ..< serviceArray.count {
             if serviceArray[i].serviceObj.isEqual(service) {
                 guard let detailArray = service.characteristics else {
                     return
                 }
-                var indexpaths = [NSIndexPath]()
+                var indexpaths = [IndexPath]()
                 for detail in detailArray {
                     serviceArray[i].characterArray.append(detail)
-                    indexpaths.append(NSIndexPath(forRow: serviceArray[i].characterArray.count - 1, inSection: i))
+                    indexpaths.append(IndexPath(row: serviceArray[i].characterArray.count - 1, section: i))
                 }
                 delegate?.updateTableViewRowUI(indexpaths)
             }

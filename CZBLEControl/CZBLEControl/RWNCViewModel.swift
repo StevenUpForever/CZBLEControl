@@ -10,8 +10,8 @@ import UIKit
 import CoreBluetooth
 
 protocol RWNCDelegate: class {
-    func updateTableViewUI(indexPath: NSIndexPath)
-    func replaceNotifyImage(image: UIImage?)
+    func updateTableViewUI(_ indexPath: IndexPath)
+    func replaceNotifyImage(_ image: UIImage?)
 }
 
 enum RWNCIdentifier {
@@ -58,20 +58,20 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
     
     //UI viewModel
     
-    func setUIElement(actionBarItem: UIBarButtonItem, fallBackAction: () -> Void) {
+    func setUIElement(_ actionBarItem: UIBarButtonItem, fallBackAction: () -> Void) {
         
         if peripheralObj != nil && characterObj != nil {
             
             switch identifier {
             case .read:
                 actionBarItem.title = "read"
-                peripheralObj?.readValueForCharacteristic(characterObj!)
+                peripheralObj?.readValue(for: characterObj!)
                 
             case .write, .writeWithNoResponse:
                 actionBarItem.title = "write"
                 
             case .notify:
-                peripheralObj?.setNotifyValue(true, forCharacteristic: characterObj!)
+                peripheralObj?.setNotifyValue(true, for: characterObj!)
                 actionBarItem.title = nil
                 actionBarItem.image = UIImage(named: "unnotifyItem")
                 
@@ -81,7 +81,7 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
             
             if let descriptorArray = characterObj?.descriptors {
                 for descriptor: CBDescriptor in descriptorArray {
-                    peripheralObj?.readValueForDescriptor(descriptor)
+                    peripheralObj?.readValue(for: descriptor)
                 }
             }
         } else {
@@ -89,34 +89,34 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
         }
     }
     
-    func actionButtonProcess(sender: UIBarButtonItem, target: RWNCTableViewController) {
+    func actionButtonProcess(_ sender: UIBarButtonItem, target: RWNCTableViewController) {
         guard let character = characterObj else {
             return
         }
         switch identifier {
         case .read:
-            peripheralObj?.readValueForCharacteristic(character)
+            peripheralObj?.readValue(for: character)
             
         case .write, .writeWithNoResponse:
             let popVC = PopoverViewController()
             popVC.delegate = self
-            popVC.modalPresentationStyle = UIModalPresentationStyle.Popover
-            popVC.preferredContentSize = CGSizeMake(300, 125)
+            popVC.modalPresentationStyle = UIModalPresentationStyle.popover
+            popVC.preferredContentSize = CGSize(width: 300, height: 125)
             popVC.transitioningDelegate = self
             let popController = popVC.popoverPresentationController
-            popController?.permittedArrowDirections = .Any
+            popController?.permittedArrowDirections = .any
             popController?.barButtonItem = sender
             popController?.delegate = self
             
-            target.presentViewController(popVC, animated: true, completion: nil)
+            target.present(popVC, animated: true, completion: nil)
             
         case .notify:
             if characterObj?.isNotifying == true {
                 CustomAlertController.showChooseAlertControllerWithBlock("Close notify", message: "Are you sure to close notify?", target: target, actionHandler: { (action) in
-                    self.peripheralObj?.setNotifyValue(false, forCharacteristic: character)
+                    self.peripheralObj?.setNotifyValue(false, for: character)
                 })
             } else {
-                peripheralObj?.setNotifyValue(true, forCharacteristic: character)
+                peripheralObj?.setNotifyValue(true, for: character)
             }
             
         default:
@@ -126,25 +126,25 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
     
     //MARK: - popoverPresentViewControlller delegate
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
     //MARK: - PopoverVC delegate
     
-    func popOverVCWriteValueProcess(input: String) {
-        if let data = input.dataUsingEncoding(NSUTF8StringEncoding) {
-            peripheralObj?.writeValue(data, forCharacteristic: characterObj!, type: .WithoutResponse)
+    func popOverVCWriteValueProcess(_ input: String) {
+        if let data = input.data(using: String.Encoding.utf8) {
+            peripheralObj?.writeValue(data, for: characterObj!, type: .withoutResponse)
             
             if identifier == .write {
                 writeValueArray.append((input, dateFormatTransfer()))
-                let indexPath = NSIndexPath(forRow: writeValueArray.count - 1, inSection: 1)
+                let indexPath = IndexPath(row: writeValueArray.count - 1, section: 1)
                 
                 delegate?.updateTableViewUI(indexPath)
                 
             } else {
                 valueArray.append((input, dateFormatTransfer()))
-                let indexPath = NSIndexPath(forRow: valueArray.count - 1, inSection: 1)
+                let indexPath = IndexPath(row: valueArray.count - 1, section: 1)
                 
                 delegate?.updateTableViewUI(indexPath)
                 
@@ -156,27 +156,27 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
     
     func disconnectPeripheral() {
         if characterObj?.isNotifying == true {
-            peripheralObj?.setNotifyValue(false, forCharacteristic: characterObj!)
+            peripheralObj?.setNotifyValue(false, for: characterObj!)
         }
     }
     
-    func appendDataToValueArray(characteristic: CBCharacteristic) -> NSIndexPath? {
+    func appendDataToValueArray(_ characteristic: CBCharacteristic) -> IndexPath? {
         if let dataValue = characteristic.value {
-            let dataString = String(data: dataValue, encoding: NSUTF8StringEncoding) ?? "No data respond"
+            let dataString = String(data: dataValue, encoding: String.Encoding.utf8) ?? "No data respond"
             valueArray.append((dataString, dateFormatTransfer()))
             
             //Insert new cell row
             let sectionNum = identifier == .write ? 2 : 1
-            return NSIndexPath(forRow: valueArray.count - 1, inSection: sectionNum)
+            return IndexPath(row: valueArray.count - 1, section: sectionNum)
         } else {
             return nil
         }
     }
     
-    func appendDataToDescriptorArray(descriptor: CBDescriptor) -> NSIndexPath? {
-        if let descriptorString = descriptor.value?.description {
+    func appendDataToDescriptorArray(_ descriptor: CBDescriptor) -> IndexPath? {
+        if let descriptorString = (descriptor.value as AnyObject).description {
             descriptorArray.append(descriptorString)
-            return NSIndexPath(forRow: descriptorArray.count - 1, inSection: 0)
+            return IndexPath(row: descriptorArray.count - 1, section: 0)
         } else {
             return nil
         }

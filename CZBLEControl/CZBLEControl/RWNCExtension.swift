@@ -7,52 +7,72 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 extension RWNCTableViewController: UITextFieldDelegate {
     
     func showFileNameAlertController() {
-        let alertController = UIAlertController(title: "Please enter your file name", message: nil, preferredStyle: .Alert)
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
+        let alertController = UIAlertController(title: "Please enter your file name", message: nil, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
             textField.placeholder = "Enter file name here"
             self.fileNameTextField = textField
-            self.fileNameTextField!.addTarget(self, action: #selector(self.textFieldValueChanged), forControlEvents: .EditingChanged)
+            self.fileNameTextField!.addTarget(self, action: #selector(self.textFieldValueChanged), for: .editingChanged)
         }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        submitAction = UIAlertAction(title: "OK", style: .Default, handler: { (action) in
-            dispatch_async(dispatch_get_main_queue(), {
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        submitAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            DispatchQueue.main.async(execute: {
                 self.showDriveActionSheet()
             })
         })
-        submitAction!.enabled = false
+        submitAction!.isEnabled = false
         alertController.addAction(submitAction!)
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     func showDriveActionSheet() {
-        let alertController = UIAlertController(title: "Where would you like to save?", message: nil, preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: "Where would you like to save?", message: nil, preferredStyle: .actionSheet)
 //        alertController.addAction(UIAlertAction(title: "iCloud Drive", style: .Default, handler: { (action) in
 //            dispatch_async(dispatch_get_main_queue(), {
 //                CustomAlertController.showCancelAlertController("iCloud save will coming soon", message: nil, target: self)
 //            })
 //        }))
-        alertController.addAction(UIAlertAction(title: "Google Drive", style: .Default, handler: { (action) in
-            dispatch_async(dispatch_get_main_queue(), {
-                self.indicator!.showAnimated(true)
+        alertController.addAction(UIAlertAction(title: "Google Drive", style: .default, handler: { (action) in
+            DispatchQueue.main.async(execute: {
+                self.indicator!.show(animated: true)
             })
             self.viewModel.uploadToGoogleDrive(self.fileName ?? "Default file", target: self, completionHandler: { (success, errorMessage) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.indicator!.hideAnimated(true)
+                DispatchQueue.main.async(execute: {
+                    self.indicator!.hide(animated: true)
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             })
         }))
-        alertController.addAction(UIAlertAction(title: "Dropbox", style: .Default, handler: { (action) in
-            dispatch_async(dispatch_get_main_queue(), {
-                self.indicator!.showAnimated(true)
+        alertController.addAction(UIAlertAction(title: "Dropbox", style: .default, handler: { (action) in
+            DispatchQueue.main.async(execute: {
+                self.indicator!.show(animated: true)
             })
             self.viewModel.uploadToDropbox(self.fileName ?? "Default file", target: self, completionHandler: { (success, errorMessage) in
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.indicator!.hideAnimated(true)
+                DispatchQueue.main.async(execute: {
+                    self.indicator!.hide(animated: true)
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             })
@@ -62,8 +82,8 @@ extension RWNCTableViewController: UITextFieldDelegate {
 //                CustomAlertController.showCancelAlertController("Locally save will coming soon", message: nil, target: self)
 //            })
 //        }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        presentViewController(alertController, animated: true, completion: nil)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
     //MARK: Custom Selectors
@@ -73,11 +93,11 @@ extension RWNCTableViewController: UITextFieldDelegate {
             fileName = self.fileNameTextField?.text
             if fileNameTextField!.text != nil && fileNameTextField!.text?.characters.count > 0 {
                 if submitAction != nil {
-                    submitAction!.enabled = true
+                    submitAction!.isEnabled = true
                 }
             } else {
                 if submitAction != nil {
-                    submitAction!.enabled = false
+                    submitAction!.isEnabled = false
                 }
             }
         }

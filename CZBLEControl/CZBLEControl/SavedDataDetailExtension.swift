@@ -14,18 +14,18 @@ extension SavedDataDetailTableViewController {
     
     func loadProperFileContent() {
         
-        indicator.showAnimated(true)
+        indicator.show(animated: true)
         
         let handleFileContentResponse = { (success: Bool, dataArray: [[NSString]]?, errorMessage: String?) in
             if success && dataArray != nil {
                 self.dataSourceArray = dataArray!
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.indicator.hideAnimated(true)
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
                     self.tableView.reloadData()
                 })
             } else {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.indicator.hideAnimated(true)
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             }

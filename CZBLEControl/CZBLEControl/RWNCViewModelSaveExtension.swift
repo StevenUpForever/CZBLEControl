@@ -13,31 +13,31 @@ extension RWNCViewModel: dropboxDelegate {
     
     //MARK: Google Drive
     
-    func uploadToGoogleDrive(fileName: String, target: UIViewController, completionHandler: statusMessageHandler) {
+    func uploadToGoogleDrive(_ fileName: String, target: UIViewController, completionHandler: @escaping statusMessageHandler) {
         if googleDriveManager.isAuthorized() {
             googleDriveSaveData(fileName, completionHandler: completionHandler)
         } else {
             googleDriveManager.authorizeGoogleAccount(target, completionHandler: { [weak self] (authSuccess) in
-                if let strongSelf = self where authSuccess {
+                if let strongSelf = self , authSuccess {
                     strongSelf.googleDriveSaveData(fileName, completionHandler: completionHandler)
                 } else {
-                    completionHandler(success: false, errorMessage: "Authorize user failed")
+                    completionHandler(false, "Authorize user failed")
                 }
             })
         }
     }
     
-    private func googleDriveSaveData(fileName: String, completionHandler: statusMessageHandler) {
+    fileprivate func googleDriveSaveData(_ fileName: String, completionHandler: @escaping statusMessageHandler) {
         if identifier == .write {
-            googleDriveManager.saveWriteAndValueData(fileName ?? "Default file", writeArray: writeValueArray, valueArray: valueArray, completionHandler: completionHandler)
+            googleDriveManager.saveWriteAndValueData(fileName , writeArray: writeValueArray, valueArray: valueArray, completionHandler: completionHandler)
         } else {
-            googleDriveManager.saveValueData(fileName ?? "Default file", dataArray: valueArray, completionHandler: completionHandler)
+            googleDriveManager.saveValueData(fileName , dataArray: valueArray, completionHandler: completionHandler)
         }
     }
     
     //MARK: Dropbox
     
-    func uploadToDropbox(fileName: String, target: UIViewController, completionHandler: statusMessageHandler) {
+    func uploadToDropbox(_ fileName: String, target: UIViewController, completionHandler: @escaping statusMessageHandler) {
         dropboxManager.delegate = self
         if dropboxManager.isAuthorized() {
             dropboxSaveData(fileName, completionHandler: completionHandler)
@@ -47,15 +47,15 @@ extension RWNCViewModel: dropboxDelegate {
         }
     }
     
-    private func dropboxSaveData(fileName: String, completionHandler: statusMessageHandler) {
+    fileprivate func dropboxSaveData(_ fileName: String, completionHandler: @escaping statusMessageHandler) {
         if identifier == .write {
-            dropboxManager.saveWriteAndValueData(fileName ?? "Default file", writeArray: writeValueArray, valueArray: valueArray, completionHandler: completionHandler)
+            dropboxManager.saveWriteAndValueData(fileName , writeArray: writeValueArray, valueArray: valueArray, completionHandler: completionHandler)
         } else {
-            dropboxManager.saveValueData(fileName ?? "Default file", dataArray: valueArray, completionHandler: completionHandler)
+            dropboxManager.saveValueData(fileName , dataArray: valueArray, completionHandler: completionHandler)
         }
     }
     
-    func didFinishAuthorizeUser(success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?) {
+    func didFinishAuthorizeUser(_ success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?) {
         if success && tempInfo != nil {
             uploadToDropbox(tempInfo!.tempFileName, target: tempInfo!.tempTarget, completionHandler: tempInfo!.completionHandler)
         } else {

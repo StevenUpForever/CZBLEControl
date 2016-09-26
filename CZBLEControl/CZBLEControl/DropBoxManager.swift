@@ -10,7 +10,7 @@ import UIKit
 import SwiftyDropbox
 
 protocol dropboxDelegate: class {
-    func didFinishAuthorizeUser(success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?)
+    func didFinishAuthorizeUser(_ success: Bool, token: DropboxAccessToken?, error: OAuth2Error?, errorMessage: String?)
 }
 
 class DropBoxManager: NSObject {
@@ -22,133 +22,137 @@ class DropBoxManager: NSObject {
         return manager
     }()
     
-    func authorizeUser(viewControllerTarget: UIViewController) {
-        Dropbox.authorizeFromController(viewControllerTarget)
+    func authorizeUser(_ viewControllerTarget: UIViewController) {
+        DropboxClientsManager.authorizeFromController(UIApplication.shared,
+                                                      controller: viewControllerTarget,
+                                                      openURL: { (url: URL) -> Void in
+                                                        UIApplication.shared.openURL(url)
+        })
     }
     
     func deauthorizeUser() {
-        Dropbox.unlinkClient()
+        DropboxClientsManager.unlinkClient()
     }
     
     func isAuthorized() -> Bool {
-        return Dropbox.authorizedClient != nil
+        return DropboxClientsManager.authorizedClient != nil
     }
     
     //Save Data
     
-    func saveValueData(title: String, dataArray: [(String, String)], completionHandler: statusMessageHandler) {
-        if let data = tupleJoinStr(dataArray).dataUsingEncoding(NSUTF8StringEncoding) {
+    func saveValueData(_ title: String, dataArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
+        if let data = tupleJoinStr(dataArray).data(using: String.Encoding.utf8) {
             uploadData(title, data: data, completionHandler: completionHandler)
         } else {
-            completionHandler(success: false, errorMessage: "Data cannot be transferred to file")
+            completionHandler(false, "Data cannot be transferred to file")
         }
     }
     
-    func saveWriteAndValueData(title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: statusMessageHandler) {
+    func saveWriteAndValueData(_ title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
         let dataStr = "Write Value\n\n" + tupleJoinStr(writeArray) + "Read Value\n\n" + tupleJoinStr(valueArray)
-        if let data = dataStr.dataUsingEncoding(NSUTF8StringEncoding) {
+        if let data = dataStr.data(using: String.Encoding.utf8) {
             uploadData(title, data: data, completionHandler: completionHandler)
         } else {
-            completionHandler(success: false, errorMessage: "Data cannot be transferred to file")
+            completionHandler(false, "Data cannot be transferred to file")
         }
     }
     
-    private func uploadData(title: String, data: NSData, completionHandler: statusMessageHandler) {
+    fileprivate func uploadData(_ title: String, data: Data, completionHandler: @escaping statusMessageHandler) {
         createFolder {(success, errorMessage) in
             if success {
-                Dropbox.authorizedClient?.files.upload(path: "/\(kFolderName)/\(title).txt", input: data).response({ (metaData, error) in
+                DropboxClientsManager.authorizedClient?.files.upload(path: "/\(kFolderName)/\(title).txt", input: data).response(completionHandler: { (metaData, error) in
                     if error != nil {
-                        completionHandler(success: false, errorMessage: "Upload file failed")
+                        completionHandler(false, "Upload file failed")
                     } else if metaData != nil {
-                        completionHandler(success: true, errorMessage: "Upload file successfully")
+                        completionHandler(true, "Upload file successfully")
                     } else {
-                        completionHandler(success: false, errorMessage: "File data unavailable")
+                        completionHandler(false, "File data unavailable")
                     }
                 })
             } else {
-                completionHandler(success: false, errorMessage: errorMessage)
+                completionHandler(false, errorMessage)
             }
         }
     }
     
-    private var DropboxFolder: Files.Metadata!
+    fileprivate var DropboxFolder: Files.Metadata!
     
-    private func createFolder(completionHandler: statusMessageHandler) {
-        Dropbox.authorizedClient?.files.listFolder(path: "", recursive: false, includeMediaInfo: false, includeDeleted: false, includeHasExplicitSharedMembers: false).response({ (response, error) in
+    fileprivate func createFolder(_ completionHandler: @escaping statusMessageHandler) {
+        DropboxClientsManager.authorizedClient?.files.listFolder(path: "", recursive: false, includeMediaInfo: false, includeDeleted: false, includeHasExplicitSharedMembers: false).response(completionHandler: { (response, error) in
             if error != nil {
-                completionHandler(success: false, errorMessage: "Error when chenck file list")
+                completionHandler(false, "Error when chenck file list")
             } else if let entries = response?.entries {
                 var folderExisted = false
                 for entry in entries {
                     if entry.name == kFolderName {
                         self.DropboxFolder = entry
                         folderExisted = true
-                        completionHandler(success: true, errorMessage: "Folder existed")
+                        completionHandler(true, "Folder existed")
                         return
                     }
                 }
                 if !folderExisted {
-                    Dropbox.authorizedClient?.files.createFolder(path: "/\(kFolderName)").response({ (fileMetaData, error) in
+                    DropboxClientsManager.authorizedClient?.files.createFolder(path: "/\(kFolderName)").response(completionHandler: { (fileMetaData, error) in
                         if error != nil {
-                            completionHandler(success: false, errorMessage: "Create folder failed")
+                            completionHandler(false, "Create folder failed")
                         } else if fileMetaData != nil {
                             self.DropboxFolder = fileMetaData!
-                            completionHandler(success: true, errorMessage: "Create folder successfully")
+                            completionHandler(true, "Create folder successfully")
                         } else {
-                            completionHandler(success: false, errorMessage: "Folder data unavailable")
+                            completionHandler(false, "Folder data unavailable")
                         }
                     })
                 }
             } else {
-                completionHandler(success: false, errorMessage: "No data available")
+                completionHandler(false, "No data available")
             }
         })
     }
     
-    func loadFileList(completionHandler: (success: Bool, dataArray: [Files.Metadata]?, errorMessage: String?) -> Void) {
-        Dropbox.authorizedClient?.files.listFolder(path: "/\(kFolderName)", recursive: false, includeMediaInfo: false, includeDeleted: false, includeHasExplicitSharedMembers: false).response({ (response, error) in
+    func loadFileList(_ completionHandler: @escaping (_ success: Bool, _ dataArray: [Files.Metadata]?, _ errorMessage: String?) -> Void) {
+        DropboxClientsManager.authorizedClient?.files.listFolder(path: "/\(kFolderName)", recursive: false, includeMediaInfo: false, includeDeleted: false, includeHasExplicitSharedMembers: false).response(completionHandler: { (response, error) in
             if error != nil {
-                completionHandler(success: false, dataArray: nil, errorMessage: "Error when chenck file list")
+                completionHandler(false, nil, "Error when chenck file list")
             } else if let filesList = response?.entries {
                 let validTextList = filesList.filter({ (file) -> Bool in
                     file.name.hasSuffix(".txt")
                 })
-                completionHandler(success: true, dataArray: validTextList, errorMessage: "Successfully get files list")
+                completionHandler(true, validTextList, "Successfully get files list")
             } else {
-                completionHandler(success: false, dataArray: nil, errorMessage: "Error when chenck file list")
+                completionHandler(false, nil, "Error when chenck file list")
             }
         })
     }
     
-    func readFileContent(fileObj: Files.Metadata, completionHandler: (success: Bool, dataArray: [[NSString]]?, errorMessage: String?) -> Void) {
-        Dropbox.authorizedClient?.files.download(path: "/\(kFolderName)/\(fileObj.name)", rev: nil, overwrite: true, destination: { (url, urlResponse) -> NSURL in
-            let pathStr = NSTemporaryDirectory().stringByAppendingString(fileObj.name)
-            return NSURL(fileURLWithPath: pathStr)
-        }).response({ (response, error) in
+    func readFileContent(_ fileObj: Files.Metadata, completionHandler: @escaping (_ success: Bool, _ dataArray: [[NSString]]?, _ errorMessage: String?) -> Void) {
+        DropboxClientsManager.authorizedClient?.files.download(path: "/\(kFolderName)/\(fileObj.name)", rev: nil, overwrite: true, destination: { (url, urlResponse) -> URL in
+            let pathStr = NSTemporaryDirectory() + fileObj.name
+            return NSURL(fileURLWithPath: pathStr) as URL
+        }).response(completionHandler: { (response, error) in
             if error != nil {
-                completionHandler(success: false, dataArray: nil, errorMessage: "Failed to read file content")
+                completionHandler(false, nil, "Failed to read file content")
             } else if let (_, url) = response {
-                if let data = NSData(contentsOfURL: url) {
-                    if let dataString = NSString(data: data, encoding: NSUTF8StringEncoding) {
-                        completionHandler(success: true, dataArray: dataString.parseToDataTableView(), errorMessage: "Parse file content successfully")
+                if let data = NSData(contentsOf: url) {
+                    if let dataString = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) {
+                        completionHandler(true, dataString.parseToDataTableView(), "Parse file content successfully")
                     } else {
-                        completionHandler(success: false, dataArray: nil, errorMessage: "Failed to parse file content")
+                        completionHandler(false, nil, "Failed to parse file content")
                     }
                 } else {
-                    completionHandler(success: false, dataArray: nil, errorMessage: "Failed to transfer file content")
+                    completionHandler(false, nil, "Failed to transfer file content")
                 }
             } else {
-                completionHandler(success: false, dataArray: nil, errorMessage: "Failed to read file content")
+                completionHandler(false, nil, "Failed to read file content")
             }
         })
     }
     
-    func deleteFile(fileObj: Files.Metadata, completionHandler: statusMessageHandler) {
-        Dropbox.authorizedClient?.files.delete(path: "/\(kFolderName)/\(fileObj.name)").response({ (response, error) in
+    func deleteFile(_ fileObj: Files.Metadata, completionHandler: @escaping statusMessageHandler) {
+        DropboxClientsManager.authorizedClient?.files.delete(path: "/\(kFolderName)/\(fileObj.name)").response(completionHandler: { (response, error) in
             if error != nil {
-                completionHandler(success: false, errorMessage: "Failed to delete the file")
+                completionHandler(false, "Failed to delete the file")
             } else {
-                completionHandler(success: true, errorMessage: "Successfully delete the file")
+                completionHandler(true, "Successfully delete the file")
             }
         })
     }

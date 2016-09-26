@@ -18,7 +18,7 @@ extension RWNCViewModel {
         }
     }
     
-    func rowNum(section: Int) -> Int {
+    func rowNum(_ section: Int) -> Int {
         if identifier == .write {
             switch section {
             case 0:
@@ -33,37 +33,37 @@ extension RWNCViewModel {
         }
     }
     
-    func cellText(cell: UITableViewCell, indexPath: NSIndexPath) {
+    func cellText(_ cell: UITableViewCell, indexPath: IndexPath) {
         if identifier == .write {
-            switch indexPath.section {
+            switch (indexPath as NSIndexPath).section {
             case 0:
-                cell.textLabel?.text = descriptorArray[indexPath.row]
+                cell.textLabel?.text = descriptorArray[(indexPath as NSIndexPath).row]
                 
             case 1:
-                cell.textLabel?.text = writeValueArray[indexPath.row].0
+                cell.textLabel?.text = writeValueArray[(indexPath as NSIndexPath).row].0
                 
                 //Show date label text
-                cell.detailTextLabel?.text = writeValueArray[indexPath.row].1
+                cell.detailTextLabel?.text = writeValueArray[(indexPath as NSIndexPath).row].1
                 
             case 2:
-                cell.textLabel?.text = valueArray[indexPath.row].0
+                cell.textLabel?.text = valueArray[(indexPath as NSIndexPath).row].0
                 
                 //Show date label text
-                cell.detailTextLabel?.text = valueArray[indexPath.row].1
+                cell.detailTextLabel?.text = valueArray[(indexPath as NSIndexPath).row].1
                 
             default:
                 break
             }
         } else {
-            switch indexPath.section {
+            switch (indexPath as NSIndexPath).section {
             case 0:
-                cell.textLabel?.text = descriptorArray[indexPath.row]
+                cell.textLabel?.text = descriptorArray[(indexPath as NSIndexPath).row]
                 
             case 1:
-                cell.textLabel?.text = valueArray[indexPath.row].0
+                cell.textLabel?.text = valueArray[(indexPath as NSIndexPath).row].0
                 
                 //Show date label text
-                cell.detailTextLabel?.text = valueArray[indexPath.row].1
+                cell.detailTextLabel?.text = valueArray[(indexPath as NSIndexPath).row].1
                 
             default:
                 break
@@ -71,22 +71,22 @@ extension RWNCViewModel {
         }
     }
     
-    func deleteObjectAtIndexPath(indexPath: NSIndexPath) {
+    func deleteObjectAtIndexPath(_ indexPath: IndexPath) {
         if identifier == .write {
-            switch indexPath.section {
+            switch (indexPath as NSIndexPath).section {
             case 1:
-                writeValueArray.removeAtIndex(indexPath.row)
+                writeValueArray.remove(at: (indexPath as NSIndexPath).row)
                 
             case 2:
-                valueArray.removeAtIndex(indexPath.row)
+                valueArray.remove(at: (indexPath as NSIndexPath).row)
                 
             default:
                 break
             }
         } else {
-            switch indexPath.section {
+            switch (indexPath as NSIndexPath).section {
             case 1:
-                valueArray.removeAtIndex(indexPath.row)
+                valueArray.remove(at: (indexPath as NSIndexPath).row)
                 
             default:
                 break
@@ -95,12 +95,12 @@ extension RWNCViewModel {
     }
     
     func dateFormatTransfer() -> String {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yy hh:mm:ss:SSS"
-        return dateFormatter.stringFromDate(NSDate())
+        return dateFormatter.string(from: Date())
     }
     
-    func sectionTitle(section: Int) -> String {
+    func sectionTitle(_ section: Int) -> String {
         if identifier == .write {
             switch section {
             case 0:

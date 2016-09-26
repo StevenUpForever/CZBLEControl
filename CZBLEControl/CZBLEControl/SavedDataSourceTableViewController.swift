@@ -18,13 +18,13 @@ class SavedDataSourceTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationVC = segue.destinationViewController as? SavedDataTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? SavedDataTableViewController {
             switch segue.identifier! {
             case "GoogleDrive":
-                destinationVC.dataSource = .GoogleDrive
+                destinationVC.dataSource = .googleDrive
             case "Dropbox":
-                destinationVC.dataSource = .Dropbox
+                destinationVC.dataSource = .dropbox
             default:
                 destinationVC.dataSource = .localDrive
             }

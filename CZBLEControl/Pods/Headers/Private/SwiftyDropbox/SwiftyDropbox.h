@@ -1,1 +1,1 @@
-../../../SwiftyDropbox/Source/SwiftyDropbox.h
+../../../SwiftyDropbox/Source/SwiftyDropbox/PlatformNeutral/SwiftyDropbox.h
