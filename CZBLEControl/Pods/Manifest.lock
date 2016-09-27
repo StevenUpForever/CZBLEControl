@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.0.1)
   - Crashlytics (3.8.2):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.8)
+  - Fabric (1.6.9)
   - GoogleAPIClient/Core (1.0.5):
     - GTMSessionFetcher (~> 1.1)
   - GoogleAPIClient/Drive (1.0.5):
@@ -30,7 +30,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
-  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
   GoogleAPIClient: 4a6b0b807de8b1115a2835180b25dd93dc60f1ea
   GTMOAuth2: 1707e2f7fe3a6d7240223c23c473ba5a2d104474
   GTMSessionFetcher: 6aacd0ab48ddf0c3633ab2642d792abfcad1b08a
