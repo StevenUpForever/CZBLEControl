@@ -12,7 +12,7 @@ class BLETableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var UUIDLabel: UILabel!
-    @IBOutlet weak var RSSIView: CustomView!
+    @IBOutlet weak var RSSIView: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var rssiNumberLabel: UILabel!
     
@@ -24,8 +24,14 @@ class BLETableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         //Add colored view to show the changes about RSSI number
-        
+        RSSIView.layer.borderColor = UIColor.darkGray.cgColor
+        RSSIView.layer.borderWidth = 1.0
         self.RSSIView.insertSubview(RSSISubView, belowSubview: rssiNumberLabel)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        RSSIView.layer.cornerRadius = RSSIView.frame.size.width/2.0;
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
