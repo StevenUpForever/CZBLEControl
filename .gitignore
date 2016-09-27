@@ -16,3 +16,7 @@ appIcon.png
 *.xcuserstate
 
 *.xcuserstate
+
+CZBLEControl/.DS_Store
+
+.DS_Store
