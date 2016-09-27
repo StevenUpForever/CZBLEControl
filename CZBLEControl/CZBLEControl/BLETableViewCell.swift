@@ -26,7 +26,6 @@ class BLETableViewCell: UITableViewCell {
         //Add colored view to show the changes about RSSI number
         
         self.RSSIView.insertSubview(RSSISubView, belowSubview: rssiNumberLabel)
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

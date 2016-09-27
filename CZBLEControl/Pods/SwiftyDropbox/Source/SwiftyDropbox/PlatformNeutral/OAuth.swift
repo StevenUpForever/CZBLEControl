@@ -519,7 +519,6 @@ class Keychain {
 
         var dataResult: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &dataResult)
-
         if status == noErr {
             let results = dataResult as? [[String : AnyObject]] ?? []
             return results.map { d in d["acct"] as! String }

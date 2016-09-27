@@ -32,7 +32,7 @@ class GoogleDriveManager: NSObject {
     fileprivate let scopes = [kGTLAuthScopeDriveMetadata, kGTLAuthScopeDriveFile]
     
     func authorizeGoogleAccount(_ targetViewController: UIViewController, completionHandler: @escaping (_ authSuccess: Bool) -> Void) {
-        if let authorizer = serviceDrive.authorizer, let canAuth = authorizer.canAuthorize , canAuth {
+        if let authorizer = serviceDrive.authorizer, let canAuth = authorizer.canAuthorize, canAuth {
             completionHandler(true)
         } else {
             let authViewController = GTMOAuth2ViewControllerTouch.controller(withScope: scopes.joined(separator: " "), clientID: kClientId, clientSecret: nil, keychainItemName: kKeyChainItemName) { (authController, authResult, error) in
@@ -52,7 +52,7 @@ class GoogleDriveManager: NSObject {
     }
     
     func isAuthorized() -> Bool {
-        if let authorizer = serviceDrive.authorizer, let canAuth = authorizer.canAuthorize , canAuth {
+        if let authorizer = serviceDrive.authorizer, let canAuth = authorizer.canAuthorize, canAuth {
             return true
         } else {
             return false
@@ -112,21 +112,24 @@ class GoogleDriveManager: NSObject {
     func loadFiles(_ completionHandler: @escaping (_ success: Bool, _ errorMessage: String?, _ files:[GTLDriveFile]?) -> Void) {
         createFolder {[unowned self] (success, errorMessage) in
             if success {
-                let query = GTLQueryDrive.queryForFilesList()
-                query?.q = "'\(self.BLEFolder.identifier)' in parents and mimeType = 'text/plain'"
-                self.serviceDrive.executeQuery(query!) { (ticket, files, error) in
-                    if error != nil {
-                        print(error)
-                        completionHandler(false, "Error when load file", nil)
-                    } else if let fileList = files as? GTLDriveFileList {
-                        if let filesArray = fileList.files as? [GTLDriveFile] {
-                            completionHandler(true, "Load files successfully", filesArray)
+                if let query = GTLQueryDrive.queryForFilesList() {
+                    query.q = "'\(self.BLEFolder.identifier ?? "")' in parents and mimeType = 'text/plain'"
+                    self.serviceDrive.executeQuery(query) { (ticket, files, error) in
+                        if error != nil {
+                            print(error)
+                            completionHandler(false, "Error when load file", nil)
+                        } else if let fileList = files as? GTLDriveFileList {
+                            if let filesArray = fileList.files as? [GTLDriveFile] {
+                                completionHandler(true, "Load files successfully", filesArray)
+                            } else {
+                                completionHandler(false, "No file to show", nil)
+                            }
                         } else {
-                            completionHandler(false, "No file to show", nil)
+                            completionHandler(false, "Error when load file", nil)
                         }
-                    } else {
-                        completionHandler(false, "Error when load file", nil)
                     }
+                } else {
+                    completionHandler(false, "Cannot query files", nil)
                 }
             } else {
                 completionHandler(false, errorMessage, nil)
@@ -135,7 +138,7 @@ class GoogleDriveManager: NSObject {
     }
     
     func readFileContent(_ driveFile: GTLDriveFile, completionHandler: @escaping (_ success: Bool, _ dataArray: [[NSString]]?, _ errorMessage: String?) -> Void) {
-        let fetcher = serviceDrive.fetcherService.fetcher(withURLString: "https://www.googleapis.com/drive/v3/files/\(driveFile.identifier)?alt=media")
+        let fetcher = serviceDrive.fetcherService.fetcher(withURLString: "https://www.googleapis.com/drive/v3/files/\(driveFile.identifier ?? "")?alt=media")
         fetcher.beginFetch { (data, error) in
             if error != nil {
                 completionHandler(false, nil, "Failed to download file")
