@@ -65,7 +65,7 @@
 		282D07E11D04929118FA4303 /* Pods_CZBLEControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CZBLEControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67589EB608D98CF861B32A42 /* Pods-CZBLEControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.debug.xcconfig"; sourceTree = "<group>"; };
 		9E61ED170054ED5E194F9EB5 /* Pods-CZBLEControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.release.xcconfig"; sourceTree = "<group>"; };
-		AF215C621D9A6C83008530B5 /* CZBLEControl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CZBLEControl.entitlements; sourceTree = "<group>"; };
+		AF215C621D9A6C83008530B5 /* CZBLEControl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CZBLEControl.entitlements; path = CZBLEControl/CZBLEControl.entitlements; sourceTree = "<group>"; };
 		AF5C43CC1D98D3AD00B0C863 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AF68D29A1D7BC043008F320A /* AccountManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerViewController.swift; sourceTree = "<group>"; };
 		AF68D29D1D7BF246008F320A /* DropBoxManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropBoxManager.swift; sourceTree = "<group>"; };
@@ -265,6 +265,7 @@
 		AF7403B01CD40776004C98E6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AF215C621D9A6C83008530B5 /* CZBLEControl.entitlements */,
 				AF7403B11CD4094F004C98E6 /* .gitignore */,
 			);
 			name = Resources;
@@ -303,7 +304,6 @@
 		AFDA746F1CB1EE5800F09BD8 /* CZBLEControl */ = {
 			isa = PBXGroup;
 			children = (
-				AF215C621D9A6C83008530B5 /* CZBLEControl.entitlements */,
 				AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */,
 				AF7403B31CD40A84004C98E6 /* ClassExtension.swift */,
 				AF6E07A41D2660980007E92F /* Public View */,
