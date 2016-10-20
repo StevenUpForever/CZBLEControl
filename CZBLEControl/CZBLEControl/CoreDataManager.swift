@@ -12,7 +12,7 @@ import CoreData
 class CoreDataManager: NSObject {
     static let sharedInstance = CoreDataManager()
     
-    //Object management
+    //MARK: Object management - Save Stack
     
     func saveValueData(_ title: String, dataArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
         let context = managedObjectContext
@@ -51,6 +51,29 @@ class CoreDataManager: NSObject {
             resSet.insert(obj)
         }
         return resSet
+    }
+    
+    //MARK: Object management - Fetch Stack
+    
+    func loadBLEData(completionHandler: (_ results: [DataList]?, _ message: String) -> Void) {
+        let request = NSFetchRequest<DataList>(entityName: "DataList")
+        do {
+            let result = try managedObjectContext.fetch(request)
+            completionHandler(result, "Load data successfully")
+        } catch {
+            completionHandler(nil, "Load data failed")
+        }
+    }
+    
+    func deleteDataList(dataList: DataList, completionHandler: statusMessageHandler) {
+        let context = managedObjectContext
+        context.delete(dataList)
+        do {
+            try context.save()
+            completionHandler(true, "Save data successfully")
+        } catch let error as NSError {
+            completionHandler(false, "Save data error: " + error.localizedDescription)
+        }
     }
     
     // MARK: - Core Data stack

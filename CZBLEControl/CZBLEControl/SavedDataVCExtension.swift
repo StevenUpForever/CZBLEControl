@@ -26,7 +26,8 @@ extension SavedDataTableViewController: dropboxDelegate {
             navigationItem.title = "Dropbox"
             loadDropboxFilesWithAuthorize()
         case .localDrive: 
-            break
+            navigationItem.title = "Local Drive"
+            loadCoreDataFiles()
         }
     }
     
@@ -54,6 +55,8 @@ extension SavedDataTableViewController: dropboxDelegate {
             GoogleDriveManager.sharedManager.deleteFile(googleFile, completionHandler: handleDeleteResponse)
         } else if let dropboxFile = dataSourceArray[indexPath.row] as? Files.Metadata {
             DropBoxManager.sharedManager.deleteFile(dropboxFile, completionHandler: handleDeleteResponse)
+        } else if let localFile = dataSourceArray[indexPath.row] as? DataList {
+            CoreDataManager.sharedInstance.deleteDataList(dataList: localFile, completionHandler: handleDeleteResponse)
         }
         
     }
@@ -134,7 +137,20 @@ extension SavedDataTableViewController: dropboxDelegate {
     //MARK: CoreData Stack
     
     func loadCoreDataFiles() {
-        
+        CoreDataManager.sharedInstance.loadBLEData { (dataList, message) in
+            if dataList != nil {
+                self.dataSourceArray = dataList!
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
+                    self.tableView.reloadData()
+                })
+            } else {
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
+                    CustomAlertController.showCancelAlertController(message, message: nil, target: self)
+                })
+            }
+        }
     }
     
 }

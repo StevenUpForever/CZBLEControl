@@ -33,6 +33,8 @@ class SavedDataTableViewCell: UITableViewCell {
             textLabel?.text = googleDriveSource.name
         } else if let dropboxSource = sourceObj as? Files.Metadata {
             textLabel?.text = dropboxSource.name
+        } else if let localObj = sourceObj as? DataList {
+            textLabel?.text = localObj.name
         }
     }
 
