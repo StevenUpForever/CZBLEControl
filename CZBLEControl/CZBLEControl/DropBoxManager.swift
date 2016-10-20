@@ -31,7 +31,7 @@ class DropBoxManager: NSObject {
     }
     
     func deauthorizeUser() {
-        DropboxClientsManager.unlinkClient()
+        DropboxClientsManager.unlinkClients()
     }
     
     func isAuthorized() -> Bool {

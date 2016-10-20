@@ -247,7 +247,6 @@ open class DropboxOAuthManager {
         for urlType in urlTypes {
             let schemes = urlType["CFBundleURLSchemes"] as? [String] ?? []
             for scheme in schemes {
-                print(scheme)
                 if scheme == appScheme {
                     return true
                 }
@@ -519,6 +518,7 @@ class Keychain {
 
         var dataResult: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &dataResult)
+
         if status == noErr {
             let results = dataResult as? [[String : AnyObject]] ?? []
             return results.map { d in d["acct"] as! String }
