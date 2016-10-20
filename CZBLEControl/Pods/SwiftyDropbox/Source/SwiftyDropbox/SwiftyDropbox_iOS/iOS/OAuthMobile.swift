@@ -5,12 +5,10 @@
 import Foundation
 import UIKit
 import WebKit
-import SystemConfiguration
 
 extension DropboxClientsManager {
     public static func authorizeFromController(_ sharedApplication: UIApplication, controller: UIViewController, openURL: @escaping ((URL) -> Void), browserAuth: Bool = false) {
         precondition(DropboxOAuthManager.sharedOAuthManager != nil, "Call `DropboxClientsManager.setupWithAppKey` or `DropboxClientsManager.setupWithTeamAppKey` before calling this method")
-        precondition(DropboxClientsManager.authorizedClient == nil && DropboxClientsManager.authorizedTeamClient == nil, "A Dropbox client is already authorized")
         DropboxOAuthManager.sharedOAuthManager.authorizeFromSharedApplication(MobileSharedApplication(sharedApplication: sharedApplication, controller: controller, openURL: openURL), browserAuth: browserAuth)
     }
 

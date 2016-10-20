@@ -31,7 +31,7 @@ extension RWNCViewModel: dropboxDelegate {
         if identifier == .write {
             googleDriveManager.saveWriteAndValueData(fileName , writeArray: writeValueArray, valueArray: valueArray, completionHandler: completionHandler)
         } else {
-            googleDriveManager.saveValueData(fileName , dataArray: valueArray, completionHandler: completionHandler)
+            googleDriveManager.saveValueData(fileName, dataArray: valueArray, completionHandler: completionHandler)
         }
     }
     
@@ -62,6 +62,14 @@ extension RWNCViewModel: dropboxDelegate {
             if tempInfo != nil {
                 CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: tempInfo!.tempTarget)
             }
+        }
+    }
+    
+    func saveDataToCoreData(_ fileName: String, completionHandler: @escaping statusMessageHandler) {
+        if identifier == .write {
+            coreDataProcessor.saveWriteAndValueData(fileName, writeArray: writeValueArray, valueArray: valueArray, completionHandler: completionHandler)
+        } else {
+            coreDataProcessor.saveValueData(fileName, dataArray: valueArray, completionHandler: completionHandler)
         }
     }
     

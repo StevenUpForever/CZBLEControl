@@ -11,7 +11,6 @@ import GoogleAPIClient
 import MBProgressHUD
 
 enum savedDataSource {
-    case iCloudDrive
     case googleDrive
     case dropbox
     case localDrive

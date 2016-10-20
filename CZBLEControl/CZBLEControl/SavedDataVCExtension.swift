@@ -9,6 +9,7 @@
 import Foundation
 import GoogleAPIClient
 import SwiftyDropbox
+import CoreData
 
 extension SavedDataTableViewController: dropboxDelegate {
     
@@ -18,8 +19,6 @@ extension SavedDataTableViewController: dropboxDelegate {
         indicator.show(animated: true)
         
         switch type {
-        case .iCloudDrive:
-            break
         case .googleDrive:
             navigationItem.title = "Google Drive"
             loadGoogleDriveFilesWithAuthorize()
@@ -27,7 +26,8 @@ extension SavedDataTableViewController: dropboxDelegate {
             navigationItem.title = "Dropbox"
             loadDropboxFilesWithAuthorize()
         case .localDrive: 
-            break
+            navigationItem.title = "Local Drive"
+            loadCoreDataFiles()
         }
     }
     
@@ -55,6 +55,8 @@ extension SavedDataTableViewController: dropboxDelegate {
             GoogleDriveManager.sharedManager.deleteFile(googleFile, completionHandler: handleDeleteResponse)
         } else if let dropboxFile = dataSourceArray[indexPath.row] as? Files.Metadata {
             DropBoxManager.sharedManager.deleteFile(dropboxFile, completionHandler: handleDeleteResponse)
+        } else if let localFile = dataSourceArray[indexPath.row] as? DataList {
+            CoreDataManager.sharedInstance.deleteDataList(dataList: localFile, completionHandler: handleDeleteResponse)
         }
         
     }
@@ -129,6 +131,25 @@ extension SavedDataTableViewController: dropboxDelegate {
                 self.indicator.hide(animated: true)
                 CustomAlertController.showCancelAlertController("Authorize Dropbox user failed", message: nil, target: self)
             })
+        }
+    }
+    
+    //MARK: CoreData Stack
+    
+    func loadCoreDataFiles() {
+        CoreDataManager.sharedInstance.loadBLEData { (dataList, message) in
+            if dataList != nil {
+                self.dataSourceArray = dataList!
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
+                    self.tableView.reloadData()
+                })
+            } else {
+                DispatchQueue.main.async(execute: {
+                    self.indicator.hide(animated: true)
+                    CustomAlertController.showCancelAlertController(message, message: nil, target: self)
+                })
+            }
         }
     }
     

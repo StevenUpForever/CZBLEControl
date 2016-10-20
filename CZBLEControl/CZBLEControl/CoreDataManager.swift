@@ -12,6 +12,72 @@ import CoreData
 class CoreDataManager: NSObject {
     static let sharedInstance = CoreDataManager()
     
+    //MARK: Object management - Save Stack
+    
+    func saveValueData(_ title: String, dataArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
+        let context = managedObjectContext
+        let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as! DataList
+        dataListObj.name = title
+        dataListObj.sectionCount = 1
+        dataListObj.listToData = NSSet(set: createDataSet(context, dataArray: dataArray, section: 1))
+        do {
+            try context.save()
+            completionHandler(true, "Save data successfully")
+        } catch let error as NSError {
+            completionHandler(false, "Save data error: " + error.localizedDescription)
+        }
+    }
+    
+    func saveWriteAndValueData(_ title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
+        let context = managedObjectContext
+        let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as! DataList
+        dataListObj.name = title
+        dataListObj.sectionCount = 2
+        let set = createDataSet(context, dataArray: writeArray, section: 0).union(createDataSet(context, dataArray: valueArray, section: 1))
+        dataListObj.listToData = NSSet(set: set)
+        do {
+            try context.save()
+            completionHandler(true, "Save data successfully")
+        } catch let error as NSError {
+            completionHandler(false, "Save data error: " + error.localizedDescription)
+        }
+    }
+    
+    private func createDataSet(_ context: NSManagedObjectContext, dataArray: [(String, String)], section: Int16) -> Set<BLEData> {
+        var resSet = Set<BLEData>()
+        for tuple in dataArray {
+            let obj = NSEntityDescription.insertNewObject(forEntityName: "BLEData", into: context) as! BLEData
+            obj.dataString = tuple.0
+            obj.date = tuple.1
+            obj.section = section
+            resSet.insert(obj)
+        }
+        return resSet
+    }
+    
+    //MARK: Object management - Fetch Stack
+    
+    func loadBLEData(completionHandler: (_ results: [DataList]?, _ message: String) -> Void) {
+        let request = NSFetchRequest<DataList>(entityName: "DataList")
+        do {
+            let result = try managedObjectContext.fetch(request)
+            completionHandler(result, "Load data successfully")
+        } catch {
+            completionHandler(nil, "Load data failed")
+        }
+    }
+    
+    func deleteDataList(dataList: DataList, completionHandler: statusMessageHandler) {
+        let context = managedObjectContext
+        context.delete(dataList)
+        do {
+            try context.save()
+            completionHandler(true, "Save data successfully")
+        } catch let error as NSError {
+            completionHandler(false, "Save data error: " + error.localizedDescription)
+        }
+    }
+    
     // MARK: - Core Data stack
     
     lazy var applicationDocumentsDirectory: URL = {

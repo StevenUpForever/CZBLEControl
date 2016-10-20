@@ -50,11 +50,6 @@ extension RWNCTableViewController: UITextFieldDelegate {
     
     func showDriveActionSheet() {
         let alertController = UIAlertController(title: "Where would you like to save?", message: nil, preferredStyle: .actionSheet)
-//        alertController.addAction(UIAlertAction(title: "iCloud Drive", style: .Default, handler: { (action) in
-//            dispatch_async(dispatch_get_main_queue(), {
-//                CustomAlertController.showCancelAlertController("iCloud save will coming soon", message: nil, target: self)
-//            })
-//        }))
         alertController.addAction(UIAlertAction(title: "Google Drive", style: .default, handler: { (action) in
             DispatchQueue.main.async(execute: {
                 self.indicator!.show(animated: true)
@@ -77,11 +72,17 @@ extension RWNCTableViewController: UITextFieldDelegate {
                 })
             })
         }))
-//        alertController.addAction(UIAlertAction(title: "Local Disk", style: .Default, handler: { (action) in
-//            dispatch_async(dispatch_get_main_queue(), {
-//                CustomAlertController.showCancelAlertController("Locally save will coming soon", message: nil, target: self)
-//            })
-//        }))
+        alertController.addAction(UIAlertAction(title: "Local Drive", style: .default, handler: { (action) in
+            DispatchQueue.main.async(execute: {
+                self.indicator!.show(animated: true)
+            })
+            self.viewModel.saveDataToCoreData(self.fileName ?? "Default file", completionHandler: { (success, errorMessage) in
+                DispatchQueue.main.async(execute: {
+                    self.indicator!.hide(animated: true)
+                    CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
+                })
+            })
+        }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
