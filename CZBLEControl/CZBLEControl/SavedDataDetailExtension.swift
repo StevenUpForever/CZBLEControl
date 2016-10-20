@@ -32,18 +32,29 @@ extension SavedDataDetailTableViewController {
         }
         
         if let googleFile = sourceObj as? GTLDriveFile {
-            
             navigationItem.title = googleFile.name
-            
-            GoogleDriveManager.sharedManager.readFileContent(sourceObj as! GTLDriveFile, completionHandler: handleFileContentResponse)
+            GoogleDriveManager.sharedManager.readFileContent(googleFile, completionHandler: handleFileContentResponse)
         } else if let dropboxFile = sourceObj as? Files.Metadata {
-            
             navigationItem.title = dropboxFile.name
-            
-            DropBoxManager.sharedManager.readFileContent(sourceObj as! Files.Metadata, completionHandler: handleFileContentResponse)
-            
+            DropBoxManager.sharedManager.readFileContent(dropboxFile, completionHandler: handleFileContentResponse)
+        } else if let localFile = sourceObj as? DataList {
+            navigationItem.title = localFile.name
+            if let localDatas = localFile.listToData {
+                for data in localDatas {
+                    if let ble = data as? BLEData {
+                        if ble.section == 0 {
+                            coreDataWriteValues.append(ble)
+                        } else {
+                            coreDataReadvalues.append(ble)
+                        }
+                    }
+                }
+            }
+            DispatchQueue.main.async(execute: {
+                self.indicator.hide(animated: true)
+                self.tableView.reloadData()
+            })
         }
-        
     }
     
 }

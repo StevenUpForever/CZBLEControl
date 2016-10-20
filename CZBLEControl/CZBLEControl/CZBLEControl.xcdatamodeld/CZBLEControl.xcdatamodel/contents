@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16B2555" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BLEData" representedClassName="BLEData" syncable="YES" codeGenerationType="class">
         <attribute name="dataString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="section" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="section" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="dataToList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataList" inverseName="listToData" inverseEntity="DataList" syncable="YES"/>
     </entity>
     <entity name="DataList" representedClassName="DataList" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sectionCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="listToData" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BLEData" inverseName="dataToList" inverseEntity="BLEData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BLEData" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="DataList" positionX="171" positionY="-18" width="128" height="73"/>
+        <element name="BLEData" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="DataList" positionX="171" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

@@ -18,7 +18,8 @@ class CoreDataManager: NSObject {
         let context = managedObjectContext
         let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as! DataList
         dataListObj.name = title
-        dataListObj.listToData = NSSet(set: createDataSet(context, dataArray: dataArray, section: "Values"))
+        dataListObj.sectionCount = 1
+        dataListObj.listToData = NSSet(set: createDataSet(context, dataArray: dataArray, section: 1))
         do {
             try context.save()
             completionHandler(true, "Save data successfully")
@@ -31,7 +32,8 @@ class CoreDataManager: NSObject {
         let context = managedObjectContext
         let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as! DataList
         dataListObj.name = title
-        let set = createDataSet(context, dataArray: writeArray, section: "Write values").union(createDataSet(context, dataArray: valueArray, section: "Read values"))
+        dataListObj.sectionCount = 2
+        let set = createDataSet(context, dataArray: writeArray, section: 0).union(createDataSet(context, dataArray: valueArray, section: 1))
         dataListObj.listToData = NSSet(set: set)
         do {
             try context.save()
@@ -41,7 +43,7 @@ class CoreDataManager: NSObject {
         }
     }
     
-    private func createDataSet(_ context: NSManagedObjectContext, dataArray: [(String, String)], section: String) -> Set<BLEData> {
+    private func createDataSet(_ context: NSManagedObjectContext, dataArray: [(String, String)], section: Int16) -> Set<BLEData> {
         var resSet = Set<BLEData>()
         for tuple in dataArray {
             let obj = NSEntityDescription.insertNewObject(forEntityName: "BLEData", into: context) as! BLEData
