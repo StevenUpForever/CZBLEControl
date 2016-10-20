@@ -15,38 +15,42 @@ class CoreDataManager: NSObject {
     //Object management
     
     func saveValueData(_ title: String, dataArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
-        saveDataProcess(createContext(name: title), title: title, dataArray: dataArray, section: "Values", completionHandler: completionHandler)
-    }
-    
-    func saveWriteAndValueData(_ title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
-        let context = createContext(name: title)
-        saveDataProcess(context, title: title, dataArray: writeArray, section: "Write values", completionHandler: completionHandler)
-        saveDataProcess(context, title: title, dataArray: valueArray, section: "Read values", completionHandler: completionHandler)
-    }
-    
-    private func createContext(name: String) -> NSManagedObjectContext {
         let context = managedObjectContext
-        context.name = name
-        return context
-        
-        
-    }
-    
-    private func saveDataProcess(_ context: NSManagedObjectContext, title: String, dataArray: [(String, String)], section: String, completionHandler: @escaping statusMessageHandler) {
-        for tuple in dataArray {
-            if let obj = NSEntityDescription.insertNewObject(forEntityName: "BLEData", into: context) as? BLEData {
-                obj.dataString = tuple.0
-                obj.date = tuple.1
-                obj.section = section
-                
-            }
-        }
+        let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as! DataList
+        dataListObj.name = title
+        dataListObj.listToData = NSSet(set: createDataSet(context, dataArray: dataArray, section: "Values"))
         do {
             try context.save()
             completionHandler(true, "Save data successfully")
         } catch let error as NSError {
             completionHandler(false, "Save data error: " + error.localizedDescription)
         }
+    }
+    
+    func saveWriteAndValueData(_ title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
+        let context = managedObjectContext
+        let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as! DataList
+        dataListObj.name = title
+        let set = createDataSet(context, dataArray: writeArray, section: "Write values").union(createDataSet(context, dataArray: valueArray, section: "Read values"))
+        dataListObj.listToData = NSSet(set: set)
+        do {
+            try context.save()
+            completionHandler(true, "Save data successfully")
+        } catch let error as NSError {
+            completionHandler(false, "Save data error: " + error.localizedDescription)
+        }
+    }
+    
+    private func createDataSet(_ context: NSManagedObjectContext, dataArray: [(String, String)], section: String) -> Set<BLEData> {
+        var resSet = Set<BLEData>()
+        for tuple in dataArray {
+            let obj = NSEntityDescription.insertNewObject(forEntityName: "BLEData", into: context) as! BLEData
+            obj.dataString = tuple.0
+            obj.date = tuple.1
+            obj.section = section
+            resSet.insert(obj)
+        }
+        return resSet
     }
     
     // MARK: - Core Data stack

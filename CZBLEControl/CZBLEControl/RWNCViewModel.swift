@@ -47,6 +47,7 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
     
     let googleDriveManager = GoogleDriveManager.sharedManager
     let dropboxManager = DropBoxManager.sharedManager
+    let coreDataProcessor = CoreDataManager.sharedInstance
     
     var tempInfo: tempUploadInfo?
     

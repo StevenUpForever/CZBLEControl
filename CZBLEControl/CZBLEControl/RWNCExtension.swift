@@ -50,11 +50,6 @@ extension RWNCTableViewController: UITextFieldDelegate {
     
     func showDriveActionSheet() {
         let alertController = UIAlertController(title: "Where would you like to save?", message: nil, preferredStyle: .actionSheet)
-//        alertController.addAction(UIAlertAction(title: "iCloud Drive", style: .Default, handler: { (action) in
-//            dispatch_async(dispatch_get_main_queue(), {
-//                CustomAlertController.showCancelAlertController("iCloud save will coming soon", message: nil, target: self)
-//            })
-//        }))
         alertController.addAction(UIAlertAction(title: "Google Drive", style: .default, handler: { (action) in
             DispatchQueue.main.async(execute: {
                 self.indicator!.show(animated: true)
@@ -81,7 +76,7 @@ extension RWNCTableViewController: UITextFieldDelegate {
             DispatchQueue.main.async(execute: {
                 self.indicator!.show(animated: true)
             })
-            self.viewModel.uploadTsdoDropbox(self.fileName ?? "Default file", target: self, completionHandler: { (success, errorMessage) in
+            self.viewModel.saveDataToCoreData(self.fileName ?? "Default file", completionHandler: { (success, errorMessage) in
                 DispatchQueue.main.async(execute: {
                     self.indicator!.hide(animated: true)
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
