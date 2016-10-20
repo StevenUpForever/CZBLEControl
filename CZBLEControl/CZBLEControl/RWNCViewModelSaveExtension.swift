@@ -65,4 +65,8 @@ extension RWNCViewModel: dropboxDelegate {
         }
     }
     
+    func saveDataToCoreData(_ fileName: String, completionHandler: @escaping statusMessageHandler) {
+        
+    }
+    
 }

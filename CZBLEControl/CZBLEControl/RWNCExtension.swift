@@ -77,11 +77,17 @@ extension RWNCTableViewController: UITextFieldDelegate {
                 })
             })
         }))
-//        alertController.addAction(UIAlertAction(title: "Local Disk", style: .Default, handler: { (action) in
-//            dispatch_async(dispatch_get_main_queue(), {
-//                CustomAlertController.showCancelAlertController("Locally save will coming soon", message: nil, target: self)
-//            })
-//        }))
+        alertController.addAction(UIAlertAction(title: "Local Drive", style: .default, handler: { (action) in
+            DispatchQueue.main.async(execute: {
+                self.indicator!.show(animated: true)
+            })
+            self.viewModel.uploadTsdoDropbox(self.fileName ?? "Default file", target: self, completionHandler: { (success, errorMessage) in
+                DispatchQueue.main.async(execute: {
+                    self.indicator!.hide(animated: true)
+                    CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
+                })
+            })
+        }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertController, animated: true, completion: nil)
     }

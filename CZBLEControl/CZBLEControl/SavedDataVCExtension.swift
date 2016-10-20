@@ -9,6 +9,7 @@
 import Foundation
 import GoogleAPIClient
 import SwiftyDropbox
+import CoreData
 
 extension SavedDataTableViewController: dropboxDelegate {
     
@@ -18,8 +19,6 @@ extension SavedDataTableViewController: dropboxDelegate {
         indicator.show(animated: true)
         
         switch type {
-        case .iCloudDrive:
-            break
         case .googleDrive:
             navigationItem.title = "Google Drive"
             loadGoogleDriveFilesWithAuthorize()
@@ -130,6 +129,12 @@ extension SavedDataTableViewController: dropboxDelegate {
                 CustomAlertController.showCancelAlertController("Authorize Dropbox user failed", message: nil, target: self)
             })
         }
+    }
+    
+    //MARK: CoreData Stack
+    
+    func loadCoreDataFiles() {
+        
     }
     
 }

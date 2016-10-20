@@ -12,6 +12,43 @@ import CoreData
 class CoreDataManager: NSObject {
     static let sharedInstance = CoreDataManager()
     
+    //Object management
+    
+    func saveValueData(_ title: String, dataArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
+        saveDataProcess(createContext(name: title), title: title, dataArray: dataArray, section: "Values", completionHandler: completionHandler)
+    }
+    
+    func saveWriteAndValueData(_ title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
+        let context = createContext(name: title)
+        saveDataProcess(context, title: title, dataArray: writeArray, section: "Write values", completionHandler: completionHandler)
+        saveDataProcess(context, title: title, dataArray: valueArray, section: "Read values", completionHandler: completionHandler)
+    }
+    
+    private func createContext(name: String) -> NSManagedObjectContext {
+        let context = managedObjectContext
+        context.name = name
+        return context
+        
+        
+    }
+    
+    private func saveDataProcess(_ context: NSManagedObjectContext, title: String, dataArray: [(String, String)], section: String, completionHandler: @escaping statusMessageHandler) {
+        for tuple in dataArray {
+            if let obj = NSEntityDescription.insertNewObject(forEntityName: "BLEData", into: context) as? BLEData {
+                obj.dataString = tuple.0
+                obj.date = tuple.1
+                obj.section = section
+                
+            }
+        }
+        do {
+            try context.save()
+            completionHandler(true, "Save data successfully")
+        } catch let error as NSError {
+            completionHandler(false, "Save data error: " + error.localizedDescription)
+        }
+    }
+    
     // MARK: - Core Data stack
     
     lazy var applicationDocumentsDirectory: URL = {
