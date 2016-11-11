@@ -16,41 +16,44 @@ class CoreDataManager: NSObject {
     
     func saveValueData(_ title: String, dataArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
         let context = managedObjectContext
-        let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as! DataList
-        dataListObj.name = title
-        dataListObj.sectionCount = 1
-        dataListObj.listToData = NSSet(set: createDataSet(context, dataArray: dataArray, section: 1))
-        do {
-            try context.save()
-            completionHandler(true, "Save data successfully")
-        } catch let error as NSError {
-            completionHandler(false, "Save data error: " + error.localizedDescription)
+        if let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as? DataList {
+            dataListObj.name = title
+            dataListObj.sectionCount = 1
+            dataListObj.listToData = NSSet(set: createDataSet(context, dataArray: dataArray, section: 1))
+            do {
+                try context.save()
+                completionHandler(true, "Save data successfully")
+            } catch let error as NSError {
+                completionHandler(false, "Save data error: " + error.localizedDescription)
+            }
         }
     }
     
     func saveWriteAndValueData(_ title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
         let context = managedObjectContext
-        let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as! DataList
-        dataListObj.name = title
-        dataListObj.sectionCount = 2
-        let set = createDataSet(context, dataArray: writeArray, section: 0).union(createDataSet(context, dataArray: valueArray, section: 1))
-        dataListObj.listToData = NSSet(set: set)
-        do {
-            try context.save()
-            completionHandler(true, "Save data successfully")
-        } catch let error as NSError {
-            completionHandler(false, "Save data error: " + error.localizedDescription)
+        if let dataListObj = NSEntityDescription.insertNewObject(forEntityName: "DataList", into: context) as? DataList {
+            dataListObj.name = title
+            dataListObj.sectionCount = 2
+            let set = createDataSet(context, dataArray: writeArray, section: 0).union(createDataSet(context, dataArray: valueArray, section: 1))
+            dataListObj.listToData = NSSet(set: set)
+            do {
+                try context.save()
+                completionHandler(true, "Save data successfully")
+            } catch let error as NSError {
+                completionHandler(false, "Save data error: " + error.localizedDescription)
+            }
         }
     }
     
     private func createDataSet(_ context: NSManagedObjectContext, dataArray: [(String, String)], section: Int16) -> Set<BLEData> {
         var resSet = Set<BLEData>()
         for tuple in dataArray {
-            let obj = NSEntityDescription.insertNewObject(forEntityName: "BLEData", into: context) as! BLEData
-            obj.dataString = tuple.0
-            obj.date = tuple.1
-            obj.section = section
-            resSet.insert(obj)
+            if let obj = NSEntityDescription.insertNewObject(forEntityName: "BLEData", into: context) as? BLEData {
+                obj.dataString = tuple.0
+                obj.date = tuple.1
+                obj.section = section
+                resSet.insert(obj)
+            }
         }
         return resSet
     }
@@ -110,8 +113,12 @@ class CoreDataManager: NSObject {
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-            abort()
+            #if DEBUG
+                NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+                abort()
+            #else
+                
+            #endif
         }
         
         return coordinator
@@ -134,9 +141,13 @@ class CoreDataManager: NSObject {
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
+                #if DEBUG
+                    let nserror = error as NSError
+                    NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                    abort()
+                #else
+                    
+                #endif
             }
         }
     }
