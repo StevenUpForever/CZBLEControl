@@ -174,7 +174,7 @@ class GoogleDriveManager: NSObject {
         query?.q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false"
         serviceDrive.executeQuery(query!) { [unowned self] (checkTicket, files, checkError) in
             if checkError != nil {
-                completionHandler(false, NSLocalizedString("Cannotfind correct folder", comment: ""))
+                completionHandler(false, NSLocalizedString("Cannot find correct folder", comment: ""))
             } else {
                 if let tempFileList = files as? GTLDriveFileList {
                     if let fileList = tempFileList.files as? [GTLDriveFile] {

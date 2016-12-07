@@ -6,125 +6,125 @@
  Copyright © 2016 ChengzhiJia. All rights reserved.
  */
 
-"Login Cancelled" = "Login Cancelled";
+"Login Cancelled" = "登录已取消";
 
-"OK" = "OK";
+"OK" = "好的";
 
-"Cancel" = "Cancel";
+"Cancel" = "取消";
 
-"Please check your device and open Bluetooth" = "Please check your device and open Bluetooth";
+"Please check your device and open Bluetooth" = "请检查你的手机并打开蓝牙";
 
-"BLE Unsupported" = "BLE Unsupported";
-"Your device doesn't support BLE" = "Your device doesn't support BLE";
+"BLE Unsupported" = "不支持蓝牙";
+"Your device doesn't support BLE" = "你的手机不支持蓝牙";
 
-"BLE Device error" = "BLE Device error";
-"Unknown error, please try again" = "Unknown error, please try again";
+"BLE Device error" = "蓝牙设备错误";
+"Unknown error, please try again" = "未知错误，请再试一次";
 
-"BLE unauthorized" = "BLE unauthorized";
-"Your device is unauthorized to use Bluetooth" = "Your device is unauthorized to use Bluetooth";
+"BLE unauthorized" = "蓝牙未授权";
+"Your device is unauthorized to use Bluetooth" = "你的手机没有使用蓝牙的权限";
 
-"Connect error" = "Connect error";
-"Cannot connet device, please try again" = "Cannot connet device, please try again";
+"Connect error" = "连接错误";
+"Cannot connet device, please try again" = "不能连接到设备，请重试";
 
-"Peripheral disconnected" = "Peripheral disconnected";
-"Please reconnect your device" = "Please reconnect your device";
+"Peripheral disconnected" = "设备已断开连接";
+"Please reconnect your device" = "请重新连接设备";
 
-"Name Unavailable" = "Name Unavailable";
-"UUID Unavailable" = "UUID Unavailable";
+"Name Unavailable" = "名称无效";
+"UUID Unavailable" = "UUID无效";
 
-"BLE turned off" = "BLE turned off";
-"Turn on your Bluetooth, going back" = "Turn on your Bluetooth, going back";
-"Please turn on your Bluetooth" = "Please turn on your Bluetooth";
+"BLE turned off" = "蓝牙已关闭";
+"Turn on your Bluetooth, going back" = "请打开你的蓝牙，正在回退";
+"Please turn on your Bluetooth" = "请打开你的蓝牙";
 
-"Peripheral not found" = "Peripheral not found";
-"Peripheral or characteristic not found, going back" = "Peripheral or characteristic not found, going back";
+"Peripheral not found" = "未发现可连接设备";
+"Peripheral or characteristic not found, going back" = "未发现设备和特征值，正在回退";
 
-"Unknown Error" = "Unknown Error";
-"Unknown error, please try again" = "Unknown error, please try again";
+"Unknown Error" = "未知错误";
+"Unknown error, please try again" = "未知错误，请重试";
 
-"Connected" = "Connected";
+"Connected" = "已连接";
 
-"Disconnected\nReconnect by top right button or back to choose another device" = "Disconnected\nReconnect by top right button or back to choose another device";
+"Disconnected\nReconnect by top right button or back to choose another device" = "已断开连接\n按右上角按键重新连接或者选择其他可连接设备";
 
-"Saving..." = "Saving...";
+"Saving..." = "正在保存...";
 
-"No data to save" = "No data to save";
+"No data to save" = "没有可保存数据";
 
-"Back" = "Back";
+"Back" = "退出";
 
-"Stay" = "Stay";
+"Stay" = "留在这里";
 
-"Please enter your file name" = "Please enter your file name";
+"Please enter your file name" = "请输入文件名";
 
-"Enter file name here" = "Enter file name here";
+"Enter file name here" = "在这里输入文件名";
 
-"Where would you like to save?" = "Where would you like to save?";
+"Where would you like to save?" = "你想保存在哪里？";
 
-"Default file" = "Default file";
+"Default file" = "默认文件名";
 
-"Local Drive" = "Local Drive";
+"Local Drive" = "本地磁盘";
 
-"read" = "read";
+"read" = "读取";
 
-"write" = "write";
+"write" = "写入";
 
-"Close notify" = "Close notify";
-"Are you sure to close notify?" = "Are you sure to close notify?";
+"Close notify" = "关闭通知";
+"Are you sure to close notify?" = "你确定关闭自动通知吗？";
 
-"No data respond" = "No data respond";
+"No data respond" = "没有返回数据";
 
-"Descriptors" = "Descriptors";
+"Descriptors" = "描述值";
 
-"Write Value" = "Write Value";
+"Write Value" = "写入数据";
 
-"Return Value" = "Return Value";
+"Return Value" = "返回数据";
 
-"Read Value" = "Read Value";
+"Read Value" = "读取数据";
 
-"Write Value, no response" = "Write Value, no response";
+"Write Value, no response" = "无返回值的写入数据";
 
-"Invalid data type" = "Invalid data type";
+"Invalid data type" = "无效数据类型";
 
-"Authorize user failed" = "Authorize user failed";
+"Authorize user failed" = "用户无法授权";
 
-"Are you sure to logoff Google account?" = "Are you sure to logoff Google account?";
-"Failed authorize Google user" = "Failed authorize Google user";
+"Are you sure to logoff Google account?" = "你确定注销Google账户吗？";
+"Failed authorize Google user" = "无法授权此Google用户";
 
-"Are you sure to logoff Dropbox account?" = "Are you sure to logoff Dropbox account?";
+"Are you sure to logoff Dropbox account?" = "你确定注销Dropbox用户吗？";
 
-"Logged In" = "Logged In";
-"Logged Off" = "Logged Off";
+"Logged In" = "已登录";
+"Logged Off" = "已注销";
 
-"Loading files..." = "Loading files...";
-"Loading file content..." = "Loading file content...";
-"Deleting files..." = "Deleting files...";
-"Failed to delete the file" = "Failed to delete the file";
-"Successfully delete the file" = "Successfully delete the file";
+"Loading files..." = "加载文件...";
+"Loading file content..." = "加载文件内容...";
+"Deleting files..." = "删除文件...";
+"Failed to delete the file" = "无法删除文件";
+"Successfully delete the file" = "文件已删除";
 
-"Failed to get file list" = "Failed to get file list";
+"Failed to get file list" = "无法获取文件列表";
 
-"Save data successfully" = "Save data successfully";
-"Save data failed" = "Save data failed";
-"Load data successfully" = "Load data successfully";
-"Load data failed" = "Load data failed";
-"Upload file failed" = "Upload file failed";
-"Upload file successfully" = "Upload file successfully";
+"Save data successfully" = "保存数据成功";
+"Save data failed" = "无法保存数据";
+"Load data successfully" = "加载数据成功";
+"Load data failed" = "加载数据失败";
+"Upload file failed" = "上传文件失败";
+"Upload file successfully" = "上传文件成功";
 
-"Data cannot be transferred to file" = "Data cannot be transferred to file";
+"Data cannot be transferred to file" = "无法将数据转换到文件";
 
-"No file to show" = "No file to show";
-"Cannot query files" = "Cannot query files";
+"No file to show" = "没有可显示文件";
+"Cannot query files" = "无法查询文件";
 
-"Failed to download file" = "Failed to download file";
+"Failed to download file" = "下载文件失败";
 
-"Unknown error to download file" = "Unknown error to download file";
+"Unknown error to download file" = "下载文件时有未知错误";
 
-"Cannotfind correct folder" = "Cannotfind correct folder";
+"Cannot find correct folder" = "未能找到正确文件夹";
 
-"Correct folder found" = "Correct folder found";
-"Create folder successfully" = "Create folder successfully";
-"Create folder failed" = "Create folder failed";
+"Correct folder found" = "已找到文件夹";
+"Create folder successfully" = "成功建立文件夹";
+"Create folder failed" = "无法建立文件夹";
 
-"Files are not in correct type" = "Files are not in correct type";
+"Files are not in correct type" = "文件类型错误";
 
-"Data unavailable" = "Data unavailable";
+"Data unavailable" = "数据无效";
