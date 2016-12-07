@@ -1,111 +1,111 @@
 
 /* Class = "UILabel"; text = "Services"; ObjectID = "1VJ-00-LTm"; */
-"1VJ-00-LTm.text" = "Services";
+"1VJ-00-LTm.text" = "サービス";
 
 /* Class = "UILabel"; text = "Local Drive"; ObjectID = "3se-Oc-mCQ"; */
-"3se-Oc-mCQ.text" = "Local Drive";
+"3se-Oc-mCQ.text" = "ローカルドライブ";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "5Km-4B-vTl"; */
-"5Km-4B-vTl.text" = "Label";
+"5Km-4B-vTl.text" = "ラベル";
 
 /* Class = "UINavigationItem"; title = "Saved Data"; ObjectID = "6pQ-A1-4Is"; */
-"6pQ-A1-4Is.title" = "Saved Data";
+"6pQ-A1-4Is.title" = "保存されたデータ";
 
 /* Class = "UILabel"; text = "Google Drive"; ObjectID = "7K6-zF-lfe"; */
 "7K6-zF-lfe.text" = "Google Drive";
 
 /* Class = "UINavigationItem"; title = "Cloud Accounts"; ObjectID = "7U5-tT-xjV"; */
-"7U5-tT-xjV.title" = "Cloud Accounts";
+"7U5-tT-xjV.title" = "クラウドアカウント";
 
 /* Class = "UITabBarItem"; title = "Bluetooth"; ObjectID = "AY4-5b-c3T"; */
-"AY4-5b-c3T.title" = "Bluetooth";
+"AY4-5b-c3T.title" = "ブルートゥース";
 
 /* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "EEm-Pk-d23"; */
-"EEm-Pk-d23.title" = "Save";
+"EEm-Pk-d23.title" = "セーブ";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "G3z-tb-DWy"; */
-"G3z-tb-DWy.title" = "Settings";
+"G3z-tb-DWy.title" = "設定";
 
 /* Class = "UILabel"; text = "RSSI"; ObjectID = "Hpb-we-Am8"; */
 "Hpb-we-Am8.text" = "RSSI";
 
 /* Class = "UILabel"; text = "Disconnected\nReconnect by top right button or back to choose another device"; ObjectID = "J8W-h2-8Fy"; */
-"J8W-h2-8Fy.text" = "Disconnected\nReconnect by top right button or back to choose another device";
+"J8W-h2-8Fy.text" = "接続が解除されました\n右上のボタンで戻るか、別のデバイスを選択して戻る";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "Jty-Mp-Pdk"; */
-"Jty-Mp-Pdk.text" = "Status";
+"Jty-Mp-Pdk.text" = "状態";
 
 /* Class = "UILabel"; text = "Dropbox"; ObjectID = "MoR-f0-VRp"; */
 "MoR-f0-VRp.text" = "Dropbox";
 
 /* Class = "UILabel"; text = "UUID label"; ObjectID = "QNn-X5-Gan"; */
-"QNn-X5-Gan.text" = "UUID label";
+"QNn-X5-Gan.text" = "UUID ラベル";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "UxJ-g2-eXb"; */
-"UxJ-g2-eXb.text" = "Label";
+"UxJ-g2-eXb.text" = "ラベル";
 
 /* Class = "UILabel"; text = "Peripheral UUID"; ObjectID = "Wbp-Hi-4Vg"; */
-"Wbp-Hi-4Vg.text" = "Peripheral UUID";
+"Wbp-Hi-4Vg.text" = "ペリフェラルUUID";
 
 /* Class = "UILabel"; text = "Notify"; ObjectID = "ZLx-Hm-grf"; */
-"ZLx-Hm-grf.text" = "Notify";
+"ZLx-Hm-grf.text" = "通知する";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "a5p-PR-1wh"; */
-"a5p-PR-1wh.text" = "Label";
+"a5p-PR-1wh.text" = "ラベル";
 
 /* Class = "UILabel"; text = "Saved Data"; ObjectID = "b5F-hC-sd7"; */
-"b5F-hC-sd7.text" = "Saved Data";
+"b5F-hC-sd7.text" = "保存されたデータ";
 
 /* Class = "UILabel"; text = "Instructions"; ObjectID = "bmn-YZ-XvB"; */
-"bmn-YZ-XvB.text" = "Instructions";
+"bmn-YZ-XvB.text" = "指示";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "cvi-8a-wAl"; */
-"cvi-8a-wAl.text" = "Title";
+"cvi-8a-wAl.text" = "タイトル";
 
 /* Class = "UILabel"; text = "Read"; ObjectID = "duY-d7-Hwu"; */
-"duY-d7-Hwu.text" = "Read";
+"duY-d7-Hwu.text" = "読む";
 
 /* Class = "UINavigationItem"; title = "BLE Devices"; ObjectID = "eSt-iI-PPb"; */
-"eSt-iI-PPb.title" = "BLE Devices";
+"eSt-iI-PPb.title" = "BLEデバイス";
 
 /* Class = "UILabel"; text = "Logged Off"; ObjectID = "eXo-1r-seQ"; */
-"eXo-1r-seQ.text" = "Logged Off";
+"eXo-1r-seQ.text" = "ログオフ";
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "fpt-aJ-OkP"; */
-"fpt-aJ-OkP.title" = "Settings";
+"fpt-aJ-OkP.title" = "設定";
 
 /* Class = "UILabel"; text = "Write"; ObjectID = "hfR-ln-c85"; */
-"hfR-ln-c85.text" = "Write";
+"hfR-ln-c85.text" = "書きます";
 
 /* Class = "UILabel"; text = "W/NoResp"; ObjectID = "kFd-Dw-kbv"; */
-"kFd-Dw-kbv.text" = "W/NoResp";
+"kFd-Dw-kbv.text" = "書き込み/無応答";
 
 /* Class = "UILabel"; text = "Logged Off"; ObjectID = "kzb-vu-3Rk"; */
-"kzb-vu-3Rk.text" = "Logged Off";
+"kzb-vu-3Rk.text" = "ログオフ";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "mlT-zi-MhR"; */
-"mlT-zi-MhR.text" = "Label";
+"mlT-zi-MhR.text" = "ラベル";
 
 /* Class = "UILabel"; text = "Cloud Drive Account"; ObjectID = "p3x-9A-bTP"; */
-"p3x-9A-bTP.text" = "Cloud Drive Account";
+"p3x-9A-bTP.text" = "クラウドドライブアカウント";
 
 /* Class = "UINavigationItem"; title = "Instructions"; ObjectID = "qmu-ty-qwk"; */
-"qmu-ty-qwk.title" = "Instructions";
+"qmu-ty-qwk.title" = "指示";
 
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "tW5-wf-puc"; */
-"tW5-wf-puc.title" = "Title";
+"tW5-wf-puc.title" = "タイトル";
 
 /* Class = "UIBarButtonItem"; title = "Connect"; ObjectID = "thj-nB-rEq"; */
-"thj-nB-rEq.title" = "Connect";
+"thj-nB-rEq.title" = "接続する";
 
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "u72-K3-iuJ"; */
-"u72-K3-iuJ.text" = "Subtitle";
+"u72-K3-iuJ.text" = "字幕";
 
 /* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "vnh-N2-cXG"; */
 "vnh-N2-cXG.title" = "Item";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "xCX-I8-3dT"; */
-"xCX-I8-3dT.text" = "Label";
+"xCX-I8-3dT.text" = "ラベル";
 
 /* Class = "UINavigationItem"; title = "Title"; ObjectID = "xdb-9D-5Bx"; */
-"xdb-9D-5Bx.title" = "Title";
+"xdb-9D-5Bx.title" = "タイトル";
