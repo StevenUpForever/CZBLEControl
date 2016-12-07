@@ -68,7 +68,7 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        CustomAlertController.showCancelAlertController(NSLocalizedString("Connect error", comment: ""), message: NSLocalizedString("Cannot connet device, please try again", comment: ""), target: self)
+        CustomAlertController.showCancelAlertController(NSLocalizedString("Connect error", comment: ""), message: NSLocalizedString("Cannot connect device, please try again", comment: ""), target: self)
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {

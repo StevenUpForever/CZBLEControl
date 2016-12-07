@@ -24,7 +24,7 @@
 "Your device is unauthorized to use Bluetooth" = "你的設備沒有被授權使用藍牙";
 
 "Connect error" = "連接錯誤";
-"Cannot connet device, please try again" = "未能連接到設備，請重試";
+"Cannot connect device, please try again" = "未能連接到設備，請重試";
 
 "Peripheral disconnected" = "設備連接已斷開";
 "Please reconnect your device" = "請重新連接你的設備";

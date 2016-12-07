@@ -6,45 +6,45 @@
  Copyright © 2016 ChengzhiJia. All rights reserved.
  */
 
-"Login Cancelled" = "Login Cancelled";
+"Login Cancelled" = "Login Annulé";
 
-"OK" = "OK";
+"OK" = "d'accord";
 
-"Cancel" = "Cancel";
+"Cancel" = "Annuler";
 
-"Please check your device and open Bluetooth" = "Please check your device and open Bluetooth";
+"Please check your device and open Bluetooth" = "Veuillez vérifier votre appareil et ouvrir Bluetooth";
 
-"BLE Unsupported" = "BLE Unsupported";
-"Your device doesn't support BLE" = "Your device doesn't support BLE";
+"BLE Unsupported" = "BLE non pris en charge";
+"Your device doesn't support BLE" = "Votre appareil ne prend pas en charge BLE";
 
-"BLE Device error" = "BLE Device error";
-"Unknown error, please try again" = "Unknown error, please try again";
+"BLE Device error" = "Erreur de périphérique BLE";
+"Unknown error, please try again" = "Erreur inconnue, veuillez réessayer";
 
-"BLE unauthorized" = "BLE unauthorized";
-"Your device is unauthorized to use Bluetooth" = "Your device is unauthorized to use Bluetooth";
+"BLE unauthorized" = "BLE non autorisé";
+"Your device is unauthorized to use Bluetooth" = "Votre appareil n'est pas autorisé à utiliser Bluetooth";
 
-"Connect error" = "Connect error";
-"Cannot connet device, please try again" = "Cannot connet device, please try again";
+"Connect error" = "Erreur de connexion";
+"Cannot connect device, please try again" = "Impossible de connecter le périphérique. Veuillez réessayer.";
 
-"Peripheral disconnected" = "Peripheral disconnected";
-"Please reconnect your device" = "Please reconnect your device";
+"Peripheral disconnected" = "Périphérique déconnecté";
+"Please reconnect your device" = "Veuillez reconnecter votre appareil";
 
-"Name Unavailable" = "Name Unavailable";
-"UUID Unavailable" = "UUID Unavailable";
+"Name Unavailable" = "Nom non disponible";
+"UUID Unavailable" = "UUID indisponible";
 
-"BLE turned off" = "BLE turned off";
-"Turn on your Bluetooth, going back" = "Turn on your Bluetooth, going back";
-"Please turn on your Bluetooth" = "Please turn on your Bluetooth";
+"BLE turned off" = "BLE désactivé";
+"Turn on your Bluetooth, going back" = "Allumez votre Bluetooth, revenez en arrière";
+"Please turn on your Bluetooth" = "Veuillez activer votre Bluetooth";
 
-"Peripheral not found" = "Peripheral not found";
-"Peripheral or characteristic not found, going back" = "Peripheral or characteristic not found, going back";
+"Peripheral not found" = "Périphérique introuvable";
+"Peripheral or characteristic not found, going back" = "Périphérique ou caractéristique introuvable, retour";
 
-"Unknown Error" = "Unknown Error";
-"Unknown error, please try again" = "Unknown error, please try again";
+"Unknown Error" = "Erreur inconnue";
+"Unknown error, please try again" = "Erreur inconnue, veuillez réessayer";
 
-"Connected" = "Connected";
+"Connected" = "Connecté";
 
-"Disconnected\nReconnect by top right button or back to choose another device" = "Disconnected\nReconnect by top right button or back to choose another device";
+"Disconnected\nReconnect by top right button or back to choose another device" = "Déconnecté\nReconnexion par le bouton en haut à droite ou en arrière pour choisir un autre périphérique";
 
 "Saving..." = "Saving...";
 

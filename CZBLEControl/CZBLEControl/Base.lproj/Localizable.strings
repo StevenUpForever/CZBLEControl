@@ -24,7 +24,7 @@
 "Your device is unauthorized to use Bluetooth" = "Your device is unauthorized to use Bluetooth";
 
 "Connect error" = "Connect error";
-"Cannot connet device, please try again" = "Cannot connet device, please try again";
+"Cannot connect device, please try again" = "Cannot connect device, please try again";
 
 "Peripheral disconnected" = "Peripheral disconnected";
 "Please reconnect your device" = "Please reconnect your device";

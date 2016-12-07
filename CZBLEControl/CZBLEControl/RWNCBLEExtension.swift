@@ -25,7 +25,7 @@ extension RWNCTableViewController: CBCentralManagerDelegate, CBPeripheralDelegat
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        let alertController = UIAlertController(title: NSLocalizedString("Connect error", comment: ""), message: NSLocalizedString("Cannot connet device, please try again", comment: ""), preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Connect error", comment: ""), message: NSLocalizedString("Cannot connect device, please try again", comment: ""), preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Back", comment: ""), style: .default, handler: { (action) in
             if let nav = self.navigationController {
                 nav.popViewController(animated: true)

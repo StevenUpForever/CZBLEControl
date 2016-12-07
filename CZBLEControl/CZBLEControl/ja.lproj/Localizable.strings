@@ -6,45 +6,45 @@
  Copyright © 2016 ChengzhiJia. All rights reserved.
  */
 
-"Login Cancelled" = "Login Cancelled";
+"Login Cancelled" = "ログインがキャンセルされました";
 
-"OK" = "OK";
+"OK" = "はい";
 
-"Cancel" = "Cancel";
+"Cancel" = "キャンセル";
 
-"Please check your device and open Bluetooth" = "Please check your device and open Bluetooth";
+"Please check your device and open Bluetooth" = "お使いのデバイスを確認し、Bluetoothを開いてください";
 
-"BLE Unsupported" = "BLE Unsupported";
-"Your device doesn't support BLE" = "Your device doesn't support BLE";
+"BLE Unsupported" = "サポートされていないBLE";
+"Your device doesn't support BLE" = "お使いのデバイスはBLEをサポートしていません";
 
-"BLE Device error" = "BLE Device error";
-"Unknown error, please try again" = "Unknown error, please try again";
+"BLE Device error" = "BLEデバイスエラー";
+"Unknown error, please try again" = "不明なエラーです、もう一度お試しください";
 
-"BLE unauthorized" = "BLE unauthorized";
-"Your device is unauthorized to use Bluetooth" = "Your device is unauthorized to use Bluetooth";
+"BLE unauthorized" = "BLEが承認されていない";
+"Your device is unauthorized to use Bluetooth" = "あなたのデバイスはBluetoothを使用する権限がありません";
 
-"Connect error" = "Connect error";
-"Cannot connet device, please try again" = "Cannot connet device, please try again";
+"Connect error" = "接続エラー";
+"Cannot connect device, please try again" = "デバイスを接続できません。もう一度お試しください";
 
-"Peripheral disconnected" = "Peripheral disconnected";
-"Please reconnect your device" = "Please reconnect your device";
+"Peripheral disconnected" = "周辺機器が接続されていない";
+"Please reconnect your device" = "デバイスを再接続してください";
 
-"Name Unavailable" = "Name Unavailable";
-"UUID Unavailable" = "UUID Unavailable";
+"Name Unavailable" = "名前を使用できません";
+"UUID Unavailable" = "UUIDを使用できません";
 
-"BLE turned off" = "BLE turned off";
-"Turn on your Bluetooth, going back" = "Turn on your Bluetooth, going back";
-"Please turn on your Bluetooth" = "Please turn on your Bluetooth";
+"BLE turned off" = "BLEがオフになった";
+"Turn on your Bluetooth, going back" = "あなたのBluetoothをオンにして、戻る";
+"Please turn on your Bluetooth" = "あなたのBluetoothをオンにしてください";
 
-"Peripheral not found" = "Peripheral not found";
-"Peripheral or characteristic not found, going back" = "Peripheral or characteristic not found, going back";
+"Peripheral not found" = "周辺機器が見つかりません";
+"Peripheral or characteristic not found, going back" = "周辺機器または特性が見つかりませんでした。";
 
-"Unknown Error" = "Unknown Error";
-"Unknown error, please try again" = "Unknown error, please try again";
+"Unknown Error" = "不明なエラー";
+"Unknown error, please try again" = "不明なエラーです、もう一度お試しください";
 
-"Connected" = "Connected";
+"Connected" = "接続済み";
 
-"Disconnected\nReconnect by top right button or back to choose another device" = "Disconnected\nReconnect by top right button or back to choose another device";
+"Disconnected\nReconnect by top right button or back to choose another device" = "接続が解除されました\ n右上のボタンで戻るか、別のデバイスを選択して戻る";
 
 "Saving..." = "Saving...";
 
