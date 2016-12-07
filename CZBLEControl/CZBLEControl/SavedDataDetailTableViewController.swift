@@ -24,7 +24,7 @@ class SavedDataDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         
         indicator = MBProgressHUD(view: view)
-        indicator.label.text = "Loading file content..."
+        indicator.label.text = NSLocalizedString("Loading file content...", comment: "")
         view.addSubview(indicator)
         
         loadProperFileContent()
@@ -79,9 +79,9 @@ class SavedDataDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if sourceObj is DataList {
             if section == 0 {
-                return "Write value"
+                return NSLocalizedString("Write Value", comment: "")
             } else {
-                return "Read value"
+                return NSLocalizedString("Read Value", comment: "")
             }
         } else {
             return nil

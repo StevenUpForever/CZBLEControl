@@ -52,11 +52,11 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
         case .poweredOn:
             break
         case .poweredOff:
-            CustomAlertController.showCancelAlertControllerWithBlock("BLE turned off", message: "Turn on your Bluetooth, going back", target: self, actionHandler: { (action) in
+            CustomAlertController.showCancelAlertControllerWithBlock(NSLocalizedString("BLE turned off", comment: ""), message: NSLocalizedString("Turn on your Bluetooth, going back", comment: ""), target: self, actionHandler: { (action) in
                 _ = self.navigationController?.popToRootViewController(animated: true)
             })
         default:
-            CustomAlertController.showCancelAlertController("Unknown Error", message: "Unknown error, please try again", target: self)
+            CustomAlertController.showCancelAlertController(NSLocalizedString("Unknown Error", comment: ""), message: NSLocalizedString("Unknown error, please try again", comment: ""), target: self)
         }
     }
     
@@ -68,11 +68,11 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        CustomAlertController.showCancelAlertController("Peripheral connect error", message: "Connect to device error, please try again", target: self)
+        CustomAlertController.showCancelAlertController(NSLocalizedString("Connect error", comment: ""), message: NSLocalizedString("Cannot connet device, please try again", comment: ""), target: self)
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        CustomAlertController.showCancelAlertController("Peripheral disconnected", message: "Please reconnect your device", target: self)
+        CustomAlertController.showCancelAlertController(NSLocalizedString("Peripheral disconnected", comment: ""), message: NSLocalizedString("Please reconnect your device", comment: ""), target: self)
         
         disconnectedUI()
     }
@@ -159,13 +159,13 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     //MARK: - private methods
     
     func connectedUI() {
-        statusLabel.text = "Connected"
+        statusLabel.text = NSLocalizedString("Connected", comment: "")
         statusLabel.textColor = UIColor.black
         connectBarItem.isEnabled = false
     }
     
     func disconnectedUI() {
-        statusLabel.text = "Disconnected\nReconnect by top right button or back to choose another device"
+        statusLabel.text = NSLocalizedString("Disconnected\nReconnect by top right button or back to choose another device", comment: "")
         statusLabel.textColor = UIColor.red
         connectBarItem.isEnabled = true
     }

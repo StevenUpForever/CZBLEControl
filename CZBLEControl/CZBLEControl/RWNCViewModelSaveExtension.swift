@@ -21,7 +21,7 @@ extension RWNCViewModel: dropboxDelegate {
                 if let strongSelf = self , authSuccess {
                     strongSelf.googleDriveSaveData(fileName, completionHandler: completionHandler)
                 } else {
-                    completionHandler(false, "Authorize user failed")
+                    completionHandler(false, NSLocalizedString("Authorize user failed", comment: ""))
                 }
             })
         }

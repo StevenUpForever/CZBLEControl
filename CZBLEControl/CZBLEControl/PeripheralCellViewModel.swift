@@ -12,7 +12,7 @@ import CoreBluetooth
 class PeripheralCellViewModel: NSObject {
     
     var characterObj: CBCharacteristic?
-    var uuidString = "UUID unavailable"
+    var uuidString = NSLocalizedString("UUID Unavailable", comment: "")
     var propertyString = "Propertites:"
     
     func addGradientToView(_ view: UIView) {

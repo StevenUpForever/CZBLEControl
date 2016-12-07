@@ -31,14 +31,14 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 extension RWNCTableViewController: UITextFieldDelegate {
     
     func showFileNameAlertController() {
-        let alertController = UIAlertController(title: "Please enter your file name", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Please enter your file name", comment: ""), message: nil, preferredStyle: .alert)
         alertController.addTextField { (textField) in
-            textField.placeholder = "Enter file name here"
+            textField.placeholder = NSLocalizedString("Enter file name here", comment: "")
             self.fileNameTextField = textField
             self.fileNameTextField!.addTarget(self, action: #selector(self.textFieldValueChanged), for: .editingChanged)
         }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        submitAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        submitAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
             DispatchQueue.main.async(execute: {
                 self.showDriveActionSheet()
             })
@@ -49,12 +49,12 @@ extension RWNCTableViewController: UITextFieldDelegate {
     }
     
     func showDriveActionSheet() {
-        let alertController = UIAlertController(title: "Where would you like to save?", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: NSLocalizedString("Where would you like to save?", comment: ""), message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Google Drive", style: .default, handler: { (action) in
             DispatchQueue.main.async(execute: {
                 self.indicator!.show(animated: true)
             })
-            self.viewModel.uploadToGoogleDrive(self.fileName ?? "Default file", target: self, completionHandler: { (success, errorMessage) in
+            self.viewModel.uploadToGoogleDrive(self.fileName ?? NSLocalizedString("Default file", comment: ""), target: self, completionHandler: { (success, errorMessage) in
                 DispatchQueue.main.async(execute: {
                     self.indicator!.hide(animated: true)
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
@@ -65,25 +65,25 @@ extension RWNCTableViewController: UITextFieldDelegate {
             DispatchQueue.main.async(execute: {
                 self.indicator!.show(animated: true)
             })
-            self.viewModel.uploadToDropbox(self.fileName ?? "Default file", target: self, completionHandler: { (success, errorMessage) in
+            self.viewModel.uploadToDropbox(self.fileName ?? NSLocalizedString("Default file", comment: ""), target: self, completionHandler: { (success, errorMessage) in
                 DispatchQueue.main.async(execute: {
                     self.indicator!.hide(animated: true)
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             })
         }))
-        alertController.addAction(UIAlertAction(title: "Local Drive", style: .default, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Local Drive", comment: ""), style: .default, handler: { (action) in
             DispatchQueue.main.async(execute: {
                 self.indicator!.show(animated: true)
             })
-            self.viewModel.saveDataToCoreData(self.fileName ?? "Default file", completionHandler: { (success, errorMessage) in
+            self.viewModel.saveDataToCoreData(self.fileName ?? NSLocalizedString("Default file", comment: ""), completionHandler: { (success, errorMessage) in
                 DispatchQueue.main.async(execute: {
                     self.indicator!.hide(animated: true)
                     CustomAlertController.showCancelAlertController(errorMessage, message: nil, target: self)
                 })
             })
         }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
     

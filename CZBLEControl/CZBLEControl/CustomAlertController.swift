@@ -23,14 +23,14 @@ class CustomAlertController: UIAlertController {
     
     class func showCancelAlertController(_ title: String?, message: String?, target: UIViewController) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert);
-        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         target.present(alertController, animated: true, completion: nil)
     }
     
     class func showCancelAlertControllerWithBlock(_ title: String, message: String, target: UIViewController, actionHandler: @escaping (_ action: UIAlertAction) -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: { (action) in
             actionHandler(action)
         }))
         target.present(alertController, animated: true, completion: nil)
@@ -38,8 +38,8 @@ class CustomAlertController: UIAlertController {
     
     class func showChooseAlertControllerWithBlock(_ title: String?, message: String?, target: UIViewController, actionHandler: @escaping (_ action: UIAlertAction) -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { (action) in
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .destructive, handler: { (action) in
             actionHandler(action)
         }))
         target.present(alertController, animated: true, completion: nil)

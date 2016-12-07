@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(true, token: token, error: nil, errorMessage: nil)
 //                print("Success! User is logged into Dropbox with token: \(token)")
             case .cancel:
-                DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(false, token: nil, error: nil, errorMessage: "You canceled login")
+                DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(false, token: nil, error: nil, errorMessage: NSLocalizedString("Login Cancelled", comment: ""))
 //                print("Authorization flow was manually canceled by user.")
             case .error(let error, let description):
                 DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(false, token: nil, error: error, errorMessage: description)

@@ -19,7 +19,7 @@ class PeripheralViewModel: NSObject, CBPeripheralDelegate {
     var peripheralObj: CBPeripheral?
     var centralManager: CBCentralManager?
     
-    var uuidString = "UUID unavailable"
+    var uuidString = NSLocalizedString("UUID Unavailable", comment: "")
     
     weak var delegate: peripheralTableViewDelegate?
     

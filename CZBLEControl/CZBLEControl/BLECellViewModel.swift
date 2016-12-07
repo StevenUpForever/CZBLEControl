@@ -11,8 +11,8 @@ import CoreBluetooth
 
 class BLECellViewModel: NSObject {
     
-    var nameString: String = "Name Unavailable"
-    var uuidString: String = "UUID Unavailable"
+    var nameString: String = NSLocalizedString("Name Unavailable", comment: "")
+    var uuidString: String = NSLocalizedString("UUID Unavailable", comment: "")
     
     fileprivate var RSSINum = 0
     var RSSIString: String = "0"

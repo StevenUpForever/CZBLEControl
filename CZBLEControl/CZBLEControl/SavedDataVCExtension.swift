@@ -15,7 +15,7 @@ extension SavedDataTableViewController: dropboxDelegate {
     
     func loadProperDataSource(_ type: savedDataSource) {
         
-        indicator.label.text = "Loading files..."
+        indicator.label.text = NSLocalizedString("Loading files...", comment: "")
         indicator.show(animated: true)
         
         switch type {
@@ -26,14 +26,14 @@ extension SavedDataTableViewController: dropboxDelegate {
             navigationItem.title = "Dropbox"
             loadDropboxFilesWithAuthorize()
         case .localDrive: 
-            navigationItem.title = "Local Drive"
+            navigationItem.title = NSLocalizedString("Local Drive", comment: "")
             loadCoreDataFiles()
         }
     }
     
     func deleteData(_ indexPath: IndexPath) {
         
-        indicator.label.text = "Deleting files..."
+        indicator.label.text = NSLocalizedString("Deleting files...", comment: "")
         indicator.show(animated: true)
         
         let handleDeleteResponse = { (success: Bool, errorMessage: String?) in
@@ -74,7 +74,7 @@ extension SavedDataTableViewController: dropboxDelegate {
                 } else {
                     DispatchQueue.main.async(execute: {
                         self.indicator.hide(animated: true)
-                        CustomAlertController.showCancelAlertController("Authorize google user failed", message: nil, target: self)
+                        CustomAlertController.showCancelAlertController(NSLocalizedString("Authorize user failed", comment: ""), message: nil, target: self)
                     })
                 }
             })
@@ -114,7 +114,7 @@ extension SavedDataTableViewController: dropboxDelegate {
                 } else {
                     DispatchQueue.main.async(execute: {
                         self.indicator.hide(animated: true)
-                        CustomAlertController.showCancelAlertController("Failed to get file list", message: nil, target: self)
+                        CustomAlertController.showCancelAlertController(NSLocalizedString("Failed to get file list", comment: ""), message: nil, target: self)
                     })
                 }
             }
@@ -129,7 +129,7 @@ extension SavedDataTableViewController: dropboxDelegate {
         } else {
             DispatchQueue.main.async(execute: {
                 self.indicator.hide(animated: true)
-                CustomAlertController.showCancelAlertController("Authorize Dropbox user failed", message: nil, target: self)
+                CustomAlertController.showCancelAlertController(NSLocalizedString("Authorize user failed", comment: ""), message: nil, target: self)
             })
         }
     }

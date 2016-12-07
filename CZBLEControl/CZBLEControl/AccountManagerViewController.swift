@@ -31,7 +31,7 @@ class AccountManagerViewController: UIViewController, dropboxDelegate {
     
     @IBAction func googleDriveAction(_ sender: UITapGestureRecognizer) {
         if googleDriveManager.isAuthorized() {
-            CustomAlertController.showChooseAlertControllerWithBlock("Are you sure to logoff Google account?", message: nil, target: self, actionHandler: { (action) in
+            CustomAlertController.showChooseAlertControllerWithBlock(NSLocalizedString("Are you sure to logoff Google account?", comment: ""), message: nil, target: self, actionHandler: { (action) in
                 self.googleDriveManager.deAuthorizeUser()
                 DispatchQueue.main.async(execute: {
                     self.changeLabelState(self.googleDriveLabel, success: false)
@@ -44,7 +44,7 @@ class AccountManagerViewController: UIViewController, dropboxDelegate {
                         self.changeLabelState(self.googleDriveLabel, success: true)
                     } else {
                         self.changeLabelState(self.googleDriveLabel, success: false)
-                        CustomAlertController.showCancelAlertController("Failed authorize Google user", message: nil, target: self)
+                        CustomAlertController.showCancelAlertController(NSLocalizedString("Failed authorize Google user", comment: ""), message: nil, target: self)
                     }
                 })
             }
@@ -53,7 +53,7 @@ class AccountManagerViewController: UIViewController, dropboxDelegate {
     
     @IBAction func dropBoxAction(_ sender: UITapGestureRecognizer) {
         if dropBoxManager.isAuthorized() {
-            CustomAlertController.showChooseAlertControllerWithBlock("Are you sure to logoff Dropbox account?", message: nil, target: self, actionHandler: { (action) in
+            CustomAlertController.showChooseAlertControllerWithBlock(NSLocalizedString("Are you sure to logoff Dropbox account?", comment: ""), message: nil, target: self, actionHandler: { (action) in
                 self.dropBoxManager.deauthorizeUser()
                 DispatchQueue.main.async(execute: {
                     self.changeLabelState(self.dropBoxLabel, success: false)
@@ -76,7 +76,7 @@ class AccountManagerViewController: UIViewController, dropboxDelegate {
     }
     
     fileprivate func changeLabelState(_ sender: UILabel, success:Bool) {
-        sender.text = success ? "Logged In" : "Logged Off"
+        sender.text = success ? NSLocalizedString("Logged In", comment: "") : NSLocalizedString("Logged Off", comment: "")
         sender.textColor = success ? UIColor.black : UIColor.red
     }
 

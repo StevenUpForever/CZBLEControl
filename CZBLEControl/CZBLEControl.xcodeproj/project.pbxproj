@@ -40,6 +40,7 @@
 		AFDB2E681D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E671D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift */; };
 		AFDB2E6C1D7DFA99005ADC38 /* RWNCBLEExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */; };
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
+		AFF5F07D1DF7E2E2006B48FC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFF5F07F1DF7E2E2006B48FC /* Localizable.strings */; };
 		B23B35AF1D821D5500E90E08 /* SavedDataSourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */; };
 		B23B35B31D8226D100E90E08 /* SavedDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */; };
 		B23B35B71D8234B100E90E08 /* SavedDataDetailExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35B61D8234B100E90E08 /* SavedDataDetailExtension.swift */; };
@@ -103,6 +104,7 @@
 		AFDB2E671D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModelSaveExtension.swift; sourceTree = "<group>"; };
 		AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCBLEExtension.swift; sourceTree = "<group>"; };
 		AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModel.swift; sourceTree = "<group>"; };
+		AFF5F07E1DF7E2E2006B48FC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataSourceTableViewController.swift; sourceTree = "<group>"; };
 		B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataTableViewCell.swift; sourceTree = "<group>"; };
 		B23B35B61D8234B100E90E08 /* SavedDataDetailExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataDetailExtension.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				AFDA747C1CB1EE5800F09BD8 /* LaunchScreen.storyboard */,
 				AFDA747F1CB1EE5800F09BD8 /* Info.plist */,
 				AFDA74771CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld */,
+				AFF5F07F1DF7E2E2006B48FC /* Localizable.strings */,
 			);
 			path = CZBLEControl;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				AF5C43CD1D98D3AD00B0C863 /* Podfile in Resources */,
 				AFDA747E1CB1EE5800F09BD8 /* LaunchScreen.storyboard in Resources */,
 				AFDA747B1CB1EE5800F09BD8 /* Assets.xcassets in Resources */,
+				AFF5F07D1DF7E2E2006B48FC /* Localizable.strings in Resources */,
 				AFDA74761CB1EE5800F09BD8 /* Main.storyboard in Resources */,
 				AF7403B21CD4094F004C98E6 /* .gitignore in Resources */,
 				AF8BDEC21CB8BDE400C49885 /* PopoverViewController.xib in Resources */,
@@ -621,6 +625,15 @@
 				AFDA747D1CB1EE5800F09BD8 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		AFF5F07F1DF7E2E2006B48FC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AFF5F07E1DF7E2E2006B48FC /* en */,
+			);
+			name = Localizable.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

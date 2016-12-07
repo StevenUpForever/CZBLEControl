@@ -59,7 +59,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         viewModel.connectPeripheralWithSelectedRow(indexPath) { [weak self] (poweredOn) in
             if let strongSelf = self {
                 if !poweredOn {
-                    CustomAlertController.showCancelAlertController("Connection error", message: "Please check your device and open Bluetooth", target: strongSelf)
+                    CustomAlertController.showCancelAlertController(NSLocalizedString("Please check your device and open Bluetooth", comment: ""), message: nil, target: strongSelf)
                 } else {
                     let cell = tableView.cellForRow(at: indexPath) as! BLETableViewCell
                     if !cell.indicator.isAnimating {
@@ -92,18 +92,18 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
         case .poweredOn:
             viewModel.scanPeripheral()
         case .unsupported:
-            CustomAlertController.showCancelAlertController("BLE Unsupported", message: "Your device doesn't support BLE", target: self)
+            CustomAlertController.showCancelAlertController(NSLocalizedString("BLE Unsupported", comment: ""), message: NSLocalizedString("Your device doesn't support BLE", comment: ""), target: self)
         case .poweredOff:
             CustomAlertController.showCancelAlertController("BLE turned off", message: "Please turn on your Bluetooth", target: self)
             viewModel.clearAllPeripherals({[unowned self] (indexPaths) in
                 self.tableView.deleteRows(at: indexPaths, with: .right)
             })
         case .unknown:
-            CustomAlertController.showCancelAlertController("BLE Device error", message: "Unknown error, please try again", target: self)
+            CustomAlertController.showCancelAlertController(NSLocalizedString("BLE Device error", comment: ""), message: NSLocalizedString("Unknown error, please try again", comment: ""), target: self)
         case .unauthorized:
-            CustomAlertController.showCancelAlertController("BLE unauthorized", message: "Your device is unauthorized to use Bluetooth", target: self)
+            CustomAlertController.showCancelAlertController(NSLocalizedString("BLE unauthorized", comment: ""), message: NSLocalizedString("Your device is unauthorized to use Bluetooth", comment: ""), target: self)
         default:
-            CustomAlertController.showCancelAlertController("BLE Device error", message: "Unknown error, please try again", target: self)
+            CustomAlertController.showCancelAlertController(NSLocalizedString("BLE Device error", comment: ""), message: NSLocalizedString("Unknown error, please try again", comment: ""), target: self)
         }
     }
     
@@ -130,7 +130,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         endIndicatorLoading(viewModel.replaceSelectedPeripheral() as IndexPath)
-        CustomAlertController.showCancelAlertController("Connect error", message: "Cannot connet device, please try again", target: self)
+        CustomAlertController.showCancelAlertController(NSLocalizedString("Connect error", comment: ""), message: NSLocalizedString("Cannot connet device, please try again", comment: ""), target: self)
     }
 
     //MARK: - Other selectors
