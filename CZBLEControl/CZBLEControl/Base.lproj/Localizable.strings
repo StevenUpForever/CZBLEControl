@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  CZBLEControl
-
-  Created by Chengzhi Jia on 12/6/16.
-  Copyright © 2016 ChengzhiJia. All rights reserved.
-*/
+/*
+ Localizable.strings
+ CZBLEControl
+ 
+ Created by Chengzhi Jia on 12/6/16.
+ Copyright © 2016 ChengzhiJia. All rights reserved.
+ */
 
 "Login Cancelled" = "Login Cancelled";
 
@@ -12,7 +12,7 @@
 
 "Cancel" = "Cancel";
 
-"Please check your device and open Bluetooth" = "Please check your device and open Bluetooth"
+"Please check your device and open Bluetooth" = "Please check your device and open Bluetooth";
 
 "BLE Unsupported" = "BLE Unsupported";
 "Your device doesn't support BLE" = "Your device doesn't support BLE";
@@ -98,6 +98,33 @@
 "Loading files..." = "Loading files...";
 "Loading file content..." = "Loading file content...";
 "Deleting files..." = "Deleting files...";
+"Failed to delete the file" = "Failed to delete the file";
+"Successfully delete the file" = "Successfully delete the file";
 
 "Failed to get file list" = "Failed to get file list";
 
+"Save data successfully" = "Save data successfully";
+"Save data failed" = "Save data failed";
+"Load data successfully" = "Load data successfully";
+"Load data failed" = "Load data failed";
+"Upload file failed" = "Upload file failed";
+"Upload file successfully" = "Upload file successfully";
+
+"Data cannot be transferred to file" = "Data cannot be transferred to file";
+
+"No file to show" = "No file to show";
+"Cannot query files" = "Cannot query files";
+
+"Failed to download file" = "Failed to download file";
+
+"Unknown error to download file" = "Unknown error to download file";
+
+"Cannotfind correct folder" = "Cannotfind correct folder";
+
+"Correct folder found" = "Correct folder found";
+"Create folder successfully" = "Create folder successfully";
+"Create folder failed" = "Create folder failed";
+
+"Files are not in correct type" = "Files are not in correct type";
+
+"Data unavailable" = "Data unavailable";

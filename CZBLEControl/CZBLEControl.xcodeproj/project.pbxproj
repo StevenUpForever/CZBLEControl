@@ -25,6 +25,7 @@
 		AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */; };
 		AF8BDEC11CB8BDE400C49885 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */; };
 		AF8BDEC21CB8BDE400C49885 /* PopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */; };
+		AF90FB811DF803EB00A07215 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF90FB831DF803EB00A07215 /* Localizable.strings */; };
 		AFD10C481CB214E300CD5E86 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */; };
 		AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */; };
 		AFD10C4C1CB233B400CD5E86 /* PeripheralControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */; };
@@ -40,7 +41,6 @@
 		AFDB2E681D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E671D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift */; };
 		AFDB2E6C1D7DFA99005ADC38 /* RWNCBLEExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */; };
 		AFE578071D2B1B7100DFED23 /* RWNCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */; };
-		AFF5F07D1DF7E2E2006B48FC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFF5F07F1DF7E2E2006B48FC /* Localizable.strings */; };
 		B23B35AF1D821D5500E90E08 /* SavedDataSourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */; };
 		B23B35B31D8226D100E90E08 /* SavedDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */; };
 		B23B35B71D8234B100E90E08 /* SavedDataDetailExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23B35B61D8234B100E90E08 /* SavedDataDetailExtension.swift */; };
@@ -86,6 +86,10 @@
 		AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCTableViewController.swift; sourceTree = "<group>"; };
 		AF8BDEBF1CB8BDE400C49885 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		AF8BDEC01CB8BDE400C49885 /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverViewController.xib; sourceTree = "<group>"; };
+		AF90FB821DF803EB00A07215 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AF90FB841DF8048E00A07215 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		AF90FB851DF8048E00A07215 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		AF90FB861DF8048E00A07215 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		AFD10C491CB21EF200CD5E86 /* PeripheralInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
 		AFD10C4B1CB233B400CD5E86 /* PeripheralControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralControlViewController.swift; sourceTree = "<group>"; };
 		AFDA746D1CB1EE5800F09BD8 /* CZBLEControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZBLEControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,7 +108,6 @@
 		AFDB2E671D7DF71B005ADC38 /* RWNCViewModelSaveExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModelSaveExtension.swift; sourceTree = "<group>"; };
 		AFDB2E6B1D7DFA99005ADC38 /* RWNCBLEExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCBLEExtension.swift; sourceTree = "<group>"; };
 		AFE578061D2B1B7100DFED23 /* RWNCViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCViewModel.swift; sourceTree = "<group>"; };
-		AFF5F07E1DF7E2E2006B48FC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B23B35AE1D821D5500E90E08 /* SavedDataSourceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataSourceTableViewController.swift; sourceTree = "<group>"; };
 		B23B35B21D8226D100E90E08 /* SavedDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataTableViewCell.swift; sourceTree = "<group>"; };
 		B23B35B61D8234B100E90E08 /* SavedDataDetailExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataDetailExtension.swift; sourceTree = "<group>"; };
@@ -318,7 +321,7 @@
 				AFDA747C1CB1EE5800F09BD8 /* LaunchScreen.storyboard */,
 				AFDA747F1CB1EE5800F09BD8 /* Info.plist */,
 				AFDA74771CB1EE5800F09BD8 /* CZBLEControl.xcdatamodeld */,
-				AFF5F07F1DF7E2E2006B48FC /* Localizable.strings */,
+				AF90FB831DF803EB00A07215 /* Localizable.strings */,
 			);
 			path = CZBLEControl;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = AFDA74641CB1EE5800F09BD8;
 			productRefGroup = AFDA746E1CB1EE5800F09BD8 /* Products */;
@@ -474,7 +478,7 @@
 				AF5C43CD1D98D3AD00B0C863 /* Podfile in Resources */,
 				AFDA747E1CB1EE5800F09BD8 /* LaunchScreen.storyboard in Resources */,
 				AFDA747B1CB1EE5800F09BD8 /* Assets.xcassets in Resources */,
-				AFF5F07D1DF7E2E2006B48FC /* Localizable.strings in Resources */,
+				AF90FB811DF803EB00A07215 /* Localizable.strings in Resources */,
 				AFDA74761CB1EE5800F09BD8 /* Main.storyboard in Resources */,
 				AF7403B21CD4094F004C98E6 /* .gitignore in Resources */,
 				AF8BDEC21CB8BDE400C49885 /* PopoverViewController.xib in Resources */,
@@ -611,10 +615,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AF90FB831DF803EB00A07215 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF90FB821DF803EB00A07215 /* Base */,
+				AF90FB861DF8048E00A07215 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		AFDA74741CB1EE5800F09BD8 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AFDA74751CB1EE5800F09BD8 /* Base */,
+				AF90FB841DF8048E00A07215 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -623,17 +637,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				AFDA747D1CB1EE5800F09BD8 /* Base */,
+				AF90FB851DF8048E00A07215 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		AFF5F07F1DF7E2E2006B48FC /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AFF5F07E1DF7E2E2006B48FC /* en */,
-			);
-			name = Localizable.strings;
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -644,6 +650,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -693,6 +700,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
