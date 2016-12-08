@@ -33,7 +33,7 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
     var peripheralObj: CBPeripheral?
     var characterObj: CBCharacteristic?
     
-    var uuidString = "UUID unavailable"
+    var uuidString = NSLocalizedString("UUID unavailable", comment: "")
     
     weak var delegate: RWNCDelegate?
     
@@ -65,11 +65,11 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
             
             switch identifier {
             case .read:
-                actionBarItem.title = "read"
+                actionBarItem.title = NSLocalizedString("read", comment: "")
                 peripheralObj?.readValue(for: characterObj!)
                 
             case .write, .writeWithNoResponse:
-                actionBarItem.title = "write"
+                actionBarItem.title = NSLocalizedString("write", comment: "")
                 
             case .notify:
                 peripheralObj?.setNotifyValue(true, for: characterObj!)
@@ -113,7 +113,7 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
             
         case .notify:
             if characterObj?.isNotifying == true {
-                CustomAlertController.showChooseAlertControllerWithBlock("Close notify", message: "Are you sure to close notify?", target: target, actionHandler: { (action) in
+                CustomAlertController.showChooseAlertControllerWithBlock(NSLocalizedString("Close notify", comment: ""), message: NSLocalizedString("Are you sure to close notify?", comment: ""), target: target, actionHandler: { (action) in
                     self.peripheralObj?.setNotifyValue(false, for: character)
                 })
             } else {
@@ -163,7 +163,7 @@ class RWNCViewModel: NSObject, UIPopoverPresentationControllerDelegate, UIViewCo
     
     func appendDataToValueArray(_ characteristic: CBCharacteristic) -> IndexPath? {
         if let dataValue = characteristic.value {
-            let dataString = String(data: dataValue, encoding: String.Encoding.utf8) ?? "No data respond"
+            let dataString = String(data: dataValue, encoding: String.Encoding.utf8) ?? NSLocalizedString("No data respond", comment: "")
             valueArray.append((dataString, dateFormatTransfer()))
             
             //Insert new cell row

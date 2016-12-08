@@ -27,7 +27,7 @@ class RWNCTableViewController: UITableViewController, RWNCDelegate {
         navigationItem.title = viewModel.uuidString
         indicator = MBProgressHUD(view: tableView)
         tableView.addSubview(indicator)
-        indicator.label.text = "Saving..."
+        indicator.label.text = NSLocalizedString("Saving...", comment: "")
         
         viewModel.setUIElement(actionBarItem) { 
             self.showfallBackAlertController()
@@ -99,7 +99,7 @@ class RWNCTableViewController: UITableViewController, RWNCDelegate {
         if viewModel.dataExisted() {
             showFileNameAlertController()
         } else {
-            CustomAlertController.showCancelAlertController("No data to save", message: nil, target: self)
+            CustomAlertController.showCancelAlertController(NSLocalizedString("No data to save", comment: ""), message: nil, target: self)
         }
     }
     
@@ -116,7 +116,7 @@ class RWNCTableViewController: UITableViewController, RWNCDelegate {
     //MARK: - private methods
     
     fileprivate func showfallBackAlertController() {
-        CustomAlertController.showCancelAlertControllerWithBlock("Peripheral not found", message: "Peripheral or characteristic not found, going back", target: self, actionHandler: { (action) in
+        CustomAlertController.showCancelAlertControllerWithBlock(NSLocalizedString("Peripheral not found", comment: ""), message: NSLocalizedString("Peripheral or characteristic not found, going back", comment: ""), target: self, actionHandler: { (action) in
             _ = self.navigationController?.popViewController(animated: true)
         })
     }

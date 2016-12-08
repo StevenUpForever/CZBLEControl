@@ -1,0 +1,130 @@
+/*
+ Localizable.strings
+ CZBLEControl
+ 
+ Created by Chengzhi Jia on 12/6/16.
+ Copyright © 2016 ChengzhiJia. All rights reserved.
+ */
+
+"Login Cancelled" = "ログインがキャンセルされました";
+
+"OK" = "はい";
+
+"Cancel" = "キャンセル";
+
+"Please check your device and open Bluetooth" = "お使いのデバイスを確認し、Bluetoothを開いてください";
+
+"BLE Unsupported" = "サポートされていないBLE";
+"Your device doesn't support BLE" = "お使いのデバイスはBLEをサポートしていません";
+
+"BLE Device error" = "BLEデバイスエラー";
+"Unknown error, please try again" = "不明なエラーです、もう一度お試しください";
+
+"BLE unauthorized" = "BLEが承認されていない";
+"Your device is unauthorized to use Bluetooth" = "あなたのデバイスはBluetoothを使用する権限がありません";
+
+"Connect error" = "接続エラー";
+"Cannot connect device, please try again" = "デバイスを接続できません。もう一度お試しください";
+
+"Peripheral disconnected" = "周辺機器が接続されていない";
+"Please reconnect your device" = "デバイスを再接続してください";
+
+"Name Unavailable" = "名前を使用できません";
+"UUID Unavailable" = "UUIDを使用できません";
+
+"BLE turned off" = "BLEがオフになった";
+"Turn on your Bluetooth, going back" = "あなたのBluetoothをオンにして、戻る";
+"Please turn on your Bluetooth" = "あなたのBluetoothをオンにしてください";
+
+"Peripheral not found" = "周辺機器が見つかりません";
+"Peripheral or characteristic not found, going back" = "周辺機器または特性が見つかりませんでした。";
+
+"Unknown Error" = "不明なエラー";
+"Unknown error, please try again" = "不明なエラーです、もう一度お試しください";
+
+"Connected" = "接続済み";
+
+"Disconnected\nReconnect by top right button or back to choose another device" = "接続が解除されました\n右上のボタンで戻るか、別のデバイスを選択して戻る";
+
+"Saving..." = "保存する...";
+
+"No data to save" = "保存するデータがありません";
+
+"Back" = "バック";
+
+"Stay" = "滞在";
+
+"Please enter your file name" = "ファイル名を入力してください";
+
+"Enter file name here" = "ここにファイル名を入力してください";
+
+"Where would you like to save?" = "あなたはどこで救いたいですか？";
+
+"Default file" = "デフォルトファイル";
+
+"Local Drive" = "ローカルドライブ";
+
+"read" = "読む";
+
+"write" = "書きます";
+
+"Close notify" = "通知を閉じる";
+"Are you sure to close notify?" = "通知を閉じてもよろしいですか？";
+
+"No data respond" = "データが応答しません";
+
+"Descriptors" = "記述子";
+
+"Write Value" = "値を書き込む";
+
+"Return Value" = "戻り値";
+
+"Read Value" = "値を読み込む";
+
+"Write Value, no response" = "値を書き込む、応答がない";
+
+"Invalid data type" = "無効なデータ型";
+
+"Authorize user failed" = "ユーザーの認証に失敗しました";
+
+"Are you sure to logoff Google account?" = "Googleアカウントからログオフしてもよろしいですか？";
+"Failed authorize Google user" = "Googleユーザーの認証に失敗しました";
+
+"Are you sure to logoff Dropbox account?" = "Dropboxアカウントをログオフしてもよろしいですか？";
+
+"Logged In" = "ログインした";
+"Logged Off" = "ログオフ";
+
+"Loading files..." = "ファイルの読み込み...";
+"Loading file content..." = "ファイルコンテンツの読み込み...";
+"Deleting files..." = "ファイルの削除...";
+"Failed to delete the file" = "ファイルの削除に失敗しました";
+"Successfully delete the file" = "ファイルを正常に削除します";
+
+"Failed to get file list" = "ファイルリストを取得できませんでした";
+
+"Save data successfully" = "データを正常に保存";
+"Save data failed" = "データの保存に失敗しました";
+"Load data successfully" = "データを正常に読み込む";
+"Load data failed" = "データのロードに失敗しました";
+"Upload file failed" = "ファイルのアップロードに失敗しました";
+"Upload file successfully" = "ファイルを正常にアップロード";
+
+"Data cannot be transferred to file" = "データをファイルに転送できません";
+
+"No file to show" = "表示するファイルがありません";
+"Cannot query files" = "ファイルを照会できません";
+
+"Failed to download file" = "ファイルのダウンロードに失敗しました";
+
+"Unknown error to download file" = "ファイルをダウンロードするための不明なエラー";
+
+"Cannot find correct folder" = "正しいフォルダが見つかりません";
+
+"Correct folder found" = "正しいフォルダが見つかりました";
+"Create folder successfully" = "フォルダを正常に作成する";
+"Create folder failed" = "フォルダの作成に失敗しました";
+
+"Files are not in correct type" = "ファイルが正しいタイプではありません";
+
+"Data unavailable" = "データが利用できない";

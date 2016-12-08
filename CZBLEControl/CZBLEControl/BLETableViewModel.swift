@@ -58,7 +58,7 @@ class BLETableViewModel: NSObject {
                 if let validPeripheral = selectedPeripheralInfo?.peripheral {
                     peripheralVC.viewModel.loadBLEObjects(validPeripheral, central: centralManager)
                     peripheralVC.viewModel.centralManager = centralManager
-                    peripheralVC.navigationItem.title = validPeripheral.name ?? "Name Unavailable"
+                    peripheralVC.navigationItem.title = validPeripheral.name ?? NSLocalizedString("Name Unavailable", comment: "")
                 }
             }
         }

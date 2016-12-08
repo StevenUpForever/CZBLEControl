@@ -104,26 +104,26 @@ extension RWNCViewModel {
         if identifier == .write {
             switch section {
             case 0:
-                return "Descriptors"
+                return NSLocalizedString("Descriptors", comment: "")
             case 1:
-                return "Write Value"
+                return NSLocalizedString("Write Value", comment: "")
             default:
-                return "Return Value"
+                return NSLocalizedString("Return Value", comment: "")
             }
             
         } else {
             if section == 0 {
-                return "Descriptors"
+                return NSLocalizedString("Descriptors", comment: "")
             } else {
                 switch identifier {
                 case .read:
-                    return "Read Value"
+                    return NSLocalizedString("Read Value", comment: "")
                 case .writeWithNoResponse:
-                    return "Write Value, no response"
+                    return NSLocalizedString("Write Value, no response", comment: "")
                 case .notify:
-                    return "Return Value"
+                    return NSLocalizedString("Return Value", comment: "")
                 default:
-                    return "Invalid data type"
+                    return NSLocalizedString("Invalid data type", comment: "")
                 }
             }
         }

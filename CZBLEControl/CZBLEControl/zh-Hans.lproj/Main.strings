@@ -1,0 +1,111 @@
+
+/* Class = "UILabel"; text = "Services"; ObjectID = "1VJ-00-LTm"; */
+"1VJ-00-LTm.text" = "服务";
+
+/* Class = "UILabel"; text = "Local Drive"; ObjectID = "3se-Oc-mCQ"; */
+"3se-Oc-mCQ.text" = "本地磁盘";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5Km-4B-vTl"; */
+"5Km-4B-vTl.text" = "标签";
+
+/* Class = "UINavigationItem"; title = "Saved Data"; ObjectID = "6pQ-A1-4Is"; */
+"6pQ-A1-4Is.title" = "保存数据";
+
+/* Class = "UILabel"; text = "Google Drive"; ObjectID = "7K6-zF-lfe"; */
+"7K6-zF-lfe.text" = "Google Drive";
+
+/* Class = "UINavigationItem"; title = "Cloud Accounts"; ObjectID = "7U5-tT-xjV"; */
+"7U5-tT-xjV.title" = "云服务账号";
+
+/* Class = "UITabBarItem"; title = "Bluetooth"; ObjectID = "AY4-5b-c3T"; */
+"AY4-5b-c3T.title" = "蓝牙";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "EEm-Pk-d23"; */
+"EEm-Pk-d23.title" = "保存";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "G3z-tb-DWy"; */
+"G3z-tb-DWy.title" = "设置";
+
+/* Class = "UILabel"; text = "RSSI"; ObjectID = "Hpb-we-Am8"; */
+"Hpb-we-Am8.text" = "RSSI";
+
+/* Class = "UILabel"; text = "Disconnected\nReconnect by top right button or back to choose another device"; ObjectID = "J8W-h2-8Fy"; */
+"J8W-h2-8Fy.text" = "已断开\n按右上角按键重新连接或者选择其他设备";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "Jty-Mp-Pdk"; */
+"Jty-Mp-Pdk.text" = "状态";
+
+/* Class = "UILabel"; text = "Dropbox"; ObjectID = "MoR-f0-VRp"; */
+"MoR-f0-VRp.text" = "Dropbox";
+
+/* Class = "UILabel"; text = "UUID label"; ObjectID = "QNn-X5-Gan"; */
+"QNn-X5-Gan.text" = "UUID 标签";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "UxJ-g2-eXb"; */
+"UxJ-g2-eXb.text" = "标签";
+
+/* Class = "UILabel"; text = "Peripheral UUID"; ObjectID = "Wbp-Hi-4Vg"; */
+"Wbp-Hi-4Vg.text" = "设备 UUID";
+
+/* Class = "UILabel"; text = "Notify"; ObjectID = "ZLx-Hm-grf"; */
+"ZLx-Hm-grf.text" = "通知";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "a5p-PR-1wh"; */
+"a5p-PR-1wh.text" = "标签";
+
+/* Class = "UILabel"; text = "Saved Data"; ObjectID = "b5F-hC-sd7"; */
+"b5F-hC-sd7.text" = "保存数据";
+
+/* Class = "UILabel"; text = "Instructions"; ObjectID = "bmn-YZ-XvB"; */
+"bmn-YZ-XvB.text" = "说明";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "cvi-8a-wAl"; */
+"cvi-8a-wAl.text" = "名称";
+
+/* Class = "UILabel"; text = "Read"; ObjectID = "duY-d7-Hwu"; */
+"duY-d7-Hwu.text" = "读取";
+
+/* Class = "UINavigationItem"; title = "BLE Devices"; ObjectID = "eSt-iI-PPb"; */
+"eSt-iI-PPb.title" = "蓝牙设备";
+
+/* Class = "UILabel"; text = "Logged Off"; ObjectID = "eXo-1r-seQ"; */
+"eXo-1r-seQ.text" = "已注销";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "fpt-aJ-OkP"; */
+"fpt-aJ-OkP.title" = "设置";
+
+/* Class = "UILabel"; text = "Write"; ObjectID = "hfR-ln-c85"; */
+"hfR-ln-c85.text" = "写入";
+
+/* Class = "UILabel"; text = "W/NoResp"; ObjectID = "kFd-Dw-kbv"; */
+"kFd-Dw-kbv.text" = "写入/无返回这";
+
+/* Class = "UILabel"; text = "Logged Off"; ObjectID = "kzb-vu-3Rk"; */
+"kzb-vu-3Rk.text" = "已注销";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "mlT-zi-MhR"; */
+"mlT-zi-MhR.text" = "标签";
+
+/* Class = "UILabel"; text = "Cloud Drive Account"; ObjectID = "p3x-9A-bTP"; */
+"p3x-9A-bTP.text" = "Cloud Drive 账号";
+
+/* Class = "UINavigationItem"; title = "Instructions"; ObjectID = "qmu-ty-qwk"; */
+"qmu-ty-qwk.title" = "说明";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "tW5-wf-puc"; */
+"tW5-wf-puc.title" = "标题";
+
+/* Class = "UIBarButtonItem"; title = "Connect"; ObjectID = "thj-nB-rEq"; */
+"thj-nB-rEq.title" = "连接";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "u72-K3-iuJ"; */
+"u72-K3-iuJ.text" = "子标签";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "vnh-N2-cXG"; */
+"vnh-N2-cXG.title" = "Item";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xCX-I8-3dT"; */
+"xCX-I8-3dT.text" = "标签";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "xdb-9D-5Bx"; */
+"xdb-9D-5Bx.title" = "标题";

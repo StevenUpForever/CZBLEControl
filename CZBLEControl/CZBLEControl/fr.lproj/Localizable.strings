@@ -1,0 +1,130 @@
+/*
+ Localizable.strings
+ CZBLEControl
+ 
+ Created by Chengzhi Jia on 12/6/16.
+ Copyright © 2016 ChengzhiJia. All rights reserved.
+ */
+
+"Login Cancelled" = "Login Annulé";
+
+"OK" = "d'accord";
+
+"Cancel" = "Annuler";
+
+"Please check your device and open Bluetooth" = "Veuillez vérifier votre appareil et ouvrir Bluetooth";
+
+"BLE Unsupported" = "BLE non pris en charge";
+"Your device doesn't support BLE" = "Votre appareil ne prend pas en charge BLE";
+
+"BLE Device error" = "Erreur de périphérique BLE";
+"Unknown error, please try again" = "Erreur inconnue, veuillez réessayer";
+
+"BLE unauthorized" = "BLE non autorisé";
+"Your device is unauthorized to use Bluetooth" = "Votre appareil n'est pas autorisé à utiliser Bluetooth";
+
+"Connect error" = "Erreur de connexion";
+"Cannot connect device, please try again" = "Impossible de connecter le périphérique. Veuillez réessayer.";
+
+"Peripheral disconnected" = "Périphérique déconnecté";
+"Please reconnect your device" = "Veuillez reconnecter votre appareil";
+
+"Name Unavailable" = "Nom non disponible";
+"UUID Unavailable" = "UUID indisponible";
+
+"BLE turned off" = "BLE désactivé";
+"Turn on your Bluetooth, going back" = "Allumez votre Bluetooth, revenez en arrière";
+"Please turn on your Bluetooth" = "Veuillez activer votre Bluetooth";
+
+"Peripheral not found" = "Périphérique introuvable";
+"Peripheral or characteristic not found, going back" = "Périphérique ou caractéristique introuvable, retour";
+
+"Unknown Error" = "Erreur inconnue";
+"Unknown error, please try again" = "Erreur inconnue, veuillez réessayer";
+
+"Connected" = "Connecté";
+
+"Disconnected\nReconnect by top right button or back to choose another device" = "Déconnecté\nReconnexion par le bouton en haut à droite ou en arrière pour choisir un autre périphérique";
+
+"Saving..." = "Économie...";
+
+"No data to save" = "Aucune donnée à enregistrer";
+
+"Back" = "Arrière";
+
+"Stay" = "Rester";
+
+"Please enter your file name" = "Entrez votre nom de fichier";
+
+"Enter file name here" = "Entrez ici le nom du fichierEntrez ici le nom du fichier";
+
+"Where would you like to save?" = "Où aimeriez-vous économiser?";
+
+"Default file" = "Fichier par défaut";
+
+"Local Drive" = "Disque local";
+
+"read" = "lire";
+
+"write" = "écrire";
+
+"Close notify" = "Fermer la notification";
+"Are you sure to close notify?" = "Etes-vous sûr de fermer la notification?";
+
+"No data respond" = "Aucune donnée ne répond";
+
+"Descriptors" = "Descripteurs";
+
+"Write Value" = "Écrire la valeur";
+
+"Return Value" = "Valeur de retour";
+
+"Read Value" = "Lire la valeur";
+
+"Write Value, no response" = "Ecrire valeur, pas de réponse";
+
+"Invalid data type" = "Type de données non valide";
+
+"Authorize user failed" = "Autoriser l'utilisateur a échoué";
+
+"Are you sure to logoff Google account?" = "Etes-vous sûr de déconnecter le compte Google?";
+"Failed authorize Google user" = "Échec de l'autorisation de l'utilisateur Google";
+
+"Are you sure to logoff Dropbox account?" = "Êtes-vous sûr de déconnecter le compte Dropbox?";
+
+"Logged In" = "Connecté";
+"Logged Off" = "Déconnecté";
+
+"Loading files..." = "Chargement des fichiers...";
+"Loading file content..." = "Chargement du contenu du fichier...";
+"Deleting files..." = "Suppression de fichiers...";
+"Failed to delete the file" = "Échec de la suppression du fichier";
+"Successfully delete the file" = "Supprimer le fichier avec succès";
+
+"Failed to get file list" = "Impossible d'obtenir la liste des fichiers";
+
+"Save data successfully" = "Sauvegarder les données avec succès";
+"Save data failed" = "Échec de l'enregistrement des données";
+"Load data successfully" = "Charger les données avec succès";
+"Load data failed" = "Échec des données de chargement";
+"Upload file failed" = "Le fichier de téléchargement a échoué";
+"Upload file successfully" = "Télécharger le fichier avec succès";
+
+"Data cannot be transferred to file" = "Les données ne peuvent pas être transférées dans un fichier";
+
+"No file to show" = "Aucun fichier à afficher";
+"Cannot query files" = "Impossible d'interroger les fichiers";
+
+"Failed to download file" = "Impossible de télécharger le fichier";
+
+"Unknown error to download file" = "Erreur inconnue pour télécharger le fichiere";
+
+"Cannot find correct folder" = "Impossible de trouver le dossier correct";
+
+"Correct folder found" = "Corriger le dossier trouvé";
+"Create folder successfully" = "Créer un dossier avec succès";
+"Create folder failed" = "Échec du dossier de création";
+
+"Files are not in correct type" = "Les fichiers ne sont pas dans le type correct";
+
+"Data unavailable" = "Données indisponibles";

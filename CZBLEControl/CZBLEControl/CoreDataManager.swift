@@ -22,9 +22,9 @@ class CoreDataManager: NSObject {
             dataListObj.listToData = NSSet(set: createDataSet(context, dataArray: dataArray, section: 1))
             do {
                 try context.save()
-                completionHandler(true, "Save data successfully")
-            } catch let error as NSError {
-                completionHandler(false, "Save data error: " + error.localizedDescription)
+                completionHandler(true, NSLocalizedString("Save data successfully", comment: ""))
+            } catch _ as NSError {
+                completionHandler(false, NSLocalizedString("Save data failed", comment: ""))
             }
         }
     }
@@ -38,9 +38,9 @@ class CoreDataManager: NSObject {
             dataListObj.listToData = NSSet(set: set)
             do {
                 try context.save()
-                completionHandler(true, "Save data successfully")
-            } catch let error as NSError {
-                completionHandler(false, "Save data error: " + error.localizedDescription)
+                completionHandler(true, NSLocalizedString("Save data successfully", comment: ""))
+            } catch _ as NSError {
+                completionHandler(false, NSLocalizedString("Save data failed", comment: ""))
             }
         }
     }
@@ -64,9 +64,9 @@ class CoreDataManager: NSObject {
         let request = NSFetchRequest<DataList>(entityName: "DataList")
         do {
             let result = try managedObjectContext.fetch(request)
-            completionHandler(result, "Load data successfully")
+            completionHandler(result, NSLocalizedString("Load data successfully", comment: ""))
         } catch {
-            completionHandler(nil, "Load data failed")
+            completionHandler(nil, NSLocalizedString("Load data failed", comment: ""))
         }
     }
     
@@ -75,9 +75,9 @@ class CoreDataManager: NSObject {
         context.delete(dataList)
         do {
             try context.save()
-            completionHandler(true, "Save data successfully")
-        } catch let error as NSError {
-            completionHandler(false, "Save data error: " + error.localizedDescription)
+            completionHandler(true, NSLocalizedString("Save data successfully", comment: ""))
+        } catch _ as NSError {
+            completionHandler(false, NSLocalizedString("Save data failed", comment: ""))
         }
     }
     

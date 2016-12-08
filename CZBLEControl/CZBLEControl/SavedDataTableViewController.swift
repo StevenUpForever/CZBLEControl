@@ -29,7 +29,7 @@ class SavedDataTableViewController: UITableViewController {
         super.viewDidLoad()
         
         indicator = MBProgressHUD(view: view)
-        indicator.label.text = "Loading files..."
+        indicator.label.text = NSLocalizedString("Loading files...", comment: "")
         view.addSubview(indicator)
         
         loadProperDataSource(dataSource)

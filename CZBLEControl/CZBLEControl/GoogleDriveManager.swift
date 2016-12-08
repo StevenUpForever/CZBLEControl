@@ -70,16 +70,16 @@ class GoogleDriveManager: NSObject {
         if let data = tupleJoinStr(dataArray).data(using: String.Encoding.utf8) {
             uploadData(title, data: data, completionHandler: completionHandler)
         } else {
-            completionHandler(false, "Data cannot be transferred to file")
+            completionHandler(false, NSLocalizedString("Data cannot be transferred to file", comment: ""))
         }
     }
     
     func saveWriteAndValueData(_ title: String, writeArray: [(String, String)], valueArray: [(String, String)], completionHandler: @escaping statusMessageHandler) {
-        let dataStr = "Write Value\n\n" + tupleJoinStr(writeArray) + "Read Value\n\n" +  tupleJoinStr(valueArray)
+        let dataStr = NSLocalizedString("Write Value", comment: "") + "\n\n" + tupleJoinStr(writeArray) + NSLocalizedString("Read Value", comment: "") + "\n\n" +  tupleJoinStr(valueArray)
         if let data = dataStr.data(using: String.Encoding.utf8) {
             uploadData(title, data: data, completionHandler: completionHandler)
         } else {
-            completionHandler(false, "Data cannot be transferred to file")
+            completionHandler(false, NSLocalizedString("Data cannot be transferred to file", comment: ""))
         }
     }
     
@@ -94,10 +94,10 @@ class GoogleDriveManager: NSObject {
                 let query = GTLQueryDrive.queryForFilesCreate(withObject: driveFile, uploadParameters: parameter)
                 self.serviceDrive.executeQuery(query!, completionHandler: { (ticket, updatedFile, error) in
                     if error != nil {
-                        print(error)
-                        completionHandler(false, "Upload file failed")
+                        print(error ?? "Error")
+                        completionHandler(false, NSLocalizedString("Upload file failed", comment: ""))
                     } else {
-                        completionHandler(true, "Upload file successfully")
+                        completionHandler(true, NSLocalizedString("Upload file successfully", comment: ""))
                     }
                 })
             } else {
@@ -116,20 +116,20 @@ class GoogleDriveManager: NSObject {
                     query.q = "'\(self.BLEFolder.identifier ?? "")' in parents and mimeType = 'text/plain'"
                     self.serviceDrive.executeQuery(query) { (ticket, files, error) in
                         if error != nil {
-                            print(error)
-                            completionHandler(false, "Error when load file", nil)
+                            print(error ?? "Error")
+                            completionHandler(false, NSLocalizedString("Load data failed", comment: ""), nil)
                         } else if let fileList = files as? GTLDriveFileList {
                             if let filesArray = fileList.files as? [GTLDriveFile] {
-                                completionHandler(true, "Load files successfully", filesArray)
+                                completionHandler(true, NSLocalizedString("Load data successfully", comment: ""), filesArray)
                             } else {
-                                completionHandler(false, "No file to show", nil)
+                                completionHandler(false, NSLocalizedString("No file to show", comment: ""), nil)
                             }
                         } else {
-                            completionHandler(false, "Error when load file", nil)
+                            completionHandler(false, NSLocalizedString("Load data failed", comment: ""), nil)
                         }
                     }
                 } else {
-                    completionHandler(false, "Cannot query files", nil)
+                    completionHandler(false, NSLocalizedString("Cannot query files", comment: ""), nil)
                 }
             } else {
                 completionHandler(false, errorMessage, nil)
@@ -141,15 +141,15 @@ class GoogleDriveManager: NSObject {
         let fetcher = serviceDrive.fetcherService.fetcher(withURLString: "https://www.googleapis.com/drive/v3/files/\(driveFile.identifier ?? "")?alt=media")
         fetcher.beginFetch { (data, error) in
             if error != nil {
-                completionHandler(false, nil, "Failed to download file")
+                completionHandler(false, nil, NSLocalizedString("Failed to download file", comment: ""))
             } else if data != nil {
                 if let dataString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue) {
-                    completionHandler(true, dataString.parseToDataTableView(), "Parse file content successfully")
+                    completionHandler(true, dataString.parseToDataTableView(), NSLocalizedString("Load data successfully", comment: ""))
                 } else {
-                    completionHandler(false, nil, "Failed to parse file content")
+                    completionHandler(false, nil, NSLocalizedString("Load data failed", comment: ""))
                 }
             } else {
-                completionHandler(false, nil, "Unknown error to download file")
+                completionHandler(false, nil, NSLocalizedString("Unknown error to download file", comment: ""))
             }
         }
     }
@@ -158,9 +158,9 @@ class GoogleDriveManager: NSObject {
         let query = GTLQueryDrive.queryForFilesDelete(withFileId: driveFile.identifier)
         serviceDrive.executeQuery(query!) { (ticket, files, error) in
             if error != nil {
-                completionHandler(false, "Failed to delete the file")
+                completionHandler(false, NSLocalizedString("Failed to delete the file", comment: ""))
             } else {
-                completionHandler(true, "Successfully delete the file")
+                completionHandler(true, NSLocalizedString("Successfully delete the file", comment: ""))
             }
         }
     }
@@ -174,7 +174,7 @@ class GoogleDriveManager: NSObject {
         query?.q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false"
         serviceDrive.executeQuery(query!) { [unowned self] (checkTicket, files, checkError) in
             if checkError != nil {
-                completionHandler(false, "Error to find correct folder")
+                completionHandler(false, NSLocalizedString("Cannot find correct folder", comment: ""))
             } else {
                 if let tempFileList = files as? GTLDriveFileList {
                     if let fileList = tempFileList.files as? [GTLDriveFile] {
@@ -183,7 +183,7 @@ class GoogleDriveManager: NSObject {
                             if folderFile.name == kFolderName {
                                 self.BLEFolder = folderFile
                                 folderExisted = true
-                                completionHandler(true, "Correct folder found")
+                                completionHandler(true, NSLocalizedString("Correct folder found", comment: ""))
                                 return
                             }
                         }
@@ -196,20 +196,20 @@ class GoogleDriveManager: NSObject {
                                 if error == nil {
                                     if let properFile = updatedFile as? GTLDriveFile {
                                         self.BLEFolder = properFile
-                                        completionHandler(true, "Create folder successfully")
+                                        completionHandler(true, NSLocalizedString("Create folder successfully", comment: ""))
                                     } else {
-                                        completionHandler(false, "Create folder failed")
+                                        completionHandler(false, NSLocalizedString("Create folder failed", comment: ""))
                                     }
                                 } else {
-                                    completionHandler(false, "Create folder failed")
+                                    completionHandler(false, NSLocalizedString("Create folder failed", comment: ""))
                                 }
                             }
                         }
                     } else {
-                        completionHandler(false, "Files are not correct type")
+                        completionHandler(false, NSLocalizedString("Files are not in correct type", comment: ""))
                     }
                 } else {
-                    completionHandler(false, "Files are not correct type")
+                    completionHandler(false, NSLocalizedString("Files are not in correct type", comment: ""))
                 }
             }
         }

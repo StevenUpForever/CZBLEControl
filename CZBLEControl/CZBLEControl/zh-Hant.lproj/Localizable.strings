@@ -1,0 +1,130 @@
+/*
+ Localizable.strings
+ CZBLEControl
+ 
+ Created by Chengzhi Jia on 12/6/16.
+ Copyright © 2016 ChengzhiJia. All rights reserved.
+ */
+
+"Login Cancelled" = "登錄已取消";
+
+"OK" = "好的";
+
+"Cancel" = "取消";
+
+"Please check your device and open Bluetooth" = "請檢查你的設備并打開藍牙";
+
+"BLE Unsupported" = "不支持藍牙";
+"Your device doesn't support BLE" = "你的設備不支持藍牙";
+
+"BLE Device error" = "藍牙設備錯誤";
+"Unknown error, please try again" = "未知錯誤，請重試";
+
+"BLE unauthorized" = "藍牙設備未授權";
+"Your device is unauthorized to use Bluetooth" = "你的設備沒有被授權使用藍牙";
+
+"Connect error" = "連接錯誤";
+"Cannot connect device, please try again" = "未能連接到設備，請重試";
+
+"Peripheral disconnected" = "設備連接已斷開";
+"Please reconnect your device" = "請重新連接你的設備";
+
+"Name Unavailable" = "名稱無效";
+"UUID Unavailable" = "UUID無效";
+
+"BLE turned off" = "藍牙已關閉";
+"Turn on your Bluetooth, going back" = "請打開你的藍牙，正在回退";
+"Please turn on your Bluetooth" = "請打開你的藍牙";
+
+"Peripheral not found" = "設備未找到";
+"Peripheral or characteristic not found, going back" = "設備和特征值未找到";
+
+"Unknown Error" = "未知錯誤";
+"Unknown error, please try again" = "未知錯誤，請重試";
+
+"Connected" = "已連接";
+
+"Disconnected\nReconnect by top right button or back to choose another device" = "已斷開\n按右上角按鍵重新連接或者選擇其他設備";
+
+"Saving..." = "保存中...";
+
+"No data to save" = "沒有可保存的數據";
+
+"Back" = "退出";
+
+"Stay" = "留在這裡";
+
+"Please enter your file name" = "請輸入你的文件名";
+
+"Enter file name here" = "在這裡輸入文件名";
+
+"Where would you like to save?" = "將文件保存在哪裡？";
+
+"Default file" = "默認文件名";
+
+"Local Drive" = "本地磁盤";
+
+"read" = "讀取";
+
+"write" = "寫入";
+
+"Close notify" = "關閉通知";
+"Are you sure to close notify?" = "你確定關閉自動通知嗎？";
+
+"No data respond" = "沒有返回數據";
+
+"Descriptors" = "描述值";
+
+"Write Value" = "寫入數據";
+
+"Return Value" = "返回數據";
+
+"Read Value" = "讀取數據";
+
+"Write Value, no response" = "寫入數據但沒有返回值";
+
+"Invalid data type" = "無效數據類型";
+
+"Authorize user failed" = "未能授權用戶";
+
+"Are you sure to logoff Google account?" = "你確定註銷Google賬戶嗎？";
+"Failed authorize Google user" = "未能授權此Google用戶";
+
+"Are you sure to logoff Dropbox account?" = "你確定註銷Dropbox用戶嗎？";
+
+"Logged In" = "已經登入";
+"Logged Off" = "已經註銷";
+
+"Loading files..." = "加載文件...";
+"Loading file content..." = "加載文件內容...";
+"Deleting files..." = "刪除文件...";
+"Failed to delete the file" = "未能刪除文件";
+"Successfully delete the file" = "刪除文件成功";
+
+"Failed to get file list" = "未能獲得文件列表";
+
+"Save data successfully" = "保存數據成功";
+"Save data failed" = "保存數據失敗";
+"Load data successfully" = "加載數據成功";
+"Load data failed" = "加載數據失敗";
+"Upload file failed" = "上傳文件失敗";
+"Upload file successfully" = "上傳文件成功";
+
+"Data cannot be transferred to file" = "數據未能轉換到文件";
+
+"No file to show" = "沒有可以展示的文件";
+"Cannot query files" = "未能查詢文件";
+
+"Failed to download file" = "下載文件失敗";
+
+"Unknown error to download file" = "下載文件有未知錯誤";
+
+"Cannot find correct folder" = "未能找到正確文件夾";
+
+"Correct folder found" = "正確文件夾已找到";
+"Create folder successfully" = "建立文件夾成功";
+"Create folder failed" = "建立文件夾失敗";
+
+"Files are not in correct type" = "文件類型不正確";
+
+"Data unavailable" = "數據無效";
