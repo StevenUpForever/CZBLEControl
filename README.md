@@ -15,6 +15,7 @@ Search characteristics in specific peripheral and manage it with read, write and
 ####updates:
 **2.0:** Support save, review and delete data on cloud drives (Google Drive, Dropbox) </br>
 **2.1:** Support save, review and delete data on local drive (by Core Data)<br/>
+**2.2:** Fix Local data save issue, Now support English/Chinese(simplify/Traditional)/Japanese/French localization<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convert to Swift 3 and Xcode 8 support
 </br></br></br>
 
@@ -33,4 +34,5 @@ CZBLEControl是一个简单的蓝牙设备搜索工具，并且可以搜索相�
 ####版本更新:
 **2.0:** 支持在云端硬盘上存储，浏览和删除数据 (Google Drive, Dropbox) </br>
 **2.1:** 支持在本地磁盘上的存储，浏览和删除数据<br/>
+**2.2:** 修正本地数据存储错误，支持英语，中文（简、繁），日语，法语本地化<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;转换到Swift3以及支持Xcode8的特性
