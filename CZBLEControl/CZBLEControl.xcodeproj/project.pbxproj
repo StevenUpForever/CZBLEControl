@@ -764,7 +764,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F84DB2091197D31783C00EDA /* Pods-CZBLEControl.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CZBLEControl/CZBLEControl.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -785,7 +785,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 765DF86307A3211AAC693500 /* Pods-CZBLEControl.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CZBLEControl/CZBLEControl.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
