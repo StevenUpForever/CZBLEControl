@@ -1,6 +1,6 @@
-<Center>CZBLEControl introduction</Center>
+CZBLEControl introduction
 ==============================
-<br/>
+
 CZBLEControl is a simple tool to scan Bluetooth Low Energy support peripherals.<br/> 
 Search characteristics in specific peripheral and manage it with read, write and notify depends on variables of properties which the characteristic support.
 <br/><br/>
