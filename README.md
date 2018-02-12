@@ -17,7 +17,7 @@ Search characteristics in specific peripheral and manage it with read, write and
 * **2.0:** Support save, review and delete data on cloud drives (Google Drive, Dropbox) </br>
 * **2.1:** Support save, review and delete data on local drive (by Core Data), Convert to Swift 3 and Xcode 8 support<br/>
 * **2.2:** Fix Local data save issue, Now support English/Chinese(simplify/Traditional)/Japanese/French localization<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </br></br></br>
 
 CZBLEControl 简介
