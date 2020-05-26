@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GoogleAPIClient
+import GoogleAPIClientForREST
 import SwiftyDropbox
 
 class SavedDataTableViewCell: UITableViewCell {
@@ -29,7 +29,7 @@ class SavedDataTableViewCell: UITableViewCell {
         
         dataSourceObj = sourceObj
         
-        if let googleDriveSource = sourceObj as? GTLDriveFile {
+        if let googleDriveSource = sourceObj as? GTLRDrive_File {
             textLabel?.text = googleDriveSource.name
         } else if let dropboxSource = sourceObj as? Files.Metadata {
             textLabel?.text = dropboxSource.name

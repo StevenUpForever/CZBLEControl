@@ -8,6 +8,9 @@
 
 import UIKit
 import SwiftyDropbox
+import AppAuth
+import GTMAppAuth
+import GoogleAPIClientForREST
 
 class AccountManagerViewController: UIViewController, dropboxDelegate {
 
@@ -21,7 +24,7 @@ class AccountManagerViewController: UIViewController, dropboxDelegate {
         super.viewDidLoad()
         
         dropBoxManager.delegate = self
-        changeLabelState(self.googleDriveLabel, success: googleDriveManager.isAuthorized())
+        changeLabelState(self.googleDriveLabel, success: googleDriveManager.isAuthorized)
         changeLabelState(self.dropBoxLabel, success: dropBoxManager.isAuthorized())
     }
 
@@ -30,15 +33,15 @@ class AccountManagerViewController: UIViewController, dropboxDelegate {
     }
     
     @IBAction func googleDriveAction(_ sender: UITapGestureRecognizer) {
-        if googleDriveManager.isAuthorized() {
+        if googleDriveManager.isAuthorized {
             CustomAlertController.showChooseAlertControllerWithBlock(NSLocalizedString("Are you sure to logoff Google account?", comment: ""), message: nil, target: self, actionHandler: { (action) in
-                self.googleDriveManager.deAuthorizeUser()
+                AuthManager.shared.deauthorizeGSuite()
                 DispatchQueue.main.async(execute: {
                     self.changeLabelState(self.googleDriveLabel, success: false)
                 })
             })
         } else {
-            googleDriveManager.authorizeGoogleAccount(self) { (authSuccess) in
+            AuthManager.shared.authGSuite(self) { (authSuccess) in
                 DispatchQueue.main.async(execute: { 
                     if authSuccess {
                         self.changeLabelState(self.googleDriveLabel, success: true)
@@ -80,4 +83,14 @@ class AccountManagerViewController: UIViewController, dropboxDelegate {
         sender.textColor = success ? UIColor.black : UIColor.red
     }
 
+}
+
+extension AccountManagerViewController: OIDExternalUserAgent {
+    func present(_ externalUserAgentRequest: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
+        return true
+    }
+
+    func dismissExternalUserAgent(animated: Bool, completion: @escaping () -> Void) {
+        // no-op
+    }
 }

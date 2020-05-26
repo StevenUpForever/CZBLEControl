@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AppAuth
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -35,7 +37,10 @@ extension RWNCTableViewController: UITextFieldDelegate {
         alertController.addTextField { (textField) in
             textField.placeholder = NSLocalizedString("Enter file name here", comment: "")
             self.fileNameTextField = textField
-            self.fileNameTextField!.addTarget(self, action: #selector(self.textFieldValueChanged), for: .editingChanged)
+            self.fileNameTextField!.addTarget(
+                self,
+                action: #selector(self.textFieldValueChanged),
+                for: .editingChanged)
         }
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         submitAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
@@ -89,10 +94,10 @@ extension RWNCTableViewController: UITextFieldDelegate {
     
     //MARK: Custom Selectors
     
-    func textFieldValueChanged() {
+    @objc func textFieldValueChanged() {
         if fileNameTextField != nil {
             fileName = self.fileNameTextField?.text
-            if fileNameTextField!.text != nil && fileNameTextField!.text?.characters.count > 0 {
+            if fileNameTextField!.text != nil && fileNameTextField!.text?.count > 0 {
                 if submitAction != nil {
                     submitAction!.isEnabled = true
                 }
@@ -102,6 +107,16 @@ extension RWNCTableViewController: UITextFieldDelegate {
                 }
             }
         }
+    }
+}
+
+extension RWNCTableViewController: OIDExternalUserAgent {
+    func present(_ externalUserAgentAnimated: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
+        return true
+    }
+    
+    func dismissExternalUserAgent(animated: Bool, completion: @escaping () -> Void) {
+        // no-op
     }
     
 }

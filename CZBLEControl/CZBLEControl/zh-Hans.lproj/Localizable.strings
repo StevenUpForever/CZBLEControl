@@ -128,3 +128,5 @@
 "Files are not in correct type" = "文件类型错误";
 
 "Data unavailable" = "数据无效";
+
+"No such file associated to this file identifier" = "没有此文件对应此标识符";

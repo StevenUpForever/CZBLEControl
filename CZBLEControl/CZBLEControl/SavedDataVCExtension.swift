@@ -7,7 +7,9 @@
 //
 
 import Foundation
-import GoogleAPIClient
+import GoogleAPIClientForREST
+import GTMAppAuth
+import AppAuth
 import SwiftyDropbox
 import CoreData
 
@@ -51,7 +53,7 @@ extension SavedDataTableViewController: dropboxDelegate {
             }
         }
         
-        if let googleFile = dataSourceArray[(indexPath as NSIndexPath).row] as? GTLDriveFile {
+        if let googleFile = dataSourceArray[(indexPath as NSIndexPath).row] as? GTLRDrive_File {
             GoogleDriveManager.sharedManager.deleteFile(googleFile, completionHandler: handleDeleteResponse)
         } else if let dropboxFile = dataSourceArray[indexPath.row] as? Files.Metadata {
             DropBoxManager.sharedManager.deleteFile(dropboxFile, completionHandler: handleDeleteResponse)
@@ -65,10 +67,10 @@ extension SavedDataTableViewController: dropboxDelegate {
     
     fileprivate func loadGoogleDriveFilesWithAuthorize() {
         let googleDriveManager = GoogleDriveManager.sharedManager
-        if googleDriveManager.isAuthorized() {
+        if googleDriveManager.isAuthorized {
             loadGoogleDriveFiles(googleDriveManager)
         } else {
-            googleDriveManager.authorizeGoogleAccount(self, completionHandler: { (authSuccess) in
+            AuthManager.shared.authGSuite(self) { (authSuccess) in
                 if authSuccess {
                     self.loadGoogleDriveFiles(googleDriveManager)
                 } else {
@@ -77,7 +79,7 @@ extension SavedDataTableViewController: dropboxDelegate {
                         CustomAlertController.showCancelAlertController(NSLocalizedString("Authorize user failed", comment: ""), message: nil, target: self)
                     })
                 }
-            })
+            }
         }
     }
     
@@ -153,4 +155,14 @@ extension SavedDataTableViewController: dropboxDelegate {
         }
     }
     
+}
+
+extension SavedDataTableViewController: OIDExternalUserAgent {
+    func present(_ externalUserAgentRequest: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
+        return true
+    }
+    
+    func dismissExternalUserAgent(animated: Bool, completion: @escaping () -> Void) {
+        // no-op
+    }
 }

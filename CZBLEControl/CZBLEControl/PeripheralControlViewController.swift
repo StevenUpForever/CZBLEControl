@@ -153,7 +153,7 @@ class PeripheralControlViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func updateTableViewRowUI(_ indexPaths: [IndexPath]) {
-        tableView.insertRows(at: indexPaths, with: UITableViewRowAnimation.left)
+        tableView.insertRows(at: indexPaths, with: UITableView.RowAnimation.left)
     }
     
     //MARK: - private methods

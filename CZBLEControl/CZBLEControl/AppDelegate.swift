@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Fabric
-import Crashlytics
+import AppAuth
+import GTMAppAuth
 import SwiftyDropbox
 
 @UIApplicationMain
@@ -16,11 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-        UIApplication.shared.statusBarStyle = .lightContent
+//        UIApplication.shared.statusBarStyle = .lightContent
         
         DropboxClientsManager.setupWithAppKey("9cc6hhoqm5u7ipn")
         
@@ -31,14 +29,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Change navigation title Color and hide back button title
         
         UINavigationBar.appearance().tintColor = UIColor.white
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0.0, -80.0), for: .default)
-
-        Fabric.with([Crashlytics.self])
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(
+            UIOffset(
+                horizontal: 0.0,
+                vertical: -80.0),
+            for: .default)
         
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
         
         if let authResult = DropboxClientsManager.handleRedirectURL(url) {
             switch authResult {
@@ -52,6 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(false, token: nil, error: error, errorMessage: description)
                 print("Error \(error): \(description)")
             }
+        }
+
+        if AuthManager.shared.currentAuthorizationFlow?.resumeExternalUserAgentFlow(with: url) == true {
+            AuthManager.shared.currentAuthorizationFlow = nil
+            
+            return true
         }
         
         return false

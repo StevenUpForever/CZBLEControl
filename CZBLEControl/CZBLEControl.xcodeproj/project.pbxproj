@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		632311F6F8A579A2BF88097C /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4B71F401CB09542087CDC6 /* Pods_CZBLEControl.framework */; };
 		AF5C43CD1D98D3AD00B0C863 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AF5C43CC1D98D3AD00B0C863 /* Podfile */; };
+		AF65889E247C86730046216B /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65889D247C86730046216B /* tabBarController.swift */; };
+		AF6588A0247C958B0046216B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65889F247C958B0046216B /* AuthManager.swift */; };
 		AF68D29B1D7BC043008F320A /* AccountManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68D29A1D7BC043008F320A /* AccountManagerViewController.swift */; };
 		AF68D29E1D7BF246008F320A /* DropBoxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF68D29D1D7BF246008F320A /* DropBoxManager.swift */; };
 		AF6E079A1D263EBA0007E92F /* BLETableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */; };
@@ -19,7 +22,6 @@
 		AF7284A91CB1F14200B8D610 /* BLETableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284A81CB1F14200B8D610 /* BLETableViewController.swift */; };
 		AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */; };
 		AF7284B21CB1FAF800B8D610 /* BLETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */; };
-		AF7403B21CD4094F004C98E6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AF7403B11CD4094F004C98E6 /* .gitignore */; };
 		AF7403B41CD40A84004C98E6 /* ClassExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7403B31CD40A84004C98E6 /* ClassExtension.swift */; };
 		AF8BDEA71CB7169300C49885 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */; };
 		AF8BDEBC1CB867FF00C49885 /* RWNCTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */; };
@@ -49,7 +51,6 @@
 		B260F6DF1D821BDE007A9378 /* SavedDataVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260F6DE1D821BDE007A9378 /* SavedDataVCExtension.swift */; };
 		B2674D901D5A7A3F00BCC441 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */; };
 		B2674D931D5A9A9300BCC441 /* GoogleDriveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */; };
-		E54C4D8FB8E4634E3F3B09D1 /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3763790852E8B3F839FF4BCB /* Pods_CZBLEControl.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,10 +64,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3763790852E8B3F839FF4BCB /* Pods_CZBLEControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CZBLEControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		765DF86307A3211AAC693500 /* Pods-CZBLEControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.release.xcconfig"; sourceTree = "<group>"; };
+		3C4B71F401CB09542087CDC6 /* Pods_CZBLEControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CZBLEControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55D40485B3BE57D2809BE1DF /* Pods-CZBLEControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.release.xcconfig"; sourceTree = "<group>"; };
+		8CA7B5D0DF3DA63DCB356451 /* Pods-CZBLEControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.debug.xcconfig"; sourceTree = "<group>"; };
 		AF215C621D9A6C83008530B5 /* CZBLEControl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CZBLEControl.entitlements; path = CZBLEControl/CZBLEControl.entitlements; sourceTree = "<group>"; };
 		AF5C43CC1D98D3AD00B0C863 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AF65889D247C86730046216B /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
+		AF65889F247C958B0046216B /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		AF68D29A1D7BC043008F320A /* AccountManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerViewController.swift; sourceTree = "<group>"; };
 		AF68D29D1D7BF246008F320A /* DropBoxManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropBoxManager.swift; sourceTree = "<group>"; };
 		AF6E07991D263EBA0007E92F /* BLETableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewModel.swift; sourceTree = "<group>"; };
@@ -79,7 +83,6 @@
 		AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		AF7284AD1CB1F44600B8D610 /* CustomAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
 		AF7284B11CB1FAF800B8D610 /* BLETableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLETableViewCell.swift; sourceTree = "<group>"; };
-		AF7403B11CD4094F004C98E6 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		AF7403B31CD40A84004C98E6 /* ClassExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtension.swift; sourceTree = "<group>"; };
 		AF8BDEA61CB7169300C49885 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		AF8BDEBB1CB867FF00C49885 /* RWNCTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RWNCTableViewController.swift; sourceTree = "<group>"; };
@@ -124,7 +127,6 @@
 		B260F6DE1D821BDE007A9378 /* SavedDataVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDataVCExtension.swift; sourceTree = "<group>"; };
 		B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDriveManager.swift; sourceTree = "<group>"; };
-		F84DB2091197D31783C00EDA /* Pods-CZBLEControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFD10C481CB214E300CD5E86 /* CoreBluetooth.framework in Frameworks */,
-				E54C4D8FB8E4634E3F3B09D1 /* Pods_CZBLEControl.framework in Frameworks */,
+				632311F6F8A579A2BF88097C /* Pods_CZBLEControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,8 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				AF5C43CC1D98D3AD00B0C863 /* Podfile */,
-				F84DB2091197D31783C00EDA /* Pods-CZBLEControl.debug.xcconfig */,
-				765DF86307A3211AAC693500 /* Pods-CZBLEControl.release.xcconfig */,
+				8CA7B5D0DF3DA63DCB356451 /* Pods-CZBLEControl.debug.xcconfig */,
+				55D40485B3BE57D2809BE1DF /* Pods-CZBLEControl.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -280,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				AF215C621D9A6C83008530B5 /* CZBLEControl.entitlements */,
-				AF7403B11CD4094F004C98E6 /* .gitignore */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -320,6 +321,7 @@
 			children = (
 				AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */,
 				AF7403B31CD40A84004C98E6 /* ClassExtension.swift */,
+				AF65889D247C86730046216B /* tabBarController.swift */,
 				AF6E07A41D2660980007E92F /* Public View */,
 				AF6E07A51D2660A40007E92F /* Public Controller */,
 				AF68D29C1D7BF224008F320A /* Bluetooth */,
@@ -374,6 +376,7 @@
 				B2674D8F1D5A7A3F00BCC441 /* CoreDataManager.swift */,
 				B2674D921D5A9A9300BCC441 /* GoogleDriveManager.swift */,
 				AF68D29D1D7BF246008F320A /* DropBoxManager.swift */,
+				AF65889F247C958B0046216B /* AuthManager.swift */,
 			);
 			name = "Data Persistence";
 			sourceTree = "<group>";
@@ -382,7 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				AF7284AB1CB1F19600B8D610 /* CoreBluetooth.framework */,
-				3763790852E8B3F839FF4BCB /* Pods_CZBLEControl.framework */,
+				3C4B71F401CB09542087CDC6 /* Pods_CZBLEControl.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -394,13 +397,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFDA748D1CB1EE5900F09BD8 /* Build configuration list for PBXNativeTarget "CZBLEControl" */;
 			buildPhases = (
-				91DFD8F6E280D378B17C977D /* [CP] Check Pods Manifest.lock */,
+				3E295F40D8E7222F76E55194 /* [CP] Check Pods Manifest.lock */,
 				AFDA74691CB1EE5800F09BD8 /* Sources */,
 				AFDA746A1CB1EE5800F09BD8 /* Frameworks */,
 				AFDA746B1CB1EE5800F09BD8 /* Resources */,
-				AF6E07951D2630750007E92F /* ShellScript */,
-				A28C4B4EA1CF62D8AE11E810 /* [CP] Embed Pods Frameworks */,
-				4FA1D42E80305019B47625A9 /* [CP] Copy Pods Resources */,
+				30AC068B4B1F778E25A4CF92 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -436,7 +437,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = ChengzhiJia;
 				TargetAttributes = {
 					AFDA746C1CB1EE5800F09BD8 = {
@@ -464,6 +465,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -492,7 +494,6 @@
 				AFDA747B1CB1EE5800F09BD8 /* Assets.xcassets in Resources */,
 				AF90FB811DF803EB00A07215 /* Localizable.strings in Resources */,
 				AFDA74761CB1EE5800F09BD8 /* Main.storyboard in Resources */,
-				AF7403B21CD4094F004C98E6 /* .gitignore in Resources */,
 				AF8BDEC21CB8BDE400C49885 /* PopoverViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,63 +508,63 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4FA1D42E80305019B47625A9 /* [CP] Copy Pods Resources */ = {
+		30AC068B4B1F778E25A4CF92 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		91DFD8F6E280D378B17C977D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		A28C4B4EA1CF62D8AE11E810 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AF6E07951D2630750007E92F /* ShellScript */ = {
+		3E295F40D8E7222F76E55194 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CZBLEControl-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 8b1ffe8ddd6736a4c3bd892f971dcddb44a7b4c5 81865fc4be68129b80e68cc3cdd42d63fc22b127098d2ac8f68c4fe260fa504f";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -573,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7284AE1CB1F44600B8D610 /* CustomAlertController.swift in Sources */,
+				AF65889E247C86730046216B /* tabBarController.swift in Sources */,
 				AF8BDEC11CB8BDE400C49885 /* PopoverViewController.swift in Sources */,
 				AF6E07A71D27A39D0007E92F /* BLECellViewModel.swift in Sources */,
 				B2674D901D5A7A3F00BCC441 /* CoreDataManager.swift in Sources */,
@@ -600,6 +602,7 @@
 				AFD10C4A1CB21EF200CD5E86 /* PeripheralInfo.swift in Sources */,
 				AF6E07B01D284A590007E92F /* PeripheralCellViewModel.swift in Sources */,
 				AF6E07B31D284A8B0007E92F /* CharacterInfo.swift in Sources */,
+				AF6588A0247C958B0046216B /* AuthManager.swift in Sources */,
 				AF68D29E1D7BF246008F320A /* DropBoxManager.swift in Sources */,
 				AFDB2E6C1D7DFA99005ADC38 /* RWNCBLEExtension.swift in Sources */,
 				AF7403B41CD40A84004C98E6 /* ClassExtension.swift in Sources */,
@@ -677,14 +680,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -727,14 +738,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -762,9 +781,8 @@
 		};
 		AFDA748E1CB1EE5900F09BD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F84DB2091197D31783C00EDA /* Pods-CZBLEControl.debug.xcconfig */;
+			baseConfigurationReference = 8CA7B5D0DF3DA63DCB356451 /* Pods-CZBLEControl.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CZBLEControl/CZBLEControl.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -777,15 +795,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ChengzhiJia.CZBLEControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
 		AFDA748F1CB1EE5900F09BD8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 765DF86307A3211AAC693500 /* Pods-CZBLEControl.release.xcconfig */;
+			baseConfigurationReference = 55D40485B3BE57D2809BE1DF /* Pods-CZBLEControl.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CZBLEControl/CZBLEControl.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -797,7 +814,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ChengzhiJia.CZBLEControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

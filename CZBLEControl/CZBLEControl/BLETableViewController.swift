@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreBluetooth
-import Crashlytics
 
 class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     
@@ -21,7 +20,10 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        refresh.addTarget(self, action: #selector(BLETableViewController.tableViewRefresh(_:)), for: .valueChanged)
+        refresh.addTarget(
+            self,
+            action: #selector(BLETableViewController.tableViewRefresh(_:)),
+            for: .valueChanged)
         view.addSubview(refresh)
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "titleView"))
@@ -78,7 +80,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -149,7 +151,7 @@ class BLETableViewController: UITableViewController, CBCentralManagerDelegate {
     
     //MARK: - Selectors
     
-    func tableViewRefresh(_ refreshControl: UIRefreshControl) {
+    @objc func tableViewRefresh(_ refreshControl: UIRefreshControl) {
         viewModel.clearAllPeripherals {[unowned self] (indexPaths) in
             self.tableView.deleteRows(at: indexPaths, with: .right)
         }

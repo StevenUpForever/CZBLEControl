@@ -7,61 +7,32 @@
 //
 
 import UIKit
-import GoogleAPIClient
-import GTMOAuth2
+import GoogleAPIClientForREST
+import GTMAppAuth
+import AppAuth
 
 class GoogleDriveManager: NSObject {
     
-    static let sharedManager: GoogleDriveManager = {
-        let manager = GoogleDriveManager()
-        return manager
-    }()
+    static let sharedManager = GoogleDriveManager()
     
-    fileprivate let serviceDrive = GTLServiceDrive()
+    let driveService = GTLRDriveService()
     
+    fileprivate var BLEFolder: GTLRDrive_File?
+
     override init() {
-//        serviceDrive.shouldFetchNextPages = true
-        serviceDrive.isRetryEnabled = true
-        if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychain(forName: kKeyChainItemName, clientID: kClientId, clientSecret: nil) {
-            serviceDrive.authorizer = auth
+        super.init()
+        AuthManager.shared.authGSuite(self) { _ in
+            // no-op
         }
     }
     
-    fileprivate let kKeyChainItemName = "CZBLEControl Google Drive"
-    fileprivate let kClientId = "628215016696-m3b5glkere874v5es45os8mfr23conhd.apps.googleusercontent.com"
-    fileprivate let scopes = [kGTLAuthScopeDriveMetadata, kGTLAuthScopeDriveFile]
-    
-    func authorizeGoogleAccount(_ targetViewController: UIViewController, completionHandler: @escaping (_ authSuccess: Bool) -> Void) {
-        if let authorizer = serviceDrive.authorizer, let canAuth = authorizer.canAuthorize, canAuth {
-            completionHandler(true)
-        } else {
-            let authViewController = GTMOAuth2ViewControllerTouch.controller(withScope: scopes.joined(separator: " "), clientID: kClientId, clientSecret: nil, keychainItemName: kKeyChainItemName) { (authController, authResult, error) in
-                if error != nil {
-                    self.serviceDrive.authorizer = nil
-                    completionHandler(false)
-                } else {
-                    self.serviceDrive.authorizer = authResult
-                    authController?.dismiss(animated: true, completion: nil)
-                    completionHandler(true)
-                }
-            }
-            if authViewController is UIViewController {
-                targetViewController.present(authViewController as! UIViewController, animated: true, completion: nil)
-            }
-        }
-    }
-    
-    func isAuthorized() -> Bool {
-        if let authorizer = serviceDrive.authorizer, let canAuth = authorizer.canAuthorize, canAuth {
+    var isAuthorized: Bool {
+        if let authorization = AuthManager.shared.authorization,
+            authorization.canAuthorize() {
             return true
         } else {
             return false
         }
-    }
-    
-    func deAuthorizeUser() {
-        serviceDrive.authorizer = nil
-        GTMOAuth2ViewControllerTouch.removeAuthFromKeychain(forName: kKeyChainItemName)
     }
     
     //MARK: Save data
@@ -87,12 +58,15 @@ class GoogleDriveManager: NSObject {
         
         createFolder {[unowned self] (success, errorMessage) in
             if success {
-                let parameter = GTLUploadParameters(data: data, mimeType: "text/plain")
-                let driveFile = GTLDriveFile()
+                let parameter = GTLRUploadParameters(data: data, mimeType: "text/plain")
+                let driveFile = GTLRDrive_File()
                 driveFile.name = title
-                driveFile.parents = [self.BLEFolder.identifier]
-                let query = GTLQueryDrive.queryForFilesCreate(withObject: driveFile, uploadParameters: parameter)
-                self.serviceDrive.executeQuery(query!, completionHandler: { (ticket, updatedFile, error) in
+                if let identifier = self.BLEFolder?.identifier {
+                    driveFile.parents = [identifier]
+                }
+
+                let query = GTLRDriveQuery_FilesCreate.query(withObject: driveFile, uploadParameters: parameter)
+                self.driveService.executeQuery(query, completionHandler: { (ticket, updatedFile, error) in
                     if error != nil {
                         print(error ?? "Error")
                         completionHandler(false, NSLocalizedString("Upload file failed", comment: ""))
@@ -109,27 +83,24 @@ class GoogleDriveManager: NSObject {
     
     //MARK: Fetch data
     
-    func loadFiles(_ completionHandler: @escaping (_ success: Bool, _ errorMessage: String?, _ files:[GTLDriveFile]?) -> Void) {
+    func loadFiles(_ completionHandler: @escaping (_ success: Bool, _ errorMessage: String?, _ files:[GTLRDrive_File]?) -> Void) {
         createFolder {[unowned self] (success, errorMessage) in
             if success {
-                if let query = GTLQueryDrive.queryForFilesList() {
-                    query.q = "'\(self.BLEFolder.identifier ?? "")' in parents and mimeType = 'text/plain'"
-                    self.serviceDrive.executeQuery(query) { (ticket, files, error) in
-                        if error != nil {
-                            print(error ?? "Error")
-                            completionHandler(false, NSLocalizedString("Load data failed", comment: ""), nil)
-                        } else if let fileList = files as? GTLDriveFileList {
-                            if let filesArray = fileList.files as? [GTLDriveFile] {
-                                completionHandler(true, NSLocalizedString("Load data successfully", comment: ""), filesArray)
-                            } else {
-                                completionHandler(false, NSLocalizedString("No file to show", comment: ""), nil)
-                            }
+                let query = GTLRDriveQuery_FilesList.query()
+                query.q = "'\(self.BLEFolder?.identifier ?? "")' in parents and mimeType = 'text/plain'"
+                self.driveService.executeQuery(query) { (ticket, files, error) in
+                    if error != nil {
+                        print(error ?? "Error")
+                        completionHandler(false, NSLocalizedString("Load data failed", comment: ""), nil)
+                    } else if let fileList = files as? GTLRDrive_FileList {
+                        if let filesArray = fileList.files {
+                            completionHandler(true, NSLocalizedString("Load data successfully", comment: ""), filesArray)
                         } else {
-                            completionHandler(false, NSLocalizedString("Load data failed", comment: ""), nil)
+                            completionHandler(false, NSLocalizedString("No file to show", comment: ""), nil)
                         }
+                    } else {
+                        completionHandler(false, NSLocalizedString("Load data failed", comment: ""), nil)
                     }
-                } else {
-                    completionHandler(false, NSLocalizedString("Cannot query files", comment: ""), nil)
                 }
             } else {
                 completionHandler(false, errorMessage, nil)
@@ -137,8 +108,8 @@ class GoogleDriveManager: NSObject {
         }
     }
     
-    func readFileContent(_ driveFile: GTLDriveFile, completionHandler: @escaping (_ success: Bool, _ dataArray: [[NSString]]?, _ errorMessage: String?) -> Void) {
-        let fetcher = serviceDrive.fetcherService.fetcher(withURLString: "https://www.googleapis.com/drive/v3/files/\(driveFile.identifier ?? "")?alt=media")
+    func readFileContent(_ driveFile: GTLRDrive_File, completionHandler: @escaping (_ success: Bool, _ dataArray: [[NSString]]?, _ errorMessage: String?) -> Void) {
+        let fetcher = driveService.fetcherService.fetcher(withURLString: "https://www.googleapis.com/drive/v3/files/\(driveFile.identifier ?? "")?alt=media")
         fetcher.beginFetch { (data, error) in
             if error != nil {
                 completionHandler(false, nil, NSLocalizedString("Failed to download file", comment: ""))
@@ -154,48 +125,58 @@ class GoogleDriveManager: NSObject {
         }
     }
     
-    func deleteFile(_ driveFile: GTLDriveFile, completionHandler: @escaping statusMessageHandler) {
-        let query = GTLQueryDrive.queryForFilesDelete(withFileId: driveFile.identifier)
-        serviceDrive.executeQuery(query!) { (ticket, files, error) in
-            if error != nil {
-                completionHandler(false, NSLocalizedString("Failed to delete the file", comment: ""))
-            } else {
-                completionHandler(true, NSLocalizedString("Successfully delete the file", comment: ""))
+    func deleteFile(_ driveFile: GTLRDrive_File, completionHandler: @escaping statusMessageHandler) {
+        if let identifier = driveFile.identifier {
+            let query = GTLRDriveQuery_FilesDelete.query(withFileId: identifier)
+            driveService.executeQuery(query) { (ticket, files, error) in
+                if error != nil {
+                    completionHandler(false, NSLocalizedString("Failed to delete the file", comment: ""))
+                } else {
+                    completionHandler(true, NSLocalizedString("Successfully delete the file", comment: ""))
+                }
             }
+        } else {
+            completionHandler(false, NSLocalizedString("No such file associated to this file identifier", comment: ""))
         }
     }
     
     //MARK: Helper methods
     
-    fileprivate var BLEFolder: GTLDriveFile!
-    
     fileprivate func createFolder(_ completionHandler: @escaping statusMessageHandler) {
-        let query = GTLQueryDrive.queryForFilesList()
-        query?.q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false"
-        serviceDrive.executeQuery(query!) { [unowned self] (checkTicket, files, checkError) in
+        let query = GTLRDriveQuery_DrivesList.query()
+        query.q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false"
+        driveService.executeQuery(query) { [weak self] (checkTicket, files, checkError) in
+            guard let strongSelf = self else {
+                return
+            }
             if checkError != nil {
                 completionHandler(false, NSLocalizedString("Cannot find correct folder", comment: ""))
             } else {
-                if let tempFileList = files as? GTLDriveFileList {
-                    if let fileList = tempFileList.files as? [GTLDriveFile] {
+                if let tempFileList = files as? GTLRDrive_FileList {
+                    if let fileList = tempFileList.files {
                         var folderExisted = false
                         for folderFile in fileList {
                             if folderFile.name == kFolderName {
-                                self.BLEFolder = folderFile
+                                strongSelf.BLEFolder = folderFile
                                 folderExisted = true
                                 completionHandler(true, NSLocalizedString("Correct folder found", comment: ""))
                                 return
                             }
                         }
                         if folderExisted == false {
-                            let folder = GTLDriveFile()
+                            let folder = GTLRDrive_File()
                             folder.name = kFolderName
                             folder.mimeType = "application/vnd.google-apps.folder"
-                            let newFolderQuery = GTLQueryDrive.queryForFilesCreate(withObject: folder, uploadParameters: nil)
-                            self.serviceDrive.executeQuery(newFolderQuery!) {[unowned self] (ticket, updatedFile, error) in
+                            let newFolderQuery = GTLRDriveQuery_FilesCreate.query(
+                                withObject: folder,
+                                uploadParameters: nil)
+                            strongSelf.driveService.executeQuery(newFolderQuery) {[weak self] (ticket, updatedFile, error) in
+                                guard let strongSelf = self else {
+                                    return
+                                }
                                 if error == nil {
-                                    if let properFile = updatedFile as? GTLDriveFile {
-                                        self.BLEFolder = properFile
+                                    if let properFile = updatedFile as? GTLRDrive_File {
+                                        strongSelf.BLEFolder = properFile
                                         completionHandler(true, NSLocalizedString("Create folder successfully", comment: ""))
                                     } else {
                                         completionHandler(false, NSLocalizedString("Create folder failed", comment: ""))
@@ -215,4 +196,14 @@ class GoogleDriveManager: NSObject {
         }
     }
     
+}
+
+extension GoogleDriveManager: OIDExternalUserAgent {
+    func present(_ request: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
+        return true
+    }
+    
+    func dismissExternalUserAgent(animated: Bool, completion: @escaping () -> Void) {
+        // no-op
+    }
 }

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import GoogleAPIClient
+import GoogleAPIClientForREST
 import SwiftyDropbox
 
 extension SavedDataDetailTableViewController {
@@ -31,7 +31,7 @@ extension SavedDataDetailTableViewController {
             }
         }
         
-        if let googleFile = sourceObj as? GTLDriveFile {
+        if let googleFile = sourceObj as? GTLRDrive_File {
             navigationItem.title = googleFile.name
             GoogleDriveManager.sharedManager.readFileContent(googleFile, completionHandler: handleFileContentResponse)
         } else if let dropboxFile = sourceObj as? Files.Metadata {

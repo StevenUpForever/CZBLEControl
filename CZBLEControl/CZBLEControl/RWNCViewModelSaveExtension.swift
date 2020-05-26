@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import AppAuth
 import SwiftyDropbox
 
 extension RWNCViewModel: dropboxDelegate {
     
     //MARK: Google Drive
     
-    func uploadToGoogleDrive(_ fileName: String, target: UIViewController, completionHandler: @escaping statusMessageHandler) {
-        if googleDriveManager.isAuthorized() {
+    func uploadToGoogleDrive(_ fileName: String, target: OIDExternalUserAgent, completionHandler: @escaping statusMessageHandler) {
+        if googleDriveManager.isAuthorized {
             googleDriveSaveData(fileName, completionHandler: completionHandler)
         } else {
-            googleDriveManager.authorizeGoogleAccount(target, completionHandler: { [weak self] (authSuccess) in
+            AuthManager.shared.authGSuite(target, completionHandler: { [weak self] (authSuccess) in
                 if let strongSelf = self , authSuccess {
                     strongSelf.googleDriveSaveData(fileName, completionHandler: completionHandler)
                 } else {

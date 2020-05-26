@@ -128,3 +128,7 @@
 "Files are not in correct type" = "ファイルが正しいタイプではありません";
 
 "Data unavailable" = "データが利用できない";
+
+"No such file associated to this file identifier" = "このファイル識別子に関連付けられたそのようなファイルはありません";
+
+

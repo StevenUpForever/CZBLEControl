@@ -74,11 +74,11 @@ class RWNCTableViewController: UITableViewController, RWNCDelegate {
         return (indexPath as NSIndexPath).section == 0 ? false : true
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             viewModel.deleteObjectAtIndexPath(indexPath)
             tableView.deleteRows(at: [indexPath], with: .right)
@@ -91,8 +91,8 @@ class RWNCTableViewController: UITableViewController, RWNCDelegate {
         viewModel.actionButtonProcess(sender, target: self)
     }
     
-    weak var fileNameTextField: UITextField?
-    weak var submitAction: UIAlertAction?
+    var fileNameTextField: UITextField?
+    var submitAction: UIAlertAction?
     var fileName: String?
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {

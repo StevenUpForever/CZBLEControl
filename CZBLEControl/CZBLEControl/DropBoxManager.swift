@@ -92,15 +92,16 @@ class DropBoxManager: NSObject {
                     }
                 }
                 if !folderExisted {
-                    DropboxClientsManager.authorizedClient?.files.createFolder(path: "/\(kFolderName)").response(completionHandler: { (fileMetaData, error) in
-                        if error != nil {
-                            completionHandler(false, NSLocalizedString("Create folder failed", comment: ""))
-                        } else if fileMetaData != nil {
-                            self.DropboxFolder = fileMetaData!
-                            completionHandler(true, NSLocalizedString("Create folder successfully", comment: ""))
-                        } else {
-                            completionHandler(false, NSLocalizedString("Data unavailable", comment: ""))
-                        }
+                    DropboxClientsManager.authorizedClient?.files.createFolderV2(path: "/\(kFolderName)")
+                        .response(completionHandler: { (result, error) in
+                            if error != nil {
+                                completionHandler(false, NSLocalizedString("Create folder failed", comment: ""))
+                            } else if let result = result {
+                                self.DropboxFolder = result.metadata
+                                completionHandler(true, NSLocalizedString("Create folder successfully", comment: ""))
+                            } else {
+                                completionHandler(false, NSLocalizedString("Data unavailable", comment: ""))
+                            }
                     })
                 }
             } else {
@@ -148,12 +149,13 @@ class DropBoxManager: NSObject {
     }
     
     func deleteFile(_ fileObj: Files.Metadata, completionHandler: @escaping statusMessageHandler) {
-        DropboxClientsManager.authorizedClient?.files.delete(path: "/\(kFolderName)/\(fileObj.name)").response(completionHandler: { (response, error) in
-            if error != nil {
-                completionHandler(false, NSLocalizedString("Failed to delete the file", comment: ""))
-            } else {
-                completionHandler(true, NSLocalizedString("Successfully delete the file", comment: ""))
-            }
+        DropboxClientsManager.authorizedClient?.files.deleteV2(path: "/\(kFolderName)/\(fileObj.name)")
+            .response(completionHandler: { (response, error) in
+                if error != nil {
+                    completionHandler(false, NSLocalizedString("Failed to delete the file", comment: ""))
+                } else {
+                    completionHandler(true, NSLocalizedString("Successfully delete the file", comment: ""))
+                }
         })
     }
     
