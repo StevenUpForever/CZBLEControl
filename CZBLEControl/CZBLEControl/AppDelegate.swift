@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        UIApplication.shared.statusBarStyle = .lightContent
         
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
+        
         DropboxClientsManager.setupWithAppKey("9cc6hhoqm5u7ipn")
         
         //Thread wait for 1 second for Lauching screen

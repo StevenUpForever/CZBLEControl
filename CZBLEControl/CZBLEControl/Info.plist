@@ -53,7 +53,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>CZBLEControl need to use Bluetooth</string>
+	<string>CZBLEControl need to access peripherals to read data from</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>CZBLEControl will need Bluetooth access to read data from peripherals</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
