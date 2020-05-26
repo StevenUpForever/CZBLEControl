@@ -126,21 +126,14 @@ class DropBoxManager: NSObject {
     }
     
     func readFileContent(_ fileObj: Files.Metadata, completionHandler: @escaping (_ success: Bool, _ dataArray: [[NSString]]?, _ errorMessage: String?) -> Void) {
-        DropboxClientsManager.authorizedClient?.files.download(path: "/\(kFolderName)/\(fileObj.name)", rev: nil, overwrite: true, destination: { (url, urlResponse) -> URL in
-            let pathStr = NSTemporaryDirectory() + fileObj.name
-            return NSURL(fileURLWithPath: pathStr) as URL
-        }).response(completionHandler: { (response, error) in
+        DropboxClientsManager.authorizedClient?.files.download(path: "/\(kFolderName)/\(fileObj.name)").response(completionHandler: { (response, error) in
             if error != nil {
                 completionHandler(false, nil, NSLocalizedString("Load data failed", comment: ""))
-            } else if let (_, url) = response {
-                if let data = NSData(contentsOf: url) {
-                    if let dataString = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) {
-                        completionHandler(true, dataString.parseToDataTableView(), NSLocalizedString("Load data successfully", comment: ""))
-                    } else {
-                        completionHandler(false, nil, NSLocalizedString("Load data failed", comment: ""))
-                    }
+            } else if let (_, data) = response {
+                if let dataString = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+                    completionHandler(true, dataString.parseToDataTableView(), NSLocalizedString("Load data successfully", comment: ""))
                 } else {
-                    completionHandler(false, nil, NSLocalizedString("Data cannot be transferred to file", comment: ""))
+                    completionHandler(false, nil, NSLocalizedString("Load data failed", comment: ""))
                 }
             } else {
                 completionHandler(false, nil, NSLocalizedString("Load data failed", comment: ""))

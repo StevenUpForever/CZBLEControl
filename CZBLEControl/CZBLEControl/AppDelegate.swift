@@ -56,15 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(false, token: nil, error: error, errorMessage: description)
                 print("Error \(error): \(description)")
             }
-        }
-
-        if AuthManager.shared.currentAuthorizationFlow?.resumeExternalUserAgentFlow(with: url) == true {
+        } else if AuthManager.shared.currentAuthorizationFlow?.resumeExternalUserAgentFlow(with: url) == true {
             AuthManager.shared.currentAuthorizationFlow = nil
-            
-            return true
         }
         
-        return false
+        return true
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
