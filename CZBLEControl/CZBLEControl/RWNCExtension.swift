@@ -109,14 +109,3 @@ extension RWNCTableViewController: UITextFieldDelegate {
         }
     }
 }
-
-extension RWNCTableViewController: OIDExternalUserAgent {
-    func present(_ externalUserAgentAnimated: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
-        return true
-    }
-    
-    func dismissExternalUserAgent(animated: Bool, completion: @escaping () -> Void) {
-        // no-op
-    }
-    
-}

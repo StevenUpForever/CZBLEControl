@@ -7,6 +7,7 @@ target 'CZBLEControl' do
     
     pod 'GoogleAPIClientForREST/Drive', '~> 1.4'
     pod 'GTMAppAuth'
+    pod 'AppAuth', '~> 1.0'
     
     pod 'Firebase'
     

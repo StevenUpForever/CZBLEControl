@@ -21,9 +21,12 @@ class GoogleDriveManager: NSObject {
 
     override init() {
         super.init()
-        AuthManager.shared.authGSuite(self) { _ in
-            // no-op
-        }
+        
+        driveService.isRetryEnabled = true
+        
+        AuthManager.shared.authGSuiteFromKeyChain()
+        
+        driveService.authorizer = AuthManager.shared.authorization
     }
     
     var isAuthorized: Bool {
@@ -84,26 +87,27 @@ class GoogleDriveManager: NSObject {
     //MARK: Fetch data
     
     func loadFiles(_ completionHandler: @escaping (_ success: Bool, _ errorMessage: String?, _ files:[GTLRDrive_File]?) -> Void) {
-        createFolder {[unowned self] (success, errorMessage) in
-            if success {
-                let query = GTLRDriveQuery_FilesList.query()
-                query.q = "'\(self.BLEFolder?.identifier ?? "")' in parents and mimeType = 'text/plain'"
-                self.driveService.executeQuery(query) { (ticket, files, error) in
-                    if error != nil {
-                        print(error ?? "Error")
-                        completionHandler(false, NSLocalizedString("Load data failed", comment: ""), nil)
-                    } else if let fileList = files as? GTLRDrive_FileList {
-                        if let filesArray = fileList.files {
-                            completionHandler(true, NSLocalizedString("Load data successfully", comment: ""), filesArray)
-                        } else {
-                            completionHandler(false, NSLocalizedString("No file to show", comment: ""), nil)
-                        }
-                    } else {
-                        completionHandler(false, NSLocalizedString("Load data failed", comment: ""), nil)
-                    }
+        let query = GTLRDriveQuery_FilesList.query()
+        query.q = "'\(self.BLEFolder?.identifier ?? "")' in parents and mimeType = 'text/plain'"
+        self.driveService.executeQuery(query) { (ticket, files, error) in
+            if error != nil {
+                print(error ?? "Error")
+                
+                let errorDescription: String
+                if ticket.statusCode == 404 {
+                    errorDescription = "No CZBLEControl folder found in the drive."
+                } else {
+                    errorDescription = "load files failed"
+                }
+                completionHandler(false, NSLocalizedString(errorDescription, comment: ""), nil)
+            } else if let fileList = files as? GTLRDrive_FileList {
+                if let filesArray = fileList.files {
+                    completionHandler(true, NSLocalizedString("Load data successfully", comment: ""), filesArray)
+                } else {
+                    completionHandler(false, NSLocalizedString("No file to show", comment: ""), nil)
                 }
             } else {
-                completionHandler(false, errorMessage, nil)
+                completionHandler(false, NSLocalizedString("Load data failed", comment: ""), nil)
             }
         }
     }
@@ -143,7 +147,7 @@ class GoogleDriveManager: NSObject {
     //MARK: Helper methods
     
     fileprivate func createFolder(_ completionHandler: @escaping statusMessageHandler) {
-        let query = GTLRDriveQuery_DrivesList.query()
+        let query = GTLRDriveQuery_FilesList.query()
         query.q = "mimeType = 'application/vnd.google-apps.folder' and trashed = false"
         driveService.executeQuery(query) { [weak self] (checkTicket, files, checkError) in
             guard let strongSelf = self else {
@@ -196,14 +200,4 @@ class GoogleDriveManager: NSObject {
         }
     }
     
-}
-
-extension GoogleDriveManager: OIDExternalUserAgent {
-    func present(_ request: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
-        return true
-    }
-    
-    func dismissExternalUserAgent(animated: Bool, completion: @escaping () -> Void) {
-        // no-op
-    }
 }

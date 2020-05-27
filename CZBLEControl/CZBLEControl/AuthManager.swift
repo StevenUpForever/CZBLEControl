@@ -29,13 +29,14 @@ class AuthManager {
     
     init() {
         kKeyChainItemName = "CZBLEControl Google Drive"
-        kClientId = "628215016696-m3b5glkere874v5es45os8mfr23conhd.apps.googleusercontent.com"
-        kRedirectURI = "com.googleusercontent.apps.\(kClientId):/oauthredirect"
+        kClientId = "628215016696-ifrnd8sbuhria5ses99avkddu5ps0jdo.apps.googleusercontent.com"
+        kRedirectURI = "com.googleusercontent.apps.628215016696-ifrnd8sbuhria5ses99avkddu5ps0jdo:/oauthredirect"
     }
     
     func saveAuthGSuite(_ auth: GTMAppAuthFetcherAuthorization) {
         authorization = auth
         GTMAppAuthFetcherAuthorization.save(auth, toKeychainForName: kKeyChainItemName)
+        GoogleDriveManager.sharedManager.driveService.authorizer = auth
     }
     
     func deauthorizeGSuite() {
@@ -43,35 +44,50 @@ class AuthManager {
         GTMAppAuthFetcherAuthorization.removeFromKeychain(forName: kKeyChainItemName)
     }
     
-    func authGSuite(_ targetViewController: OIDExternalUserAgent,
-                    completionHandler: @escaping (Bool) -> Void) {
+    @discardableResult func authGSuiteFromKeyChain() -> Bool {
         if let auth = GTMAppAuthFetcherAuthorization(fromKeychainForName: kKeyChainItemName) {
             authorization = auth
-        } else {
-            let configuration = GTMAppAuthFetcherAuthorization.configurationForGoogle()
-            if let url = URL(string: kRedirectURI) {
-                let request = OIDAuthorizationRequest(
-                    configuration: configuration,
-                    clientId: kClientId,
-                    scopes: [kGTLRAuthScopeDriveMetadata, kGTLRAuthScopeDriveFile],
-                    redirectURL: url,
-                    responseType: OIDResponseTypeCode,
-                    additionalParameters: nil)
-                currentAuthorizationFlow = OIDAuthState.authState(
-                    byPresenting: request,
-                    externalUserAgent: targetViewController,
-                    callback: { (authState, error) in
-                        if let authState = authState {
-                            self.saveAuthGSuite(GTMAppAuthFetcherAuthorization(authState: authState))
-                            print("Got GTM authorization tokens. Access token: \(authState.lastTokenResponse?.accessToken ?? "No lastTokenResponse")")
-                            completionHandler(true)
-                        } else if let error = error {
-                            self.deauthorizeGSuite()
-                            print("GTM auth error: \(error.localizedDescription)")
-                            completionHandler(false)
-                        }
-                })
-            }
+            
+            return true
+        }
+        return false
+    }
+    
+    func authGSuite(_ targetViewController: UIViewController,
+                    completionHandler: @escaping (Bool) -> Void) {
+        guard !authGSuiteFromKeyChain() else {
+            return
+        }
+        let configuration = GTMAppAuthFetcherAuthorization.configurationForGoogle()
+        if let url = URL(string: kRedirectURI) {
+            let request = OIDAuthorizationRequest(
+                configuration: configuration,
+                clientId: kClientId,
+                scopes: [
+                    kGTLRAuthScopeDriveMetadata,
+                    kGTLRAuthScopeDriveFile,
+                    kGTLRAuthScopeDrive,
+                    OIDScopeOpenID,
+                    OIDScopeProfile
+                ],
+                redirectURL: url,
+                responseType: OIDResponseTypeCode,
+                additionalParameters: nil)
+            currentAuthorizationFlow = OIDAuthState.authState(
+                byPresenting: request,
+                presenting: targetViewController,
+                callback: { (authState, error) in
+                    if let authState = authState {
+                        self.saveAuthGSuite(GTMAppAuthFetcherAuthorization(authState: authState))
+                        print("Got GTM authorization tokens. Access token: \(authState.lastTokenResponse?.accessToken ?? "No lastTokenResponse")")
+                        
+                        completionHandler(true)
+                    } else if let error = error {
+                        self.deauthorizeGSuite()
+                        print("GTM auth error: \(error.localizedDescription)")
+                        completionHandler(false)
+                    }
+            })
         }
     }
     

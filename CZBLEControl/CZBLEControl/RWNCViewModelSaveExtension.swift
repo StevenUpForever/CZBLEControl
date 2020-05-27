@@ -14,7 +14,7 @@ extension RWNCViewModel: dropboxDelegate {
     
     //MARK: Google Drive
     
-    func uploadToGoogleDrive(_ fileName: String, target: OIDExternalUserAgent, completionHandler: @escaping statusMessageHandler) {
+    func uploadToGoogleDrive(_ fileName: String, target: UIViewController, completionHandler: @escaping statusMessageHandler) {
         if googleDriveManager.isAuthorized {
             googleDriveSaveData(fileName, completionHandler: completionHandler)
         } else {

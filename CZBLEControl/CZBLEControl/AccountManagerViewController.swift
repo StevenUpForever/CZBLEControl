@@ -84,13 +84,3 @@ class AccountManagerViewController: UIViewController, dropboxDelegate {
     }
 
 }
-
-extension AccountManagerViewController: OIDExternalUserAgent {
-    func present(_ externalUserAgentRequest: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
-        return true
-    }
-
-    func dismissExternalUserAgent(animated: Bool, completion: @escaping () -> Void) {
-        // no-op
-    }
-}
