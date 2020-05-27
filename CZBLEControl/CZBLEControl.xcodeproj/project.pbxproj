@@ -814,6 +814,7 @@
 				CODE_SIGN_ENTITLEMENTS = CZBLEControl/CZBLEControl.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LPRD99FQ39;
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
@@ -835,6 +836,7 @@
 				CODE_SIGN_ENTITLEMENTS = CZBLEControl/CZBLEControl.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LPRD99FQ39;
 				INFOPLIST_FILE = CZBLEControl/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

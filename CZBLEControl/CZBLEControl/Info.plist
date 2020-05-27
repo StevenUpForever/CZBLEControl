@@ -28,21 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>8b1ffe8ddd6736a4c3bd892f971dcddb44a7b4c5</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
