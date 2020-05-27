@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		632311F6F8A579A2BF88097C /* Pods_CZBLEControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4B71F401CB09542087CDC6 /* Pods_CZBLEControl.framework */; };
+		AF14BE3E247E4AF200C2EFA0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF14BE3D247E4AF200C2EFA0 /* GoogleService-Info.plist */; };
 		AF5C43CD1D98D3AD00B0C863 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AF5C43CC1D98D3AD00B0C863 /* Podfile */; };
 		AF65889E247C86730046216B /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65889D247C86730046216B /* tabBarController.swift */; };
 		AF6588A0247C958B0046216B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF65889F247C958B0046216B /* AuthManager.swift */; };
@@ -67,6 +68,7 @@
 		3C4B71F401CB09542087CDC6 /* Pods_CZBLEControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CZBLEControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55D40485B3BE57D2809BE1DF /* Pods-CZBLEControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.release.xcconfig"; sourceTree = "<group>"; };
 		8CA7B5D0DF3DA63DCB356451 /* Pods-CZBLEControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZBLEControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CZBLEControl/Pods-CZBLEControl.debug.xcconfig"; sourceTree = "<group>"; };
+		AF14BE3D247E4AF200C2EFA0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF215C621D9A6C83008530B5 /* CZBLEControl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CZBLEControl.entitlements; path = CZBLEControl/CZBLEControl.entitlements; sourceTree = "<group>"; };
 		AF5C43CC1D98D3AD00B0C863 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AF65889D247C86730046216B /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				AFDA74701CB1EE5800F09BD8 /* AppDelegate.swift */,
 				AF7403B31CD40A84004C98E6 /* ClassExtension.swift */,
 				AF65889D247C86730046216B /* tabBarController.swift */,
+				AF14BE3D247E4AF200C2EFA0 /* GoogleService-Info.plist */,
 				AF6E07A41D2660980007E92F /* Public View */,
 				AF6E07A51D2660A40007E92F /* Public Controller */,
 				AF68D29C1D7BF224008F320A /* Bluetooth */,
@@ -402,6 +405,7 @@
 				AFDA746A1CB1EE5800F09BD8 /* Frameworks */,
 				AFDA746B1CB1EE5800F09BD8 /* Resources */,
 				30AC068B4B1F778E25A4CF92 /* [CP] Embed Pods Frameworks */,
+				AF14BE41247E519200C2EFA0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -494,6 +498,7 @@
 				AF90FB811DF803EB00A07215 /* Localizable.strings in Resources */,
 				AFDA74761CB1EE5800F09BD8 /* Main.storyboard in Resources */,
 				AF8BDEC21CB8BDE400C49885 /* PopoverViewController.xib in Resources */,
+				AF14BE3E247E4AF200C2EFA0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,9 +524,11 @@
 				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -532,9 +539,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyDropbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -564,6 +573,25 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		AF14BE41247E519200C2EFA0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

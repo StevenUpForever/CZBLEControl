@@ -10,6 +10,8 @@ target 'CZBLEControl' do
     pod 'AppAuth', '~> 1.0'
     
     pod 'Firebase'
+    pod 'Firebase/Crashlytics'
+    pod 'Firebase/Performance'
     
     pod 'SwiftyDropbox'
     

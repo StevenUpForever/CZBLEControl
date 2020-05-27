@@ -10,6 +10,7 @@ import UIKit
 import AppAuth
 import GTMAppAuth
 import SwiftyDropbox
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         DropboxClientsManager.setupWithAppKey("9cc6hhoqm5u7ipn")
+        
+        FirebaseApp.configure()
         
         //Thread wait for 1 second for Lauching screen
         
