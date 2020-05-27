@@ -33,11 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Change navigation title Color and hide back button title
         
         UINavigationBar.appearance().tintColor = UIColor.white
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(
-            UIOffset(
-                horizontal: 0.0,
-                vertical: -80.0),
-            for: .default)
         
         return true
     }
