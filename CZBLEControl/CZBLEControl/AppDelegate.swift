@@ -41,8 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
-        
-        if let authResult = DropboxClientsManager.handleRedirectURL(url) {
+        if !DropboxClientsManager.handleRedirectURL(url, completion: { authResult in
             switch authResult {
             case .success(let token):
                 DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(true, token: token, error: nil, errorMessage: nil)
@@ -52,8 +51,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("Authorization flow was manually canceled by user.")
             case .error(let error, let description):
                 DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(false, token: nil, error: error, errorMessage: description)
-                print("Error \(error): \(description)")
+                print("Error \(error): \(String(describing: description))")
+            case .none:
+                DropBoxManager.sharedManager.delegate?.didFinishAuthorizeUser(false, token: nil, error: nil, errorMessage: "Auth result not available")
             }
+        }) {
+            // no-op
         } else if AuthManager.shared.currentAuthorizationFlow?.resumeExternalUserAgentFlow(with: url) == true {
             AuthManager.shared.currentAuthorizationFlow = nil
         }

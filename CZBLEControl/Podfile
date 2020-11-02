@@ -1,13 +1,13 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-platform :ios, '9.0'
+platform :ios, '12.0'
 
 target 'CZBLEControl' do
     
     pod 'GoogleAPIClientForREST/Drive', '~> 1.4'
     pod 'GTMAppAuth'
-    pod 'AppAuth', '~> 1.0'
+    pod 'AppAuth'
     
     pod 'Firebase'
     pod 'Firebase/Crashlytics'

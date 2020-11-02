@@ -73,14 +73,15 @@ class AuthManager {
                 redirectURL: url,
                 responseType: OIDResponseTypeCode,
                 additionalParameters: nil)
+
             currentAuthorizationFlow = OIDAuthState.authState(
                 byPresenting: request,
-                presenting: targetViewController,
+                presenting: targetViewController.parent ?? targetViewController,
                 callback: { (authState, error) in
                     if let authState = authState {
                         self.saveAuthGSuite(GTMAppAuthFetcherAuthorization(authState: authState))
                         print("Got GTM authorization tokens. Access token: \(authState.lastTokenResponse?.accessToken ?? "No lastTokenResponse")")
-                        
+
                         completionHandler(true)
                     } else if let error = error {
                         self.deauthorizeGSuite()
